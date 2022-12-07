@@ -39,3 +39,5 @@ const temp = "javascript를 출력할 수 있다.";
 ---
 
 3개-쓰면 hr이다.
+
+<img src="./tour22DESK.jpg" />
