@@ -1,21 +1,13 @@
-# ReactTeamProject
+# TGTW
 
+#### Team Go To Work
 12.09 ~ 12.22
-최원겸 허재원 김정규 김재일
 
-# h1
-
-## h2
-
-### h3
-
-#### h4
-
-##### h5
-
-###### h6
+팀원 : 최원겸 허재원 김정규 김재일
 
     탭을 이용해서 들여쓰기를 하면 회색으로 뭉쳐진다..
+
+<img src="./tour22DESK.jpg" />
 
 ```
 이래도 뭉쳐진다. 템플릿 리터럴 3개
@@ -40,4 +32,4 @@ const temp = "javascript를 출력할 수 있다.";
 
 3개-쓰면 hr이다.
 
-<img src="./tour22DESK.jpg" />
+
