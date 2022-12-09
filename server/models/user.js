@@ -23,6 +23,3 @@ export default class Users extends Sequelize.Model {
   }
   static associate(db) {}
 }
-
-오늘의집;
-집짓는사람들;
