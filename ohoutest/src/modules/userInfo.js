@@ -75,12 +75,12 @@ const userInfoSlice = createSlice({
         console.log("reject");
       });
   },
-  // extraReducers: {
-  //   [userInfoThunk.fulfilled]: (state, { payload }) => {
-  //     console.log("fullfilled", current(state));
-  //     return payload;
-  //   },
-  // },
+  extraReducers: {
+    [userInfoThunk.fulfilled]: (state, { payload }) => {
+      console.log("fullfilled", current(state));
+      return payload;
+    },
+  },
 });
 
 export const action = userInfoSlice.actions;
