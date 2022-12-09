@@ -5,6 +5,7 @@ import styled from "styled-components";
 import Header from "./components/Header";
 import Main from "./components/Main";
 import Footer from "./components/Footer/Container";
+
 function App() {
   return (
     <AppBox>
@@ -14,7 +15,7 @@ function App() {
       </Routes>
       <Footer />
       <div style={{ backgroundColor: "#1a1c20" }}>
-        <ManagerInfo></ManagerInfo>
+        {/* <ManagerInfo></ManagerInfo> */}
       </div>
     </AppBox>
   );
