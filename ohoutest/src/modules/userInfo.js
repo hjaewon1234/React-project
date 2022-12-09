@@ -14,7 +14,7 @@ export const userInfoThunk = createAsyncThunk(
     //     reject("실패!");
     //   }
     // });
-    const { data } = await axios.post("http://13.124.105.254:8080/api/user", {
+    const { data } = await axios.post("http://localhost:8080/api/user", {
       id: "1",
       pw: "2",
       name: "3",
@@ -32,7 +32,7 @@ export const getUserThunk = createAsyncThunk(
   "/userInfo/getUserThunk",
   async () => {
     const { data } = await axios.post(
-      "http://13.124.105.254:8080/api/user/getUsers"
+      "http://localhost:8080/api/user/getUsers"
     );
     return data;
   }
