@@ -3,6 +3,23 @@ const router = Router();
 
 import db from "../models/index.js";
 
+const users = [
+  {
+    userId: "aaa",
+    userPw: "aaa",
+    userName: "내가유저다",
+    phone: "010-1234-5678",
+    address: "천호동",
+  },
+];
+
+// db에 아무 정보가 없을 시 users의 첫 아이템을 db에 넣어준다.
+db.Users.findAll().then((data) => {
+  if (data.length === 0) {
+    db.Users.create(users[0]);
+  }
+});
+
 // api/user
 router
   .route("/")

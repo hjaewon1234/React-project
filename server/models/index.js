@@ -10,7 +10,8 @@ const configJson = require("../config/config.json");
 const config = configJson["development"];
 
 import Users from "./user.js";
-const db = { Users };
+import Products from "./product.js";
+const db = { Users, Products };
 
 import Sequelize from "sequelize";
 const sequelize = new Sequelize(
@@ -24,6 +25,7 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 Users.init(sequelize);
+Products.init(sequelize);
 
 Object.keys(db).forEach((modelName) => {
   if (db[modelName].associate) {
