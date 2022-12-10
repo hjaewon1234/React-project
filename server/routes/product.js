@@ -16,8 +16,7 @@ const tables = [
   },
 ];
 
-db.Products.findAll().then((data) => {
-  console.log(data);
+const dbData = db.Products.findAll().then((data) => {
   if (data.length === 0) {
     db.Products.create(tables[0]);
   }
@@ -25,6 +24,10 @@ db.Products.findAll().then((data) => {
 
 router.route("/").post((req, res) => {
   res.send(req.body);
+});
+
+router.route("/productManage").post((req, res) => {
+  res.send(dbData);
 });
 
 export default router;

@@ -24,10 +24,6 @@ export const userInfoThunk = createAsyncThunk(
   }
 );
 
-// product
-// id | name | brand | price | title | description | img | color | category (big:{데코,식물}, small:{조화, 생화, 드라이플라워})
-// 1  | 180cm 프리미엄 리얼소나무트리 | 더플라워마켓 | 195000 |
-
 export const getUserThunk = createAsyncThunk(
   "/userInfo/getUserThunk",
   async () => {
