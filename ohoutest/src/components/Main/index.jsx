@@ -20,6 +20,4 @@ const Body = () => {
 
 export default Body;
 
-const MainBox = styled.div`
-  width: 1200px;
-`;
+const MainBox = styled.div``;
