@@ -18,9 +18,8 @@ const Header = () => {
 export default Header;
 
 const HeaderBox = styled.div`
-  width: 1200px;
+  width: 100%;
   hr {
-    width: 100vw;
-    margin-left: calc(-1 * ((100vw - 1200px) / 2));
+    border-bottom: none;
   }
 `;

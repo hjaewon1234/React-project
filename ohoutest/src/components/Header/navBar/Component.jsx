@@ -1,12 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const NavBarComponent = ({
-  searchRef,
-  focusHandler,
-  searchInput,
-  setSearchInput,
-}) => {
+const NavBarComponent = ({}) => {
   return (
     <NavBarCompBox>
       <Link to="/main" className="logo-icon">
@@ -14,25 +9,19 @@ const NavBarComponent = ({
       </Link>
       <Link to="/">스토어</Link>
       <Link to="/">커뮤니티</Link>
-      <form className="search-box" ref={searchRef}>
+      <form className="search-box">
         <span className="magnify-icon">
           <img src="/img/magnifying-glass-solid.svg" />
         </span>
-        <input
-          id="searchInput"
-          placeholder="통합검색"
-          onFocus={focusHandler}
-          onBlur={focusHandler}
-          value={searchInput}
-          onChange={(e) => {
-            setSearchInput(e.target.value);
-          }}
-        />
-        {!searchInput || (
+        <input id="searchInput" placeholder="통합검색" />
+        {/* {!searchInput || (
           <span className="x-btn">
             <img src="/img/circle-xmark-regular.svg" />
           </span>
-        )}
+        )} */}
+        <span className="x-btn">
+          <img src="/img/circle-xmark-regular.svg" />
+        </span>
       </form>
       <Link to="/" className="cart-icon">
         <img src="/img/cart-shopping-solid.svg" />
@@ -54,6 +43,8 @@ const NavBarCompBox = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 1200px;
+  margin: 0 auto;
   a {
     text-decoration: none;
     color: black;
@@ -74,7 +65,7 @@ const NavBarCompBox = styled.div`
     outline: none;
   }
   a:first-child {
-    font-size: 0; // 여백제거용
+    font-size: 0;
   }
   .logo-icon img {
     width: 140px;
