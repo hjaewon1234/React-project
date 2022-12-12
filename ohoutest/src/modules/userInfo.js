@@ -55,7 +55,7 @@ const userInfoSlice = createSlice({
         console.log("pending");
       })
       .addCase(getUserThunk.fulfilled, (state, action) => {
-        console.log(action.payload);
+        console.log("fulfilled", action.payload);
         return state;
       })
       .addCase(getUserThunk.rejected, (state, action) => {

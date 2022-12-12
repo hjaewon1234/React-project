@@ -9,6 +9,7 @@ import Footer from "./components/Footer/Container";
 function App() {
   return (
     <AppBox>
+      <SingUp></SingUp>
       <Header />
       <Routes>
         <Route path="/main" element={<Main />}></Route>
@@ -20,6 +21,8 @@ function App() {
     </AppBox>
   );
 }
+
+import SingUp from "./components/index";
 
 export default App;
 
