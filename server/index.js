@@ -6,6 +6,10 @@ import dotenv from "dotenv";
 import cors from "cors";
 
 import routes from "./routes/index.js";
+
+import multer from "multer";
+const upload = multer({ dest: "./upload" });
+
 const app = express();
 
 dotenv.config();

@@ -23,5 +23,15 @@ export default class Products extends Sequelize.Model {
       }
     );
   }
-  static associate(db) {}
+  static associate(db) {
+    db.Products.belongsToMany(db.Users, {
+      sourceKey: "id",
+      foreignKey: "product_id",
+      through: "shopping_list",
+    });
+    db.Products.belongsTo(db.Category, {
+      foreignKey: "id",
+      targetKey: "id",
+    });
+  }
 }

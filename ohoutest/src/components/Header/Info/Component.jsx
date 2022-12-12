@@ -23,6 +23,7 @@ const InfoComponent = ({ onClick, getUserOnClick }) => {
       >
         getUserInfo
       </button>
+      <img src="/api/downloadtreeBall1.jpg" />
     </InfoBox>
   );
 };
