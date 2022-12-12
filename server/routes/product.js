@@ -29,8 +29,13 @@ router.route("/").post((req, res) => {
 router.route("/productManage").post(async (req, res) => {
   console.log("지나갔다.");
   const productInfo = await db.Products.findAll();
-  console.log(productInfo[0].dataValues);
-  res.send(productInfo[0].dataValues);
+  console.log(productInfo);
+  res.send(productInfo);
+});
+
+router.route("/getCookie").post((req, res) => {
+  res.cookie("abcd", "value");
+  res.send();
 });
 
 export default router;

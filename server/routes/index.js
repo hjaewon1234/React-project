@@ -63,7 +63,6 @@ const users = [
 async function setImages() {
   await fs.readdir("./Img", (err, datas) => {
     for (let i = 0; i < datas.length; ++i) {
-      console.log(datas[i]);
       router.get(`/download${datas[i]}`, (req, res) => {
         fs.readFile("./Img/" + datas[i], (err, data) => {
           res.writeHead(200, { "Content-Type": "text/html" });
@@ -75,6 +74,12 @@ async function setImages() {
 }
 setImages();
 
+router.post("/getImages", (req, res) => {
+  fs.readdir("./Img", (err, datas) => {
+    res.send(datas);
+  });
+});
+
 // 카테고리 등록
 // fs.readFile("./data/category.json", "utf-8", function (err, data) {
 //   if (err) {
@@ -83,6 +88,36 @@ setImages();
 //     JSON.parse(data).forEach((item) => {
 //       try {
 //         db.Category.create(item);
+//       } catch (err) {
+//         console.error(err);
+//       }
+//     });
+//   }
+// });
+
+// 제품 등록
+// fs.readFile("./data/product.json", "utf-8", function (err, data) {
+//   if (err) {
+//     console.error(err.message);
+//   } else {
+//     JSON.parse(data).forEach((item) => {
+//       try {
+//         db.Category.findOne({
+//           where: { smallsort: item.category?.smallsort },
+//         }).then((data) => {
+//           if (!data) {
+//             console.log("왜없음?", item);
+//           } else {
+//             console.log(data.id);
+//             db.Products.create({
+//               name: item.name,
+//               price: item.price,
+//               brand: item.brand,
+//               description: item.description,
+//               category: data.id,
+//             });
+//           }
+//         });
 //       } catch (err) {
 //         console.error(err);
 //       }
