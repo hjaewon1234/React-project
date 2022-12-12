@@ -33,11 +33,18 @@ const ManagerInfoComponent = ({ title }) => {
           <AccoContents>
             {ProductInfo.map((item, index) => (
               <UnitDiv key={index}>
+                {item.img.split(",").map((innerItem) => {
+                  console.log(innerItem);
+                  console.log(encodeURI(innerItem) + "이건 인코드된거임");
+                  console.log(decodeURI(innerItem) + "이건 디코드된거임");
+                  return <img src={`/api/download${decodeURI(innerItem)}`} />;
+                })}
+
                 {/* {item.img.split(",").map((imgSplit) => (
                   <img src={`/api/download${imgSplit}.jpg`} />
                 ))} */}
                 {/* <img
-                  src={`/api/download${item.img.split(",")[0]}.jpg`}
+                  src={`/api/download${decodeURI(item.img.split(",")[0])}.jpg`}
                   width={"70px"}
                 /> */}
                 <div>

@@ -6,9 +6,7 @@ import axios from "axios";
 export const productManageThunk = createAsyncThunk(
   "/product/productManageThunk",
   async () => {
-    const { data } = await axios.post(
-      "http://localhost:8080/api/product/productManage"
-    );
+    const { data } = await axios.post("/api/product/productManage");
 
     return data;
   }
@@ -44,6 +42,9 @@ const productManage = createSlice({
         const { type, payload } = action;
         console.log("fulfilled");
         return payload;
+      })
+      .addCase(productManageThunk.rejected, (state, action) => {
+        console.log("rejected");
       });
   },
 });

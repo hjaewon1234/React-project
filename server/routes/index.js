@@ -115,6 +115,7 @@ router.post("/getImages", (req, res) => {
 //               brand: item.brand,
 //               description: item.description,
 //               category: data.id,
+//               img: item.img,
 //             });
 //           }
 //         });
