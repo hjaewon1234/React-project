@@ -5,15 +5,6 @@ export const userInfoThunk = createAsyncThunk(
   "/userInfo/userInfoThunk",
   async (test) => {
     console.log(test);
-    // return await new Promise((resolve, reject) => {
-    //   try {
-    //     setTimeout(() => {
-    //       resolve("할롱!");
-    //     }, 2000);
-    //   } catch (error) {
-    //     reject("실패!");
-    //   }
-    // });
     const { data } = await axios.post("http://localhost:8080/api/user", {
       id: "1",
       pw: "2",
