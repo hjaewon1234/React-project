@@ -1,4 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { useDispatch } from "react-redux";
+
 import axios from "axios";
 
 export const productManageThunk = createAsyncThunk(
@@ -11,6 +13,8 @@ export const productManageThunk = createAsyncThunk(
     return data;
   }
 );
+
+// 우선순위 - > 초기값 설정 //
 
 const productManage = createSlice({
   name: "productManageInfo",
@@ -27,19 +31,19 @@ const productManage = createSlice({
   ],
   reducers: {
     setProduct: (state, action) => {
-      console.log(state);
-      state = [...state, ...action.payload];
+      const { type, payload } = action;
+      state = [...state, ...payload];
     },
   },
   extraReducers: (bulider) => {
     bulider
       .addCase(productManageThunk.pending, (state, action) => {
         console.log("pending");
-        console.log(state);
       })
-      .addCase(productManageThunk.fulfilled, (state, { payload }) => {
+      .addCase(productManageThunk.fulfilled, (state, action) => {
+        const { type, payload } = action;
         console.log("fulfilled");
-        return { payload };
+        return payload;
       });
   },
 });

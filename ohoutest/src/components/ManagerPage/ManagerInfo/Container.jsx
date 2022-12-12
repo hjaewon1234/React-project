@@ -1,28 +1,35 @@
-import ManagerInfoComponent from "./Component";
+import ManagerInfoComponent from "./unitCompnents/ManagerInfoComponent";
+import QnaComponent from "./unitCompnents/QnaComponent";
 import styled from "styled-components";
-import { useSelector, useDispatch } from "react-redux";
-import { action, productManageThunk } from "../../../modules/productManage";
+import { useDispatch } from "react-redux";
+import { Route, Routes } from "react-router-dom";
+
+import AnswerQna from "./unitCompnents/AnswerQna";
+import { productManageThunk } from "../../../modules/productManage";
 
 const ManagerInfoContainer = () => {
   // 필요한게 뭐가 있을까?
   const dispatch = useDispatch();
+  const tempThunk = () => dispatch(productManageThunk());
+  tempThunk();
+  // const ProductInfo = useSelector((state) => state.productManageInfo);
 
-  const ProductInfo = useSelector((state) => state.productManageInfo);
-  console.log(ProductInfo);
+  // 계속 불러오는게 문제임
 
   return (
     <InfoContainerBox>
       {/* 이미지 넣는법  테스트 */}
-      <img src="/api/downloadtreeBall1.jpg"></img>
 
-      <ManagerInfoComponent
-        title={"상품 배송 정보"}
-        info={ProductInfo.payload}
-      />
-      <ManagerInfoComponent title={"문의 사항 확인"} />
+      <Routes>
+        <Route path="/qnaAnswer/:id" element={<AnswerQna />} />
+      </Routes>
+      <img src="/api/downloadtreeBall2.jpg"></img>
+
+      <ManagerInfoComponent title={"상품 배송 정보"} />
+      <QnaComponent title={"문의 사항 확인"} />
       <ManagerInfoComponent title={"상품 추가"} />
-      <button onClick={() => dispatch(productManageThunk())}>그럼말고</button>
-      <button onClick={() => console.log(ProductInfo)}>확인해보기</button>
+      <button onClick={() => dispatch(productManageThunk())}>애플 최고</button>
+      <button>윈도우 쌉구림ㅋ</button>
     </InfoContainerBox>
   );
 };

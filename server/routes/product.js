@@ -12,7 +12,7 @@ const tables = [
     기분 좋아야 하는 특별한날 기대에 못미치는 상품을 받으면 안돼서에요
     상품 한개 한개 오랜 시간을 두고 꼼꼼히 선택했어요.
     누적된 피드백과 의견 주신 내용을 최대한 반영하려 많은 노력도 담았지요.`,
-    img: "treeBall1,treeBall2,treeBall3",
+    img: "treeBall1",
   },
 ];
 
@@ -29,8 +29,10 @@ router.route("/").post((req, res) => {
 router.route("/productManage").post(async (req, res) => {
   console.log("지나갔다.");
   const productInfo = await db.Products.findAll();
-  console.log(productInfo[0].dataValues);
-  res.send(productInfo[0].dataValues);
+
+  console.log(productInfo.length);
+  console.log(productInfo);
+  res.send(productInfo);
 });
 
 export default router;
