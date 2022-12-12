@@ -22,7 +22,7 @@ const ManagerInfoComponent = (props) => {
           <AccoContents>
             <div>
               <img src="./Img/testImg.png" style={{ width: "70px" }} />
-              <div>[끼사마루] [사은품 증정] 멀티 드레스룸 행거 1+1 SET</div>
+              <div>[ 까시미어 ] [사은품 증정] 멀티 드레스룸 행거 1+1 SET</div>
             </div>
           </AccoContents>
 

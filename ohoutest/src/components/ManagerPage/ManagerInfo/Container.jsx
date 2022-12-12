@@ -1,24 +1,30 @@
 import ManagerInfoComponent from "./Component";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
-import { action } from "../../../modules/productManage";
+import { action, productManageThunk } from "../../../modules/productManage";
 
 const ManagerInfoContainer = () => {
   // 필요한게 뭐가 있을까?
   const dispatch = useDispatch();
+
   const ProductInfo = useSelector((state) => state.productManageInfo);
-  const ProductManageInfo = () => dispatch(action.setProduct);
   console.log(ProductInfo);
-  console.log(ProductManageInfo());
 
   return (
     <InfoContainerBox>
-      <ManagerInfoComponent title={"언제다할수잇을까"} />
-      <ManagerInfoComponent title={"진짜하기싫어"} />
-      <button onClick={() => dispatch(action.setProduct)}>그럼말고</button>
+      <ManagerInfoComponent
+        title={"상품 배송 정보"}
+        info={ProductInfo.payload}
+      />
+      <ManagerInfoComponent title={"문의 사항 확인"} />
+      <ManagerInfoComponent title={"상품 추가"} />
+      <button onClick={() => dispatch(productManageThunk())}>그럼말고</button>
+      <button onClick={() => console.log(ProductInfo)}>확인해보기</button>
     </InfoContainerBox>
   );
 };
+
+// 지금 상황으로 봤을 때 추가가 된것이 확인이 되는것 같음.
 
 export default ManagerInfoContainer;
 
