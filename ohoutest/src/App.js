@@ -1,4 +1,3 @@
-import Header from "./components/Header";
 import ManagerInfo from "./components/ManagerPage";
 
 function App() {
