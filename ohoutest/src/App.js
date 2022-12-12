@@ -28,4 +28,5 @@ const AppBox = styled.div`
   align-items: center;
   text-align: center;
   background-color: #f4f4f4;
+  height: 3000px;
 `;

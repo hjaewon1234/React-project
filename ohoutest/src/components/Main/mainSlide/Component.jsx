@@ -1,15 +1,22 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
 
-import { useRef, useState } from "react";
+const animaSpeed = 3;
+let animating = false;
+let currentItemId;
 
 const MainSlideComponent = () => {
   const container = useRef();
   const innerBox = useRef();
   const btnContainer = useRef();
-  let currentItem = 1;
-  let animating = false;
-  const animaSpeed = 5;
+  const [currentItem, setcurrentItem] = useState(1);
+  useEffect(() => {
+    clearTimeout(currentItemId);
+    currentItemId = setTimeout(() => {
+      next();
+    }, 3500);
+  }, [currentItem]);
   const itemArr = [
     "주말 반짝특가",
     "END SALE",
@@ -22,144 +29,112 @@ const MainSlideComponent = () => {
     "리퍼마켓",
     "선물 ITEM",
   ];
+  const slideItem = ["/", "/", "/", "/", "/", "/", "/", "/", "/", "/"];
 
-  const selector = (handler) => {
-    if (animating) return;
-    animating = true;
-    if (handler) {
-      currentItem++;
-      if (currentItem === 11) {
-        animator();
-        setTimeout(() => {
-          animator(100);
-          currentItem = 1;
-          animating = false;
-        }, animaSpeed * 100);
-      } else {
-        animator();
-      }
-    } else {
-      currentItem--;
-      if (currentItem === 0) {
-        animator();
-        setTimeout(() => {
-          animator(1000);
-          currentItem = 10;
-          animating = false;
-        }, animaSpeed * 100);
-      } else {
-        animator();
-      }
-    }
-  };
-
-  const animator = (aug) => {
-    if (!aug) {
-      const temp = currentItem * 100;
-      container.current.style.transition = `transform ${animaSpeed / 10}s`;
-      container.current.style.transform = `translate(-${temp}vw)`;
-      setTimeout(() => {
-        animating = false;
-      }, animaSpeed * 100);
-    } else {
-      container.current.style.transition = "transform 0s";
-      container.current.style.transform = `translate(-${aug}vw)`;
+  const slideExecuter = (param) => {
+    container.current.style.transition = `transform ${animaSpeed / 10}s`;
+    container.current.style.transform = `translate(-${param}vw)`;
+    setTimeout(() => {
       animating = false;
-    }
+    }, animaSpeed * 100);
   };
 
-  const btnSelector = (idx) => {
+  const blindExecuter = (param) => {
+    setTimeout(() => {
+      container.current.style.transition = "transform 0s";
+      container.current.style.transform = `translate(-${param}vw)`;
+      animating = false;
+    }, animaSpeed * 100);
+    setcurrentItem(param / 100);
+  };
+
+  const animator = (key, param) => {
     if (animating) return;
     animating = true;
-    currentItem = idx + 1;
-    animator();
+    switch (key) {
+      case "left":
+        setcurrentItem((prev) => prev - 1);
+        slideExecuter(currentItem * 100 - 100);
+        if (currentItem === 1) {
+          blindExecuter(1000);
+          return;
+        }
+        return;
+
+      case "right":
+        setcurrentItem((prev) => prev + 1);
+        slideExecuter(currentItem * 100 + 100);
+        if (currentItem === 10) {
+          blindExecuter(100);
+          return;
+        }
+        return;
+
+      case "btn":
+        setcurrentItem(param);
+        slideExecuter(param * 100);
+        return;
+
+      default:
+        return;
+    }
   };
 
   const prev = () => {
-    selector(false);
+    animator("left");
   };
+
   const next = () => {
-    selector(true);
+    animator("right");
   };
 
-  const autoSlider = setInterval(() => {
-    console.log("인터벌작동");
-    next();
-  }, 3500);
-
-  const intervalStarter = () => {
-    // const autoSlider = setInterval(() => {
-    //   console.log("인터벌작동");
-    //   next();
-    // }, 3500);
+  const btnSelector = (idx) => {
+    animator("btn", idx);
   };
 
-  const intervalStopper = () => {
-    // clearInterval(autoSlider);
-  };
+  const intervalStarter = () => {};
 
-  // const myInterval = () => {
-  //   for (let delay = 0; delay < 35; delay++) {
-  //     setTimeout(() => {
-  //       console.log(delay);
-  //     }, 100 * delay);
-  //   }
-  // };
-  // myInterval();
+  const intervalStopper = () => {};
+
+  const SlideCycle = () => {
+    return (
+      <>
+        <Link to={"/"}>
+          <img src="/img/mainSlideImg/mainslideimg10.webp" />
+        </Link>
+        {slideItem.map((elem, idx) => {
+          return (
+            <Link key={`slideItem - ${idx + 1}`} to={elem}>
+              <img src={`/img/mainSlideImg/mainslideimg${idx + 1}.webp`} />
+            </Link>
+          );
+        })}
+        <Link to={"/"}>
+          <img src="/img/mainSlideImg/mainslideimg1.webp" />
+        </Link>
+      </>
+    );
+  };
 
   return (
     <MainSlideCompBox>
       <div
         className="inner-box"
         ref={innerBox}
-        onMouseOver={intervalStopper}
+        onMouseEnter={intervalStopper}
         onMouseOut={intervalStarter}
       >
         <div className="slide-container" ref={container}>
-          <Link to={"/"}>
-            <img src="/img/mainSlideImg/mainslideimg10.webp" />
-          </Link>
-          <Link to={"/"}>
-            <img src="/img/mainSlideImg/mainslideimg1.webp" />
-          </Link>
-          <Link to={"/"}>
-            <img src="/img/mainSlideImg/mainslideimg2.webp" />
-          </Link>
-          <Link to={"/"}>
-            <img src="/img/mainSlideImg/mainslideimg3.webp" />
-          </Link>
-          <Link to={"/"}>
-            <img src="/img/mainSlideImg/mainslideimg4.webp" />
-          </Link>
-          <Link to={"/"}>
-            <img src="/img/mainSlideImg/mainslideimg5.webp" />
-          </Link>
-          <Link to={"/"}>
-            <img src="/img/mainSlideImg/mainslideimg6.webp" />
-          </Link>
-          <Link to={"/"}>
-            <img src="/img/mainSlideImg/mainslideimg7.webp" />
-          </Link>
-          <Link to={"/"}>
-            <img src="/img/mainSlideImg/mainslideimg8.webp" />
-          </Link>
-          <Link to={"/"}>
-            <img src="/img/mainSlideImg/mainslideimg9.webp" />
-          </Link>
-          <Link to={"/"}>
-            <img src="/img/mainSlideImg/mainslideimg10.webp" />
-          </Link>
-          <Link to={"/"}>
-            <img src="/img/mainSlideImg/mainslideimg1.webp" />
-          </Link>
+          {SlideCycle()}
         </div>
       </div>
       <div className="btn-container" ref={btnContainer}>
         {itemArr.map((elem, idx) => {
           return (
             <button
+              className={currentItem === idx + 1 ? "current-item" : ""}
               onClick={() => {
-                btnSelector(idx);
+                btnSelector(idx + 1);
               }}
               key={`itemArr-${idx}`}
             >
@@ -199,6 +174,7 @@ const MainSlideCompBox = styled.div`
     font-size: 0;
     user-select: none;
     white-space: nowrap;
+    /* transform: translate(-100vw); */
     transform: translate(-100vw);
   }
   a {
@@ -224,6 +200,9 @@ const MainSlideCompBox = styled.div`
     flex-grow: 1;
     cursor: pointer;
   }
+  .btn-container > button:hover {
+    background-color: rgb(234, 234, 234);
+  }
   .btn-container button:last-child {
     border-right: 1px solid lightgrey;
   }
@@ -236,5 +215,12 @@ const MainSlideCompBox = styled.div`
   }
   .slide-btn button img {
     vertical-align: middle;
+  }
+  .current-item {
+    background-color: gray !important;
+    font-weight: bold;
+    color: white;
+    cursor: default !important;
+    transition: background ${animaSpeed / 10}s;
   }
 `;
