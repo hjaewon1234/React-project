@@ -5,8 +5,22 @@ export default class Users extends Sequelize.Model {
     return super.init(
       {
         id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
+        userId: { type: Sequelize.STRING(255), allowNull: true },
+        userPw: { type: Sequelize.STRING(255), allowNull: true },
         userName: {
           type: Sequelize.STRING(45),
+          allowNull: true,
+        },
+        phone: {
+          type: Sequelize.STRING(255),
+          allowNull: true,
+        },
+        userAddress: {
+          type: Sequelize.STRING(255),
+          allowNull: true,
+        },
+        userAddress1: {
+          type: Sequelize.STRING(255),
           allowNull: true,
         },
       },

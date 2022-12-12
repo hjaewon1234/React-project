@@ -1,13 +1,7 @@
-import Header from "./components/Header";
+import SingUp from "./components/index";
 
 function App() {
-  return (
-    <div>
-      <div>
-        <Header></Header>
-      </div>
-    </div>
-  );
+  return <SingUp></SingUp>;
 }
 
 export default App;

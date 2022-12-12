@@ -1,40 +1,43 @@
 import express from "express";
-import session from "express-session";
+import dotenv from "dotenv";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
-import dotenv from "dotenv";
 import cors from "cors";
-
+import {
+  login,
+  accessToken,
+  refreshToken,
+  loginSuccess,
+  logout,
+} from "./controller/index.js";
 import routes from "./routes/index.js";
 const app = express();
-
 dotenv.config();
+
 app.use((req, res, next) => {
   if (process.env.NODE_ENV === "production") morgan("combined")(req, res, next);
   else morgan("dev")(req, res, next);
 });
-app.use(cors({ credentials: true, optionsSuccessStatus: 200 }));
+
 app.use(express.json());
-app.use(cookieParser(process.env.COOKIE_SECRET));
-app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 app.use(
-  session({
-    resave: false,
-    saveUninitialized: false,
-    secret: process.env.COOKIE_SECRET,
-    cookie: {
-      httpOnly: true,
-      secure: false,
-    },
-    name: "session",
+  cors({
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"],
+    credentials: true,
   })
 );
-
 app.set("port", process.env.PORT || 8080);
 
 app.use("/api", routes);
+app.post("/login", login);
+app.get("/accesstoken", accessToken);
+app.get("/refreshtoken", refreshToken);
+app.get("/login/success", loginSuccess);
+app.post("/logout", logout);
 
-// region: db
+// region: db;
 import model from "./models/index.js";
 
 model.sequelize
@@ -45,6 +48,6 @@ model.sequelize
   });
 // region: db-end
 
-app.listen(app.get("port"), () => {
-  console.log(app.get("port"));
+app.listen(process.env.PORT, () => {
+  console.log(`server is on ${process.env.PORT}`);
 });
