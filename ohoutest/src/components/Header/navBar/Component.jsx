@@ -41,15 +41,8 @@ const NavBarComponent = ({}) => {
 
 export default NavBarComponent;
 const NavBarCompBox = styled.div`
-  background-color: #f4f4f4;
-  padding: 10px;
-  position: fixed;
-  z-index: 1;
-  margin: 0 auto;
-  left: 0;
-  right: 0;
-  // top: 0;
-
+  height: 90px;
+  display: flex;
   .nav-bar-container {
     display: flex;
     justify-content: space-between;
