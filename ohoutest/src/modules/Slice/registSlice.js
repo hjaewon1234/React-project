@@ -21,11 +21,11 @@ export const signUpUser = createAsyncThunk("signUpUser", async (body) => {
 // axios.post("경로", {담아서 보낼 데이터})
 
 const registSlice = createSlice({
-  name: "userInfo",
+  name: "userRegist",
   initialState,
   reducers: {
     setUser: (state, action) => {
-      state.userInfo.user = action.payload;
+      state.userRegist.user = action.payload;
     },
   },
   extraReducers: {

@@ -1,7 +1,7 @@
-import LoginContainer from "./Login/Container";
+import LoginContainer from "./UserLogin/Login/Container";
 import Login2Container from "./Login2/Container";
 import RegistContainer from "./Regist/Container";
-import MainContainer from "./Main/Container";
+import MainContainer from "./UserLogin/Main/Container";
 import { Routes, Route, Link } from "react-router-dom";
 
 const SingUp = ({ userName }) => {

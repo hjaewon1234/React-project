@@ -1,4 +1,4 @@
-import MainComponents from "../Main/Components";
+import MainComponents from "./Components.jsx";
 
 const MainContainer = () => {
   return (

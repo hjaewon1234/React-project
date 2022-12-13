@@ -53,6 +53,7 @@ const Login2Components = ({ join }) => {
         >
           로그인
         </button>
+        <button>로그아웃</button>
       </RegistMain>
     </>
   );
