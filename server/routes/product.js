@@ -16,11 +16,11 @@ const tables = [
   },
 ];
 
-db.Products.findAll().then((data) => {
-  if (data.length === 0) {
-    db.Products.create(tables[0]);
-  }
-});
+// db.Products.findAll().then((data) => {
+//   if (data.length === 0) {
+//     db.Products.create(tables[0]);
+//   }
+// });
 
 router.route("/").post((req, res) => {
   res.send(req.body);
