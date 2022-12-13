@@ -1,15 +1,17 @@
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { useState } from "react";
-let tempArr = [1, 2, 3, 4];
+let tempArr = [1, 2, 3, 4, 5];
 // 여기도 추후에 숫자를 어떻게 받을 지 생각을 하고
 // 숫자를 눌럿을 때 임시 랜더링으로 파일을 다시 불러오면 될 것 같음.
 
-const ManagerInfoComponent = ({ title }) => {
+const ManagerInfoComponent = ({ title, tempThunk }) => {
   const [accodion, setAccodion] = useState(true);
   const [color, setColor] = useState(1);
   const ProductInfo = useSelector((state) => state.productManageInfo);
+  console.log(ProductInfo.length);
   console.log(ProductInfo);
+
   return (
     <Infodiv>
       <div>
@@ -33,12 +35,16 @@ const ManagerInfoComponent = ({ title }) => {
           <AccoContents>
             {ProductInfo.map((item, index) => (
               <UnitDiv key={index}>
-                {item.img.split(",").map((innerItem) => {
-                  console.log(innerItem);
-                  console.log(encodeURI(innerItem) + "이건 인코드된거임");
-                  console.log(decodeURI(innerItem) + "이건 디코드된거임");
-                  return <img src={`/api/download${decodeURI(innerItem)}`} />;
-                })}
+                {/* {item.img ? (
+                  item.img.split(",").map((innerItem) => {
+                    console.log(innerItem);
+                    console.log(encodeURI(innerItem) + "이건 인코드된거임");
+                    console.log(decodeURI(innerItem) + "이건 디코드된거임");
+                    return <img src={`/api/download${decodeURI(innerItem)}`} />;
+                  })
+                ) : (
+                  <></>
+                )} */}
 
                 {/* {item.img.split(",").map((imgSplit) => (
                   <img src={`/api/download${imgSplit}.jpg`} />
@@ -66,9 +72,9 @@ const ManagerInfoComponent = ({ title }) => {
             {tempArr.map((item, index) => (
               <NumberBox
                 key={index}
-                onClick={() => setColor(item)}
+                onClick={() => tempThunk(index)}
                 style={{
-                  backgroundColor: color == item ? "#f0a500" : "#f4f4f4",
+                  backgroundColor: color - 1 == item ? "#f0a500" : "#f4f4f4",
                 }}
               >
                 {item}

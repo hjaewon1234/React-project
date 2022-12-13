@@ -28,11 +28,12 @@ router.route("/").post((req, res) => {
 
 router.route("/productManage").post(async (req, res) => {
   console.log("지나갔다.");
+  console.log(req.body.number);
   const productInfo = await db.Products.findAll();
+  const sliceInfo = productInfo.slice(req.body.number, req.body.number + 10);
 
   console.log(productInfo.length);
-  console.log(productInfo);
-  res.send(productInfo);
+  res.send(sliceInfo);
 });
 
 export default router;
