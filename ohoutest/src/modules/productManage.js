@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { useDispatch } from "react-redux";
 
 import axios from "axios";
 
@@ -45,6 +44,7 @@ const productManage = createSlice({
       })
       .addCase(productManageThunk.fulfilled, (state, action) => {
         const { type, payload } = action;
+        console.log(payload);
         console.log("fulfilled");
         return payload;
       })
