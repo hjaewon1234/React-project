@@ -4,47 +4,60 @@ import styled from "styled-components";
 const NavBarComponent = ({}) => {
   return (
     <NavBarCompBox>
-      <Link to="/main" className="logo-icon">
-        <img src="/img/TeamLogo.png" />
-      </Link>
-      <Link to="/">스토어</Link>
-      <Link to="/">커뮤니티</Link>
-      <form className="search-box">
-        <span className="magnify-icon">
-          <img src="/img/magnifying-glass-solid.svg" />
-        </span>
-        <input id="searchInput" placeholder="통합검색" />
-        {/* {!searchInput || (
+      <div className="nav-bar-container">
+        <Link to="/main" className="logo-icon">
+          <img src="/img/TeamLogo.png" />
+        </Link>
+        <Link to="/">스토어</Link>
+        <Link to="/">커뮤니티</Link>
+        <form className="search-box">
+          <span className="magnify-icon">
+            <img src="/img/magnifying-glass-solid.svg" />
+          </span>
+          <input id="searchInput" placeholder="통합검색" />
+          {/* {!searchInput || (
           <span className="x-btn">
             <img src="/img/circle-xmark-regular.svg" />
           </span>
         )} */}
-        <span className="x-btn">
-          <img src="/img/circle-xmark-regular.svg" />
-        </span>
-      </form>
-      <Link to="/" className="cart-icon">
-        <img src="/img/cart-shopping-solid.svg" />
-      </Link>
-      <Link to="/">로그인</Link>
-      <Link to="/">회원가입</Link>
-      <Link to="/">고객센터</Link>
-      <button className="upload-btn">
-        글쓰기
-        <img src="/img/chevron-right-solid.svg" alt="" />
-      </button>
+          <span className="x-btn">
+            <img src="/img/circle-xmark-regular.svg" />
+          </span>
+        </form>
+        <Link to="/" className="cart-icon">
+          <img src="/img/cart-shopping-solid.svg" />
+        </Link>
+        <Link to="/">로그인</Link>
+        <Link to="/">회원가입</Link>
+        <Link to="/">고객센터</Link>
+        <button className="upload-btn">
+          글쓰기
+          <img src="/img/chevron-right-solid.svg" alt="" />
+        </button>
+      </div>
     </NavBarCompBox>
   );
 };
 
 export default NavBarComponent;
 const NavBarCompBox = styled.div`
+  background-color: #f4f4f4;
   padding: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 1200px;
+  position: fixed;
+  z-index: 1;
   margin: 0 auto;
+  left: 0;
+  right: 0;
+  // top: 0;
+
+  .nav-bar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 1200px;
+    margin: 0 auto;
+  }
+
   a {
     text-decoration: none;
     color: black;
