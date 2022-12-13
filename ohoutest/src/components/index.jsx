@@ -1,4 +1,5 @@
 import LoginContainer from "./Login/Container";
+import Login2Container from "./Login2/Container";
 import RegistContainer from "./Regist/Container";
 import MainContainer from "./Main/Container";
 import { Routes, Route, Link } from "react-router-dom";
@@ -20,8 +21,9 @@ const SingUp = ({ userName }) => {
       {userName ? <MainContainer /> : <></>}
       <Routes>
         <Route path="/regist" element={<RegistContainer />} />
-        <Route path="/" element={<LoginContainer />} />
+        <Route path="/login" element={<LoginContainer />} />
       </Routes>
+      <Login2Container></Login2Container>
     </>
   );
 };

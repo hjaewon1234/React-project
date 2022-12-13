@@ -39,6 +39,7 @@ router.post("/getUsers", async (req, res) => {
         userPw: crypto.SHA256(req.body.inputPw).toString(),
         userAddress: req.body.inputAdress,
         userAddress1: req.body.inputAdress1,
+        publish: "",
       });
       console.log("하이");
       res.send({ status: 200 });
