@@ -6,7 +6,7 @@ const animaSpeed = 3;
 let animating = false;
 let currentItemId;
 
-const MainSlideComponent = () => {
+const MainSlideComponent = ({}) => {
   const container = useRef();
   const innerBox = useRef();
   const btnContainer = useRef();
