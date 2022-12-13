@@ -27,7 +27,7 @@ const ManagerInfoContainer = () => {
       <Routes>
         <Route path="/qnaAnswer/:id" element={<AnswerQna />} />
       </Routes>
-      <img src="/api/downloadtreeBall2.jpg"></img>
+      <img src={`http://localhost:8080/api/downloadtreeBall1.jpg`}></img>
 
       <ManagerInfoComponent title={"상품 배송 정보"} tempThunk={tempThunk} />
       <QnaComponent title={"문의 사항 확인"} productInfo={productInfo} />
@@ -43,5 +43,7 @@ const ManagerInfoContainer = () => {
 export default ManagerInfoContainer;
 
 const InfoContainerBox = styled.div`
+  background-color: #1a1c20;
+  width: 100%;
   padding: 50px;
 `;

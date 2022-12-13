@@ -6,19 +6,21 @@ import Header from "./components/Header";
 import Main from "./components/Main";
 import Footer from "./components/Footer/Container";
 import SingUp from "./components/index";
+import axios from "axios";
+axios.defaults.withCredentials = true;
 
 function App() {
   return (
     <AppBox>
-      <SingUp></SingUp>
       <Header />
       <Routes>
+        <Route path="/" element={<Main />}></Route>
         <Route path="/main" element={<Main />}></Route>
+        <Route path="/signUp" element={<SingUp></SingUp>}></Route>
+        <Route path="/managerInfo" element={<ManagerInfo></ManagerInfo>} />
       </Routes>
       <Footer />
-      <div style={{ backgroundColor: "#1a1c20" }}>
-        {/* <ManagerInfo></ManagerInfo> */}
-      </div>
+      <div style={{ backgroundColor: "#1a1c20" }}></div>
     </AppBox>
   );
 }
