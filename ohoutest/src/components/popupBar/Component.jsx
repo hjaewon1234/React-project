@@ -1,16 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 
-const PopupBarComponent = () => {
-  const [switcher, setSwitcher] = useState(false);
-
-  if (switcher) {
-    return <div>ㅎㅇ</div>;
-  } else {
-    return <div>ㅃㅇ</div>;
-  }
-
+const PopupBarComponent = ({ setSwitcher }) => {
   return (
     <PopupBarCompBox>
       <Link to={"/"}>
@@ -19,7 +10,10 @@ const PopupBarComponent = () => {
       <Link to={"/"}>
         <img className="popup-right" src="/img/popupBar/popup2.png" />
       </Link>
-      <img src="/img/x-solid.svg" />
+      <img
+        onClick={() => setSwitcher((prev) => !prev)}
+        src="/img/x-solid.svg"
+      />
     </PopupBarCompBox>
   );
 };
@@ -28,6 +22,7 @@ export default PopupBarComponent;
 
 const PopupBarCompBox = styled.div`
   display: flex;
+  width: 100%;
   & > img {
     width: 24px;
     height: 20px;
