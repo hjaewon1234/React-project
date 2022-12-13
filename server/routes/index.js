@@ -63,7 +63,7 @@ const users = [
 async function setImages() {
   await fs.readdir("./Img", (err, datas) => {
     for (let i = 0; i < datas.length; ++i) {
-      router.get(`/download${datas[i]}`, (req, res) => {
+      router.get(`/download${encodeURI(datas[i])}`, (req, res) => {
         fs.readFile("./Img/" + datas[i], (err, data) => {
           res.writeHead(200, { "Content-Type": "text/html" });
           res.end(data);
@@ -108,7 +108,7 @@ router.post("/getImages", (req, res) => {
 //           if (!data) {
 //             console.log("왜없음?", item);
 //           } else {
-//             console.log(data.id);
+//             console.log(data.id, item.img);
 //             db.Products.create({
 //               name: item.name,
 //               price: item.price,
