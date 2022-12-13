@@ -1,7 +1,16 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const PopupBarComponent = () => {
+  const [switcher, setSwitcher] = useState(false);
+
+  if (switcher) {
+    return <div>ㅎㅇ</div>;
+  } else {
+    return <div>ㅃㅇ</div>;
+  }
+
   return (
     <PopupBarCompBox>
       <Link to={"/"}>
