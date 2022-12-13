@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoffee } from "@fortawesome/free-solid-svg-icons";
-// import { useDispatch } from "react";
 import styled from "styled-components";
 import Post from "../../modules/Api/kakaoApi";
 import { signUpUser } from "../../modules/Slice/registSlice";
 import { useDispatch } from "react-redux";
 const RegistComponents = ({ join }) => {
   // const dispathch = useDispatch();
+  // const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
+  // const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
+
   const [inputId, setId] = useState("");
   const [inputPw, setPw] = useState("");
   const [inputPw1, setPw1] = useState("");

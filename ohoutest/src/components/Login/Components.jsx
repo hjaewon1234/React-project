@@ -2,20 +2,19 @@ import { useState } from "react";
 // import { useDispatch } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import { signUpUser } from "../../modules/Slice/registSlice";
 import { useDispatch } from "react-redux";
 const LoginComponents = ({ setIsLogin, setUser }) => {
   const [inputId, setId] = useState("");
   const [inputPw, setPw] = useState("");
   const dispatch = useDispatch();
-  const logHandle = () => {
-    dispatch(
-      signUpUser({
-        inputId,
-        inputPw,
-      })
-    );
-  };
+  // const logHandle = () => {
+  //   dispatch(
+  //     signUpUser({
+  //       inputId,
+  //       inputPw,
+  //     })
+  //   );
+  // };
 
   const Login = () => {
     axios({
@@ -53,12 +52,7 @@ const LoginComponents = ({ setIsLogin, setUser }) => {
         }}
         placeholder={"비밀번호"}
       />
-      <button
-        onClick={() => {
-          logHandle();
-        }}
-        className="loginButton"
-      >
+      <button onClick={Login} className="loginButton">
         로그인
       </button>
     </div>
