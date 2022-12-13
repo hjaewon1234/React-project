@@ -35,8 +35,8 @@ const ManagerInfoComponent = ({ title, tempThunk }) => {
           <AccoContents>
             {productInfo.map((item, index) => (
               <UnitDiv key={index}>
-                {item.img ? (
-                  item?.img?.split(",").map((innerItem) => {
+                {/* {item.img ? (
+                  item.img?.split(",").map((innerItem) => {
                     console.log(innerItem);
                     console.log(encodeURI(innerItem) + "이건 인코드된거임");
                     console.log(decodeURI(innerItem) + "이건 디코드된거임");
@@ -44,7 +44,7 @@ const ManagerInfoComponent = ({ title, tempThunk }) => {
                   })
                 ) : (
                   <></>
-                )}
+                )} */}
 
                 {/* {item.img.split(",").map((imgSplit) => (
                   <img src={`/api/download${imgSplit}.jpg`} />
