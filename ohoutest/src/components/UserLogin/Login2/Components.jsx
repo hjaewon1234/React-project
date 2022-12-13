@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { logInUser } from "../../modules/Slice/loginSlice";
+import { logInUser } from "../../../modules/Slice/loginSlice";
 import { useDispatch } from "react-redux";
 const Login2Components = ({ join }) => {
   const [inputId, setId] = useState("");
