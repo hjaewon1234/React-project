@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const TodaysDealComponent = ({ itemArr, testArr }) => {
   return (
     <TodaysDealCompBox>
-      <div className="subtitle">
+      {/* <div className="subtitle">
         <div>오늘의딜</div>
         <Link to={"/"}>더보기</Link>
       </div>
@@ -23,6 +23,10 @@ const TodaysDealComponent = ({ itemArr, testArr }) => {
         </Link>
       </div>
       {/* {testArr.map((elem, idx) => {
+        <button>클릭</button>
+      </div> */}
+      {testArr.map((elem, idx) => {
+        console.log(elem);
         return (
           <div key={`testArr - ${idx}`}>
             {elem.aa}
@@ -33,7 +37,7 @@ const TodaysDealComponent = ({ itemArr, testArr }) => {
             {elem.cb}
           </div>
         );
-      })} */}
+      })}
     </TodaysDealCompBox>
   );
 };
