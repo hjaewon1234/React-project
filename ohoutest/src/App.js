@@ -15,7 +15,7 @@ function App() {
       </Routes>
       <Footer />
       <div style={{ backgroundColor: "#1a1c20" }}>
-        <ManagerInfo></ManagerInfo>
+        {/* <ManagerInfo></ManagerInfo> */}
       </div>
     </AppBox>
   );
