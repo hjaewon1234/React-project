@@ -8,6 +8,8 @@ import Main from "./components/Main";
 import Footer from "./components/Footer/Container";
 import SingUp from "./components/index";
 import PopupBarContainer from "./components/popupBar/Container";
+import axios from "axios";
+axios.defaults.withCredentials = true;
 
 function App() {
   const [switcher, setSwitcher] = useState(false);
@@ -17,12 +19,13 @@ function App() {
       {switcher || <PopupBarContainer setSwitcher={setSwitcher} />}
       <Header />
       <Routes>
+        <Route path="/" element={<Main />}></Route>
         <Route path="/main" element={<Main />}></Route>
+        <Route path="/signUp" element={<SingUp></SingUp>}></Route>
+        <Route path="/managerInfo" element={<ManagerInfo></ManagerInfo>} />
       </Routes>
       <Footer />
-      <div style={{ backgroundColor: "#1a1c20" }}>
-        {/* <ManagerInfo></ManagerInfo> */}
-      </div>
+      <div style={{ backgroundColor: "#1a1c20" }}></div>
     </AppBox>
   );
 }
