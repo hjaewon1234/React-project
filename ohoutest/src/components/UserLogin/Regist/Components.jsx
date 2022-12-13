@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCoffee } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faCoffee } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
-import Post from "../../modules/Api/kakaoApi";
-import { signUpUser } from "../../modules/Slice/registSlice";
+import Post from "../../../modules/Api/kakaoApi";
+import { signUpUser } from "../../../modules/Slice/registSlice";
 import { useDispatch } from "react-redux";
 const RegistComponents = ({ join }) => {
   // const dispathch = useDispatch();
