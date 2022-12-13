@@ -8,9 +8,9 @@ let tempArr = [1, 2, 3, 4, 5];
 const ManagerInfoComponent = ({ title, tempThunk }) => {
   const [accodion, setAccodion] = useState(true);
   const [color, setColor] = useState(1);
-  const ProductInfo = useSelector((state) => state.productManageInfo);
-  console.log(ProductInfo.length);
-  console.log(ProductInfo);
+  const productInfo = useSelector((state) => state.productManageInfo);
+  console.log(productInfo.length);
+  console.log(productInfo);
 
   return (
     <Infodiv>
@@ -33,7 +33,7 @@ const ManagerInfoComponent = ({ title, tempThunk }) => {
           }}
         >
           <AccoContents>
-            {ProductInfo.map((item, index) => (
+            {productInfo.map((item, index) => (
               <UnitDiv key={index}>
                 {/* {item.img ? (
                   item.img.split(",").map((innerItem) => {
