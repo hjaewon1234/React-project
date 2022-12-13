@@ -227,7 +227,7 @@ const refreshToken = (req, res) => {
     const accessToken = jwt.sign(
       {
         // id: userData.id,
-        username: userData.username,
+        userName: userData.userName,
         userId: userData.userId,
       },
       process.env.ACCESS_SECRET,

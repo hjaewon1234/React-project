@@ -5,6 +5,7 @@ import styled from "styled-components";
 import Header from "./components/Header";
 import Main from "./components/Main";
 import Footer from "./components/Footer/Container";
+import SingUp from "./components/index";
 
 function App() {
   return (
@@ -21,8 +22,6 @@ function App() {
     </AppBox>
   );
 }
-
-import SingUp from "./components/index";
 
 export default App;
 
