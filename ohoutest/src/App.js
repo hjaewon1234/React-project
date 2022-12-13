@@ -13,7 +13,7 @@ function App() {
   const [switcher, setSwitcher] = useState(false);
   return (
     <AppBox>
-      <SingUp></SingUp>
+      {/* <SingUp></SingUp> */}
       {switcher || <PopupBarContainer setSwitcher={setSwitcher} />}
       <Header />
       <Routes>
