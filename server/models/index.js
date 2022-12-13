@@ -1,4 +1,6 @@
-import configJson from "../config/config.json" assert { type: "json" };
+import { createRequire } from "module";
+const require = createRequire(import.meta.url);
+const configJson = require("../config/config.json");
 const config = configJson["development"];
 
 import Users from "./user.js";
