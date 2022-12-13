@@ -1,4 +1,4 @@
-import RegistComponents from "../Regist/Components";
+import RegistComponents from "./Components";
 
 const RegistContainer = () => {
   return <RegistComponents></RegistComponents>;
