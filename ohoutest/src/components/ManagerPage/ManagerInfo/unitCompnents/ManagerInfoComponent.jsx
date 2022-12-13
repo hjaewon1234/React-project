@@ -5,11 +5,10 @@ let tempArr = [1, 2, 3, 4, 5];
 // 여기도 추후에 숫자를 어떻게 받을 지 생각을 하고
 // 숫자를 눌럿을 때 임시 랜더링으로 파일을 다시 불러오면 될 것 같음.
 
-const ManagerInfoComponent = ({ title, tempThunk }) => {
+const ManagerInfoComponent = ({ title, tempThunk, productInfo }) => {
   const [accodion, setAccodion] = useState(true);
-  const [color, setColor] = useState(1);
-  const productInfo = useSelector((state) => state.productManageInfo);
-  console.log(productInfo.length);
+  const [color, setColor] = useState(0);
+  // const productInfo = useSelector((state) => state.productManageInfo);
   console.log(productInfo);
 
   return (
@@ -35,16 +34,21 @@ const ManagerInfoComponent = ({ title, tempThunk }) => {
           <AccoContents>
             {productInfo.map((item, index) => (
               <UnitDiv key={index}>
-                {item.img ? (
+                {/* {item.img ? (
                   item?.img?.split(",").map((innerItem) => {
                     console.log(innerItem);
                     console.log(encodeURI(innerItem) + "이건 인코드된거임");
                     console.log(decodeURI(innerItem) + "이건 디코드된거임");
-                    return <img src={`/api/download${decodeURI(innerItem)}`} />;
+                    return (
+                      <img
+                        src={`/api/download${decodeURI(innerItem)}`}
+                        style={{ width: "70px" }}
+                      />
+                    );
                   })
                 ) : (
                   <></>
-                )}
+                )} */}
 
                 {/* {item.img.split(",").map((imgSplit) => (
                   <img src={`/api/download${imgSplit}.jpg`} />
@@ -55,7 +59,7 @@ const ManagerInfoComponent = ({ title, tempThunk }) => {
                 /> */}
                 <div>
                   <div>
-                    [ {item.brand} ] [사은품 증정] {item.name}
+                    [ {item.brand} ] {item.name}
                   </div>
                 </div>
                 <div style={{ display: "flex", columnGap: "10px" }}>
@@ -72,9 +76,14 @@ const ManagerInfoComponent = ({ title, tempThunk }) => {
             {tempArr.map((item, index) => (
               <NumberBox
                 key={index}
-                onClick={() => tempThunk(index)}
+                onClick={() => {
+                  tempThunk(index);
+                  setColor(index);
+                }}
+                // 숫자로 할 지 , 인덱스로 할 지 확실히 하는것이 중요하다 (페이징 색 변화)
+                // onClick에 함수를 여러개 넣어 줄 때 는 ()=>{} 형태를 취한다.
                 style={{
-                  backgroundColor: color - 1 == item ? "#f0a500" : "#f4f4f4",
+                  backgroundColor: color == index ? "#f0a500" : "#f4f4f4",
                 }}
               >
                 {item}
