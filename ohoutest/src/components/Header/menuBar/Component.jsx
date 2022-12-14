@@ -19,7 +19,7 @@ const MenuBarCompBox = styled.div`
   gap: 30px;
   width: 1200px;
   margin: 0 auto;
-  margin-top: 100px;
+  margin-top: 10px;
   margin-bottom: 10px;
   a {
     text-decoration: none;

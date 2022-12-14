@@ -24,7 +24,6 @@ export default Header;
 const HeaderBox = styled.div`
   width: 100%;
   position: sticky;
-  // position: fixed;
   z-index: 1;
   left: 0px;
   right: 0px;
