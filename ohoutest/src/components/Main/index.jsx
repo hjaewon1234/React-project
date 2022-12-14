@@ -6,7 +6,7 @@ import TodaysDealContainer from "./todaysDeal/Container";
 import CategoriesContainer from "./categories/Container";
 import HotListContainer from "./hotList/Container";
 
-const Body = () => {
+const Main = () => {
   return (
     <MainBox>
       <MainSlideContainer />
@@ -18,6 +18,6 @@ const Body = () => {
   );
 };
 
-export default Body;
+export default Main;
 
 const MainBox = styled.div``;

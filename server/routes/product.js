@@ -25,5 +25,22 @@ const tables = [
 router.route("/").post((req, res) => {
   res.send(req.body);
 });
+// /api/product/
+router.route("/getProducts").post((req, res) => {
+  // console.log("getProducts req : ", req.body);
+  db.Products.findAll().then((data) => {
+    console.log(data[0].dataValues);
+    const sendData = [];
+    data.map((item, index) => {
+      if (
+        index < req.body.boxIdx - 1 ||
+        index >= req.body.boxIdx + req.body.idx - 1
+      )
+        return;
+      return sendData.push(item.dataValues);
+    });
+    res.send(sendData);
+  });
+});
 
 export default router;
