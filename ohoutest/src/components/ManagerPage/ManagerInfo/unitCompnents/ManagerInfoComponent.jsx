@@ -1,11 +1,16 @@
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { useState } from "react";
-let tempArr = [1, 2, 3, 4, 5];
+
 // 여기도 추후에 숫자를 어떻게 받을 지 생각을 하고
 // 숫자를 눌럿을 때 임시 랜더링으로 파일을 다시 불러오면 될 것 같음.
 
-const ManagerInfoComponent = ({ title, tempThunk, productInfo }) => {
+const ManagerInfoComponent = ({
+  title,
+  tempThunk,
+  productInfo,
+  productPaging,
+}) => {
   const [accodion, setAccodion] = useState(true);
   const [color, setColor] = useState(0);
   // const productInfo = useSelector((state) => state.productManageInfo);
@@ -73,7 +78,7 @@ const ManagerInfoComponent = ({ title, tempThunk, productInfo }) => {
           </AccoContents>
 
           <PagingDiv>
-            {tempArr.map((item, index) => (
+            {productPaging.map((item, index) => (
               <NumberBox
                 key={index}
                 onClick={() => {
@@ -86,7 +91,7 @@ const ManagerInfoComponent = ({ title, tempThunk, productInfo }) => {
                   backgroundColor: color == index ? "#f0a500" : "#f4f4f4",
                 }}
               >
-                {item}
+                {item + 1}
               </NumberBox>
             ))}
           </PagingDiv>

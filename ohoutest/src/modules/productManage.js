@@ -5,10 +5,10 @@ import axios from "axios";
 export const productManageThunk = createAsyncThunk(
   "/product/productManageThunk",
   async (num) => {
-    const { data } = await axios.post("/api/product/productManage", {
+    const { data } = await axios.post("/api/manager/productManage", {
       number: num,
     });
-    console.log(data + "data임");
+
     return data;
   }
 );
