@@ -1,7 +1,6 @@
 import Login2Components from "./Components.jsx";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Login2Components from "./Components";
 
 const Login2Container = () => {
   const [isLogin, setIsLogin] = useState(false);
