@@ -15,13 +15,6 @@ router
     res.send(req.body);
   });
 
-router.post("/Users", (req, res) => {
-  db.Users.findAll().then((data) => {
-    console.log(data);
-    res.send({ users: data });
-  });
-});
-
 router.post("/getUsers", async (req, res) => {
   try {
     console.log("getUsersbody : ", req.body);

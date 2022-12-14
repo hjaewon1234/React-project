@@ -1,19 +1,41 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { logInUser } from "../../modules/Slice/loginSlice";
-import { useDispatch } from "react-redux";
-const Login2Components = ({ join }) => {
+import axios from "axios";
+
+const Login2Components = ({ setIsLogin, setUser }) => {
   const [inputId, setId] = useState("");
   const [inputPw, setPw] = useState("");
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
+  // const logInHandle = () => {
+  //   dispatch(
+  //     logInUser({
+  //       inputId,
+  //       inputPw,
+  //     })
+  //   );
+  // };
+
   const logInHandle = () => {
-    dispatch(
-      logInUser({
-        inputId,
-        inputPw,
-      })
-    );
+    // dispatch(
+    //   logInUser({
+    //     inputId,
+    //     inputPw,
+    //   })
+    // );
+    axios({
+      url: "http://localhost:8080/login",
+      method: "POST",
+      withCredentials: true,
+      data: {
+        inputId: inputId,
+        inputPw: inputPw,
+      },
+    }).then((result) => {
+      if (result.status === 200) {
+        window.open("/", "_self");
+      }
+    });
   };
 
   return (
@@ -46,14 +68,7 @@ const Login2Components = ({ join }) => {
             placeholder={"비밀번호"}
           />
         </RegistMidStlye>
-        <button
-          onClick={() => {
-            logInHandle();
-          }}
-        >
-          로그인
-        </button>
-        <button>로그아웃</button>
+        <button onClick={logInHandle}>로그인</button>
       </RegistMain>
     </>
   );
