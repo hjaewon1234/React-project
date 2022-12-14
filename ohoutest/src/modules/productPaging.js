@@ -5,7 +5,7 @@ import axios from "axios";
 export const productPagingThunk = createAsyncThunk(
   "/product/productPageThunk",
   async () => {
-    const { data } = await axios.post("/api/product/productPage");
+    const { data } = await axios.post("/api/manager/productPage");
     console.log(data);
     return data;
   }
@@ -13,15 +13,11 @@ export const productPagingThunk = createAsyncThunk(
 
 const productPaging = createSlice({
   name: "productPaging",
-  initialState: [
-    {
-      pageNum: 0,
-    },
-  ],
+  initialState: [0],
   reducers: {
     setPaging: (state, action) => {
       const { type, payload } = action;
-      state = payload;
+      state = [...state, payload];
     },
   },
   extraReducers: (bulider) => {

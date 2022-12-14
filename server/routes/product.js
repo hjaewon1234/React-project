@@ -26,29 +26,4 @@ router.route("/").post((req, res) => {
   res.send(req.body);
 });
 
-router.route("/productManage").post(async (req, res) => {
-  console.log("지나갔다.");
-
-  const productInfo = await db.Products.findAll();
-  const sliceInfo = productInfo.slice(
-    req.body.number * 10,
-    req.body.number * 10 + 10
-  );
-
-  res.send(sliceInfo);
-});
-
-router.route("/productPage").post(async (req, res) => {
-  let pageNum = 0;
-
-  console.log(pageNum);
-  // if (parseInt(pagingNum / 10) == pagingNum / 10) {
-  //   pageNum = parseInt(pagingNum / 10);
-  // } else {
-  //   pageNum = parseInt(pagingNum / 10) + 1;
-  // }
-  console.log(pageNum);
-  res.send(pageNum);
-});
-
 export default router;

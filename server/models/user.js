@@ -46,5 +46,9 @@ export default class Users extends Sequelize.Model {
       through: "shopping_list",
       // as: "Noo",
     });
+    db.Users.hasMany(db.Qna, {
+      foreignKey: "users_id",
+      targetKey: "id",
+    });
   }
 }
