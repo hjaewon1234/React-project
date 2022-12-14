@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const productManageThunk = createAsyncThunk(
-  "/product/productManageThunk",
+  "/managerInfo/productManageThunk",
   async (num) => {
     const { data } = await axios.post("/api/manager/productManage", {
       number: num,

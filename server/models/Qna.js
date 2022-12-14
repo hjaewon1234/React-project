@@ -6,9 +6,9 @@ export default class Qna extends Sequelize.Model {
       {
         id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
 
-        QnaText: { type: Sequelize.STRING(500), allowNull: true },
-        QnaAnswer: { type: Sequelize.STRING(500), allowNull: true },
-        QnaState: { type: Sequelize.BOOLEAN, allowNull: true },
+        qnaText: { type: Sequelize.STRING(500), allowNull: true },
+        qnaAnswer: { type: Sequelize.STRING(500), allowNull: true },
+        qnaState: { type: Sequelize.BOOLEAN, allowNull: true },
       },
       {
         sequelize,

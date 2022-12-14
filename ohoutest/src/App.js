@@ -6,6 +6,8 @@ import Header from "./components/Header";
 import Main from "./components/Main";
 import Footer from "./components/Footer/Container";
 import SingUp from "./components/index";
+import AnswerQna from "./components/ManagerPage/ManagerInfo/answerQna/AnswerQnaComponent";
+import AnswerQnaContainer from "./components/ManagerPage/ManagerInfo/answerQna/AnswerQnaContainer";
 import PopupBarContainer from "./components/popupBar/Container";
 import axios from "axios";
 import RegistContainer from "./components/UserLogin/Regist/Container";
@@ -27,6 +29,15 @@ function App() {
         <Route path="/regist" element={<RegistContainer />} />
         <Route path="/search/:sword" element={<SearchContainer />} />
         {/* 회원가입 예외처리 하려고  26번 줄 추가 */}
+        <Route
+          path="/managerInfo/qnaAnswer/:id"
+          element={
+            <>
+              <ManagerInfo />
+              <AnswerQnaContainer />
+            </>
+          }
+        />
       </Routes>
       <Footer />
       <div style={{ backgroundColor: "#1a1c20" }}></div>

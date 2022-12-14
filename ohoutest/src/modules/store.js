@@ -6,6 +6,10 @@ import { reducer as logInSlice } from "./Slice/loginSlice";
 import { reducer as productPagingReducer } from "./productPaging";
 import { reducer as searchReducer } from "./search";
 
+import { reducer as qnaInfoReducer } from "./qnaInfo";
+import { reducer as qnaPagingReducer } from "./qnaPaging";
+import { reducer as answerQnaReducer } from "./answerQna";
+import { reducer as tempStateChangeReducer } from "./tempStateChange";
 export const store = configureStore({
   reducer: {
     userInfo: userInfoReducer,
@@ -14,6 +18,10 @@ export const store = configureStore({
     userLogin: logInSlice,
     productPaging: productPagingReducer,
     search: searchReducer,
+    qnaInfo: qnaInfoReducer,
+    qnaPaging: qnaPagingReducer,
+    answerQna: answerQnaReducer,
+    tempStateChange: tempStateChangeReducer,
   },
 });
 export default store;
