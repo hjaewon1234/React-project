@@ -17,7 +17,6 @@ const ManagerInfoContainer = () => {
     tempThunk(0);
     tempPagingThunk();
   }, []);
-
   const productInfo = useSelector((state) => state.productManageInfo);
   const productPaging = useSelector((state) => state.productPaging);
   console.log(productPaging);
@@ -25,7 +24,7 @@ const ManagerInfoContainer = () => {
   return (
     <InfoContainerBox>
       <Routes>
-        <Route path="/qnaAnswer/:id" element={<AnswerQna />} />
+        <Route path="/managerInfo/qnaAnswer/:id" element={<AnswerQna />} />
         {/* id에 맞춰서 AnserQna에 줄 값 설정
             id에 따라서 줄 값 은 배열로 뽑아온 것의 index가 될것이다. 
             페이징을 햇을때 문제가 생길까? -> 어차피 뽑아온것에 index 0~9 이기 때문에
@@ -58,7 +57,7 @@ const ManagerInfoContainer = () => {
             
             */}
       </Routes>
-      <img src="/api/downloadtreeBall2.jpg"></img>
+      <img src={`http://localhost:8080/api/downloadtreeBall1.jpg`}></img>
 
       <ManagerInfoComponent
         title={"상품 배송 정보"}
@@ -73,8 +72,6 @@ const ManagerInfoContainer = () => {
         productInfo={productInfo}
         productPaging={productPaging}
       />
-      <button onClick={() => dispatch(productManageThunk())}>애플 최고</button>
-      <button>윈도우 쌉구림ㅋ</button>
     </InfoContainerBox>
   );
 };
@@ -82,5 +79,7 @@ const ManagerInfoContainer = () => {
 export default ManagerInfoContainer;
 
 const InfoContainerBox = styled.div`
+  background-color: #1a1c20;
+  width: 100%;
   padding: 50px;
 `;

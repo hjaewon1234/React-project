@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+
 import { useState } from "react";
 
 // 여기도 추후에 숫자를 어떻게 받을 지 생각을 하고
@@ -39,7 +39,7 @@ const ManagerInfoComponent = ({
           <AccoContents>
             {productInfo.map((item, index) => (
               <UnitDiv key={index}>
-                {/* {item.img ? (
+                {/* {item?.img ? (
                   item?.img?.split(",").map((innerItem) => {
                     console.log(innerItem);
                     console.log(encodeURI(innerItem) + "이건 인코드된거임");

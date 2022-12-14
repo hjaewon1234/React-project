@@ -5,6 +5,7 @@ import product from "./product.js";
 import manager from "./manager.js";
 import db from "../models/index.js";
 import fs from "fs";
+import login from "./login.js";
 
 router.use("/", (req, res, next) => {
   console.log("routes/index.js : " + req.url);
@@ -127,5 +128,6 @@ router.post("/getImages", (req, res) => {
 //     });
 //   }
 // });
+router.use("/login", login);
 
 export default router;

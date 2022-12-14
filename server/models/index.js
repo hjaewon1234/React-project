@@ -1,12 +1,6 @@
-// import { readFile } from "fs/promises";
-// import configJson from "../config/config.json";
-// const configJson = JSON.parse(
-//   await readFile(new URL("../config/config.json", import.meta.url))
-// );
 import { createRequire } from "module";
 const require = createRequire(import.meta.url);
 const configJson = require("../config/config.json");
-
 const config = configJson["development"];
 
 import Users from "./user.js";

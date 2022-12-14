@@ -55,19 +55,19 @@ const userInfoSlice = createSlice({
         console.log("pending");
       })
       .addCase(getUserThunk.fulfilled, (state, action) => {
-        console.log(action.payload);
+        console.log("fulfilled", action.payload);
         return state;
       })
       .addCase(getUserThunk.rejected, (state, action) => {
         console.log("reject");
       });
   },
-  // extraReducers: {
-  //   [userInfoThunk.fulfilled]: (state, { payload }) => {
-  //     console.log("fullfilled", current(state));
-  //     return payload;
-  //   },
-  // },
+  extraReducers: {
+    [userInfoThunk.fulfilled]: (state, { payload }) => {
+      console.log("fullfilled", current(state));
+      return payload;
+    },
+  },
 });
 
 export const action = userInfoSlice.actions;
