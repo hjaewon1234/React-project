@@ -8,15 +8,17 @@ const AnswerQna = () => {
     <AnswerQnaDiv>
       <AnswerQnaInner>
         <div>
-          <div>제목</div>
-          <div>문의 사항</div>
-          <div>1</div>
-          <div>2</div>
-          <div>3</div>
+          <div>userId</div>
+          <div>해당 상품 이름</div>
         </div>
-        <div>32143124321432143214214</div>
+        <div>
+          문의사항문의사항문의사항문의사항문의사항문의사항문의사항문의사항문의사항문의사항문의사항문의사항문의사항문의사항문의사항문의사항문의사항문의사항문의사항문의사항문의사항문의사항문의사항문의사항문의사항
+          문의사항문의사항문의사항문의사항문의사항문의사항문의사항문의사항문의사항문의사항문의사항문의사항문의사항문의사항문의사항문의사항문의사항문의사항문의사항문의사항문의사항문의사항문의사항문의사항문의사항
+          문의사항문의사항문의사항문의사항문의사항문의사항문의사항문의사항문의사항문의사항문의사항문의사항문의사항문의사항문의사항문의사항문의사항문의사항문의사항문의사항문의사항
+        </div>
+        <textarea />
         <Link to="/">
-          <button>눌러라눌러</button>
+          <button>답변 제출</button>
         </Link>
       </AnswerQnaInner>
     </AnswerQnaDiv>
@@ -47,8 +49,11 @@ const AnswerQnaInner = styled.div`
     display: flex;
     column-gap: 50px;
   }
-  input {
+  textarea {
     width: 100%;
-    padding: 5px 10px;
+    height: 100px;
+    resize: none;
+    boreder: none;
+    padding: auto;
   }
 `;

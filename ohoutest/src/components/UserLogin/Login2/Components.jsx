@@ -1,8 +1,8 @@
 import { useState } from "react";
 import styled from "styled-components";
-import axios from "axios";
-
-const Login2Components = ({ setIsLogin, setUser }) => {
+import { logInUser } from "../../../modules/Slice/loginSlice";
+import { useDispatch } from "react-redux";
+const Login2Components = ({ join }) => {
   const [inputId, setId] = useState("");
   const [inputPw, setPw] = useState("");
 

@@ -1,10 +1,13 @@
-import configJson from "../config/config.json" assert { type: "json" };
+import { createRequire } from "module";
+const require = createRequire(import.meta.url);
+const configJson = require("../config/config.json");
 const config = configJson["development"];
 
 import Users from "./user.js";
 import Products from "./product.js";
 import Category from "./category.js";
-const db = { Users, Products, Category };
+import Qna from "./Qna.js";
+const db = { Users, Products, Category, Qna };
 
 import Sequelize from "sequelize";
 const sequelize = new Sequelize(
@@ -20,6 +23,7 @@ db.Sequelize = Sequelize;
 Users.init(sequelize);
 Products.init(sequelize);
 Category.init(sequelize);
+Qna.init(sequelize);
 
 Object.keys(db).forEach((modelName) => {
   if (db[modelName].associate) {

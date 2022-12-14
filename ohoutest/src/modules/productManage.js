@@ -1,14 +1,16 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { useDispatch } from "react-redux";
 
 import axios from "axios";
 
 export const productManageThunk = createAsyncThunk(
   "/product/productManageThunk",
   async (num) => {
-    const { data } = await axios.post("/api/product/productManage", {
-      number: num,
-    });
+    const { data } = await axios.post(
+      "http://localhost:8080/api/product/productManage",
+      {
+        number: num,
+      }
+    );
 
     return data;
   }
@@ -42,6 +44,7 @@ const productManage = createSlice({
       })
       .addCase(productManageThunk.fulfilled, (state, action) => {
         const { type, payload } = action;
+        console.log(payload);
         console.log("fulfilled");
         return payload;
       })
