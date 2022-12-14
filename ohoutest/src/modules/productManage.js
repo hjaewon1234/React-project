@@ -6,7 +6,7 @@ export const productManageThunk = createAsyncThunk(
   "/product/productManageThunk",
   async (num) => {
     const { data } = await axios.post(
-      "http://localhost:8080/api/product/productManage",
+      "http://localhost:8080/api/manager/productManage",
       {
         number: num,
       }
