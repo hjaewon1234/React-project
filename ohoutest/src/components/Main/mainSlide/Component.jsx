@@ -96,28 +96,8 @@ const MainSlideComponent = ({}) => {
 
   const intervalStopper = () => {};
 
-  const SlideCycle = () => {
-    return (
-      <>
-        <Link to={"/"}>
-          <img src="/img/mainSlideImg/mainslideimg10.webp" />
-        </Link>
-        {slideItem.map((elem, idx) => {
-          return (
-            <Link key={`slideItem - ${idx + 1}`} to={elem}>
-              <img src={`/img/mainSlideImg/mainslideimg${idx + 1}.webp`} />
-            </Link>
-          );
-        })}
-        <Link to={"/"}>
-          <img src="/img/mainSlideImg/mainslideimg1.webp" />
-        </Link>
-      </>
-    );
-  };
-
   return (
-    <MainSlideCompBox>
+    <MainSlideCompBox isTest={true}>
       <div
         className="inner-box"
         ref={innerBox}
@@ -125,7 +105,7 @@ const MainSlideComponent = ({}) => {
         onMouseOut={intervalStarter}
       >
         <div className="slide-container" ref={container}>
-          {SlideCycle()}
+          <SlideCycle slideItem={slideItem} />
         </div>
       </div>
       <div className="btn-container" ref={btnContainer}>
@@ -166,10 +146,31 @@ const MainSlideComponent = ({}) => {
   );
 };
 
+const SlideCycle = ({ slideItem }) => {
+  return (
+    <>
+      <Link to={"/"}>
+        <img src="/img/mainSlideImg/mainslideimg10.webp" />
+      </Link>
+      {slideItem.map((elem, idx) => {
+        return (
+          <Link key={`slideItem - ${idx + 1}`} to={elem}>
+            <img src={`/img/mainSlideImg/mainslideimg${idx + 1}.webp`} />
+          </Link>
+        );
+      })}
+      <Link to={"/"}>
+        <img src="/img/mainSlideImg/mainslideimg1.webp" />
+      </Link>
+    </>
+  );
+};
+
 export default MainSlideComponent;
 
 const MainSlideCompBox = styled.div`
   width: 100vw;
+  ${(props) => (props.isTest ? "border: 5px solid black;" : "")}
   .slide-container {
     font-size: 0;
     user-select: none;
