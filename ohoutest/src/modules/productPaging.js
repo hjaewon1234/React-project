@@ -5,7 +5,9 @@ import axios from "axios";
 export const productPagingThunk = createAsyncThunk(
   "/product/productPageThunk",
   async () => {
-    const { data } = await axios.post("/api/manager/productPage");
+    const { data } = await axios.post(
+      "http://localhost:8080/api/manager/productPage"
+    );
     console.log(data);
     return data;
   }
