@@ -69,9 +69,6 @@ const ManagerInfoComponent = ({
                 </div>
                 <div style={{ display: "flex", columnGap: "10px" }}>
                   <ShippingDiv>배송 중</ShippingDiv>
-                  {/* 여기에는 배송중 // 배송완료로 나눠서 하면 될것 같음. 
-                      createdAt이랑 현재 시간이랑 비교를 한 후 나누면 될 것 같음. 현재 시간을 알 수 있는게 
-                      new Date */}
                 </div>
               </UnitDiv>
             ))}
@@ -85,8 +82,6 @@ const ManagerInfoComponent = ({
                   tempThunk(index);
                   setColor(index);
                 }}
-                // 숫자로 할 지 , 인덱스로 할 지 확실히 하는것이 중요하다 (페이징 색 변화)
-                // onClick에 함수를 여러개 넣어 줄 때 는 ()=>{} 형태를 취한다.
                 style={{
                   backgroundColor: color == index ? "#f0a500" : "#f4f4f4",
                 }}

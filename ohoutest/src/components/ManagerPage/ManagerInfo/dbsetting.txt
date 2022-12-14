@@ -1,31 +1,4 @@
-import ManagerInfoComponent from "./unitCompnents/ManagerInfoComponent";
-import QnaComponent from "./unitCompnents/QnaComponent";
-import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
-import { Route, Routes } from "react-router-dom";
-
-import AnswerQna from "./unitCompnents/AnswerQna";
-import { useEffect } from "react";
-import { productManageThunk } from "../../../modules/productManage";
-import { productPagingThunk } from "../../../modules/productPaging";
-
-const ManagerInfoContainer = () => {
-  const dispatch = useDispatch();
-  const tempThunk = (num) => dispatch(productManageThunk(num));
-  const tempPagingThunk = () => dispatch(productPagingThunk());
-  useEffect(() => {
-    tempThunk(0);
-    tempPagingThunk();
-  }, []);
-  const productInfo = useSelector((state) => state.productManageInfo);
-  const productPaging = useSelector((state) => state.productPaging);
-  console.log(productPaging);
-  console.log(productInfo);
-  return (
-    <InfoContainerBox>
-      <Routes>
-        <Route path="/managerInfo/qnaAnswer/:id" element={<AnswerQna />} />
-        {/* id에 맞춰서 AnserQna에 줄 값 설정
+{/* id에 맞춰서 AnserQna에 줄 값 설정
             id에 따라서 줄 값 은 배열로 뽑아온 것의 index가 될것이다. 
             페이징을 햇을때 문제가 생길까? -> 어차피 뽑아온것에 index 0~9 이기 때문에
             무방할 것 같음.
@@ -56,30 +29,3 @@ const ManagerInfoContainer = () => {
             n:m => belonsToMany
             
             */}
-      </Routes>
-      <img src={`http://localhost:8080/api/downloadtreeBall1.jpg`}></img>
-
-      <ManagerInfoComponent
-        title={"상품 배송 정보"}
-        tempThunk={tempThunk}
-        productInfo={productInfo}
-        productPaging={productPaging}
-      />
-      <QnaComponent title={"문의 사항 확인"} productInfo={productInfo} />
-      <ManagerInfoComponent
-        title={"상품 추가"}
-        tempThunk={tempThunk}
-        productInfo={productInfo}
-        productPaging={productPaging}
-      />
-    </InfoContainerBox>
-  );
-};
-
-export default ManagerInfoContainer;
-
-const InfoContainerBox = styled.div`
-  background-color: #1a1c20;
-  width: 100%;
-  padding: 50px;
-`;

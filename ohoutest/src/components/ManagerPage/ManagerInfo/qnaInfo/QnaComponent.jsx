@@ -1,18 +1,11 @@
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+
 import { useState } from "react";
-import { Link, Routes, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-import AnswerQna from "./AnswerQna";
-let tempArr = [1, 2, 3, 4];
-// 여기도 추후에 숫자를 어떻게 받을 지 생각을 하고
-// 숫자를 눌럿을 때 임시 랜더링으로 파일을 다시 불러오면 될 것 같음.
-
-const QnaComponent = ({ title, productInfo }) => {
+const QnaComponent = ({ title, qnaInfo, qnaPaging, tempQnaInfoThunk }) => {
   const [accodion, setAccodion] = useState(true);
-  const [color, setColor] = useState(1);
-
-  console.log(productInfo);
+  const [color, setColor] = useState(0);
   return (
     <Infodiv>
       <div>
@@ -34,37 +27,59 @@ const QnaComponent = ({ title, productInfo }) => {
           }}
         >
           <AccoContents>
-            {productInfo.map((item, index) => (
-              <UnitDiv key={index}>
-                <div>
+            {qnaInfo.map((item, index) => {
+              console.log(item);
+              return (
+                <UnitDiv key={index}>
                   <div>
-                    [ {item.brand} ] {item.name}
+                    <div>
+                      [ {item.User.userId} ] [{item.Product.brand}]{" "}
+                      {item.Product.name}
+                    </div>
                   </div>
-                </div>
-                <div style={{ display: "flex", columnGap: "10px" }}>
-                  <QnaDiv>
-                    <Link to={`/managerInfo/qnaAnswer/${index}`}>답변하기</Link>
-                  </QnaDiv>
-                  <ShippingDiv>답변 대기</ShippingDiv>
-
-                  {/* 여기에 문의 사항을 넣을꺼임
-                      들어가야되는것은 유저Id , 상품명 , 답변 대기 or 답변 완료 // 답변 수정 or 답변 달기
-                   */}
-                </div>
-              </UnitDiv>
-            ))}
+                  <div style={{ display: "flex", columnGap: "10px" }}>
+                    {item.qnaState ? (
+                      <QnaDiv style={{ backgroundColor: "lightblue" }}>
+                        <Link
+                          to={`/managerInfo/qnaAnswer/${index}`}
+                          style={{ color: "black" }}
+                        >
+                          답변수정
+                        </Link>
+                      </QnaDiv>
+                    ) : (
+                      <QnaDiv>
+                        <Link to={`/managerInfo/qnaAnswer/${index}`}>
+                          답변하기
+                        </Link>
+                      </QnaDiv>
+                    )}
+                    {item.qnaState ? (
+                      <ShippingDiv style={{ backgroundColor: "green" }}>
+                        답변 완료
+                      </ShippingDiv>
+                    ) : (
+                      <ShippingDiv>답변 대기</ShippingDiv>
+                    )}
+                  </div>
+                </UnitDiv>
+              );
+            })}
           </AccoContents>
 
           <PagingDiv>
-            {tempArr.map((item, index) => (
+            {qnaPaging.map((item, index) => (
               <NumberBox
                 key={index}
-                onClick={() => setColor(item)}
+                onClick={() => {
+                  tempQnaInfoThunk(index);
+                  setColor(index);
+                }}
                 style={{
-                  backgroundColor: color == item ? "#f0a500" : "#f4f4f4",
+                  backgroundColor: color == index ? "#f0a500" : "#f4f4f4",
                 }}
               >
-                {item}
+                {item + 1}
               </NumberBox>
             ))}
           </PagingDiv>

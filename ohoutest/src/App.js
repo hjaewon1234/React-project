@@ -6,6 +6,8 @@ import Header from "./components/Header";
 import Main from "./components/Main";
 import Footer from "./components/Footer/Container";
 import SingUp from "./components/index";
+import AnswerQna from "./components/ManagerPage/ManagerInfo/answerQna/AnswerQnaComponent";
+import AnswerQnaContainer from "./components/ManagerPage/ManagerInfo/answerQna/AnswerQnaContainer";
 import PopupBarContainer from "./components/popupBar/Container";
 import axios from "axios";
 axios.defaults.withCredentials = true;
@@ -22,6 +24,15 @@ function App() {
         <Route path="/main" element={<Main />}></Route>
         <Route path="/signUp" element={<SingUp></SingUp>}></Route>
         <Route path="/managerInfo" element={<ManagerInfo></ManagerInfo>} />
+        <Route
+          path="/managerInfo/qnaAnswer/:id"
+          element={
+            <>
+              <ManagerInfo />
+              <AnswerQnaContainer />
+            </>
+          }
+        />
       </Routes>
       <Footer />
       <div style={{ backgroundColor: "#1a1c20" }}></div>

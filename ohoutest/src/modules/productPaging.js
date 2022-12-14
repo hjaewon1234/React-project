@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const productPagingThunk = createAsyncThunk(
-  "/product/productPageThunk",
+  "/managerInfo/productPageThunk",
   async () => {
     const { data } = await axios.post(
       "http://localhost:8080/api/manager/productPage"
@@ -30,6 +30,7 @@ const productPaging = createSlice({
       .addCase(productPagingThunk.fulfilled, (state, action) => {
         const { type, payload } = action;
         console.log("paging fulfilled");
+        console.log(payload);
         return payload;
       })
       .addCase(productPagingThunk.rejected, (state, action) => {
