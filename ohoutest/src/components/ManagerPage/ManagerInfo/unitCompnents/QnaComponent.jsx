@@ -43,7 +43,7 @@ const QnaComponent = ({ title, productInfo }) => {
                 </div>
                 <div style={{ display: "flex", columnGap: "10px" }}>
                   <QnaDiv>
-                    <Link to={`/qnaAnswer/${index}`}>답변하기</Link>
+                    <Link to={`/managerInfo/qnaAnswer/${index}`}>답변하기</Link>
                   </QnaDiv>
                   <ShippingDiv>답변 대기</ShippingDiv>
 
