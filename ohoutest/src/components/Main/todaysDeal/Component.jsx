@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-const TodaysDealComponent = ({ itemArr, testArr }) => {
+const TodaysDealComponent = ({ itemArr }) => {
   return (
     <TodaysDealCompBox>
       <div className="subtitle">
@@ -9,31 +9,29 @@ const TodaysDealComponent = ({ itemArr, testArr }) => {
         <Link to={"/"}>더보기</Link>
       </div>
       <div className="today-deal-container">
-        <Link to={"/"}>
-          <img src="/img/item/itemPrev1.jpg" />
-        </Link>
-        <Link to={"/"}>
-          <img src="/img/item/itemPrev2.jpg" />
-        </Link>
-        <Link to={"/"}>
-          <img src="/img/item/itemPrev3.jpg" />
-        </Link>
-        <Link to={"/"}>
-          <img src="/img/item/itemPrev4.jpg" />
-        </Link>
+        {itemArr.map((elem, idx) => {
+          return (
+            <ItemBox key={`itemArr - ${idx}`}>
+              <Link to={"/"}>
+                <div className="today-deal-item-img">
+                  <img
+                    src={`http://localhost:8080/api/download${
+                      elem.img.split(",")[0]
+                    }`}
+                  />
+                </div>
+                <div className="item-container">
+                  <div className="item-brand">{elem.brand}</div>
+                  <div className="item-name">{elem.name}</div>
+                  <div className="item-price">
+                    {elem.price.toLocaleString()}
+                  </div>
+                </div>
+              </Link>
+            </ItemBox>
+          );
+        })}
       </div>
-      {/* {testArr.map((elem, idx) => {
-        return (
-          <div key={`testArr - ${idx}`}>
-            {elem.aa}
-            {elem.ab}
-            {elem.ba}
-            {elem.bb}
-            {elem.ca}
-            {elem.cb}
-          </div>
-        );
-      })} */}
     </TodaysDealCompBox>
   );
 };
@@ -65,22 +63,47 @@ const TodaysDealCompBox = styled.div`
     display: flex;
     gap: 20px;
   }
-  .today-deal-container a {
-    font-size: 0;
+`;
+
+const ItemBox = styled.div`
+  width: 25%;
+  img {
+    width: 100%;
+    transition: transform 0.2s;
   }
   a {
+    font-size: 0;
+    text-decoration: none;
+    color: inherit;
+  }
+  .today-deal-item-img {
     overflow: hidden;
     border-radius: 8px;
+    font-size: 0;
   }
-  a img {
-    width: 100%;
+  .item-container {
+    margin-top: 5px;
+    text-align: left;
   }
-  a img:hover {
-    transform: scale(1.1);
-    transition: transform 0.25s;
+  .item-brand {
+    font-size: 12px;
+    color: #828c94;
   }
-  a img:not(:hover) {
-    transform: scale(1);
-    transition: transform 0.2s;
+  .item-name {
+    margin-top: 5px;
+    font-size: 16px;
+    color: #424242;
+  }
+  .item-price {
+    font-size: 22px;
+    font-weight: bold;
+  }
+  &:hover {
+    img {
+      transform: scale(1.1);
+    }
+    .item-name {
+      color: #9f9f9f;
+    }
   }
 `;

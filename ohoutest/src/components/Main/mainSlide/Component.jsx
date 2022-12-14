@@ -6,7 +6,7 @@ const animaSpeed = 3;
 let animating = false;
 let currentItemId;
 
-const MainSlideComponent = ({}) => {
+const MainSlideComponent = () => {
   const container = useRef();
   const innerBox = useRef();
   const btnContainer = useRef();
@@ -169,8 +169,8 @@ const SlideCycle = ({ slideItem }) => {
 export default MainSlideComponent;
 
 const MainSlideCompBox = styled.div`
+  // ${(props) => (props.isTest ? "border: 5px solid black;" : "")}
   width: 100vw;
-  ${(props) => (props.isTest ? "border: 5px solid black;" : "")}
   .slide-container {
     font-size: 0;
     user-select: none;
