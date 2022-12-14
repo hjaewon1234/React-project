@@ -17,7 +17,6 @@ const ManagerInfoContainer = () => {
     tempThunk(0);
     tempPagingThunk();
   }, []);
-
   const productInfo = useSelector((state) => state.productManageInfo);
   const productPaging = useSelector((state) => state.productPaging);
   console.log(productPaging);

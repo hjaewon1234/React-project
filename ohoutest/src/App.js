@@ -2,7 +2,6 @@ import { useState } from "react";
 import ManagerInfo from "./components/ManagerPage";
 import { Routes, Route } from "react-router-dom";
 import styled from "styled-components";
-
 import Header from "./components/Header";
 import Main from "./components/Main";
 import Footer from "./components/Footer/Container";
