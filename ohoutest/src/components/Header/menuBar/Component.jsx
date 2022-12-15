@@ -1,20 +1,39 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useEffect, useRef } from "react";
+
 import RankingContainer from "./ranking/Container";
 
 const MenuBarComponent = () => {
+  const menuBarRef = useRef();
+  let prevScroll = 0;
+  let currentScroll = 0;
+  let isDown;
+
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      currentScroll = window.scrollY;
+      currentScroll > prevScroll ? (isDown = true) : (isDown = false);
+      if (isDown) {
+        console.log("내림");
+      } else {
+        console.log("올림");
+      }
+      prevScroll = currentScroll;
+    });
+  }, []);
+  // component will unmount
+
   return (
-    <>
-      <MenuBarCompBox>
-        <LinkBox>
-          <Link to={"/"}>스토어홈</Link>
-          <Link to={"/"}>카테고리</Link>
-          <Link to={"/"}>베스트</Link>
-          <Link to={"/"}>오늘의딜</Link>
-        </LinkBox>
-        <RankingContainer />
-      </MenuBarCompBox>
-    </>
+    <MenuBarCompBox ref={menuBarRef}>
+      <LinkBox>
+        <Link to={"/"}>스토어홈</Link>
+        <Link to={"/"}>카테고리</Link>
+        <Link to={"/"}>베스트</Link>
+        <Link to={"/"}>오늘의딜</Link>
+      </LinkBox>
+      <RankingContainer />
+    </MenuBarCompBox>
   );
 };
 
@@ -39,8 +58,9 @@ const LinkBox = styled.div`
 
 const MenuBarCompBox = styled.div`
   display: flex;
+  left: 50%;
   gap: 30px;
-  width: 100%;
+  width: 1200px;
   margin: 0 auto;
   margin-top: 10px;
   margin-bottom: 10px;

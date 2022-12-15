@@ -61,12 +61,14 @@ const TodaysDealCompBox = styled.div`
   }
   .today-deal-container {
     display: flex;
-    gap: 20px;
+    gap: 10px;
+    justify-content: space-between;
   }
 `;
 
 const ItemBox = styled.div`
-  width: 25%;
+  width: 24%;
+  margin-bottom: 30px;
   img {
     width: 100%;
     transition: transform 0.2s;
@@ -82,8 +84,9 @@ const ItemBox = styled.div`
     font-size: 0;
   }
   .item-container {
-    margin-top: 5px;
     text-align: left;
+    margin: 7px 5px;
+    padding: 0 5px;
   }
   .item-brand {
     font-size: 12px;

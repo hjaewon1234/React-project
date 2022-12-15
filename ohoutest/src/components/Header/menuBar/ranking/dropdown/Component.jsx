@@ -116,8 +116,8 @@ const DropBox = styled.div`
   ul {
     position: absolute;
     display: none;
-    right: 10px;
-    width: 280px;
+    right: 315px;
+    width: 180px;
     margin-top: 10px;
     list-style-type: none;
   }
