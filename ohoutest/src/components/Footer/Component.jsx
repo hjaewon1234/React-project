@@ -125,6 +125,7 @@ const FooterComponent = () => {
 export default FooterComponent;
 
 const FooterBox = styled.div`
+  margin-top: 50px;
   width: 100%;
   background-color: #e9e9e9;
   font-size: 12px;

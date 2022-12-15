@@ -49,7 +49,7 @@ const NavBarComponent = ({ onChange, onSubmit }) => {
         <Link to="/">고객센터</Link>
         <button className="upload-btn">
           글쓰기
-          <img src="/img/chevron-right-solid.svg" alt="" />
+          <img src="/img/chevron-right-solid.svg" />
         </button>
       </div>
     </NavBarCompBox>
