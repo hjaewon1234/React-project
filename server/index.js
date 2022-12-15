@@ -9,6 +9,7 @@ import {
   refreshToken,
   loginSuccess,
   logout,
+  check,
 } from "./controller/index.js";
 import routes from "./routes/index.js";
 
@@ -34,11 +35,12 @@ app.use(
 );
 app.set("port", process.env.PORT || 8080);
 
+app.use("/", loginSuccess);
 app.use("/api", routes);
+app.get("/check", check);
 app.post("/login", login);
 app.get("/accesstoken", accessToken);
 app.get("/refreshtoken", refreshToken);
-app.get("/login/success", loginSuccess);
 app.post("/logout", logout);
 
 // region: db;
