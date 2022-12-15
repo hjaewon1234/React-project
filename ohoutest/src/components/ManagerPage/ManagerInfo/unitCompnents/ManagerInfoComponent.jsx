@@ -13,8 +13,6 @@ const ManagerInfoComponent = ({
 }) => {
   const [accodion, setAccodion] = useState(true);
   const [color, setColor] = useState(0);
-  // const productInfo = useSelector((state) => state.productManageInfo);
-  console.log(productInfo);
 
   return (
     <Infodiv>

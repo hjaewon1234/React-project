@@ -32,6 +32,7 @@ const MainSlideComponent = () => {
   const slideItem = ["/", "/", "/", "/", "/", "/", "/", "/", "/", "/"];
 
   const slideExecuter = (param) => {
+    if (!container.current) return;
     container.current.style.transition = `transform ${animaSpeed / 10}s`;
     container.current.style.transform = `translate(-${param}vw)`;
     setTimeout(() => {
@@ -40,6 +41,7 @@ const MainSlideComponent = () => {
   };
 
   const blindExecuter = (param) => {
+    if (!container.current) return;
     setTimeout(() => {
       container.current.style.transition = "transform 0s";
       container.current.style.transform = `translate(-${param}vw)`;

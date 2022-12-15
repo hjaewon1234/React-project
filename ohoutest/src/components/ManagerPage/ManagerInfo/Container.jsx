@@ -19,8 +19,6 @@ const ManagerInfoContainer = () => {
   }, []);
   const productInfo = useSelector((state) => state.productManageInfo);
   const productPaging = useSelector((state) => state.productPaging);
-  console.log(productPaging);
-  console.log(productInfo);
   return (
     <InfoContainerBox>
       <Routes>

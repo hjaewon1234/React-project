@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 const AnswerQna = () => {
   const { id } = useParams(useLocation());
-  console.log(id);
   return (
     <AnswerQnaDiv>
       <AnswerQnaInner>

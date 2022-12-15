@@ -9,6 +9,7 @@ import SingUp from "./components/index";
 import PopupBarContainer from "./components/popupBar/Container";
 import axios from "axios";
 import RegistContainer from "./components/UserLogin/Regist/Container";
+import SearchContainer from "./components/Search/Container";
 axios.defaults.withCredentials = true;
 
 function App() {
@@ -23,7 +24,8 @@ function App() {
         <Route path="/main" element={<Main />}></Route>
         <Route path="/signUp" element={<SingUp></SingUp>}></Route>
         <Route path="/managerInfo" element={<ManagerInfo></ManagerInfo>} />
-        <Route path="/reg" element={<RegistContainer />} />
+        <Route path="/regist" element={<RegistContainer />} />
+        <Route path="/search/:sword" element={<SearchContainer />} />
         {/* 회원가입 예외처리 하려고  26번 줄 추가 */}
       </Routes>
       <Footer />

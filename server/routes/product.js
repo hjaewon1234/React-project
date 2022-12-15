@@ -27,9 +27,7 @@ router.route("/").post((req, res) => {
 });
 // /api/product/
 router.route("/getProducts").post((req, res) => {
-  // console.log("getProducts req : ", req.body);
   db.Products.findAll().then((data) => {
-    console.log(data[0].dataValues);
     const sendData = [];
     data.map((item, index) => {
       if (
@@ -44,9 +42,52 @@ router.route("/getProducts").post((req, res) => {
 });
 
 router.route("/getTopten").post((req, res) => {
-  db.TopTen.findAll().then((data) => {
-    console.log(data);
-    res.send(data);
+  db.Search.findAll({ order: [["count", "DESC"]] }).then((data) => {
+    const countAry = [];
+
+    const myPromise = new Promise((resolve, reject) => {
+      data.map(async (item) => {
+        const curItemName = await db.Products.findOne({
+          where: { id: item.dataValues.products_id },
+        });
+        countAry.push(curItemName.name);
+        if (countAry.length >= 10) {
+          resolve(countAry);
+        }
+      });
+    });
+    myPromise.then((data) => {
+      let countAry = data;
+      const topTenAry = [];
+
+      db.TopTen.findAll()
+        .then((data) => {
+          for (let i = 0; i < 10; ++i) {
+            topTenAry.push({
+              productName: countAry[i] || "",
+              rankTableData: data[i]?.dataValues,
+            });
+          }
+          return topTenAry;
+        })
+        .then((topAry) => {
+          const topAryPromise = new Promise((resolve, reject) => {
+            let count = 0;
+            topAry.map((item, index) => {
+              db.TopTen.update(
+                { productName: item.productName },
+                { where: { id: index + 1 } }
+              ).then(() => {
+                count++;
+                if (count >= 10) resolve();
+              });
+            });
+          });
+          topAryPromise.then(() => {
+            res.send(topAry);
+          });
+        });
+    });
   });
 });
 

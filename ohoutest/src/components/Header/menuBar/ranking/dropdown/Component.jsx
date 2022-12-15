@@ -4,7 +4,7 @@ import axios from "axios";
 
 let dropdownElems = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 // rankDb에서 rank 가져오기
-axios.post("http://localhost:8080/api/product/getTopten").then((data) => {
+axios.post("/api/product/getTopten").then((data) => {
   data.data.map((item, index) => {
     dropdownElems[index] = item.productName;
   });
@@ -12,23 +12,30 @@ axios.post("http://localhost:8080/api/product/getTopten").then((data) => {
 export const DropdownComp = () => {
   const [mouseEnter, setMouseEnter] = useState("");
   const [selected, setSelected] = useState("1");
+  const [selected2, setSelected2] = useState("2");
   const [elemCount, setElemCount] = useState(0);
   const [transYAnim, setTransYAnim] = useState("");
 
   useEffect(() => {}, [mouseEnter]);
 
+  let timeoutId1;
+  let timeoutId2;
+
   useEffect(() => {
+    clearTimeout(timeoutId1);
+    clearTimeout(timeoutId2);
     setTransYAnim(() => "");
-    setTimeout(() => {
+    timeoutId1 = setTimeout(() => {
       setElemCount((state) => (state + 1) % 10);
     }, 1000);
-    setTimeout(() => {
+    timeoutId2 = setTimeout(() => {
       setTransYAnim(() => "transYAnim");
     }, 500);
   }, [selected]);
 
   useEffect(() => {
     setSelected(() => dropdownElems[elemCount]);
+    setSelected2(() => dropdownElems[(elemCount + 1) % 10]);
   }, [elemCount]);
 
   return (
@@ -45,14 +52,21 @@ export const DropdownComp = () => {
           mouseEnter == "hover" ? "selected " + transYAnim : transYAnim
         } `}
       >
-        <span>{elemCount + 1} </span>
-        <img className={"up"} src="./img/caret-up-solid.svg" />
-        {` ${selected}`}
+        <div>
+          <span>{elemCount + 1} </span>
+          <img className={"up"} src="./img/caret-up-solid.svg" />
+          {` ${selected}`}
+        </div>
+        <div>
+          <span>{(elemCount + 2) % 10} </span>
+          <img className={"up"} src="./img/caret-up-solid.svg" />
+          {` ${selected2}`}
+        </div>
       </div>
       <ul>
         {dropdownElems.map((item, index) => (
           <li key={`dropdownElemKey-${index}`}>
-            <span>{index} </span>
+            <span>{index + 1} </span>
             <img className={"down"} src="./img/caret-down-solid.svg" />{" "}
             {` ${item}`}
           </li>
@@ -63,11 +77,13 @@ export const DropdownComp = () => {
 };
 
 const DropBox = styled.div`
-  padding: 5px 20px 15px 20px;
-  width: 200px;
+  padding: 5px 20px 20px 20px;
+  width: 300px;
+  height: 29px;
   background-color: #f4f4f4;
   border-radius: 5px;
   overflow-y: hidden;
+  overflow-x: hidden;
 
   span {
     font-weight: 600;
@@ -89,13 +105,19 @@ const DropBox = styled.div`
   }
 
   .selected {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
   }
 
   ul {
     position: absolute;
     display: none;
     right: 10px;
-    width: 180px;
+    width: 280px;
     margin-top: 10px;
     list-style-type: none;
   }
@@ -104,6 +126,10 @@ const DropBox = styled.div`
   }
   ul > li {
     display: flex;
+    height: 50px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     column-gap: 10px;
     padding-left: 20px;
     padding: 10px 0px 10px 20px;
@@ -111,7 +137,7 @@ const DropBox = styled.div`
     z-index: 2;
     color: #1a1c20;
     width: inherit;
-
+    align-items: center;
     span {
       font-weight: 600;
     }
@@ -122,7 +148,7 @@ const DropBox = styled.div`
       transform: translateY(0px);
     }
     to {
-      transform: translateY(-30px);
+      transform: translateY(-42px);
     }
   }
 `;

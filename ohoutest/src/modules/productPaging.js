@@ -8,7 +8,6 @@ export const productPagingThunk = createAsyncThunk(
     const { data } = await axios.post(
       "http://localhost:8080/api/manager/productPage"
     );
-    console.log(data);
     return data;
   }
 );

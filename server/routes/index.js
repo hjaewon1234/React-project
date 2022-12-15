@@ -4,7 +4,6 @@ import user from "./user.js";
 import product from "./product.js";
 import manager from "./manager.js";
 import search from "./search.js";
-import db from "../models/index.js";
 import fs from "fs";
 import login from "./login.js";
 

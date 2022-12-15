@@ -12,7 +12,6 @@ const QnaComponent = ({ title, productInfo }) => {
   const [accodion, setAccodion] = useState(true);
   const [color, setColor] = useState(1);
 
-  console.log(productInfo);
   return (
     <Infodiv>
       <div>

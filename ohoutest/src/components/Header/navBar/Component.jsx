@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useState } from "react";
 
-const NavBarComponent = ({ onChange, onSubmit }) => {
+const NavBarComponent = ({ onSubmit }) => {
   const [searchInput, setSearchInput] = useState("");
 
   return (
@@ -12,7 +12,7 @@ const NavBarComponent = ({ onChange, onSubmit }) => {
           <img src="/img/TeamLogo.png" />
         </Link>
         <Link to="/">스토어</Link>
-        <Link to="/">커뮤니티</Link>
+        <Link to="/community">커뮤니티</Link>
         <div className="search-box">
           <span className="magnify-icon">
             <img src="/img/magnifying-glass-solid.svg" />
@@ -22,7 +22,6 @@ const NavBarComponent = ({ onChange, onSubmit }) => {
             placeholder="통합검색"
             onChange={(e) => {
               setSearchInput(() => e.target.value);
-              onChange(e.target.value);
             }}
             onKeyDown={(e) => {
               if (e.key == "Enter") {

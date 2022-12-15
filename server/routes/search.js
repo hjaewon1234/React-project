@@ -48,4 +48,25 @@ router.route("/search").post((req, res) => {
     });
 });
 
+router.route("/searchWord").post((req, res) => {
+  db.Products.findAll().then((data) => {
+    const sendData = [];
+    const filtered = data.filter((item) => {
+      return (
+        item.dataValues.name?.includes(req.body.sword) ||
+        item.dataValues.brand?.includes(req.body.sword)
+      );
+    });
+    filtered.map((item, index) => {
+      // if (
+      //   index < req.body.boxIdx - 1 ||
+      //   index >= req.body.boxIdx + req.body.idx - 1
+      // )
+      //   return;
+      return sendData.push(item.dataValues);
+    });
+    res.send(sendData);
+  });
+});
+
 export default router;

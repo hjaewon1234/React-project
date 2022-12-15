@@ -9,6 +9,7 @@ import {
   overlapNickName,
 } from "../../../modules/Slice/registSlice";
 import { useDispatch } from "react-redux";
+
 const RegistComponents = () => {
   // const dispathch = useDispatch();
   // const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;

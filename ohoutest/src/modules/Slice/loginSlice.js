@@ -6,12 +6,10 @@ const initialState = {
 };
 
 export const logInUser = createAsyncThunk("logInUser", async (body) => {
-  console.log(body);
-  const { data } = await axios.post("http://localhost:8080/api/login/success", {
+  const { data } = await axios.post("/api/login/success", {
     ...body,
     body: JSON.stringify(body),
   });
-  console.log(data);
   return data;
 });
 // axios.post("경로", {담아서 보낼 데이터})
