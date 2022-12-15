@@ -13,7 +13,6 @@ const Header = () => {
         <NavBarContainer />
         <hr />
         <MenuBarContainer />
-        <hr />
       </div>
     </HeaderBox>
   );
