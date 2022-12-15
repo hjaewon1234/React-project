@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { useState } from "react";
 
-const NavBarComponent = ({}) => {
+const NavBarComponent = ({ onChange, onSubmit }) => {
+  const [searchInput, setSearchInput] = useState("");
+
   return (
     <NavBarCompBox>
       <div className="nav-bar-container">
@@ -10,11 +13,25 @@ const NavBarComponent = ({}) => {
         </Link>
         <Link to="/">스토어</Link>
         <Link to="/">커뮤니티</Link>
-        <form className="search-box">
+        <div className="search-box">
           <span className="magnify-icon">
             <img src="/img/magnifying-glass-solid.svg" />
           </span>
-          <input id="searchInput" placeholder="통합검색" />
+          <input
+            id="searchInput"
+            placeholder="통합검색"
+            onChange={(e) => {
+              setSearchInput(() => e.target.value);
+              onChange(e.target.value);
+            }}
+            onKeyDown={(e) => {
+              if (e.key == "Enter") {
+                onSubmit(searchInput);
+                setSearchInput(() => "");
+              }
+            }}
+            value={searchInput}
+          />
           {/* {!searchInput || (
           <span className="x-btn">
             <img src="/img/circle-xmark-regular.svg" />
@@ -23,12 +40,12 @@ const NavBarComponent = ({}) => {
           <span className="x-btn">
             <img src="/img/circle-xmark-regular.svg" />
           </span>
-        </form>
+        </div>
         <Link to="/" className="cart-icon">
           <img src="/img/cart-shopping-solid.svg" />
         </Link>
-        <Link to="/">로그인</Link>
-        <Link to="/">회원가입</Link>
+        <Link to="/login">로그인</Link>
+        <Link to="/signUp">회원가입</Link>
         <Link to="/">고객센터</Link>
         <button className="upload-btn">
           글쓰기

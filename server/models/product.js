@@ -35,7 +35,11 @@ export default class Products extends Sequelize.Model {
     });
     db.Products.hasMany(db.Qna, {
       foreignKey: "products_id",
-      targetKey: "id",
+      sourceKey: "id",
+    });
+    db.Products.hasMany(db.Search, {
+      foreignKey: "products_id",
+      sourceKey: "id",
     });
   }
 }

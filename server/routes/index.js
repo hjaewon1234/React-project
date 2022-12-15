@@ -3,6 +3,7 @@ const router = Router();
 import user from "./user.js";
 import product from "./product.js";
 import manager from "./manager.js";
+import search from "./search.js";
 import db from "../models/index.js";
 import fs from "fs";
 import login from "./login.js";
@@ -15,6 +16,7 @@ router.use("/", (req, res, next) => {
 router.use("/user", user);
 router.use("/product", product);
 router.use("/manager", manager);
+router.use("/search", search);
 
 // db에 아무 정보가 없을 시 첫 아이템을 db에 넣어준다.
 
@@ -41,6 +43,14 @@ const users = [
   },
 ];
 
+// 관계 맺음
+// db.Users.findOne({ where: { id: 1 } }).then((user) => {
+//   db.Products.findOne({ where: { id: 1 } }).then((product) => {
+//     user.addProducts(product);
+//     product.addUsers(user);
+//   });
+// });
+
 // db.Users.findAll().then((data) => {
 //   if (data.length === 0) {
 //     db.Users.create(users[0]);
@@ -52,14 +62,6 @@ const users = [
 //   if (data.length === 0) {
 //     db.Products.create(products[0]);
 //   }
-// });
-
-// 관계 맺음
-// db.Users.findOne({ where: { id: 1 } }).then((user) => {
-//   db.Products.findOne({ where: { id: 1 } }).then((product) => {
-//     user.addProducts(product);
-//     product.addUsers(user);
-//   });
 // });
 
 // 이미지 등록
@@ -128,6 +130,7 @@ router.post("/getImages", (req, res) => {
 //     });
 //   }
 // });
+
 router.use("/login", login);
 
 export default router;
