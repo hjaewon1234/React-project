@@ -1,8 +1,21 @@
 import { Router } from "express";
 import crypto from "crypto-js";
+import db from "../models/index.js";
 const router = Router();
 
-import db from "../models/index.js";
+const overapId = async (req) => {
+  const curUser = await db.Users.findOne({
+    where: { userId: req.body.inputId },
+  });
+  return curUser;
+};
+
+const overapNickName = async (req) => {
+  const curUser = await db.Users.findOne({
+    where: { userName: req.body.inputName },
+  });
+  return curUser;
+};
 
 // api/user
 router
@@ -21,6 +34,7 @@ router.post("/getUsers", async (req, res) => {
     const curUser = await db.Users.findOne({
       where: { userId: req.body.inputId },
     });
+
     console.log(curUser);
     if (curUser) {
       console.log("이미있음");
@@ -35,6 +49,42 @@ router.post("/getUsers", async (req, res) => {
         publish: "",
       });
       console.log("하이");
+      res.send({ status: 200 });
+    }
+  } catch (err) {
+    console.error(err);
+    res.send({ status: 400 });
+  }
+});
+
+router.post("/overlapId", async (req, res) => {
+  try {
+    const tempUserId = await overapId(req);
+
+    console.log("oooooooooooooooooooooooooo", curUser);
+    if (tempUserId) {
+      console.log("중복되는 아이디가 있습니다.");
+      res.send({ status: 401 });
+    } else {
+      console.log("중복되는 아이디가 없습니다.");
+      res.send({ status: 200 });
+    }
+  } catch (err) {
+    console.error(err);
+    res.send({ status: 400 });
+  }
+});
+
+router.post("/overapNickName", async (req, res) => {
+  try {
+    const tempUserNickName = await overapNickName(req);
+
+    console.log("oooooooooooooooooooooooooo", curUser);
+    if (tempUserNickName) {
+      console.log("중복되는 닉네임이 있습니다.");
+      res.send({ status: 401 });
+    } else {
+      console.log("중복되는 닉네임이 없습니다.");
       res.send({ status: 200 });
     }
   } catch (err) {

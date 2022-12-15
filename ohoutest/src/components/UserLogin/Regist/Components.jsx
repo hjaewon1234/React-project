@@ -3,9 +3,13 @@ import { useState } from "react";
 // import { faCoffee } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 import Post from "../../../modules/Api/kakaoApi";
-import { signUpUser } from "../../../modules/Slice/registSlice";
+import {
+  signUpUser,
+  overlapId,
+  overlapNickName,
+} from "../../../modules/Slice/registSlice";
 import { useDispatch } from "react-redux";
-const RegistComponents = ({ join }) => {
+const RegistComponents = () => {
   // const dispathch = useDispatch();
   // const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
   // const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -30,6 +34,13 @@ const RegistComponents = ({ join }) => {
         inputAdress1,
       })
     );
+  };
+  const overlapIdHandle = () => {
+    dispatch(overlapId({ inputId }));
+  };
+
+  const overlapNickNameHandle = () => {
+    dispatch(overlapNickName({ inputName }));
   };
 
   const [enroll_company, setEnroll_company] = useState({
@@ -64,7 +75,14 @@ const RegistComponents = ({ join }) => {
               }}
               placeholder={"아이디"}
             />
-            <button className="idBtnOverlap">중복 ID 검사</button>
+            <button
+              className="idBtnOverlap"
+              onClick={() => {
+                overlapIdHandle();
+              }}
+            >
+              중복 ID 검사
+            </button>
             <label> 비밀번호</label>
             <label className="small">
               영문, 숫자를 포함한 8자 이상의 비밀번호를 입력해주세요.
@@ -98,7 +116,14 @@ const RegistComponents = ({ join }) => {
               }}
               placeholder={"별명 (2~15자)"}
             />
-            <button className="idBtnOverlap">닉네임 중복 검사</button>
+            <button
+              className="idBtnOverlap"
+              onClick={() => {
+                overlapNickNameHandle();
+              }}
+            >
+              닉네임 중복 검사
+            </button>
             <label> 주소</label>
             <div className="address_search">
               <input

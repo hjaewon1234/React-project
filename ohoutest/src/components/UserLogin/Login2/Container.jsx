@@ -1,27 +1,11 @@
 import Login2Components from "./Components.jsx";
 import axios from "axios";
 import { useEffect, useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 const Login2Container = () => {
   const [isLogin, setIsLogin] = useState(false);
   const [user, setUser] = useState({});
-
-  const accessToken = () => {
-    axios({
-      url: "http://localhost:8080/accesstoken",
-      method: "GET",
-      withCredentials: true,
-    });
-  };
-
-  const refreshToken = () => {
-    axios({
-      url: "http://localhost:8080/refreshtoken",
-      method: "GET",
-      withCredentials: true,
-    });
-  };
-
+  const navigate = useNavigate();
   const logout = () => {
     axios({
       url: "http://localhost:8080/logout",
@@ -29,19 +13,16 @@ const Login2Container = () => {
       withCredentials: true,
     }).then((result) => {
       if (result.status === 200) {
-        window.open("/", "_self");
+        // window.open("/", "_self");
+        navigate("/", { replace: true });
       }
     });
   };
 
-  console.log(user.userName);
-  console.log(user.username);
-  console.log(user.inputName);
-
   useEffect(() => {
     try {
       axios({
-        url: "http://localhost:8080/login/success",
+        url: "http://localhost:8080/check",
         method: "GET",
         withCredentials: true,
       })
@@ -49,6 +30,7 @@ const Login2Container = () => {
           if (result.data) {
             setIsLogin(true);
             setUser(result.data);
+            console.log(result.data);
           }
         })
         .catch((error) => {
@@ -61,14 +43,17 @@ const Login2Container = () => {
 
   return (
     <>
-      <a onClick={accessToken}></a>
-      <a onClick={refreshToken}></a>
-      <h3>{user.username} 111님이 로그인했습니다.</h3>
-      <button onClick={logout}>Logout</button>
-      <Login2Components
-        setUser={setUser}
-        setIsLogin={setIsLogin}
-      ></Login2Components>
+      {isLogin ? (
+        <>
+          <h3>{user.userName} 님이 로그인했습니다.</h3>
+          <button onClick={logout}>Logout</button>
+        </>
+      ) : (
+        <Login2Components
+          setUser={setUser}
+          setIsLogin={setIsLogin}
+        ></Login2Components>
+      )}
     </>
   );
 };

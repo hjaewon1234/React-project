@@ -8,6 +8,7 @@ import Footer from "./components/Footer/Container";
 import SingUp from "./components/index";
 import PopupBarContainer from "./components/popupBar/Container";
 import axios from "axios";
+import RegistContainer from "./components/UserLogin/Regist/Container";
 axios.defaults.withCredentials = true;
 
 function App() {
@@ -22,6 +23,8 @@ function App() {
         <Route path="/main" element={<Main />}></Route>
         <Route path="/signUp" element={<SingUp></SingUp>}></Route>
         <Route path="/managerInfo" element={<ManagerInfo></ManagerInfo>} />
+        <Route path="/reg" element={<RegistContainer />} />
+        {/* 회원가입 예외처리 하려고  26번 줄 추가 */}
       </Routes>
       <Footer />
       <div style={{ backgroundColor: "#1a1c20" }}></div>
