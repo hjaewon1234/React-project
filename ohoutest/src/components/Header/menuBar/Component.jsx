@@ -16,7 +16,9 @@ const MenuBarComponent = () => {
       currentScroll > prevScroll ? (isDown = true) : (isDown = false);
       if (isDown) {
         console.log("내림");
+        // menuBarRef.current.style.top = "49px";
       } else {
+        // menuBarRef.current.style.top = "";
         console.log("올림");
       }
       prevScroll = currentScroll;
@@ -25,15 +27,18 @@ const MenuBarComponent = () => {
   // component will unmount
 
   return (
-    <MenuBarCompBox ref={menuBarRef}>
-      <LinkBox>
-        <Link to={"/"}>스토어홈</Link>
-        <Link to={"/"}>카테고리</Link>
-        <Link to={"/"}>베스트</Link>
-        <Link to={"/"}>오늘의딜</Link>
-      </LinkBox>
-      <RankingContainer />
-    </MenuBarCompBox>
+    <MenuBarContainer>
+      <MenuBarCompBox ref={menuBarRef}>
+        <LinkBox>
+          <Link to={"/"}>스토어홈</Link>
+          <Link to={"/"}>카테고리</Link>
+          <Link to={"/"}>베스트</Link>
+          <Link to={"/"}>오늘의딜</Link>
+        </LinkBox>
+        <RankingContainer />
+      </MenuBarCompBox>
+      <hr />
+    </MenuBarContainer>
   );
 };
 
@@ -58,12 +63,9 @@ const LinkBox = styled.div`
 
 const MenuBarCompBox = styled.div`
   display: flex;
-  left: 50%;
   gap: 30px;
   width: 1200px;
   margin: 0 auto;
-  margin-top: 10px;
-  margin-bottom: 10px;
   a {
     text-decoration: none;
     color: black;
@@ -71,5 +73,13 @@ const MenuBarCompBox = styled.div`
   }
   a:hover {
     color: #f0a500;
+  }
+`;
+
+const MenuBarContainer = styled.div`
+  background-color: #f4f4f4;
+  width: 100%;
+  hr {
+    border-bottom: none;
   }
 `;
