@@ -64,6 +64,7 @@ const LinkBox = styled.div`
 
 const MenuBarCompBox = styled.div`
   display: flex;
+  left: 50%;
   gap: 30px;
   width: 1200px;
   margin: 0 auto;
