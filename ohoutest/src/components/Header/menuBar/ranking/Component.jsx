@@ -11,4 +11,7 @@ const RankingComponent = () => {
 
 export default RankingComponent;
 
-const RankingCompBox = styled.div``;
+const RankingCompBox = styled.div`
+  position: relative;
+  user-select: none;
+`;

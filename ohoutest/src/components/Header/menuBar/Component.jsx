@@ -82,5 +82,6 @@ const MenuBarContainer = styled.div`
   width: 100%;
   hr {
     border-bottom: none;
+    border-top: 1px solid #f0a500;
   }
 `;

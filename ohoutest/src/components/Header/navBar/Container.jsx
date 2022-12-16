@@ -1,9 +1,8 @@
-import NavBarComponent from "./Component";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import axios from "axios";
 
+import NavBarComponent from "./Component";
 import { action } from "../../../modules/search";
 
 const NavBarContainer = () => {

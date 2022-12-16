@@ -116,10 +116,12 @@ const DropBox = styled.div`
   ul {
     position: absolute;
     display: none;
-    right: 315px;
+    left: 50%;
+    transform: translate(-50%, 0);
     width: 180px;
     margin-top: 10px;
     list-style-type: none;
+    width: 300px;
   }
   .selected + ul {
     display: block;

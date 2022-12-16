@@ -16,6 +16,9 @@ const MainSlideComponent = () => {
     currentItemId = setTimeout(() => {
       next();
     }, 3500);
+    return () => {
+      clearTimeout(currentItemId);
+    };
   }, [currentItem]);
   const itemArr = [
     "주말 반짝특가",
