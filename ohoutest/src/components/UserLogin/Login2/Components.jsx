@@ -2,13 +2,19 @@ import { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-const Login2Components = ({ setIsLogin, setUser }) => {
+import { useDispatch } from "react-redux";
+import { action } from "../../../modules/userInfo";
+
+const Login2Components = ({ setIsLogin, setUser, user }) => {
   const [inputId, setId] = useState("");
   const [inputPw, setPw] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const logInHandle = () => {
+    console.log(inputId, inputPw);
     axios({
-      url: "http://localhost:8080/login",
+      url: "/login",
       method: "POST",
       withCredentials: true,
       // client와 server가 쿠키 값을 공유
@@ -17,12 +23,18 @@ const Login2Components = ({ setIsLogin, setUser }) => {
         inputPw: inputPw,
       },
     }).then((result) => {
-      console.log(result.data);
-      console.log(result.data);
       if (result.status === 200) {
         console.log("로그인 성공");
-        window.open("/signUp", "_self");
-        // navigate("/signUp", { replace: true });
+        // window.open("/signUp", "_self");
+        navigate("/signUp", { replace: true });
+        console.log(result.data);
+        dispatch(
+          action.setUser({
+            id: user.userId,
+            pw: "",
+            name: user.userName,
+          })
+        );
       }
     });
   };

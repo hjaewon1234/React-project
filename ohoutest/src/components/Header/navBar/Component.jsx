@@ -40,7 +40,7 @@ const NavBarComponent = ({ onSubmit }) => {
             <img src="/img/circle-xmark-regular.svg" />
           </span>
         </div>
-        <Link to="/" className="cart-icon">
+        <Link to="/cart" className="cart-icon">
           <img src="/img/cart-shopping-solid.svg" />
         </Link>
         <Link to="/login">로그인</Link>

@@ -26,7 +26,8 @@ const userInfoSlice = createSlice({
   initialState: { id: "", pw: "", name: "" },
   reducers: {
     setUser: (state, action) => {
-      state.userInfo.user = action.payload;
+      console.log(action);
+      state = action.payload;
     },
   },
   extraReducers: (bulider) => {

@@ -101,14 +101,14 @@ const FooterComponent = () => {
             부담합니다.
           </div>
           <div className="footer-item-img-layer footer-item-icon-layer">
-            <img src="img/footer/icons/youtube.svg" />
-            <img src="img/footer/icons/instagram.svg" />
-            <img src="img/footer/icons/facebook.svg" />
-            <img src="img/footer/icons/twitter.svg" />
-            <img src="img/footer/icons/naver.svg" />
-            <img src="img/footer/icons/naverLine.svg" />
-            <img src="img/footer/icons/kakaoTalk.svg" />
-            <img src="img/footer/icons/kakaoStory.svg" />
+            <img src="/img/footer/icons/youtube.svg" />
+            <img src="/img/footer/icons/instagram.svg" />
+            <img src="/img/footer/icons/facebook.svg" />
+            <img src="/img/footer/icons/twitter.svg" />
+            <img src="/img/footer/icons/naver.svg" />
+            <img src="/img/footer/icons/naverLine.svg" />
+            <img src="/img/footer/icons/kakaoTalk.svg" />
+            <img src="/img/footer/icons/kakaoStory.svg" />
           </div>
           <div>
             <div>
