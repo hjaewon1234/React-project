@@ -12,6 +12,8 @@ import PopupBarContainer from "./components/PopupBar/Container";
 import axios from "axios";
 import RegistContainer from "./components/UserLogin/Regist/Container";
 import Login2Container from "./components/UserLogin/Login2/Container";
+import SearchContainer from "./components/Search/Container";
+import CartContainer from "./components/Cart/Container";
 axios.defaults.withCredentials = true;
 
 function App() {
@@ -29,6 +31,18 @@ function App() {
         <Route path="/regist" element={<RegistContainer />} />
         <Route path="/login" element={<Login2Container />} />
         {/* 회원가입 예외처리 하려고  27,28번줄 추가 */}
+        <Route path="/search/:sword" element={<SearchContainer />} />
+        {/* 회원가입 예외처리 하려고  26번 줄 추가 */}
+        <Route
+          path="/managerInfo/qnaAnswer/:id"
+          element={
+            <>
+              <ManagerInfo />
+              <AnswerQnaContainer />
+            </>
+          }
+        />
+        <Route path="/cart" element={<CartContainer />}></Route>
       </Routes>
       <Footer />
       <div style={{ backgroundColor: "#1a1c20" }}></div>

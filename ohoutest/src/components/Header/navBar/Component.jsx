@@ -97,7 +97,7 @@ const NavBarComponent = ({ onSubmit }) => {
             )}
           </span>
         </div>
-        <Link to="/" className="cart-icon">
+        <Link to="/cart" className="cart-icon">
           <img src="/img/cart-shopping-solid.svg" />
         </Link>
         <div className="login-pic">

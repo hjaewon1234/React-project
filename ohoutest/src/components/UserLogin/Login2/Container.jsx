@@ -79,6 +79,7 @@ const Login2Container = () => {
         </>
       ) : (
         <Login2Components
+          user={user}
           setUser={setUser}
           setIsLogin={setIsLogin}
         ></Login2Components>
