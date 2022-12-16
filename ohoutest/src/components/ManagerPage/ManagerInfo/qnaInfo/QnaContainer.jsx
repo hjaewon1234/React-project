@@ -14,7 +14,7 @@ const QnaContainer = () => {
   useEffect(() => {
     tempQnaInfoThunk(0);
     tempQnaPagingThunk();
-  }, [tempChange]);
+  }, []);
   const qnaInfo = useSelector((state) => state.qnaInfo);
   const qnaPaging = useSelector((state) => state.qnaPaging);
 

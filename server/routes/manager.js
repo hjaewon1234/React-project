@@ -1,11 +1,10 @@
 import { Router } from "express";
 const router = Router();
-
+import multer from "multer";
 import db from "../models/index.js";
 import Users from "../models/user.js";
 import Qna from "../models/Qna.js";
 import Products from "../models/product.js";
-import { where } from "sequelize";
 
 router.route("/productManage").post(async (req, res) => {
   const productInfo = await db.Products.findAll();
@@ -88,6 +87,23 @@ router.route("/answerQna").post(async (req, res) => {
   // 지금 한게 db 수정 하는 방식임. id로 찾아서 qnaAnswer 칼럼을 현재 받은 걸로 바꿔주는거임
   // 지금 또 수정해야되는 부분은 qnaAnswer의 값이 있으면 상태를 바꿔준다.
   res.send(req.body);
+});
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "./upload/");
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
+
+const uploader = multer({ storage: storage });
+
+router.route("/uploadFile").post(uploader.array("img", 4), (req, res) => {
+  console.log(req.file);
+
+  res.send("에라이모르겟다.");
 });
 
 export default router;
