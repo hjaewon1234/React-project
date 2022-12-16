@@ -3,38 +3,41 @@ import { Link } from "react-router-dom";
 
 const SearchProductComp = ({ itemArr }) => {
   return (
-    <SearchProductBox>
-      <div className="today-deal-container">
-        {itemArr?.map((elem, idx) => {
-          return (
-            <ItemBox key={`itemArr - ${idx}`}>
-              <Link to={"/"}>
-                <div className="today-deal-item-img">
-                  <img src={`/api/download${elem.img.split(",")[0]}`} />
-                </div>
-                <div className="item-container">
-                  <div className="item-brand">{elem.brand}</div>
-                  <div className="item-name">{elem.name}</div>
-                  <div className="item-price">
-                    {elem.price.toLocaleString()}
+    <>
+      <MaxLengthBox>전체 {itemArr.length}개</MaxLengthBox>
+      <SearchProductBox>
+        <div className="today-deal-container">
+          {itemArr?.map((elem, idx) => {
+            return (
+              <ItemBox key={`itemArr - ${idx}`}>
+                <Link to={"/"}>
+                  <div className="today-deal-item-img">
+                    <img src={`/api/download${elem.img.split(",")[0]}`} />
                   </div>
-                </div>
-              </Link>
-            </ItemBox>
-          );
-        })}
-      </div>
-    </SearchProductBox>
+                  <div className="item-container">
+                    <div className="item-brand">{elem.brand}</div>
+                    <div className="item-name">{elem.name}</div>
+                    <div className="item-price">
+                      {elem.price.toLocaleString()}
+                    </div>
+                  </div>
+                </Link>
+              </ItemBox>
+            );
+          })}
+        </div>
+      </SearchProductBox>
+    </>
   );
 };
 
 export default SearchProductComp;
 
 const SearchProductBox = styled.div`
-  width: 100%;
+  width: 80%;
   display: flex;
   margin: 0 auto;
-  margin-top: 50px;
+  margin-top: 10px;
   .subtitle {
     display: flex;
     justify-content: space-between;
@@ -53,16 +56,16 @@ const SearchProductBox = styled.div`
     text-decoration: none;
   }
   .today-deal-container {
-    justify-content: center;
+    justify-content: left;
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 5%;
   }
 `;
 
 const ItemBox = styled.div`
-  width: 20%;
+  width: 21%;
   img {
     width: 100%;
     transition: transform 0.2s;
@@ -104,4 +107,12 @@ const ItemBox = styled.div`
       color: #9f9f9f;
     }
   }
+`;
+
+const MaxLengthBox = styled.div`
+  width: 80%;
+  margin: auto;
+  text-align: left;
+  color: grey;
+  font-size: 0.8rem;
 `;

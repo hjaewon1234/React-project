@@ -54,12 +54,12 @@ export const DropdownComp = () => {
       >
         <div>
           <span>{elemCount + 1} </span>
-          <img className={"up"} src="./img/caret-up-solid.svg" />
+          <img className={"up"} src="/api/downloadcaretupsolid.png" />
           {` ${selected}`}
         </div>
         <div>
           <span>{(elemCount + 2) % 10} </span>
-          <img className={"up"} src="./img/caret-up-solid.svg" />
+          <img className={"up"} src="/api/downloadcaretupsolid.png" />
           {` ${selected2}`}
         </div>
       </div>
@@ -67,7 +67,10 @@ export const DropdownComp = () => {
         {dropdownElems.map((item, index) => (
           <li key={`dropdownElemKey-${index}`}>
             <span>{index + 1} </span>
-            <img className={"down"} src="./img/caret-down-solid.svg" />{" "}
+            <img
+              className={"down"}
+              src="/api/downloadcaretdownsolid.png"
+            />{" "}
             {` ${item}`}
           </li>
         ))}
@@ -116,9 +119,9 @@ const DropBox = styled.div`
   ul {
     position: absolute;
     display: none;
-    right: 10px;
+    right: 15px;
     width: 280px;
-    margin-top: 10px;
+    margin-top: 5px;
     list-style-type: none;
   }
   .selected + ul {

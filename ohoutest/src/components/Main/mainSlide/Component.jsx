@@ -32,19 +32,21 @@ const MainSlideComponent = () => {
   const slideItem = ["/", "/", "/", "/", "/", "/", "/", "/", "/", "/"];
 
   const slideExecuter = (param) => {
-    if (!container.current) return;
-    container.current.style.transition = `transform ${animaSpeed / 10}s`;
-    container.current.style.transform = `translate(-${param}vw)`;
+    if (container.current) {
+      container.current.style.transition = `transform ${animaSpeed / 10}s`;
+      container.current.style.transform = `translate(-${param}vw)`;
+    }
     setTimeout(() => {
       animating = false;
     }, animaSpeed * 100);
   };
 
   const blindExecuter = (param) => {
-    if (!container.current) return;
     setTimeout(() => {
-      container.current.style.transition = "transform 0s";
-      container.current.style.transform = `translate(-${param}vw)`;
+      if (container.current) {
+        container.current.style.transition = "transform 0s";
+        container.current.style.transform = `translate(-${param}vw)`;
+      }
       animating = false;
     }, animaSpeed * 100);
     setcurrentItem(param / 100);
@@ -91,6 +93,7 @@ const MainSlideComponent = () => {
   };
 
   const btnSelector = (idx) => {
+    console.log(idx);
     animator("btn", idx);
   };
 

@@ -12,6 +12,7 @@ import PopupBarContainer from "./components/popupBar/Container";
 import axios from "axios";
 import RegistContainer from "./components/UserLogin/Regist/Container";
 import SearchContainer from "./components/Search/Container";
+import CartContainer from "./components/Cart/Container";
 axios.defaults.withCredentials = true;
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
             </>
           }
         />
+        <Route path="/cart" element={<CartContainer />}></Route>
       </Routes>
       <Footer />
       <div style={{ backgroundColor: "#1a1c20" }}></div>
