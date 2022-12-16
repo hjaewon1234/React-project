@@ -10,6 +10,7 @@ const QnaContainer = () => {
   const tempQnaInfoThunk = (num) => dispatch(qnaInfoThunk(num));
   const tempQnaPagingThunk = () => dispatch(qnaPagingThunk());
   const tempChange = useSelector((state) => state.tempStateChange);
+  console.log(tempChange);
   useEffect(() => {
     tempQnaInfoThunk(0);
     tempQnaPagingThunk();
