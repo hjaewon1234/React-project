@@ -9,20 +9,23 @@ const MenuBarComponent = () => {
   let prevScroll = 0;
   let currentScroll = 0;
   let isDown;
+  const scrollEvent = () => {
+    currentScroll = window.scrollY;
+    currentScroll > prevScroll ? (isDown = true) : (isDown = false);
+    if (isDown) {
+      console.log("내림");
+    } else {
+      console.log("올림");
+    }
+    prevScroll = currentScroll;
+  };
 
   useEffect(() => {
-    window.addEventListener("scroll", () => {
-      currentScroll = window.scrollY;
-      currentScroll > prevScroll ? (isDown = true) : (isDown = false);
-      if (isDown) {
-        console.log("내림");
-      } else {
-        console.log("올림");
-      }
-      prevScroll = currentScroll;
-    });
+    window.addEventListener("scroll", scrollEvent);
+    return () => {
+      window.removeEventListener("scroll", scrollEvent);
+    };
   }, []);
-  // component will unmount
 
   return (
     <MenuBarCompBox ref={menuBarRef}>
