@@ -45,7 +45,7 @@ const NavBarComponent = ({ onChange, onSubmit }) => {
           <img src="/img/cart-shopping-solid.svg" />
         </Link>
         <Link to="/login">로그인</Link>
-        <Link to="/signUp">회원가입</Link>
+        <Link to="/regist">회원가입</Link>
         <Link to="/">고객센터</Link>
         <button className="upload-btn">
           글쓰기

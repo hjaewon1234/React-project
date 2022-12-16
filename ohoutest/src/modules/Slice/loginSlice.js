@@ -2,21 +2,32 @@ import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
 import axios from "axios";
 const initialState = {
   inputId: "",
-  inputPw: "",
+  inputName: "",
 };
 
-export const logInUser = createAsyncThunk("logInUser", async (body) => {
+// export const logInUser = createAsyncThunk("logInUser", async (body) => {
+//   console.log(body);
+//   const { data } = await axios.post("http://localhost:8080/api/login/success", {
+//     ...body,
+//     body: JSON.stringify(body),
+//   });
+//   console.log(data);
+//   return data;
+// });
+// axios.post("경로", {담아서 보낼 데이터})
+
+export const logInUser = createAsyncThunk("/login/logInUser", async (body) => {
   console.log(body);
-  const { data } = await axios.post("http://localhost:8080/api/login/success", {
+  const { data } = await axios.get("http://localhost:8080/api/login/success", {
     ...body,
-    body: JSON.stringify(body),
+    body: JSON.stringify(...body),
   });
   console.log(data);
   return data;
 });
 // axios.post("경로", {담아서 보낼 데이터})
 
-const logInSlice = createSlice({
+const loginSlice = createSlice({
   name: "userLogin",
   initialState,
   reducers: {
@@ -24,21 +35,22 @@ const logInSlice = createSlice({
       state.userLogin.user = action.payload;
     },
   },
-  extraReducers: {
-    [logInUser.pending]: (state, action) => {
-      console.log("pending");
-    },
-    [logInUser.fulfilled]: (state, { payload }) => {
-      console.log("fulfilled", payload);
-      console.log(current(state));
-      return payload;
-    },
-    [logInUser.rejected]: (state, action) => {
-      console.log("rejected");
-    },
+  extraReducers: (bulider) => {
+    bulider
+      .addCase(logInUser.pending, (state, action) => {
+        console.log("pending");
+      })
+      .addCase(logInUser.fulfilled, (state, { payload }) => {
+        console.log("fulfilled", payload);
+        console.log(current(state));
+        return state;
+      })
+      .addCase(logInUser.rejected, (state, action) => {
+        console.log("rejected");
+      });
   },
 });
 
-export const action = logInSlice.actions;
+export const action = loginSlice.actions;
 
-export const reducer = logInSlice.reducer;
+export const reducer = loginSlice.reducer;

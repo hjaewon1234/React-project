@@ -2,10 +2,23 @@ import { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { logInUser } from "../../../modules/Slice/loginSlice";
+import { useDispatch, useSelector } from "react-redux";
 const Login2Components = ({ setIsLogin, setUser }) => {
   const [inputId, setId] = useState("");
   const [inputPw, setPw] = useState("");
+  const [inputName, setName] = useState("");
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const loginHandler = () => {
+    dispatch(
+      logInUser({
+        inputId,
+        inputName,
+      })
+    );
+  };
+
   const logInHandle = () => {
     axios({
       url: "http://localhost:8080/login",
@@ -57,7 +70,9 @@ const Login2Components = ({ setIsLogin, setUser }) => {
             placeholder={"비밀번호"}
           />
         </RegistMidStlye>
-        <button onClick={logInHandle}>로그인</button>
+        <button onClick={logInHandle} onChange={loginHandler}>
+          로그인
+        </button>
       </RegistMain>
     </>
   );

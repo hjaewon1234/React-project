@@ -29,7 +29,7 @@ router.route("/").post((req, res) => {
 router.route("/getProducts").post((req, res) => {
   // console.log("getProducts req : ", req.body);
   db.Products.findAll().then((data) => {
-    console.log(data[0].dataValues);
+    console.log(data[0]?.dataValues);
     const sendData = [];
     data.map((item, index) => {
       if (
