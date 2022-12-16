@@ -109,6 +109,9 @@ const NavBarComponent = ({ onSubmit }) => {
           />
           {isOpen && <DropDown arr={loginedMenu} refs={tempRef} />}
         </div>
+        <Link to="/login">로그인</Link>
+        <Link to="/regist">회원가입</Link>
+        <Link to="/">고객센터</Link>
         <button className="upload-btn">
           글쓰기
           <img src="/img/chevron-right-solid.svg" />

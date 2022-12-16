@@ -9,11 +9,9 @@ import {
   overlapNickName,
 } from "../../../modules/Slice/registSlice";
 import { useDispatch } from "react-redux";
-
+import { Link } from "react-router-dom";
 const RegistComponents = () => {
   // const dispathch = useDispatch();
-  // const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
-  // const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
   const [inputId, setId] = useState("");
   const [inputPw, setPw] = useState("");
@@ -22,8 +20,55 @@ const RegistComponents = () => {
   const [inputAdress, setAdress] = useState("");
   const [inputAdress1, setAdress1] = useState("");
   const [popup, setPopup] = useState(false);
+  const [checkItems, setCheckItems] = useState([]);
   // const [openPostcode, setOpenPostcode] = useState(false);
   const dispatch = useDispatch();
+  const [enroll_company, setEnroll_company] = useState({
+    address: "",
+  });
+
+  const [inputIdError, setIdError] = useState("");
+  const [inputPwError, setPwError] = useState("");
+  const [inputPw1Error, setPw1Error] = useState("");
+  const [inputNameError, setNameError] = useState("");
+
+  const onInputReset = (e) => {
+    setId("");
+    setPw("");
+    setPw1("");
+    setName("");
+    setAdress("");
+    setAdress1("");
+  };
+
+  const onChangeUserId = (e) => {
+    const userIdRegex = /^[가-힣a-zA-Z]/gi;
+    if (!e.target.value || userIdRegex.test(e.target.value)) setIdError(false);
+    else setIdError(true);
+    setId(e.target.value);
+  };
+
+  const onChangeUserPw = (e) => {
+    const userPwRegex = /^[가-힣a-zA-Z]/gi;
+    if (!e.target.value || userPwRegex.test(e.target.value)) setPwError(false);
+    else setPwError(true);
+    setPwError(e.target.value);
+  };
+  const onChangeUserPw1 = (e) => {
+    const userPw1Regex = /^[가-힣a-zA-Z]/gi;
+    if (!e.target.value || userPw1Regex.test(e.target.value))
+      setPw1Error(false);
+    else setPw1Error(true);
+    setPw1Error(e.target.value);
+  };
+  const onChangeUserName = (e) => {
+    const userNameRegex = /^[가-힣a-zA-Z]/gi;
+    if (!e.target.value || userNameRegex.test(e.target.value))
+      setNameError(false);
+    else setNameError(true);
+    setNameError(e.target.value);
+  };
+
   const registHandle = () => {
     dispatch(
       signUpUser({
@@ -36,6 +81,32 @@ const RegistComponents = () => {
       })
     );
   };
+  const data = [
+    { id: 0, title: "만 14세 이상입니다." },
+    { id: 1, title: "이용약관" },
+    { id: 2, title: "개인정보수집 및 이용동의" },
+    { id: 3, title: "개인정보 마케팅 활용 동의" },
+    { id: 4, title: "이벤트, 쿠폰, 특가 알림 메일 및 SMS 등 수신" },
+  ];
+
+  const SinglecheckHandle = (checked, id) => {
+    if (checked) {
+      setCheckItems((prev) => [...prev, id]);
+    } else {
+      setCheckItems(checkItems.filter((el) => el !== id));
+    }
+  };
+
+  const AllcheckHandle = (checked) => {
+    if (checked) {
+      const idArray = [];
+      data.forEach((el) => idArray.push(el.id));
+      setCheckItems(idArray);
+    } else {
+      setCheckItems([]);
+    }
+  };
+
   const overlapIdHandle = () => {
     dispatch(overlapId({ inputId }));
   };
@@ -43,10 +114,6 @@ const RegistComponents = () => {
   const overlapNickNameHandle = () => {
     dispatch(overlapNickName({ inputName }));
   };
-
-  const [enroll_company, setEnroll_company] = useState({
-    address: "",
-  });
 
   const handleInput = (e) => {
     setEnroll_company({
@@ -74,8 +141,14 @@ const RegistComponents = () => {
               onInput={(e) => {
                 setId(e.target.value);
               }}
+              onChange={onChangeUserId}
               placeholder={"아이디"}
             />
+            {inputIdError && (
+              <div className="formInvalid">
+                5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능
+              </div>
+            )}
             <button
               className="idBtnOverlap"
               onClick={() => {
@@ -85,9 +158,7 @@ const RegistComponents = () => {
               중복 ID 검사
             </button>
             <label> 비밀번호</label>
-            <label className="small">
-              영문, 숫자를 포함한 8자 이상의 비밀번호를 입력해주세요.
-            </label>
+            <label className="small"></label>
             <input
               type={"password"}
               value={inputPw}
@@ -95,7 +166,13 @@ const RegistComponents = () => {
                 setPw(e.target.value);
               }}
               placeholder={"비밀번호"}
+              onChange={onChangeUserPw}
             />
+            {inputPwError && (
+              <div className="formInvalid">
+                8~16자 영문 대 소문자, 숫자, 특수문자 ok
+              </div>
+            )}
             <label> 비밀번호 확인</label>
             <input
               type={"password"}
@@ -103,12 +180,16 @@ const RegistComponents = () => {
               onInput={(e) => {
                 setPw1(e.target.value);
               }}
+              onChange={onChangeUserPw1}
               placeholder={"비밀번호 확인"}
-            />
+            />{" "}
+            {inputPw1Error && (
+              <div className="formInvalid">
+                비밀번호 영문자+숫자+특수조합(8~25자리 입력)
+              </div>
+            )}
             <label> 닉네임</label>
-            <label className="small">
-              영문, 숫자를 포함한 8자 이상의 비밀번호를 입력해주세요.
-            </label>
+            <label className="small"></label>
             <input
               type={"text"}
               value={inputName}
@@ -116,7 +197,13 @@ const RegistComponents = () => {
                 setName(e.target.value);
               }}
               placeholder={"별명 (2~15자)"}
+              onChange={onChangeUserName}
             />
+            {inputNameError && (
+              <div className="formInvalid">
+                한글과 영문 대 소문자를 사용하세요. (특수기호, 공백 사용 불가)
+              </div>
+            )}
             <button
               className="idBtnOverlap"
               onClick={() => {
@@ -139,13 +226,6 @@ const RegistComponents = () => {
                   setAdress1(e.target.value);
                 }}
               />
-
-              {popup && (
-                <Post
-                  company={enroll_company}
-                  setcompany={setEnroll_company}
-                ></Post>
-              )}
             </div>
             <input
               type={"text"}
@@ -155,57 +235,101 @@ const RegistComponents = () => {
               }}
               placeholder={"나머지 주소"}
             />
+            {popup && (
+              <Post
+                popup={popup}
+                autoClose
+                company={enroll_company}
+                setcompany={setEnroll_company}
+              ></Post>
+            )}
             <div className="kakaoAdressP" value={""}>
               <button className="kakaoAdress" onClick={handleComplete}>
                 주소 찾기
               </button>
-              <button className="kakaoAdress">주소 입력</button>
+              <button className="kakaoAdress" onClick={handleComplete}>
+                주소 입력
+              </button>
             </div>
             <label> 약관동의</label>
           </RegistMidStlye>
           <AcceptStlye>
-            <div>
+            <table>
+              <thead>
+                <tr>
+                  <th>
+                    <input
+                      type="checkbox"
+                      name="select-all"
+                      onChange={(e) => AllcheckHandle(e.target.checked)}
+                      checked={checkItems.length === data.length ? true : false}
+                    />
+                  </th>
+                  <th className="check1">전체동의</th>
+                </tr>
+              </thead>
+              <thead>
+                {data?.map((data, key) => (
+                  <tr key={key}>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name={`select-${data.id}`}
+                        onChange={(e) =>
+                          SinglecheckHandle(e.target.checked, data.id)
+                        }
+                        checked={checkItems.includes(data.id) ? true : false}
+                      />
+                    </td>
+                    <td className="second-row">{data.title}</td>
+                  </tr>
+                ))}
+              </thead>
+            </table>
+            {/* <div>
               <input type="checkbox" id="check1" />
-              <label for="check1"></label>
+              <label htmlFor="check1"></label>
               <h6> 전체동의</h6>
             </div>
             <div>
               <input type="checkbox" id="check2" />
-              <label for="check2"></label>
+              <label htmlFor="check2"></label>
               <h6> 만 14세 이상입니다.</h6>
             </div>
             <div>
               <input type="checkbox" id="check3" />
-              <label for="check3"></label>
+              <label htmlFor="check3"></label>
               <h6> 이용약관</h6>
             </div>
             <div>
               <input type="checkbox" id="check4" />
-              <label for="check4"></label>
+              <label htmlFor="check4"></label>
               <h6> 개인정보수집 및 이용동의</h6>
             </div>
             <div>
               <input type="checkbox" id="check5" />
-              <label for="check5"></label>
+              <label htmlFor="check5"></label>
               <h6> 개인정보 마케팅 활용 동의</h6>
             </div>
             <div>
               <input type="checkbox" id="check6" />
-              <label for="check6"></label>
+              <label htmlFor="check6"></label>
               <h6> 이벤트, 쿠폰, 특가 알림 메일 및 SMS 등 수신</h6>
-            </div>
+            </div> */}
           </AcceptStlye>
 
           <button
             onClick={() => {
               registHandle();
             }}
+            onChange={onInputReset}
           >
             회원가입하기
           </button>
           <LoginStyle>
             <div>
-              <h6>이미 아이디가 있으신가요? </h6>
+              <Link to={"/signUp"}>이미 아이디가 있으신가요? </Link>
+              {/* <h6>이미 아이디가 있으신가요? </h6> */}
             </div>
           </LoginStyle>
         </RegistMain>
@@ -305,6 +429,10 @@ const RegistMidStlye = styled.div`
   .kakaoAdress {
     width: 170px;
     height: 50px;
+  }
+  .formInvalid {
+    font-size: 12px;
+    color: red;
   }
 `;
 const AcceptStlye = styled.div`

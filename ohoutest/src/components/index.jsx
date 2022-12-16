@@ -7,17 +7,7 @@ import { Link } from "react-router-dom";
 const SingUp = ({ userName }) => {
   return (
     <>
-      <div>
-        <Link to={"/"}>Home</Link>
-        {userName ? (
-          <></>
-        ) : (
-          <>
-            | <Link to={"/regist"}>회원가입</Link> |
-            <Link to={"/login"}>로그인</Link>
-          </>
-        )}
-      </div>
+      <div>{userName ? <></> : <></>}</div>
       {userName ? <MainContainer /> : <></>}
       <Login2Container></Login2Container>
     </>

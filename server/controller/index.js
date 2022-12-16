@@ -281,6 +281,7 @@ const accessToken = async (req, res) => {
     const { userPw, ...others } = userData;
 
     res.status(200).json(others);
+    console.log("othersothersothersothersothers", others);
   } catch (error) {
     res.status(500).json(error);
   }

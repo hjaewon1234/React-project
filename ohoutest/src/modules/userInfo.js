@@ -26,7 +26,8 @@ const userInfoSlice = createSlice({
   initialState: { id: "", pw: "", name: "" },
   reducers: {
     setUser: (state, action) => {
-      state.userInfo.user = action.payload;
+      console.log(action.payload);
+      return action.payload;
     },
   },
   extraReducers: (bulider) => {
@@ -37,8 +38,8 @@ const userInfoSlice = createSlice({
       })
       .addCase(userInfoThunk.fulfilled, (state, { payload }) => {
         console.log(current(state));
-        // state = state;
-        // state.userInfo.user = action.payload;
+        state = state;
+        state.userInfo.user = action.payload;
         return { ...payload };
       })
       .addCase(userInfoThunk.rejected, (state, action) => {
@@ -57,12 +58,12 @@ const userInfoSlice = createSlice({
         console.log("reject");
       });
   },
-  extraReducers: {
-    [userInfoThunk.fulfilled]: (state, { payload }) => {
-      console.log("fullfilled", current(state));
-      return payload;
-    },
-  },
+  // extraReducers: {
+  //   [userInfoThunk.fulfilled]: (state, { payload }) => {
+  //     console.log("fullfilled", current(state));
+  //     return payload;
+  //   },
+  // },
 });
 
 export const action = userInfoSlice.actions;
