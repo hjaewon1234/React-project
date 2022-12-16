@@ -37,3 +37,37 @@ const HeaderBox = styled.div`
     position: relative;
   }
 `;
+
+// const Header = () => {
+//   const fixedRef = useRef();
+
+//   return (
+//     <HeaderBox>
+//       <div className="fixed-container" ref={fixedRef}>
+//         <NavBarContainer />
+//         <hr />
+//         <MenuBarContainer />
+//         <hr />
+//       </div>
+//     </HeaderBox>
+//   );
+// };
+
+// export default Header;
+
+// const HeaderBox = styled.div`
+//   width: 100%;
+//   position: sticky;
+//   z-index: 100;
+//   left: 0px;
+//   right: 0px;
+//   top: 0px;
+//   hr {
+//     border-bottom: none;
+//   }
+//   .fixed-container {
+//     background-color: #f4f4f4;
+//     margin: 0 auto;
+//     position: relative;
+//   }
+// `;
