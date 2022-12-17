@@ -70,9 +70,7 @@ const Login2Components = ({ setIsLogin, setUser, user }) => {
             placeholder={"비밀번호"}
           />
         </RegistMidStlye>
-        <button onClick={logInHandle} onChange={loginHandler}>
-          로그인
-        </button>
+        <button onClick={logInHandle}>로그인</button>
       </RegistMain>
     </>
   );
