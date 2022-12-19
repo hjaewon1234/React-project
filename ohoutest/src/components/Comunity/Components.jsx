@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 const CommunityComp = ({ user }, props) => {
-  console.log(user, props);
+  document.cookie.split(";").map((item) => {
+    console.log(item.split("=")[0]);
+  });
   return (
     <>
       <div>

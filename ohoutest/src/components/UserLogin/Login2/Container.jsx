@@ -21,6 +21,7 @@ const Login2Container = () => {
       if (result.status === 200) {
         // window.open("/", "_self");
         navigate("/", { replace: true });
+        dispatch(action.setUser({ userId: "", userName: "" }));
       }
     });
   };
@@ -48,21 +49,6 @@ const Login2Container = () => {
         .catch((error) => {
           console.error(error);
         });
-      // axios({
-      //   url: "http://localhost:8080/api/user/frontCookie",
-      //   method: "post",
-      //   withCredentials: true,
-      // })
-      //   .then((result) => {
-      //     if (result.data) {
-      //       setIsLogin(true);
-      //       setUser(result.data);
-      //       console.log(result.data);
-      //     }
-      //   })
-      //   .catch((error) => {
-      //     console.log(error);
-      //   });
     } catch (error) {
       console.log(error);
     }

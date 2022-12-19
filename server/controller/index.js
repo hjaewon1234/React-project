@@ -254,12 +254,12 @@ const login = async (req, res, next) => {
         // token 전송
         res.cookie("accessToken", accessToken, {
           secure: false,
-          httpOnly: true,
+          httpOnly: false,
         });
 
         res.cookie("refreshToken", refreshToken, {
           secure: false,
-          httpOnly: true,
+          httpOnly: false,
         });
 
         res.status(200).json("login success");
@@ -309,7 +309,7 @@ const refreshToken = async (req, res) => {
 
     res.cookie("accessToken", accessToken, {
       secure: false,
-      httpOnly: true,
+      httpOnly: false,
     });
 
     res.status(200).json("Access Token Recreated");
@@ -345,7 +345,7 @@ const loginSuccess = async (req, res, next) => {
 
       res.cookie("accessToken", accessToken, {
         secure: false,
-        httpOnly: true,
+        httpOnly: false,
       });
 
       global.userId = data.userId;
