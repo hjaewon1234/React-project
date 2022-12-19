@@ -1,9 +1,16 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-const CommunityComp = ({ user }, props) => {
+import { useEffect, useState } from "react";
+const CommunityComp = ({ user, getChatData, pushChatData, chatData }) => {
+  const [inputText, setInputText] = useState("");
   document.cookie.split(";").map((item) => {
-    console.log(item.split("=")[0]);
+    // console.log(item.split("=")[0]);
   });
+
+  useEffect(() => {
+    getChatData();
+  }, []);
+
   return (
     <>
       <div>
@@ -15,17 +22,36 @@ const CommunityComp = ({ user }, props) => {
           )}
         </div>
         <div>
-          <input type="text" />
+          <input
+            type="text"
+            onChange={(e) => {
+              setInputText(e.target.value);
+            }}
+            onKeyDown={(e) => {
+              if (e.key == "Enter") {
+                pushChatData({
+                  name: user.userId,
+                  text: inputText,
+                  importance: "S",
+                });
+              }
+            }}
+            value={inputText}
+          />
         </div>
       </div>
 
       <div>
         <ul>
-          <li>1 : 1 </li>
-          <li>2 : 2 </li>
-          <li>3 : 3 </li>
-          <li>4 : 4 </li>
-          <li>5 : 5 </li>
+          {chatData?.length ? (
+            chatData?.map((item, index) => (
+              <ListBox key={`list-${index}`} className={item.importance}>
+                {item.name} : {item.text}
+              </ListBox>
+            ))
+          ) : (
+            <></>
+          )}
         </ul>
       </div>
     </>
@@ -33,3 +59,21 @@ const CommunityComp = ({ user }, props) => {
 };
 
 export default CommunityComp;
+
+const ListBox = styled.div`
+  &.s {
+    color: red !important;
+  }
+  &.a {
+    color: green !important;
+  }
+  &.b {
+    color: blue !important;
+  }
+  &.c {
+    color: grey !important;
+  }
+  &.d {
+    color: white !important;
+  }
+`;
