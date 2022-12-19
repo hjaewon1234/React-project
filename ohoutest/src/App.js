@@ -14,6 +14,8 @@ import RegistContainer from "./components/UserLogin/Regist/Container";
 import Login2Container from "./components/UserLogin/Login2/Container";
 import SearchContainer from "./components/Search/Container";
 import CartContainer from "./components/Cart/Container";
+import CommunityContainer from "./components/Comunity/Container";
+
 axios.defaults.withCredentials = true;
 
 function App() {
@@ -43,6 +45,7 @@ function App() {
           }
         />
         <Route path="/cart" element={<CartContainer />}></Route>
+        <Route path="/community" element={<CommunityContainer />} />
       </Routes>
       <Footer />
       <div style={{ backgroundColor: "#1a1c20" }}></div>

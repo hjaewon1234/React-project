@@ -56,10 +56,17 @@ const ManagerInfoComponent = ({
                 {/* {item.img.split(",").map((imgSplit) => (
                   <img src={`/api/download${imgSplit}.jpg`} />
                 ))} */}
-                {/* <img
-                  src={`/api/download${decodeURI(item.img.split(",")[0])}.jpg`}
-                  width={"70px"}
-                /> */}
+                {item.img ? (
+                  <>
+                    {/* <img
+                      src={`/api/download${decodeURI(item.img.split(",")[0])}`}
+                      width={"70px"}
+                    /> */}
+                  </>
+                ) : (
+                  "asdf"
+                )}
+
                 <div>
                   <div>
                     [ {item.brand} ] {item.name}
