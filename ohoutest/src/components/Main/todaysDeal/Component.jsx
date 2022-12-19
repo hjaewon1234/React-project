@@ -63,6 +63,7 @@ const TodaysDealCompBox = styled.div`
     display: flex;
     gap: 10px;
     justify-content: space-between;
+    word-break: break-word;
   }
 `;
 

@@ -9,3 +9,8 @@
 routes\index 카테고리 등록, 제품등록
 
 하다가 db is not defined 뜨면 맨위에 import db
+
+
+인기검색어 오류시
+
+db topten -> 111 222 333 444 555 ... 10 10 10 작성 -> 서버 재시작 -> db search 10개 이상 되게 검색하기
