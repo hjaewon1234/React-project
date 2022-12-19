@@ -8,11 +8,16 @@ import Products from "../models/product.js";
 
 router.route("/productManage").post(async (req, res) => {
   const productInfo = await db.Products.findAll();
+
   const sliceInfo = productInfo.slice(
     req.body.number * 10,
     req.body.number * 10 + 10
   );
 
+  sliceInfo.map((item, idx) => {
+    item.img = item.img.split(",")[0];
+  });
+  // 이렇게 해서 sliceInfo 로 사진을 하나씩만 보내줌
   res.send(sliceInfo);
   // 원래는 페이지 정보와 페이징 내용을 같이 보내야 한다.
   // 좀더 생각을 해보자 관계형 db만 하고.
@@ -20,7 +25,7 @@ router.route("/productManage").post(async (req, res) => {
 
 router.route("/productPage").post(async (req, res) => {
   let pageNum = [];
-  console.log("몇번도니");
+
   const pagingLength = (await db.Products.findAll()).length;
 
   for (let i = 0; i < pagingLength / 10; i++) {
@@ -31,8 +36,6 @@ router.route("/productPage").post(async (req, res) => {
 });
 
 router.route("/qnaInfo").post(async (req, res) => {
-  console.log(req.body.number + "req바디님 나와주세요");
-
   const tempDbFind = await Qna.findAll({
     include: [
       { model: Users, attributes: ["userId", "userName"] },
@@ -54,6 +57,8 @@ router.route("/qnaInfo").post(async (req, res) => {
     req.body.number * 10,
     req.body.number * 10 + 10
   );
+  console.log(sliceQnaInfo[0].dataValues);
+  console.log(tempDbFind[0].dataValues);
   // 이런 형식으로 보내면 User 라는 칼럼으로 userId, userName이 객체로 들어간다.
   res.send(sliceQnaInfo);
 });
@@ -71,8 +76,6 @@ router.route("/qnaPage").post(async (req, res) => {
 });
 
 router.route("/answerQna").post(async (req, res) => {
-  console.log(req.body);
-
   await db.Qna.update(
     {
       qnaAnswer: req.body.qnaAnswer,
@@ -85,23 +88,6 @@ router.route("/answerQna").post(async (req, res) => {
   // 지금 한게 db 수정 하는 방식임. id로 찾아서 qnaAnswer 칼럼을 현재 받은 걸로 바꿔주는거임
   // 지금 또 수정해야되는 부분은 qnaAnswer의 값이 있으면 상태를 바꿔준다.
   res.send(req.body);
-});
-
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "./upload/");
-  },
-  filename: (req, file, cb) => {
-    cb(null, file.originalname);
-  },
-});
-
-const uploader = multer({ storage: storage });
-
-router.route("/uploadFile").post(uploader.array("img", 4), (req, res) => {
-  console.log(req.file);
-
-  res.send("에라이모르겟다.");
 });
 
 export default router;

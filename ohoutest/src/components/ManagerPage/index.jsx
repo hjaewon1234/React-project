@@ -1,14 +1,10 @@
 import styled from "styled-components";
 import { Route, Routes } from "react-router-dom";
-import { useEffect } from "react";
 
 import ManagerInfoContainer from "./ManagerInfo/managerInfo/ManagerInfoContainer";
-
 import AnswerQna from "./ManagerInfo/answerQna/AnswerQnaComponent";
 import QnaContainer from "./ManagerInfo/qnaInfo/QnaContainer";
-import AnswerQnaContainer from "./ManagerInfo/answerQna/AnswerQnaContainer";
-import { productManageThunk } from "../../modules/productManage";
-import { productPagingThunk } from "../../modules/productPaging";
+import FileAddContainer from "./ManagerInfo/FileAdd/FileAddContainer";
 
 const ManagerInfo = () => {
   return (
@@ -18,6 +14,7 @@ const ManagerInfo = () => {
       </Routes>
       <ManagerInfoContainer />;
       <QnaContainer />;
+      <FileAddContainer />
     </InfoContainerBox>
   );
 };

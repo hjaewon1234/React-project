@@ -6,6 +6,22 @@
 // const LoginComponents = ({ setIsLogin, setUser }) => {
 //   const [userId, setId] = useState("");
 //   const [userPw, setPw] = useState("");
+const Login = () => {
+  axios({
+    url: "http://localhost:8080/login",
+    method: "POST",
+    withCredentials: true,
+    data: {
+      userId: inputId,
+      userPw: inputPw,
+    },
+  }).then((result) => {
+    if (result.status === 200) {
+      window.open("/", "_self");
+      // 새로고침 할필요 없이 그냥 상태만 바꿔주면 자동으로 리랜더링 하는데
+    }
+  });
+};
 
 //   const Login = () => {
 //     axios({

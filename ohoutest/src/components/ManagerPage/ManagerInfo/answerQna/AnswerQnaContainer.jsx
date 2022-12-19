@@ -8,6 +8,7 @@ import { action } from "../../../../modules/tempStateChange";
 const AnswerQnaContainer = () => {
   const dispatch = useDispatch();
   const qnaInfo = useSelector((state) => state.qnaInfo);
+  const tempState = useSelector((state) => state.tempStateChange);
   const tempStateChange = () =>
     dispatch(tempStateChange(action.setTempStateChange));
 
@@ -16,17 +17,11 @@ const AnswerQnaContainer = () => {
       "http://localhost:8080/api/manager/answerQna",
       { id: id, qnaAnswer: answerQnaText }
     );
-    console.log(data);
+
     return data;
   };
 
-  return (
-    <AnswerQnaComponent
-      qnaInfo={qnaInfo}
-      axiosFunc={axiosFunc}
-      tempStateChange={tempStateChange}
-    />
-  );
+  return <AnswerQnaComponent qnaInfo={qnaInfo} axiosFunc={axiosFunc} />;
 };
 
 export default AnswerQnaContainer;

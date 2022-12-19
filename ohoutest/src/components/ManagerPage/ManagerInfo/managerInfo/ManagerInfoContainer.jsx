@@ -16,7 +16,7 @@ const ManagerInfoContainer = () => {
 
   const productInfo = useSelector((state) => state.productManageInfo);
   const productPaging = useSelector((state) => state.productPaging);
-  console.log(productPaging);
+
   return (
     <ManagerInfoComponent
       title={"상품 배송 정보"}
