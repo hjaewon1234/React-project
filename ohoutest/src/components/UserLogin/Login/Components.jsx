@@ -28,6 +28,7 @@ const LoginComponents = ({ setIsLogin, setUser }) => {
     }).then((result) => {
       if (result.status === 200) {
         window.open("/", "_self");
+        // 새로고침 할필요 없이 그냥 상태만 바꿔주면 자동으로 리랜더링 하는데
       }
     });
   };

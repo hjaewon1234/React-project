@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 
 import styled from "styled-components";
 
-const AnswerQnaComponent = ({ qnaInfo, axiosFunc, tempStateChange }) => {
+const AnswerQnaComponent = ({ qnaInfo, axiosFunc }) => {
   const { id } = useParams(useLocation());
   const [state, setState] = useState(qnaInfo[id].qnaAnswer);
   // const [dbConnect, setDbConnect] =
@@ -22,8 +22,8 @@ const AnswerQnaComponent = ({ qnaInfo, axiosFunc, tempStateChange }) => {
         <Link to="/managerInfo">
           <button
             onClick={() => {
-              tempStateChange();
               axiosFunc(qnaInfo[id].id, state.toString());
+
               // 문의사항에 관련된 거를 한번 불러와주면된다.
               // 불러올 방법은..?=> 결국 db를 무조건 한번 불러와야된다
               // thunk를 써야된다. num에 대한것을 어떻게 정의해 줄까

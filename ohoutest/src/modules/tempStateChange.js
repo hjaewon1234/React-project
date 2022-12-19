@@ -5,7 +5,7 @@ const tempStateChange = createSlice({
   initialState: true,
   reducers: {
     setTempStateChange: (state, action) => {
-      state = !state;
+      state = false;
     },
   },
 });

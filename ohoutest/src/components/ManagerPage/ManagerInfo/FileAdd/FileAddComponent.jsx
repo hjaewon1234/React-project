@@ -1,18 +1,8 @@
 import styled from "styled-components";
-
 import { useState } from "react";
 
-// 여기도 추후에 숫자를 어떻게 받을 지 생각을 하고
-// 숫자를 눌럿을 때 임시 랜더링으로 파일을 다시 불러오면 될 것 같음.
-
-const ManagerInfoComponent = ({
-  title,
-  tempThunk,
-  productInfo,
-  productPaging,
-}) => {
+const FileAddComponent = ({ title, upload }) => {
   const [accodion, setAccodion] = useState(true);
-  const [color, setColor] = useState(0);
 
   return (
     <Infodiv>
@@ -35,48 +25,22 @@ const ManagerInfoComponent = ({
           }}
         >
           <AccoContents>
-            {productInfo.map((item, index) => (
-              <UnitDiv key={index}>
-                <img
-                  src={`/api/download${decodeURI(item.img)}`}
-                  style={{ width: "70px" }}
-                />
-
-                <div>
-                  <div>
-                    [ {item.brand} ] {item.name}
-                  </div>
-                </div>
-                <div style={{ display: "flex", columnGap: "10px" }}>
-                  <ShippingDiv>배송 중</ShippingDiv>
-                </div>
-              </UnitDiv>
-            ))}
+            <form encType="multipart/form-data" onSubmit={upload}>
+              <input type="text" name="name" placeholder="name" />
+              <input type="number" name="price" placeholder="price" />
+              <input type="text" name="brand" placeholder="brand" />
+              <input type="text" name="description" placeholder="description" />
+              <input type="file" name="file" multiple />
+              <button type="submit ">상품 추가</button>
+            </form>
           </AccoContents>
-
-          <PagingDiv>
-            {productPaging.map((item, index) => (
-              <NumberBox
-                key={index}
-                onClick={() => {
-                  tempThunk(index);
-                  setColor(index);
-                }}
-                style={{
-                  backgroundColor: color == index ? "#f0a500" : "#f4f4f4",
-                }}
-              >
-                {item + 1}
-              </NumberBox>
-            ))}
-          </PagingDiv>
         </InfoContentDiv>
       </div>
     </Infodiv>
   );
 };
 
-export default ManagerInfoComponent;
+export default FileAddComponent;
 
 const Infodiv = styled.div`
   width: 100%;
@@ -109,11 +73,17 @@ const NumberBox = styled.div`
 `;
 const AccoContents = styled.div`
   padding: 10px;
-  & > div {
+
+  & > form {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    align-items: center;
-    column-gap: 20px;
+
+    row-gap: 20px;
+  }
+  & > form > input {
+    width: 70%;
+    margin: auto;
   }
 `;
 const UnitDiv = styled.div`

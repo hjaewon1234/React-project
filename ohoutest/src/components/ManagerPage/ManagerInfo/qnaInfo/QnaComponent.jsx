@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 const QnaComponent = ({ title, qnaInfo, qnaPaging, tempQnaInfoThunk }) => {
   const [accodion, setAccodion] = useState(true);
   const [color, setColor] = useState(0);
+
   return (
     <Infodiv>
       <div>
@@ -13,7 +14,7 @@ const QnaComponent = ({ title, qnaInfo, qnaPaging, tempQnaInfoThunk }) => {
           <div style={{ fontSize: "22px", fontWeight: "bold" }}>{title}</div>
           <div style={{ paddingRight: "3%" }}>
             <img
-              src="./arrow-up-solid.svg"
+              src="/arrow-up-solid.svg"
               style={{
                 width: "22px",
                 rotate: accodion ? "180deg" : "0deg",
@@ -28,7 +29,6 @@ const QnaComponent = ({ title, qnaInfo, qnaPaging, tempQnaInfoThunk }) => {
         >
           <AccoContents>
             {qnaInfo.map((item, index) => {
-              console.log(item);
               return (
                 <UnitDiv key={index}>
                   <div>
@@ -103,17 +103,18 @@ const Infodiv = styled.div`
     border-radius: 10px;
   }
 `;
-
-const InfoContentDiv = styled.div`
-  background-color: #f4f4f4;
-  border-radius: 0 0 10px 10px;
-`;
 const PagingDiv = styled.div`
   display: flex;
   justify-content: center;
   column-gap: 10px;
   padding-bottom: 10px;
 `;
+
+const InfoContentDiv = styled.div`
+  background-color: #f4f4f4;
+  border-radius: 0 0 10px 10px;
+`;
+
 const NumberBox = styled.div`
   border: 1px solid gray;
   border-radius: 5px;
