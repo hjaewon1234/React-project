@@ -82,7 +82,7 @@ const FooterComponent = () => {
               </div>
             </div>
             <div className="footer-item-img-layer-item">
-              <img src="img/footer/dnv.png" />
+              <img src="/img/footer/dnv.png" />
               <div className="footer-item-img-layer-item-container">
                 <span>
                   고객님이 현금결제한 금액에 대해 우리은행과 채무지급보증 계약을
