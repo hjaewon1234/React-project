@@ -6,6 +6,7 @@ import manager from "./manager.js";
 import search from "./search.js";
 import fs from "fs";
 import login from "./login.js";
+import db from "../models/index.js";
 
 router.use("/", (req, res, next) => {
   console.log("routes/index.js : " + req.url);

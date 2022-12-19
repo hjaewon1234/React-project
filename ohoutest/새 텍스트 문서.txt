@@ -1,0 +1,11 @@
+서버 index.js  → 50번줄 false를 true로
+
+저장
+
+서버 index.js  → 50번줄 true를 false로
+
+저장
+
+routes\index 카테고리 등록, 제품등록
+
+하다가 db is not defined 뜨면 맨위에 import db
