@@ -2,13 +2,14 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useEffect, useRef, useState } from "react";
 
-import DropDown from "../../DropDown";
+import DropDown from "./DropDown";
 
 const NavBarComponent = ({ onSubmit }) => {
   const [searchInput, setSearchInput] = useState("");
-  const [isOpen, setIsOpen] = useState(false);
   const loginedMenu = ["마이페이지", "로그아웃"];
-  const tempRef = useRef();
+  const dropDownRef = useRef();
+  const imgRef = useRef();
+  const [isOpen, setIsOpen] = useState(false);
   useEffect(() => {}, [isOpen]);
 
   // return (
@@ -106,9 +107,21 @@ const NavBarComponent = ({ onSubmit }) => {
               setIsOpen(!isOpen);
             }}
             src="/img/loginDefault.jpeg"
+            ref={imgRef}
           />
-          {isOpen && <DropDown arr={loginedMenu} refs={tempRef} />}
+          {isOpen && (
+            <DropDown
+              arr={loginedMenu}
+              refs={dropDownRef}
+              isOpen={isOpen}
+              setIsOpen={setIsOpen}
+              imgRef={imgRef}
+            />
+          )}
         </div>
+        <Link to="/login">로그인</Link>
+        <Link to="/signUp">회원가입</Link>
+        <Link to="/">고객센터</Link>
         <button className="upload-btn">
           글쓰기
           <img src="/img/chevron-right-solid.svg" />

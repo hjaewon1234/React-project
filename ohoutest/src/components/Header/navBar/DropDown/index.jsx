@@ -1,7 +1,17 @@
 import { nanoid } from "@reduxjs/toolkit";
 import styled from "styled-components";
+import { useEffect } from "react";
 
-const DropDown = ({ arr, refs }) => {
+const DropDown = ({ arr, refs, isOpen, setIsOpen, imgRef }) => {
+  const handler = ({ target }) => {
+    if (!refs.current?.contains(target) && !imgRef.current?.contains(target)) {
+      setIsOpen(!isOpen);
+    }
+  };
+  useEffect(() => {
+    window.addEventListener("click", handler);
+  }, []);
+
   return (
     <DropDownBox className="drop-container" ref={refs}>
       <ul className="drop-ul">
@@ -27,5 +37,3 @@ const DropDownBox = styled.div`
   .drop-item {
   }
 `;
-
-// white-space: nowrap;

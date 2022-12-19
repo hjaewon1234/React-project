@@ -56,6 +56,7 @@ const HotListCompBox = styled.div`
     gap: 10px;
     flex-wrap: wrap;
     justify-content: space-between;
+    word-break: break-word;
   }
 `;
 
