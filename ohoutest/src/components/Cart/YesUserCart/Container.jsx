@@ -14,15 +14,11 @@ const YesUserCartContainer = ({ userInfo }) => {
     console.log(totalState);
   }, [totalState]);
 
-<<<<<<< HEAD
   const buyOnClick = () => {
     axios.post("/api/order/buy", { id: 1, user: userInfo }).then(({ data }) => {
       console.log(data);
     });
   };
-=======
-  const buyOnClick = () => {};
->>>>>>> 60f218a (rebase test)
 
   return (
     <>
