@@ -1,6 +1,7 @@
 import Sequelize from "sequelize";
 
-export default class Search extends Sequelize.Model {
+// user, product 관계
+export default class Order extends Sequelize.Model {
   static init(sequelize) {
     return super.init(
       {
@@ -10,15 +11,20 @@ export default class Search extends Sequelize.Model {
         sequelize,
         timestamps: true,
         underscored: true,
-        modelName: "Search",
-        tableName: "search",
+        modelName: "Order",
+        tableName: "order",
         charset: "utf8mb4",
         collate: "utf8mb4_general_ci",
       }
     );
   }
+
   static associate(db) {
-    db.Search.belongsTo(db.Products, {
+    db.Order.belongsTo(db.Products, {
+      foreignKey: "products_id",
+      targetKey: "id",
+    });
+    db.Order.belongsTo(db.Users, {
       foreignKey: "products_id",
       targetKey: "id",
     });
