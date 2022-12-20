@@ -1,26 +1,35 @@
+import { useEffect, useState } from "react";
 import styled from "styled-components";
+import CartProductCardContainer from "./CartProductCard/Container";
 
-const YesUserCartComp = ({ CartProductCardContainer }) => {
+const YesUserCartComp = ({ totalState, setTotalState }) => {
+  const [totalPrice, setTotalPrice] = useState(0);
+  console.log("rerender");
+  useEffect(() => {
+    setTotalPrice(
+      totalState.reduce((acc, cur) => {
+        return acc + cur;
+      }, 0)
+    );
+    console.log(totalPrice);
+  }, [totalState]);
   return (
     <BigBox>
-      <div>
-        <div>
-          <input type={"checkbox"} checked={true} />
-          <p>모두선택</p>
-        </div>
-        <div>선택삭제</div>
-      </div>
+      <SelectBox></SelectBox>
       <YesUserCartBox>
         <div className="">
           <div>달팽이리빙 배송</div>
           <hr />
           <div>
-            <CartProductCardContainer></CartProductCardContainer>
+            <CartProductCardContainer
+              totalState={totalState}
+              setTotalState={setTotalState}
+            ></CartProductCardContainer>
           </div>
           <hr />
           <div>배송비 무료</div>
         </div>
-        <div>
+        <SummaryBox>
           <div className="summary">
             <div>
               <ul>
@@ -29,18 +38,18 @@ const YesUserCartComp = ({ CartProductCardContainer }) => {
                   <p>총 배송비</p>
                 </li>
                 <li>
-                  <p>29,000원</p>
+                  <p>{totalPrice}원</p>
                   <p>+ 0원</p>
                 </li>
               </ul>
               <div>
                 <p>결제금액</p>
-                <p>12,900원</p>
+                <p>{totalPrice}원</p>
               </div>
             </div>
-            <button>1개 상품 구매하기</button>
+            <button onClick={() => {}}>1개 상품 구매하기</button>
           </div>
-        </div>
+        </SummaryBox>
       </YesUserCartBox>
     </BigBox>
   );
@@ -58,6 +67,8 @@ const YesUserCartBox = styled.div`
   width: 90%;
   margin: 20px auto;
   column-gap: 10%;
+  padding: 0px 0px 100px 0px;
+
   & > div:first-child {
     display: flex;
     flex-direction: column;
@@ -66,13 +77,11 @@ const YesUserCartBox = styled.div`
     border-radius: 10px;
     background-color: #f4f4f4;
     div {
-      padding: 5px;
     }
     div:nth-child(1) {
       margin: 10px 0px;
     }
     div:nth-child(3) {
-      height: 200px;
     }
     div:last-child {
       margin: 10px 0px;
@@ -150,3 +159,17 @@ const YesUserCartBox = styled.div`
     }
   }
 `;
+
+const SelectBox = styled.div`
+  width: 90%;
+  margin: auto;
+  padding-top: 50px;
+  display: flex;
+  column-gap: 50px;
+  & > div {
+    width: 60%;
+    display: flex;
+  }
+`;
+
+const SummaryBox = styled.div``;
