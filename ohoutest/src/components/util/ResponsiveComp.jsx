@@ -32,17 +32,17 @@ const MainBox = styled.div`
   color: #f4f4f4;
 `;
 const XLBox = styled.div`
-    margin:auto;
-    width: ${({ WIDTH }) => {
-      if (WIDTH >= 1440) {
-        return "1440px";
-      } else if (WIDTH >= 1024) {
-        return "1024px";
-      } else if (WIDTH >= 768) {
-        return "768px";
-      } else {
-        return "425px";
-      }
-    }}};
-  background-color: #1A1C20;
+  margin: auto;
+  width: ${({ WIDTH }) => {
+    if (WIDTH >= 1440) {
+      return "1440px";
+    } else if (WIDTH >= 1024) {
+      return "1024px";
+    } else if (WIDTH >= 768) {
+      return "768px";
+    } else {
+      return "425px";
+    }
+  }};
+  background-color: #1a1c20;
 `;

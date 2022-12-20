@@ -35,10 +35,8 @@ const MainSlideComponent = () => {
   const slideItem = ["/", "/", "/", "/", "/", "/", "/", "/", "/", "/"];
 
   const slideExecuter = (param) => {
-    // if (container.current) {
     container.current.style.transition = `transform ${animaSpeed / 10}s`;
     container.current.style.transform = `translate(-${param}vw)`;
-    // }
     setTimeout(() => {
       animating = false;
     }, animaSpeed * 100);
@@ -46,10 +44,8 @@ const MainSlideComponent = () => {
 
   const blindExecuter = (param) => {
     setTimeout(() => {
-      // if (container.current) {
       container.current.style.transition = "transform 0s";
       container.current.style.transform = `translate(-${param}vw)`;
-      // }
       animating = false;
     }, animaSpeed * 100);
     setcurrentItem(param / 100);
@@ -178,6 +174,7 @@ export default MainSlideComponent;
 const MainSlideCompBox = styled.div`
   // ${(props) => (props.isTest ? "border: 5px solid black;" : "")}
   width: 100vw;
+  margin-left: calc(-50vw + 50%);
   .slide-container {
     font-size: 0;
     user-select: none;
@@ -230,5 +227,17 @@ const MainSlideCompBox = styled.div`
     color: white;
     cursor: default !important;
     transition: background ${animaSpeed / 10}s;
+  }
+
+  @media only screen and (max-width: 1440px) {
+  }
+  @media only screen and (max-width: 1024px) {
+    & .btn-container {
+      display: none;
+    }
+  }
+  @media only screen and (max-width: 768px) {
+  }
+  @media only screen and (max-width: 425px) {
   }
 `;

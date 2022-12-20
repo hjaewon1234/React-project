@@ -42,6 +42,8 @@ const IconLayerCompBox = styled.div`
   margin-top: 50px;
   display: flex;
   justify-content: space-around;
+  font-weight: bold;
+
   .icon-item {
     text-decoration: none;
     color: black;
@@ -63,9 +65,47 @@ const IconLayerCompBox = styled.div`
     background-color: rgb(255, 119, 119);
     border-radius: 10px;
     padding: 2px 5px 2px;
-    font-size: 12px;
+    font-size: 0.7em;
     font-weight: bold;
     color: white;
     line-height: 15px;
+    line-height: 1.5em;
+  }
+
+  @media only screen and (max-width: 1440px) {
+    width: 1000px;
+  }
+  @media only screen and (max-width: 1024px) {
+    width: 750px;
+    .icon-item img {
+      width: 60px;
+    }
+    a {
+      font-size: 12px;
+    }
+  }
+  @media only screen and (max-width: 768px) {
+    width: 400px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+    .icon-item img {
+      width: 70px;
+    }
+    a {
+      font-size: 14px;
+    }
+  }
+  @media only screen and (max-width: 425px) {
+    width: 320px;
+    gap: 15px;
+    justify-content: space-around;
+    .icon-item img {
+      width: 100px;
+    }
+    a {
+      font-size: 15px;
+    }
   }
 `;

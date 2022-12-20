@@ -135,6 +135,7 @@ export default NavBarComponent;
 const NavBarCompBox = styled.div`
   height: 90px;
   display: flex;
+
   .nav-bar-container {
     display: flex;
     justify-content: space-between;
@@ -142,7 +143,6 @@ const NavBarCompBox = styled.div`
     width: 1200px;
     margin: 0 auto;
   }
-
   a {
     text-decoration: none;
     color: black;
@@ -250,7 +250,6 @@ const NavBarCompBox = styled.div`
   }
   .login-pic .drop-container {
     width: 350px;
-    // / 2 - 25
     position: absolute;
     z-index: 4;
     top: 70px;
@@ -272,5 +271,14 @@ const NavBarCompBox = styled.div`
   }
   .login-pic .drop-item:hover {
     background-color: #f0a500;
+  }
+
+  @media only screen and (max-width: 1440px) {
+  }
+  @media only screen and (max-width: 1024px) {
+  }
+  @media only screen and (max-width: 768px) {
+  }
+  @media only screen and (max-width: 425px) {
   }
 `;

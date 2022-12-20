@@ -23,13 +23,13 @@ export default PopupBarComponent;
 const PopupBarCompBox = styled.div`
   display: flex;
   width: 100%;
+
   & > img {
     width: 24px;
     height: 20px;
     margin: 15px 20px 15px;
     position: absolute;
     right: 0;
-    top: 0;
     object-fit: cover;
     filter: invert(100%) sepia(96%) saturate(0%) hue-rotate(96deg)
       brightness(106%) contrast(104%);
@@ -54,5 +54,26 @@ const PopupBarCompBox = styled.div`
   .popup-right {
     margin-left: 65px;
     height: 50px;
+  }
+
+  @media only screen and (max-width: 1440px) {
+  }
+  @media only screen and (max-width: 1024px) {
+    margin-right: 70px;
+    & > img {
+      filter: none;
+      margin: 15px 5px 15px 0;
+    }
+    & a > .popup-left {
+      margin-right: 0px;
+    }
+    & a > .popup-right {
+      margin-left: 0px;
+    }
+  }
+  @media only screen and (max-width: 768px) {
+    display: none;
+  }
+  @media only screen and (max-width: 425px) {
   }
 `;

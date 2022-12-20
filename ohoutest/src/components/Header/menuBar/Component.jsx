@@ -38,7 +38,6 @@ const MenuBarComponent = () => {
         </LinkBox>
         <RankingContainer />
       </MenuBarCompBox>
-      <hr />
     </MenuBarContainer>
   );
 };
@@ -48,10 +47,11 @@ export default MenuBarComponent;
 const LinkBox = styled.div`
   display: flex;
   gap: 30px;
-  width: 100%;
+  flex: 1;
   margin: 0 auto;
   margin-top: 10px;
   margin-bottom: 10px;
+
   a {
     text-decoration: none;
     color: black;
@@ -59,14 +59,30 @@ const LinkBox = styled.div`
   }
   a:hover {
     color: #f0a500;
+  }
+
+  @media only screen and (max-width: 1440px) {
+  }
+  @media only screen and (max-width: 1024px) {
+    flex: 0;
+    justify-content: space-between;
+    min-width: 500px;
+  }
+  @media only screen and (max-width: 768px) {
+    min-width: 400px;
+  }
+  @media only screen and (max-width: 425px) {
+    min-width: 300px;
+    gap: 10px;
   }
 `;
 
 const MenuBarCompBox = styled.div`
   display: flex;
   gap: 30px;
-  width: 1200px;
   margin: 0 auto;
+  flex-wrap: wrap;
+
   a {
     text-decoration: none;
     color: black;
@@ -75,13 +91,37 @@ const MenuBarCompBox = styled.div`
   a:hover {
     color: #f0a500;
   }
+
+  @media only screen and (max-width: 1440px) {
+  }
+  @media only screen and (max-width: 1024px) {
+  }
+  @media only screen and (max-width: 768px) {
+  }
+  @media only screen and (max-width: 425px) {
+  }
 `;
 
 const MenuBarContainer = styled.div`
   background-color: #f4f4f4;
-  width: 100%;
+  width: 1200px;
+  margin: 0 auto;
+
   hr {
     border-bottom: none;
     border-top: 1px solid #f0a500;
+  }
+
+  @media only screen and (max-width: 1440px) {
+    width: 900px;
+  }
+  @media only screen and (max-width: 1024px) {
+    width: 700px;
+  }
+  @media only screen and (max-width: 768px) {
+    width: 420px;
+  }
+  @media only screen and (max-width: 425px) {
+    width: 320px;
   }
 `;

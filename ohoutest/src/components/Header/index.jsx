@@ -13,6 +13,7 @@ const Header = () => {
         <NavBarContainer />
         <hr />
         <MenuBarContainer />
+        <hr />
       </div>
     </HeaderBox>
   );
@@ -27,6 +28,7 @@ const HeaderBox = styled.div`
   left: 0px;
   right: 0px;
   top: 0px;
+
   hr {
     border-bottom: none;
     border-top: 1px solid #f0a500;

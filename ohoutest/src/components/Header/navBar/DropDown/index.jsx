@@ -10,6 +10,9 @@ const DropDown = ({ arr, refs, isOpen, setIsOpen, imgRef }) => {
   };
   useEffect(() => {
     window.addEventListener("click", handler);
+    return () => {
+      window.removeEventListener("click", handler);
+    };
   }, []);
 
   return (
@@ -37,3 +40,5 @@ const DropDownBox = styled.div`
   .drop-item {
   }
 `;
+
+// @keyframes, animation
