@@ -73,7 +73,6 @@ const Login2Components = ({ setIsLogin, setUser, user }) => {
         </RegistMidStlye>
         <button
           onClick={logInHandle}
-          onChange={loginHandler}
           disabled={inputId.length <= 99 && inputPw.length <= 8 ? true : false}
         >
           로그인
