@@ -1,4 +1,3 @@
-import userDatabase from "../Database.js";
 import jwt from "jsonwebtoken";
 import db from "../models/index.js";
 
@@ -358,8 +357,6 @@ const loginSuccess = async (req, res, next) => {
 const check = (req, res) => {
   if (global.userId) {
     res.status(200).json({ userId: global.userId, userName: global.userName });
-  } else {
-    res.status(400).send("로그인 되어있지 않습니다.");
   }
 };
 
@@ -369,7 +366,9 @@ const logout = (req, res) => {
     res.clearCookie("refreshToken");
     global.userId = "";
     global.userName = "";
-    res.status(200).json("Logout Success");
+    // res.status(200).json("Logout Success");
+
+    res.status(200).json({ userId: global.userId, userName: global.userName });
   } catch (error) {
     res.status(500).json(error);
   }

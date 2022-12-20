@@ -20,6 +20,9 @@ const Login2Container = () => {
     }).then((result) => {
       if (result.status === 200) {
         // window.open("/", "_self");
+        console.log(result.status);
+        console.log(result.data);
+        setUser(result.data);
         navigate("/", { replace: true });
         dispatch(action.setUser({ userId: "", userName: "" }));
       }

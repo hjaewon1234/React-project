@@ -37,6 +37,10 @@ const Login2Components = ({ setIsLogin, setUser, user }) => {
           })
         );
       }
+      // else if (result.status === 400) {
+      //   console.log("로그인 실패");
+      //   alert("아이디 비번 확인 해주세요");
+      // }
     });
   };
 
@@ -58,9 +62,6 @@ const Login2Components = ({ setIsLogin, setUser, user }) => {
           />
 
           <label> 비밀번호</label>
-          <label className="small">
-            영문, 숫자를 포함한 8자 이상의 비밀번호를 입력해주세요.
-          </label>
           <input
             type={"password"}
             value={inputPw}
@@ -70,7 +71,13 @@ const Login2Components = ({ setIsLogin, setUser, user }) => {
             placeholder={"비밀번호"}
           />
         </RegistMidStlye>
-        <button onClick={logInHandle}>로그인</button>
+        <button
+          onClick={logInHandle}
+          onChange={loginHandler}
+          disabled={inputId.length <= 99 && inputPw.length <= 8 ? true : false}
+        >
+          로그인
+        </button>
       </RegistMain>
     </>
   );
@@ -98,6 +105,9 @@ const RegistMain = styled.div`
     font-weight: bold;
     color: rgb(244, 244, 244);
     border-radius: 5px;
+    &:disabled {
+      background-color: rgb(0, 150, 245, 0.3);
+    }
   }
 `;
 const RegistTopStlye = styled.div`
