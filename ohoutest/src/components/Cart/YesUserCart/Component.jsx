@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import CartProductCardContainer from "./CartProductCard/Container";
 
-const YesUserCartComp = ({ totalState, setTotalState }) => {
+const YesUserCartComp = ({ totalState, setTotalState, buyOnClick }) => {
   const [totalPrice, setTotalPrice] = useState(0);
   console.log("rerender");
   useEffect(() => {
@@ -38,16 +38,22 @@ const YesUserCartComp = ({ totalState, setTotalState }) => {
                   <p>총 배송비</p>
                 </li>
                 <li>
-                  <p>{totalPrice}원</p>
-                  <p>+ 0원</p>
+                  <p>{totalPrice.toLocaleString()} 원</p>
+                  <p>+ 0 원</p>
                 </li>
               </ul>
               <div>
                 <p>결제금액</p>
-                <p>{totalPrice}원</p>
+                <p>{totalPrice.toLocaleString()} 원</p>
               </div>
             </div>
-            <button onClick={() => {}}>1개 상품 구매하기</button>
+            <button
+              onClick={() => {
+                buyOnClick();
+              }}
+            >
+              상품 구매하기
+            </button>
           </div>
         </SummaryBox>
       </YesUserCartBox>
@@ -69,6 +75,9 @@ const YesUserCartBox = styled.div`
   column-gap: 10%;
   padding: 0px 0px 100px 0px;
 
+  p {
+    white-space: nowrap;
+  }
   & > div:first-child {
     display: flex;
     flex-direction: column;

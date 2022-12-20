@@ -56,9 +56,28 @@ const CartProductCardComp = ({
           </div>
         </div>
       </MainView>
-      <CountView>{name}</CountView>
+      <CountView>
+        <div>
+          <div>
+            <div>{name}</div>
+            <div>X</div>
+          </div>
+          <div>
+            <select name="count">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+            </select>
+          </div>
+        </div>
+      </CountView>
       <div className="optionDiv">
-        <span>옵션변경 | 바로구매</span> <span>{price}</span>
+        <span>옵션변경 | 바로구매</span>{" "}
+        <span>{`${price.toLocaleString()} 원`}</span>
       </div>
     </CartProductCardBox>
   );
@@ -101,6 +120,20 @@ const MainView = styled.div`
   }
 `;
 
-const CountView = styled.div``;
+const CountView = styled.div`
+  width: 100%;
+  & > div {
+    display: flex;
+    flex-direction: column;
+  }
+  & > div > div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  select {
+    width: 100px;
+  }
+`;
 
 export default CartProductCardComp;
