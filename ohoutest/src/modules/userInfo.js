@@ -29,6 +29,10 @@ const userInfoSlice = createSlice({
       console.log(action.payload);
       return action.payload;
     },
+    // setLogOut(state) {
+    //   console.log(state);
+    //   return state;
+    // },
   },
   extraReducers: (bulider) => {
     // 추가적인 리듀서를 작성한다.

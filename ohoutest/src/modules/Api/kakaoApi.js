@@ -62,7 +62,7 @@ export default Post;
 
 const KakaoStyle = styled.div`
   .postmodal {
-    position: fixed;
+    position: sticky;
     top: 0;
     left: 0;
     width: 0;

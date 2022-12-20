@@ -20,6 +20,7 @@ export const signUpUser = createAsyncThunk("/user/signUpUser", async (body) => {
       console.log(error);
     })
     .then((data) => {
+      console.log(data.data);
       if (data.data.status == 401) {
         alert("중복되는 아이디와 닉네임이 있습니다.");
       } else if (data.data.status == 200) {
@@ -42,9 +43,16 @@ export const overlapId = createAsyncThunk(
       })
       .then((data) => {
         if (data.data.status == 401) {
-          alert("중복되는 아이디가 있습니다.");
+          alert("중복되는 아이디가 있습니다. 다시 확인해주세요");
+        } else if (data.data.status == 402) {
+          alert("비밀번호 입력을 다시 확인해주세요");
+        } else if (data.data.status == 403) {
+          alert("중복되는 닉네임이 있습니다. 다시 확인해주세요");
+        } else if (data.data.status == 405) {
+          alert("아이디 영문으로만 입력 해주세요");
         } else if (data.data.status == 200) {
           alert("중복되는 아이디가 없습니다.");
+        } else {
         }
       });
     console.log(data);

@@ -35,10 +35,30 @@ router.post("/getUsers", async (req, res) => {
     const curUser = await db.Users.findOne({
       where: { userId: req.body.inputId },
     });
-    console.log(curUser);
+    const curUser1 = await db.Users.findOne({
+      where: { userPw: req.body.inputPw },
+    });
+    const curUser2 = await db.Users.findOne({
+      where: { userName: req.body.inputName },
+    });
+
+    const idRegExp = /^[a-zA-z0-9]{6,12}$/;
+    const currentId = req.body.inputId;
+
     if (curUser) {
-      console.log("이미있음");
-      res.send({ status: 401 });
+      if (!idRegExp.test(currentId)) {
+        console.log("영문으로만 입력");
+        res.send({ status: 405 });
+      } else {
+        console.log("아이디 있음");
+        res.send({ status: 401 });
+      }
+    } else if (curUser1) {
+      console.log("비밀번호 확인");
+      res.send({ status: 402 });
+    } else if (curUser2) {
+      console.log("닉네임 확인");
+      res.send({ status: 403 });
     } else {
       await db.Users.create({
         userName: req.body.inputName,
@@ -48,6 +68,7 @@ router.post("/getUsers", async (req, res) => {
         userAddress1: req.body.inputAdress1,
       });
       console.log("회원가입이 완료되었습니다.");
+
       res.send({ status: 200 });
     }
   } catch (err) {

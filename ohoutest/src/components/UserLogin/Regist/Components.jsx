@@ -1,6 +1,4 @@
 import { useState } from "react";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faCoffee } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 import Post from "../../../modules/Api/kakaoApi";
 import {
@@ -10,6 +8,7 @@ import {
 } from "../../../modules/Slice/registSlice";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import React from "react";
 const RegistComponents = () => {
   // const dispathch = useDispatch();
 
@@ -18,55 +17,82 @@ const RegistComponents = () => {
   const [inputPw1, setPw1] = useState("");
   const [inputName, setName] = useState("");
   const [inputAdress, setAdress] = useState("");
-  const [inputAdress1, setAdress1] = useState("");
+  const [inputAdress1, setinputAdress1] = useState({
+    address: "",
+  });
+  // const [inputAdress1, inputAdress1] = useState("");
   const [popup, setPopup] = useState(false);
   const [checkItems, setCheckItems] = useState([]);
   // const [openPostcode, setOpenPostcode] = useState(false);
   const dispatch = useDispatch();
-  const [enroll_company, setEnroll_company] = useState({
-    address: "",
-  });
 
-  const [inputIdError, setIdError] = useState("");
-  const [inputPwError, setPwError] = useState("");
-  const [inputPw1Error, setPw1Error] = useState("");
-  const [inputNameError, setNameError] = useState("");
+  // 오류메세지 상태 저장
+  const [idMessage, setIdMessage] = React.useState("");
+  const [nameMessage, setNameMessage] = React.useState("");
+  const [passwordMessage, setPasswordMessage] = React.useState("");
+  const [passwordConfirmMessage, setPasswordConfirmMessage] =
+    React.useState("");
 
-  const onInputReset = (e) => {
-    setId("");
-    setPw("");
-    setPw1("");
-    setName("");
-    setAdress("");
-    setAdress1("");
+  // 유효성 검사
+  const [isId, setIsId] = React.useState(false);
+  const [isname, setIsName] = React.useState(false);
+  const [isPassword, setIsPassword] = React.useState(false);
+  const [isPasswordConfirm, setIsPasswordConfirm] = React.useState(false);
+
+  const [checkedButtons, setCheckedButtons] = useState([]);
+
+  const onChangeId = (e) => {
+    const currentId = e.target.value;
+    setId(currentId);
+    const idRegExp = /^[a-zA-Z0-9]{6,30}$/;
+
+    if (!idRegExp.test(currentId)) {
+      setIdMessage("6-12사이 영문 대소문자 또는 숫자를 입력해 주세요");
+      setIsId(false);
+    } else {
+      setIdMessage("사용가능한 아이디 입니다.");
+      setIsId(true);
+    }
   };
 
-  const onChangeUserId = (e) => {
-    const userIdRegex = /^[가-힣a-zA-Z]/gi;
-    if (!e.target.value || userIdRegex.test(e.target.value)) setIdError(false);
-    else setIdError(true);
-    setId(e.target.value);
+  const onChangeName = (e) => {
+    const currentName = e.target.value;
+    setName(currentName);
+
+    if (currentName.length < 3 || currentName.length > 5) {
+      setNameMessage("닉네임은 3글자 이상 5글자 이하로 입력해주세요!");
+      setIsName(false);
+    } else {
+      setNameMessage("사용가능한 닉네임 입니다.");
+      setIsName(true);
+    }
   };
 
-  const onChangeUserPw = (e) => {
-    const userPwRegex = /^[가-힣a-zA-Z]/gi;
-    if (!e.target.value || userPwRegex.test(e.target.value)) setPwError(false);
-    else setPwError(true);
-    setPwError(e.target.value);
+  const onChangePassword = (e) => {
+    const currentPassword = e.target.value;
+    setPw(currentPassword);
+    const passwordRegExp =
+      /(?=.*\d{1,50})(?=.*[~`!@#$%\^&*()-+=]{1,50})(?=.*[a-zA-Z]{2,50}).{8,50}$/;
+    if (!passwordRegExp.test(currentPassword)) {
+      setPasswordMessage(
+        "숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요."
+      );
+      setIsPassword(false);
+    } else {
+      setPasswordMessage("안전한 비밀번호 입니다.");
+      setIsPassword(true);
+    }
   };
-  const onChangeUserPw1 = (e) => {
-    const userPw1Regex = /^[가-힣a-zA-Z]/gi;
-    if (!e.target.value || userPw1Regex.test(e.target.value))
-      setPw1Error(false);
-    else setPw1Error(true);
-    setPw1Error(e.target.value);
-  };
-  const onChangeUserName = (e) => {
-    const userNameRegex = /^[가-힣a-zA-Z]/gi;
-    if (!e.target.value || userNameRegex.test(e.target.value))
-      setNameError(false);
-    else setNameError(true);
-    setNameError(e.target.value);
+  const onChangePasswordConfirm = (e) => {
+    const currentPasswordConfirm = e.target.value;
+    setPw1(currentPasswordConfirm);
+    if (inputPw !== currentPasswordConfirm) {
+      setPasswordConfirmMessage("입력한 비밀번호와 같지 않습니다.");
+      setIsPasswordConfirm(false);
+    } else {
+      setPasswordConfirmMessage("비밀번호가 확인 되었습니다.");
+      setIsPasswordConfirm(true);
+    }
   };
 
   const registHandle = () => {
@@ -77,10 +103,26 @@ const RegistComponents = () => {
         inputPw1,
         inputName,
         inputAdress,
-        inputAdress1,
+        ...inputAdress1,
       })
     );
   };
+
+  //  checkbox
+
+  const changeHandler = (checked, id) => {
+    if (checked) {
+      setCheckedButtons([...checkedButtons, id]);
+      console.log("체크 반영 확인");
+    } else {
+      setCheckedButtons(checkedButtons.filter((button) => button !== id));
+      console.log("체크 해제 확인");
+    }
+  };
+
+  const isAllChecked = checkedButtons.length === 5;
+  const checkDisble = !isAllChecked;
+
   const data = [
     { id: 0, title: "만 14세 이상입니다." },
     { id: 1, title: "이용약관" },
@@ -116,8 +158,8 @@ const RegistComponents = () => {
   };
 
   const handleInput = (e) => {
-    setEnroll_company({
-      ...enroll_company,
+    setinputAdress1({
+      ...inputAdress1,
       [e.target.name]: e.target.value,
     });
   };
@@ -141,19 +183,17 @@ const RegistComponents = () => {
               onInput={(e) => {
                 setId(e.target.value);
               }}
-              onChange={onChangeUserId}
+              pattern="[a-zA-Z0-9]"
+              onChange={onChangeId}
               placeholder={"아이디"}
             />
-            {inputIdError && (
-              <div className="formInvalid">
-                5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능
-              </div>
-            )}
+            <p className="message"> {idMessage} </p>
             <button
               className="idBtnOverlap"
               onClick={() => {
                 overlapIdHandle();
               }}
+              disabled={inputId.length <= 5 ? true : false}
             >
               중복 ID 검사
             </button>
@@ -166,13 +206,9 @@ const RegistComponents = () => {
                 setPw(e.target.value);
               }}
               placeholder={"비밀번호"}
-              onChange={onChangeUserPw}
+              onChange={onChangePassword}
             />
-            {inputPwError && (
-              <div className="formInvalid">
-                8~16자 영문 대 소문자, 숫자, 특수문자 ok
-              </div>
-            )}
+            <p className="message">{passwordMessage}</p>
             <label> 비밀번호 확인</label>
             <input
               type={"password"}
@@ -180,14 +216,10 @@ const RegistComponents = () => {
               onInput={(e) => {
                 setPw1(e.target.value);
               }}
-              onChange={onChangeUserPw1}
+              onChange={onChangePasswordConfirm}
               placeholder={"비밀번호 확인"}
-            />{" "}
-            {inputPw1Error && (
-              <div className="formInvalid">
-                비밀번호 영문자+숫자+특수조합(8~25자리 입력)
-              </div>
-            )}
+            />
+            <p className="message">{passwordConfirmMessage}</p>
             <label> 닉네임</label>
             <label className="small"></label>
             <input
@@ -196,19 +228,16 @@ const RegistComponents = () => {
               onInput={(e) => {
                 setName(e.target.value);
               }}
-              placeholder={"별명 (2~15자)"}
-              onChange={onChangeUserName}
+              placeholder={"닉네임 (3~15자)"}
+              onChange={onChangeName}
             />
-            {inputNameError && (
-              <div className="formInvalid">
-                한글과 영문 대 소문자를 사용하세요. (특수기호, 공백 사용 불가)
-              </div>
-            )}
+            <p className="message">{nameMessage}</p>
             <button
               className="idBtnOverlap"
               onClick={() => {
                 overlapNickNameHandle();
               }}
+              disabled={inputName.length <= 2 ? true : false}
             >
               닉네임 중복 검사
             </button>
@@ -221,9 +250,9 @@ const RegistComponents = () => {
                 required={true}
                 name="address"
                 onChange={handleInput}
-                value={(enroll_company.address, inputAdress1)}
+                value={inputAdress1.address}
                 onInput={(e) => {
-                  setAdress1(e.target.value);
+                  inputAdress1(e.target.value);
                 }}
               />
             </div>
@@ -239,8 +268,8 @@ const RegistComponents = () => {
               <Post
                 popup={popup}
                 autoClose
-                company={enroll_company}
-                setcompany={setEnroll_company}
+                company={inputAdress1}
+                setcompany={setinputAdress1}
               ></Post>
             )}
             <div className="kakaoAdressP" value={""}>
@@ -280,6 +309,7 @@ const RegistComponents = () => {
                         }
                         checked={checkItems.includes(data.id) ? true : false}
                       />
+                      <label></label>
                     </td>
                     <td className="second-row">{data.title}</td>
                   </tr>
@@ -322,7 +352,13 @@ const RegistComponents = () => {
             onClick={() => {
               registHandle();
             }}
-            onChange={onInputReset}
+            disabled={
+              inputId.length <= 5 ||
+              inputPw.length <= 7 ||
+              inputName.length <= 2
+                ? true
+                : false
+            }
           >
             회원가입하기
           </button>
@@ -360,6 +396,9 @@ const RegistMain = styled.div`
     font-weight: bold;
     color: rgb(244, 244, 244);
     border-radius: 5px;
+    &:disabled {
+      background-color: rgb(0, 150, 245, 0.3);
+    }
   }
 `;
 const RegistTopStlye = styled.div`
@@ -416,6 +455,9 @@ const RegistMidStlye = styled.div`
     height: 35px;
     margin-top: 17px;
     margin-bottom: 17px;
+    &:disabled {
+      background-color: rgb(0, 150, 245, 0.3);
+    }
   }
 
   .kakaoAdressP {
@@ -430,9 +472,9 @@ const RegistMidStlye = styled.div`
     width: 170px;
     height: 50px;
   }
-  .formInvalid {
+  .message {
     font-size: 12px;
-    color: red;
+    color: green;
   }
 `;
 const AcceptStlye = styled.div`
@@ -446,32 +488,19 @@ const AcceptStlye = styled.div`
   margin-bottom: 30px;
   cursor: pointer;
 
-  div {
+  tr {
     padding: 0 15px;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
     height: 55px;
+    font-size: 12px;
     gap: 10px;
   }
-  div input[type="checkbox"] {
-    display: none;
+  tr th {
+    background-color: ;
   }
-
-  div input[type="checkbox"] + label {
-    display: inline-block;
-    width: 25px;
-    height: 25px;
-    position: relative;
-    border: 1px solid rgb(244, 244, 244);
-  }
-
-  div input[id="check1"]:checked + label::after,
-  div input[id="check2"]:checked + label::after,
-  div input[id="check3"]:checked + label::after,
-  div input[id="check4"]:checked + label::after,
-  div input[id="check5"]:checked + label::after,
-  div input[id="check6"]:checked + label::after {
+  tr td input[name="select"]:checked + label::after {
     content: "✔";
     display: inline-block;
     font-size: 15px;
@@ -485,28 +514,23 @@ const AcceptStlye = styled.div`
     border-color: rgb(240, 165, 0);
   }
 
-  div h6 {
-    font-size: 12px;
-    color: rgb(26, 28, 32);
-  }
-
-  div:nth-child(2)::after,
-  div:nth-child(3)::after,
-  div:nth-child(4)::after {
+  tr:nth-child(1)::after,
+  tr:nth-child(2)::after,
+  tr:nth-child(3)::after {
     margin-left: -5px;
     content: "(필수)";
     font-size: 10px;
     color: rgb(240, 165, 0);
   }
-  div:nth-child(5)::after,
-  div:nth-child(6)::after {
+  tr:nth-child(4)::after,
+  tr:nth-child(5)::after {
     margin-left: -5px;
     content: "(선택)";
     font-size: 10px;
     color: rgb(240, 165, 0);
   }
 
-  div:nth-child(1)::after {
+  div:nth-child(5)::after {
     margin-left: -5px;
     content: "선택항목에 대한 동의 포함";
     font-size: 5px;
