@@ -20,4 +20,6 @@ const Main = () => {
 
 export default Main;
 
-const MainBox = styled.div``;
+const MainBox = styled.div`
+  width: 100%;
+`;

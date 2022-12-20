@@ -42,6 +42,7 @@ const TodaysDealCompBox = styled.div`
   width: 1200px;
   margin: 0 auto;
   margin-top: 50px;
+
   .subtitle {
     display: flex;
     justify-content: space-between;
@@ -61,15 +62,31 @@ const TodaysDealCompBox = styled.div`
   }
   .today-deal-container {
     display: flex;
-    gap: 10px;
     justify-content: space-between;
     word-break: break-word;
+  }
+
+  @media only screen and (max-width: 1440px) {
+    width: 1000px;
+  }
+  @media only screen and (max-width: 1024px) {
+    width: 750px;
+  }
+  @media only screen and (max-width: 768px) {
+    width: 400px;
+    .today-deal-container {
+      flex-wrap: wrap;
+    }
+  }
+  @media only screen and (max-width: 425px) {
+    width: 320px;
   }
 `;
 
 const ItemBox = styled.div`
   width: 24%;
   margin-bottom: 30px;
+
   img {
     width: 100%;
     transition: transform 0.2s;
@@ -109,5 +126,15 @@ const ItemBox = styled.div`
     .item-name {
       color: #9f9f9f;
     }
+  }
+
+  @media only screen and (max-width: 1440px) {
+  }
+  @media only screen and (max-width: 1024px) {
+  }
+  @media only screen and (max-width: 768px) {
+    width: 100%;
+  }
+  @media only screen and (max-width: 425px) {
   }
 `;
