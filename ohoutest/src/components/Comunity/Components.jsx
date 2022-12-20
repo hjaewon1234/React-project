@@ -62,18 +62,18 @@ export default CommunityComp;
 
 const ListBox = styled.div`
   &.s {
-    color: red !important;
+    color: red;
   }
   &.a {
-    color: green !important;
+    color: green;
   }
   &.b {
-    color: blue !important;
+    color: blue;
   }
   &.c {
-    color: grey !important;
+    color: grey;
   }
   &.d {
-    color: white !important;
+    color: white;
   }
 `;
