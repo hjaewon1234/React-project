@@ -20,7 +20,7 @@ const CartContainer = () => {
       {userInfo?.userId ? (
         <CartContainerBox>
           <p>{userInfo.userId}님의 장바구니입니다.</p>
-          <YesUserCartContainer></YesUserCartContainer>
+          <YesUserCartContainer userInfo={userInfo}></YesUserCartContainer>
         </CartContainerBox>
       ) : (
         <CartComponent navigate={navigation} />
