@@ -1,11 +1,20 @@
 import YesUserCartComp from "./Component";
-import CartProductCardContainer from "./CartProductCard/Container";
+import { useEffect, useState } from "react";
 
 const YesUserCartContainer = ({}) => {
+  const [totalState, setTotalState] = useState([]);
+
+  useEffect(() => {
+    console.log(totalState);
+  }, [totalState]);
+
   return (
-    <YesUserCartComp
-      CartProductCardContainer={CartProductCardContainer}
-    ></YesUserCartComp>
+    <>
+      <YesUserCartComp
+        totalState={totalState}
+        setTotalState={setTotalState}
+      ></YesUserCartComp>
+    </>
   );
 };
 
