@@ -10,7 +10,8 @@ import Qna from "./Qna.js";
 import Search from "./search.js";
 import TopTen from "./topten.js";
 import Chat from "./chat.js";
-const db = { Users, Products, Category, Qna, Search, TopTen, Chat };
+import Order from "./order.js";
+const db = { Users, Products, Category, Qna, Search, TopTen, Chat, Order };
 
 import Sequelize from "sequelize";
 const sequelize = new Sequelize(
@@ -30,6 +31,7 @@ Qna.init(sequelize);
 Search.init(sequelize);
 TopTen.init(sequelize);
 Chat.init(sequelize);
+Order.init(sequelize);
 
 Object.keys(db).forEach((modelName) => {
   if (db[modelName].associate) {
