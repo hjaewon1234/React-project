@@ -3,9 +3,6 @@
 // import styled from "styled-components";
 // import axios from "axios";
 
-// const LoginComponents = ({ setIsLogin, setUser }) => {
-//   const [userId, setId] = useState("");
-//   const [userPw, setPw] = useState("");
 const Login = () => {
   axios({
     url: "http://localhost:8080/login",
@@ -22,6 +19,32 @@ const Login = () => {
     }
   });
 };
+
+return (
+  <div>
+    <label> 아이디</label>
+    <input
+      type={"text"}
+      value={inputId}
+      onInput={(e) => {
+        setId(e.target.value);
+      }}
+      placeholder={"아이디"}
+    />
+    <label> 비밀번호</label>
+    <input
+      type={"password"}
+      value={inputPw}
+      onInput={(e) => {
+        setPw(e.target.value);
+      }}
+      placeholder={"비밀번호"}
+    />
+    <button onClick={Login} className="loginButton">
+      로그인
+    </button>
+  </div>
+);
 
 //   const Login = () => {
 //     axios({
