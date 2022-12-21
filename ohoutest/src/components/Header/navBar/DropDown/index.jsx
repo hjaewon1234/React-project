@@ -1,8 +1,15 @@
 import { nanoid } from "@reduxjs/toolkit";
 import styled from "styled-components";
 import { useEffect } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { action } from "../../../../modules/userInfo.js";
 
 const DropDown = ({ arr, refs, isOpen, setIsOpen, imgRef }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const handler = ({ target }) => {
     if (!refs.current?.contains(target) && !imgRef.current?.contains(target)) {
       setIsOpen(!isOpen);
@@ -20,7 +27,29 @@ const DropDown = ({ arr, refs, isOpen, setIsOpen, imgRef }) => {
       <ul className="drop-ul">
         {arr.map((elem) => {
           return (
-            <li key={`${arr} - ${nanoid()}`} className="drop-item">
+            <li
+              key={`${arr} - ${nanoid()}`}
+              className="drop-item"
+              onClick={() => {
+                switch (elem) {
+                  case "로그아웃":
+                    console.log("로그아웃 스위치");
+                    axios({
+                      url: "http://localhost:8080/logout",
+                      method: "POST",
+                      withCredentials: true,
+                    }).then((result) => {
+                      if (result.status === 200) {
+                        navigate("/", { replace: true });
+                        dispatch(action.setUser({ userId: "", userName: "" }));
+                      }
+                    });
+                    return;
+                  case "마이페이지":
+                    return;
+                }
+              }}
+            >
               {elem}
             </li>
           );

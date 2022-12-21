@@ -15,6 +15,7 @@ const SearchComponent = ({ itemArr }) => {
 };
 
 const SearchComponentBox = styled.div`
+  width: 100%;
   padding: 50px 0px;
   margin: 0px 50px;
 `;

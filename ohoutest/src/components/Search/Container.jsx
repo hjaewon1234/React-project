@@ -26,7 +26,9 @@ const SearchContainer = () => {
     searchWordAxios(setItemArr, searchWord);
   }, [searchWord]);
 
-  useEffect(() => {}, [itemArr]);
+  useEffect(() => {
+    console.log("itemArr", itemArr);
+  }, [itemArr]);
   return <SearchComponent itemArr={itemArr} />;
 };
 
