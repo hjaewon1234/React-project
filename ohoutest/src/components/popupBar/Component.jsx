@@ -1,20 +1,24 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
-const PopupBarComponent = ({ setSwitcher }) => {
+const PopupBarComponent = () => {
+  const [switcher, setSwitcher] = useState(false);
   return (
-    <PopupBarCompBox>
-      <Link to={"/"}>
-        <img className="popup-left" src="/img/popupBar/popup1.png" />
-      </Link>
-      <Link to={"/"}>
-        <img className="popup-right" src="/img/popupBar/popup2.png" />
-      </Link>
-      <img
-        onClick={() => setSwitcher((prev) => !prev)}
-        src="/img/x-solid.svg"
-      />
-    </PopupBarCompBox>
+    switcher || (
+      <PopupBarCompBox>
+        <Link to={"/"}>
+          <img className="popup-left" src="/img/popupBar/popup1.png" />
+        </Link>
+        <Link to={"/"}>
+          <img className="popup-right" src="/img/popupBar/popup2.png" />
+        </Link>
+        <img
+          onClick={() => setSwitcher((prev) => !prev)}
+          src="/img/x-solid.svg"
+        />
+      </PopupBarCompBox>
+    )
   );
 };
 

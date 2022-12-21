@@ -33,6 +33,7 @@ const FooterContainer = () => {
       console.log(error);
     }
   }, []);
+
   return <FooterComponent />;
 };
 

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import ManagerInfo from "./components/ManagerPage";
 import { Routes, Route } from "react-router-dom";
 import styled from "styled-components";
@@ -19,12 +18,10 @@ import CommunityContainer from "./components/Comunity/Container";
 axios.defaults.withCredentials = true;
 
 function App() {
-  const [switcher, setSwitcher] = useState(false);
-
   return (
     <AppBox>
       {/* <SingUp></SingUp> */}
-      {switcher || <PopupBarContainer setSwitcher={setSwitcher} />}
+      <PopupBarContainer />
       <Header />
       <Routes>
         <Route path="/" element={<Main />}></Route>
