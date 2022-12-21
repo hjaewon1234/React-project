@@ -2,17 +2,26 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import CartProductCardContainer from "./CartProductCard/Container";
 
-const YesUserCartComp = ({ totalState, setTotalState, buyOnClick }) => {
+const YesUserCartComp = ({
+  totalState,
+  totalCount,
+  setTotalState,
+  setTotalCount,
+  buyOnClick,
+}) => {
   const [totalPrice, setTotalPrice] = useState(0);
-  console.log("rerender");
   useEffect(() => {
+    const totalArray = totalState.map((item, index) => {
+      return +item * +totalCount[index];
+    });
+    console.log("totalArray", totalArray);
     setTotalPrice(
-      totalState.reduce((acc, cur) => {
+      totalArray.reduce((acc, cur) => {
         return acc + cur;
       }, 0)
     );
     console.log(totalPrice);
-  }, [totalState]);
+  }, [totalState, totalCount]);
   return (
     <BigBox>
       <SelectBox></SelectBox>
@@ -23,7 +32,9 @@ const YesUserCartComp = ({ totalState, setTotalState, buyOnClick }) => {
           <div>
             <CartProductCardContainer
               totalState={totalState}
+              totalCount={totalCount}
               setTotalState={setTotalState}
+              setTotalCount={setTotalCount}
             ></CartProductCardContainer>
           </div>
           <hr />

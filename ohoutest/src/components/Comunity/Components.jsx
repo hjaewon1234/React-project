@@ -32,7 +32,7 @@ const CommunityComp = ({ user, getChatData, pushChatData, chatData }) => {
                 pushChatData({
                   name: user.userId,
                   text: inputText,
-                  importance: "S",
+                  importance: "s",
                 });
               }
             }}

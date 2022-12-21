@@ -1,25 +1,66 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import uuid from "react-uuid";
 
 const CartProductCardComp = ({
   brand,
   name,
   price,
   setTotalState,
+  setTotalCount,
   index,
+  totalCount,
   totalState,
+  count,
 }) => {
   useEffect(() => {
     setTotalState((state) => {
-      console.log(state);
+      console.log([...state, 0]);
       return [...state, 0];
+    });
+    setTotalCount((state) => {
+      console.log([...state, +count]);
+      return [...state, +count];
     });
   }, []);
 
   useEffect(() => {
     console.log("adf");
   }, [totalState]);
-  console.log(totalState);
+
+  const optionDiv = () => {
+    return (
+      <>
+        <select
+          name="count"
+          onChange={(e) => {
+            setTotalCount((state) => {
+              const tempState = [...state];
+              tempState[index] = e.target.value;
+              return tempState;
+            });
+          }}
+          key={uuid()}
+          defaultValue={totalCount[index]}
+        >
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, index) => {
+            if (index == count) {
+              return (
+                <option key={`count-${index}`} value={`${item}`}>
+                  {item}
+                </option>
+              );
+            } else
+              return (
+                <option key={`count-${index}`} value={`${item}`}>
+                  {item}
+                </option>
+              );
+          })}
+        </select>
+      </>
+    );
+  };
 
   return (
     <CartProductCardBox>
@@ -60,19 +101,16 @@ const CartProductCardComp = ({
         <div>
           <div>
             <div>{name}</div>
-            <div>X</div>
+            <div
+              className="deleteBtn"
+              onClick={() => {
+                console.log(index, "번째 아이템 삭제 버튼 눌림");
+              }}
+            >
+              X
+            </div>
           </div>
-          <div>
-            <select name="count">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-            </select>
-          </div>
+          <div>{optionDiv()}</div>
         </div>
       </CountView>
       <div className="optionDiv">
@@ -122,6 +160,11 @@ const MainView = styled.div`
 
 const CountView = styled.div`
   width: 100%;
+  background-color: #afafaf75;
+  padding: 0px 20px;
+  border-radius: 15px;
+  color: #1a1c20;
+  font-weight: 800;
   & > div {
     display: flex;
     flex-direction: column;
@@ -133,6 +176,21 @@ const CountView = styled.div`
   }
   select {
     width: 100px;
+  }
+
+  .deleteBtn {
+    cursor: pointer;
+    background-color: #f0a500;
+    color: #f4f4f4;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+  }
+  .deleteBtn:hover {
+    background-color: #cf7500;
   }
 `;
 
