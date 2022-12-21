@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import CartProductCardComp from "./Component";
 
 const CartProductCardContainer = ({
-  totalState,
   totalCount,
   setTotalState,
   setTotalCount,
@@ -13,7 +12,6 @@ const CartProductCardContainer = ({
         brand={"달팽이리빙"}
         name={"푸벨드마망 라운드 원터치 휴지통(7L)"}
         price={12900}
-        totalState={totalState}
         totalCount={totalCount}
         setTotalState={setTotalState}
         setTotalCount={setTotalCount}
@@ -24,7 +22,6 @@ const CartProductCardContainer = ({
         brand={"달팽이빙빙"}
         name={"휴지통(20L)"}
         price={99900}
-        totalState={totalState}
         totalCount={totalCount}
         setTotalState={setTotalState}
         setTotalCount={setTotalCount}

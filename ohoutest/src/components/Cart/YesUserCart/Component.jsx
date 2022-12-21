@@ -14,13 +14,11 @@ const YesUserCartComp = ({
     const totalArray = totalState.map((item, index) => {
       return +item * +totalCount[index];
     });
-    console.log("totalArray", totalArray);
     setTotalPrice(
       totalArray.reduce((acc, cur) => {
         return acc + cur;
       }, 0)
     );
-    console.log(totalPrice);
   }, [totalState, totalCount]);
   return (
     <BigBox>
@@ -31,7 +29,6 @@ const YesUserCartComp = ({
           <hr />
           <div>
             <CartProductCardContainer
-              totalState={totalState}
               totalCount={totalCount}
               setTotalState={setTotalState}
               setTotalCount={setTotalCount}

@@ -10,23 +10,16 @@ const CartProductCardComp = ({
   setTotalCount,
   index,
   totalCount,
-  totalState,
   count,
 }) => {
   useEffect(() => {
     setTotalState((state) => {
-      console.log([...state, 0]);
       return [...state, 0];
     });
     setTotalCount((state) => {
-      console.log([...state, +count]);
       return [...state, +count];
     });
   }, []);
-
-  useEffect(() => {
-    console.log("adf");
-  }, [totalState]);
 
   const optionDiv = () => {
     return (
@@ -74,7 +67,6 @@ const CartProductCardComp = ({
                 !tempState[index]
                   ? (tempState[index] = price)
                   : (tempState[index] = 0);
-                console.log(tempState);
                 return tempState;
               });
             }}
