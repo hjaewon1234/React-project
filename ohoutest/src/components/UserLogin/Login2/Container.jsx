@@ -2,7 +2,7 @@ import Login2Components from "./Components.jsx";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { action } from "../../../modules/userInfo.js";
 import styled from "styled-components";
 
@@ -12,6 +12,7 @@ const Login2Container = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const curUser = useSelector((state) => state.userInfo);
   const logout = () => {
     axios({
       url: "http://localhost:8080/logout",
@@ -30,32 +31,33 @@ const Login2Container = () => {
   };
 
   useEffect(() => {
-    dispatch(action.setUser(user));
-  }, [user]);
+    console.log(curUser);
+    setUser(curUser);
+  }, [curUser]);
 
-  useEffect(() => {
-    try {
-      axios({
-        url: "http://localhost:8080/check",
-        method: "GET",
-        withCredentials: true,
-      })
-        .then((result) => {
-          if (result.data) {
-            setIsLogin(true);
-            setUser(result.data);
-            console.log(result.data);
-            navigate("/login", { replace: true });
-            // navigate("/", { replace: true });
-          }
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
+  // useEffect(() => {
+  //   try {
+  //     axios({
+  //       url: "http://localhost:8080/check",
+  //       method: "GET",
+  //       withCredentials: true,
+  //     })
+  //       .then((result) => {
+  //         if (result.data) {
+  //           setIsLogin(true);
+  //           setUser(result.data);
+  //           console.log(result.data);
+  //           navigate("/login", { replace: true });
+  //           // navigate("/", { replace: true });
+  //         }
+  //       })
+  //       .catch((error) => {
+  //         console.error(error);
+  //       });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }, []);
 
   return (
     <div>

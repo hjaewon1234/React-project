@@ -23,7 +23,7 @@ export const getUserThunk = createAsyncThunk(
 
 const userInfoSlice = createSlice({
   name: "userInfo",
-  initialState: { id: "", pw: "", name: "" },
+  initialState: { userId: "", userName: "" },
   reducers: {
     setUser: (state, action) => {
       console.log(action.payload);

@@ -221,7 +221,7 @@ const login = async (req, res, next) => {
     res.send("로그인 되어있습니다.");
   } else {
     const tempUser = await test(req);
-
+    console.log(req.body);
     if (!tempUser) {
       res.status(403).json("Not Authorized");
     } else {
@@ -229,7 +229,7 @@ const login = async (req, res, next) => {
         // access Token 발급
         const accessToken = jwt.sign(
           {
-            username: tempUser.userame,
+            username: tempUser.userName,
             userId: tempUser.userId,
           },
           process.env.ACCESS_SECRET,
@@ -241,7 +241,7 @@ const login = async (req, res, next) => {
         // refresh Token 발급
         const refreshToken = jwt.sign(
           {
-            username: tempUser.username,
+            username: tempUser.userName,
             userId: tempUser.userId,
           },
           process.env.REFRECH_SECRET,
@@ -265,7 +265,9 @@ const login = async (req, res, next) => {
           // Credential: true,
         });
 
-        res.status(200).json("login success");
+        res
+          .status(200)
+          .json({ userId: tempUser.userId, userName: tempUser.userName });
       } catch (error) {
         res.status(500).json(error);
       }

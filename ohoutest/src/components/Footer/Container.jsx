@@ -9,6 +9,7 @@ const FooterContainer = () => {
   const [curUser, setcurUser] = useState("");
 
   useDidMountEffect(() => {
+    console.log(curUser);
     if (document.cookie) dispatch(action.setUser(curUser));
     else dispatch(action.setUser({ userId: "", userName: "" }));
   }, [curUser]);

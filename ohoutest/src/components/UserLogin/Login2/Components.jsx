@@ -39,14 +39,14 @@ const Login2Components = ({ setIsLogin, setUser, user }) => {
         // window.open("/signUp", "_self");
         // navigate("/", { replace: true });
         navigate("/", { replace: true });
-        console.log(result.data);
-        dispatch(
-          action.setUser({
-            id: user.userId,
-            pw: "",
-            name: user.userName,
-          })
-        );
+        console.log(result.data, user);
+        if (result.data?.userId)
+          dispatch(
+            action.setUser({
+              userId: result.data.userId,
+              userName: result.data.userName,
+            })
+          );
       }
     });
   };
@@ -79,7 +79,9 @@ const Login2Components = ({ setIsLogin, setUser, user }) => {
             placeholder={"비밀번호"}
           />
           <button
-            onClick={logInHandle}
+            onClick={() => {
+              logInHandle();
+            }}
             // onChange={loginHandler}
             disabled={
               inputId.length <= 99 && inputPw.length <= 8 ? true : false
