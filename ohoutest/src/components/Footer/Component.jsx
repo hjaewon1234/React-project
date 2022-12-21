@@ -246,6 +246,66 @@ const FooterBox = styled.div`
   .cloned-by {
     margin-top: 3px;
     font-weight: bold;
+    font-size: 1.3em;
     color: #f0a500;
+  }
+
+  @media only screen and (max-width: 1440px) {
+    .footer-container {
+      width: 900px;
+    }
+    .footer-item {
+      padding: 5px 10px;
+    }
+  }
+  @media only screen and (max-width: 1024px) {
+    .footer-container {
+      flex-wrap: wrap;
+      width: 750px;
+    }
+    .footer-item:first-child,
+    .footer-item:nth-child(2) {
+      width: 50%;
+    }
+    .footer-item:nth-child(2) {
+      border-right: none;
+    }
+    .footer-item:last-child {
+      width: 100%;
+    }
+    .footer-item:last-child:before {
+      content: "";
+      width: 100%;
+      height: 10px;
+      border-bottom: 1px solid #c2c2c2;
+      margin-bottom: 10px;
+    }
+  }
+  @media only screen and (max-width: 768px) {
+    margin-top: -30px;
+    .footer-container {
+      flex-wrap: wrap;
+      width: 100%;
+    }
+  }
+  @media only screen and (max-width: 425px) {
+    .footer-item:first-child,
+    .footer-item:nth-child(2) {
+      width: 100%;
+    }
+    .footer-item:nth-child(2) {
+      border: none;
+    }
+    .footer-item:first-child:after {
+      content: "";
+      width: 100%;
+      height: 15px;
+      border-bottom: 1px solid #c2c2c2;
+      margin-bottom: 10px;
+    }
+    .footer-item-icon-layer img {
+      width: 20px;
+      height: 20px;
+    }
   }
 `;

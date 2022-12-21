@@ -67,19 +67,28 @@ const TodaysDealCompBox = styled.div`
   }
 
   @media only screen and (max-width: 1440px) {
-    width: 1000px;
+    width: 900px;
   }
   @media only screen and (max-width: 1024px) {
-    width: 750px;
+    width: 700px;
   }
   @media only screen and (max-width: 768px) {
-    width: 400px;
+    width: 100%;
     .today-deal-container {
-      flex-wrap: wrap;
+      flex-direction: column;
+    }
+    a {
+      display: flex;
+      align-items: center;
+    }
+    .today-deal-item-img {
+      flex-basis: 100%;
+    }
+    .item-container {
+      flex-basis: 100%;
     }
   }
   @media only screen and (max-width: 425px) {
-    width: 320px;
   }
 `;
 
@@ -134,6 +143,19 @@ const ItemBox = styled.div`
   }
   @media only screen and (max-width: 768px) {
     width: 100%;
+    margin: 0;
+    padding: 3%;
+    border-bottom: 1px solid lightgrey;
+    &:last-child {
+    }
+    &:hover {
+      img {
+        transform: none;
+      }
+      .item-name {
+        color: #424242;
+      }
+    }
   }
   @media only screen and (max-width: 425px) {
   }
