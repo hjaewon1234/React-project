@@ -254,11 +254,15 @@ const login = async (req, res, next) => {
         res.cookie("accessToken", accessToken, {
           secure: false,
           httpOnly: false,
+          // httpOnly: true,
+          // Credential: true,
         });
 
         res.cookie("refreshToken", refreshToken, {
           secure: false,
           httpOnly: false,
+          // httpOnly: true,
+          // Credential: true,
         });
 
         res.status(200).json("login success");
@@ -366,9 +370,9 @@ const logout = (req, res) => {
     res.clearCookie("refreshToken");
     global.userId = "";
     global.userName = "";
-    // res.status(200).json("Logout Success");
+    res.status(200).json("Logout Success");
 
-    res.status(200).json({ userId: global.userId, userName: global.userName });
+    // res.status(200).json({ userId: global.userId, userName: global.userName });
   } catch (error) {
     res.status(500).json(error);
   }

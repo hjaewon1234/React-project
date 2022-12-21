@@ -41,6 +41,13 @@ const RegistComponents = () => {
 
   const [checkedButtons, setCheckedButtons] = useState([]);
 
+  const [allChecked, setAllchecked] = useState(false);
+  const [checked1, setChecked1] = useState(false);
+  const [checked2, setChecked2] = useState(false);
+  const [checked3, setChecked3] = useState(false);
+  const [checked4, setChecked4] = useState(false);
+  const [checked5, setChecked5] = useState(false);
+
   const onChangeId = (e) => {
     const currentId = e.target.value;
     setId(currentId);
@@ -168,6 +175,35 @@ const RegistComponents = () => {
     setPopup(!popup);
   };
 
+  console.log(allChecked);
+  const handelAllChecked = (e) => {
+    setAllchecked(!allChecked);
+    setChecked1(!allChecked);
+    setChecked2(!allChecked);
+    setChecked3(!allChecked);
+    setChecked4(!allChecked);
+    setChecked5(!allChecked);
+  };
+
+  const handelChecked1 = (e) => {
+    setChecked1(!checked1);
+    if (!checked1 === false) {
+      setAllchecked(checked1);
+    }
+  };
+  const handelChecked2 = (e) => {
+    setChecked2(!checked2);
+  };
+  const handelChecked3 = (e) => {
+    setChecked3(!checked3);
+  };
+  const handelChecked4 = (e) => {
+    setChecked4(!checked4);
+  };
+  const handelChecked5 = (e) => {
+    setChecked5(!checked5);
+  };
+
   return (
     <>
       <KakaoApi>
@@ -198,7 +234,6 @@ const RegistComponents = () => {
               중복 ID 검사
             </button>
             <label> 비밀번호</label>
-            <label className="small"></label>
             <input
               type={"password"}
               value={inputPw}
@@ -221,7 +256,6 @@ const RegistComponents = () => {
             />
             <p className="message">{passwordConfirmMessage}</p>
             <label> 닉네임</label>
-            <label className="small"></label>
             <input
               type={"text"}
               value={inputName}
@@ -245,7 +279,7 @@ const RegistComponents = () => {
             <div className="address_search">
               <input
                 className="user_enroll_text"
-                placeholder="주소"
+                placeholder="주소 찾기 버튼을 눌러주세요"
                 type="text"
                 required={true}
                 name="address"
@@ -254,6 +288,7 @@ const RegistComponents = () => {
                 onInput={(e) => {
                   inputAdress1(e.target.value);
                 }}
+                disabled
               />
             </div>
             <input
@@ -276,14 +311,17 @@ const RegistComponents = () => {
               <button className="kakaoAdress" onClick={handleComplete}>
                 주소 찾기
               </button>
-              <button className="kakaoAdress" onClick={handleComplete}>
+              <button
+                className="kakaoAdress"
+                disabled={inputAdress.length <= 5 ? true : false}
+              >
                 주소 입력
               </button>
             </div>
             <label> 약관동의</label>
           </RegistMidStlye>
           <AcceptStlye>
-            <table>
+            {/* <table>
               <thead>
                 <tr>
                   <th>
@@ -315,7 +353,82 @@ const RegistComponents = () => {
                   </tr>
                 ))}
               </thead>
-            </table>
+            </table> */}
+            <label>
+              <input
+                id="check1"
+                type={"checkbox"}
+                checked={allChecked}
+                onChange={handelAllChecked}
+              />
+              전체동의
+            </label>
+            <label>
+              <input
+                id="check2"
+                type={"checkbox"}
+                checked={checked1}
+                onChange={handelChecked1}
+              />
+              만 14세 이상입니다
+            </label>{" "}
+            <label>
+              <input
+                id="check3"
+                type={"checkbox"}
+                checked={checked2}
+                onChange={handelChecked2}
+              />
+              이용약관
+            </label>{" "}
+            <label>
+              <input
+                id="check4"
+                type={"checkbox"}
+                checked={checked3}
+                onChange={handelChecked3}
+              />
+              개인정보수집 및 이용동의
+            </label>
+            <label>
+              <input
+                id="check5"
+                type={"checkbox"}
+                checked={checked4}
+                onChange={handelChecked4}
+              />
+              개인정보 마케팅 활용 동의
+            </label>{" "}
+            <label>
+              <input
+                id="check6"
+                type={"checkbox"}
+                checked={checked5}
+                onChange={handelChecked5}
+              />
+              이벤트, 쿠폰, 특가 알림 메일 및 SMS 등 수신
+            </label>
+            {checked1 === true && checked2 === true && checked3 === true ? (
+              <Link href={`/`}>
+                <button
+                  onClick={() => {
+                    registHandle();
+                  }}
+                  checked={checkItems.includes(data.id) ? true : false}
+                  disabled={
+                    inputId.length <= 5 ||
+                    inputPw.length <= 7 ||
+                    inputName.length <= 2
+                      ? true
+                      : false
+                  }
+                >
+                  회원가입하기
+                </button>
+              </Link>
+            ) : (
+              ""
+            )}
             {/* <div>
               <input type="checkbox" id="check1" />
               <label htmlFor="check1"></label>
@@ -348,25 +461,11 @@ const RegistComponents = () => {
             </div> */}
           </AcceptStlye>
 
-          <button
-            onClick={() => {
-              registHandle();
-            }}
-            disabled={
-              inputId.length <= 5 ||
-              inputPw.length <= 7 ||
-              inputName.length <= 2
-                ? true
-                : false
-            }
-          >
-            회원가입하기
-          </button>
           <LoginStyle>
-            <div>
-              <Link to={"/signUp"}>이미 아이디가 있으신가요? </Link>
-              {/* <h6>이미 아이디가 있으신가요? </h6> */}
-            </div>
+            <Link to={"/signUp"} style={{ textDecoration: "none" }}>
+              <div> 이미 아이디가 있으신가요? </div>
+            </Link>
+            {/* <h6>이미 아이디가 있으신가요? </h6> */}
           </LoginStyle>
         </RegistMain>
       </KakaoApi>
@@ -382,6 +481,7 @@ const KakaoApi = styled.div`
 `;
 
 const RegistMain = styled.div`
+  margin-top: 33px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -396,8 +496,12 @@ const RegistMain = styled.div`
     font-weight: bold;
     color: rgb(244, 244, 244);
     border-radius: 5px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    transition: 0.4s ease-in-out;
     &:disabled {
-      background-color: rgb(0, 150, 245, 0.3);
+      transition: 0.8s ease-in-out;
+      background-color: rgb(216, 217, 207);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.1);
     }
   }
 `;
@@ -417,10 +521,11 @@ const RegistMidStlye = styled.div`
   flex-direction: column;
   label {
     align-self: flex-start;
-    margin-bottom: 0px;
+    margin-bottom: 5px;
     padding: 10px;
     padding-left: 0px;
     font-weight: bold;
+    font-size: 15px;
   }
   label.small {
     align-self: flex-start;
@@ -430,7 +535,6 @@ const RegistMidStlye = styled.div`
     font-size: 14px;
     font-weight: 600;
   }
-
   input {
     border-radius: 5px;
     width: 350px;
@@ -438,29 +542,31 @@ const RegistMidStlye = styled.div`
     outline: none;
     border: 0;
     background-color: rgb(244, 244, 244);
+    border-bottom: solid 1px rgba(216, 217, 207, 0.7);
     padding-left: 10px;
     font-size: 15px;
+    background-color: transparent;
   }
 
   button {
-    border-radius: 5px;
+    border-radius: 8px;
     width: 350px;
     height: 50px;
   }
-  div h6 {
-    color: rgb(244, 244, 244);
-  }
+
   .idBtnOverlap {
     width: 225px;
     height: 35px;
     margin-top: 17px;
-    margin-bottom: 17px;
+    margin-bottom: 33px;
     &:disabled {
-      background-color: rgb(0, 150, 245, 0.3);
+      background-color: rgb(216, 217, 207);
     }
   }
 
   .kakaoAdressP {
+    margin-top: 33px;
+    margin-bottom: 33px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -471,6 +577,13 @@ const RegistMidStlye = styled.div`
   .kakaoAdress {
     width: 170px;
     height: 50px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    transition: 0.4s ease-in-out;
+    &:disabled {
+      transition: 0.8s ease-in-out;
+      background-color: rgb(216, 217, 207);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.1);
+    }
   }
   .message {
     font-size: 12px;
@@ -487,43 +600,47 @@ const AcceptStlye = styled.div`
   margin-top: 5px;
   margin-bottom: 30px;
   cursor: pointer;
+  margin-top: 15px;
 
-  tr {
+  label {
     padding: 0 15px;
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
     height: 55px;
     font-size: 12px;
+    font-weight: bold;
     gap: 10px;
   }
-  tr th {
-    background-color: ;
-  }
-  tr td input[name="select"]:checked + label::after {
-    content: "✔";
-    display: inline-block;
-    font-size: 15px;
-    width: 25px;
-    height: 25px;
-    text-align: center;
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    background-color: rgb(240, 165, 0);
-    border-color: rgb(240, 165, 0);
+
+  label:nth-child(1),
+  label:nth-child(2),
+  label:nth-child(3),
+  label:nth-child(4),
+  label:nth-child(5),
+  label:nth-child(6) {
+    font-size: 12px;
+    input[type="checkbox"] {
+      -webkit-appearance: radio;
+      transform: scale(1.5);
+      accent-color: rgb(240, 165, 0);
+      &::after {
+        display: none;
+      }
+    }
   }
 
-  tr:nth-child(1)::after,
-  tr:nth-child(2)::after,
-  tr:nth-child(3)::after {
+  label:nth-child(2)::after,
+  label:nth-child(3)::after,
+  label:nth-child(4)::after {
     margin-left: -5px;
     content: "(필수)";
     font-size: 10px;
     color: rgb(240, 165, 0);
   }
-  tr:nth-child(4)::after,
-  tr:nth-child(5)::after {
+
+  label:nth-child(5)::after,
+  label:nth-child(6)::after {
     margin-left: -5px;
     content: "(선택)";
     font-size: 10px;
@@ -541,19 +658,12 @@ const AcceptStlye = styled.div`
 
 const LoginStyle = styled.div`
   margin-bottom: 50px;
-
   div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-  }
-  div h6 {
-    font-size: 15px;
-  }
-  div h6::after {
-    margin-left: 12px;
-    content: "로그인";
-    text-decoration: underline;
+    padding-bottom: 7px;
+    border-top: solid 1px rgba(216, 217, 207, 0.7);
+    color: rgb(240, 165, 0);
+    text-shadow: 1.5px 1.5px rgba(207, 117, 0, 0.1);
+    font-weight: bold;
+    font-size: 30px;
   }
 `;

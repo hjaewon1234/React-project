@@ -22,10 +22,17 @@ export const signUpUser = createAsyncThunk("/user/signUpUser", async (body) => {
     .then((data) => {
       console.log(data.data);
       if (data.data.status == 401) {
-        alert("중복되는 아이디와 닉네임이 있습니다.");
+        alert("중복 아이디가 있습니다. 다시 확인해주세요");
+      } else if (data.data.status == 402) {
+        alert("비밀번호 입력을 다시 확인해주세요");
+      } else if (data.data.status == 403) {
+        alert("중복되는 닉네임이 있습니다. 다시 확인해주세요");
+      } else if (data.data.status == 405) {
+        alert("아이디 영문으로만 입력 해주세요");
       } else if (data.data.status == 200) {
         alert("회원가입이 완료되었습니다.");
         window.open("/", "_self");
+      } else {
       }
     });
   console.log(data);
@@ -37,25 +44,27 @@ export const overlapId = createAsyncThunk(
   "/user/overlapId",
   async (inputId) => {
     console.log(inputId, JSON.stringify(inputId.inputId));
-    const { data } = await axios
-      .post("http://localhost:8080/api/user/overlapId", {
+    const { data } = await axios.post(
+      "http://localhost:8080/api/user/overlapId",
+      {
         inputId: JSON.stringify(inputId.inputId),
-      })
-      .then((data) => {
-        if (data.data.status == 401) {
-          alert("중복되는 아이디가 있습니다. 다시 확인해주세요");
-        } else if (data.data.status == 402) {
-          alert("비밀번호 입력을 다시 확인해주세요");
-        } else if (data.data.status == 403) {
-          alert("중복되는 닉네임이 있습니다. 다시 확인해주세요");
-        } else if (data.data.status == 405) {
-          alert("아이디 영문으로만 입력 해주세요");
-        } else if (data.data.status == 200) {
-          alert("중복되는 아이디가 없습니다.");
-        } else {
-        }
-      });
-    console.log(data);
+      }
+    );
+    // .then((data) => {
+    if (data.status == 401) {
+      alert("중복되는 아이디가 있습니다. 다시 확인해주세요");
+    } else if (data.status == 402) {
+      alert("비밀번호 입력을 다시 확인해주세요");
+    } else if (data.status == 403) {
+      alert("중복되는 닉네임이 있습니다. 다시 확인해주세요");
+    } else if (data.status == 405) {
+      alert("아이디 영문으로만 입력 해주세요");
+    } else if (data.status == 200) {
+      alert("중복되는 아이디가 없습니다.");
+    } else {
+    }
+    // });
+    console.log("data", data);
     return data;
   }
 );

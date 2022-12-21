@@ -68,7 +68,6 @@ router.post("/getUsers", async (req, res) => {
         userAddress1: req.body.inputAdress1,
       });
       console.log("회원가입이 완료되었습니다.");
-
       res.send({ status: 200 });
     }
   } catch (err) {
