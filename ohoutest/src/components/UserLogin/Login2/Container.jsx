@@ -9,7 +9,7 @@ import styled from "styled-components";
 // import ParticleTest from "../Particle/Components";
 
 const Login2Container = () => {
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
   const [user, setUser] = useState({});
   const navigate = useNavigate();
   const dispatch = useDispatch();
