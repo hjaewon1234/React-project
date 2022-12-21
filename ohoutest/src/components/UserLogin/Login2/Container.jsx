@@ -20,9 +20,9 @@ const Login2Container = () => {
     }).then((result) => {
       if (result.status === 200) {
         // window.open("/", "_self");
-        console.log(result.status);
-        console.log(result.data);
-        setUser(result.data);
+        // console.log(result.status);
+        // console.log(result.data);
+        // setUser(result.data);
         navigate("/", { replace: true });
         dispatch(action.setUser({ userId: "", userName: "" }));
       }
@@ -45,8 +45,8 @@ const Login2Container = () => {
             setIsLogin(true);
             setUser(result.data);
             console.log(result.data);
-
-            navigate("/signUp", { replace: true });
+            navigate("/login", { replace: true });
+            // navigate("/", { replace: true });
           }
         })
         .catch((error) => {
@@ -58,7 +58,7 @@ const Login2Container = () => {
   }, []);
 
   return (
-    <LoginAfter>
+    <div>
       {isLogin ? (
         <>
           <h3>{user.userName} 님이 로그인했습니다.</h3>
@@ -71,28 +71,28 @@ const Login2Container = () => {
           setIsLogin={setIsLogin}
         ></Login2Components>
       )}
-    </LoginAfter>
+    </div>
   );
 };
 
 export default Login2Container;
 
-const LoginAfter = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-  button {
-    position: relative;
-    border: none;
-    display: inline-block;
-    padding: 15px 30px;
-    border-radius: 15px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-    color: #f0a500;
-    text-decoration: none;
-    font-weight: 600;
-    transition: 0.25s;
-    cursor: pointer;
-  }
-`;
+// const LoginAfter = styled.div`
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   gap: 10px;
+//   button {
+//     position: relative;
+//     border: none;
+//     display: inline-block;
+//     padding: 15px 30px;
+//     border-radius: 15px;
+//     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+//     color: #f0a500;
+//     text-decoration: none;
+//     font-weight: 600;
+//     transition: 0.25s;
+//     cursor: pointer;
+//   }
+// `;
