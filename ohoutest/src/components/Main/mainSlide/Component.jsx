@@ -187,7 +187,6 @@ const MainSlideCompBox = styled.div`
   }
   img {
     width: 100%;
-    object-fit: cover;
   }
   .inner-box {
     overflow: hidden;
@@ -240,14 +239,8 @@ const MainSlideCompBox = styled.div`
     .btn-container {
       display: none;
     }
-    a {
-      min-height: 200px;
-    }
   }
   @media only screen and (max-width: 768px) {
-    a {
-      min-height: 150px;
-    }
   }
   @media only screen and (max-width: 425px) {
     a {

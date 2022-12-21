@@ -88,8 +88,11 @@ const IconLayerCompBox = styled.div`
     width: 100%;
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
     gap: 20px;
-
+    .icon-item img {
+      width: 60px;
+    }
     a {
       font-size: 12px;
     }
