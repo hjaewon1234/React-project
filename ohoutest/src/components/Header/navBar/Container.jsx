@@ -1,11 +1,14 @@
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 import NavBarComponent from "./Component";
 import { action } from "../../../modules/search";
 
 const NavBarContainer = () => {
+  const [isOnline, setIsOnline] = useState(false);
+  const state = useSelector((state) => state);
   const dispatch = useDispatch();
   const navigation = useNavigate();
   const onSubmit = (value) => {
@@ -17,7 +20,12 @@ const NavBarContainer = () => {
       });
     });
   };
-  return <NavBarComponent onSubmit={onSubmit} />;
+
+  useEffect(() => {
+    if (state.userInfo.userId) setIsOnline(true);
+    else setIsOnline(false);
+  });
+  return <NavBarComponent onSubmit={onSubmit} isOnline={isOnline} />;
 };
 
 export default NavBarContainer;

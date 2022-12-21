@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 import DropDown from "./DropDown";
 
-const NavBarComponent = ({ onSubmit }) => {
+const NavBarComponent = ({ onSubmit, isOnline }) => {
   const [searchInput, setSearchInput] = useState("");
   const loginedMenu = ["마이페이지", "로그아웃"];
   const dropDownRef = useRef();
@@ -12,57 +12,8 @@ const NavBarComponent = ({ onSubmit }) => {
   const [isOpen, setIsOpen] = useState(false);
   useEffect(() => {}, [isOpen]);
 
-  // return (
-  //   <NavBarCompBox>
-  //     <div className="nav-bar-container">
-  //       <Link to="/main" className="logo-icon">
-  //         <img src="/img/TeamLogo.png" />
-  //       </Link>
-  //       <Link to="/">스토어</Link>
-  //       <Link to="/community">커뮤니티</Link>
-  //       <div className="search-box">
-  //         <span className="magnify-icon">
-  //           <img src="/img/magnifying-glass-solid.svg" />
-  //         </span>
-  //         <input
-  //           id="searchInput"
-  //           placeholder="통합검색"
-  //           onChange={(e) => {
-  //             setSearchInput(() => e.target.value);
-  //           }}
-  //           onKeyDown={(e) => {
-  //             if (e.key == "Enter") {
-  //               onSubmit(searchInput);
-  //               setSearchInput(() => "");
-  //             }
-  //           }}
-  //           value={searchInput}
-  //         />
-  //         {/* {!searchInput || (
-  //         <span className="x-btn">
-  //                     <img src="/img/x-solid.svg" />
-  //         </span>
-  //       )} */}
-  //         <span className="x-btn">
-  //           <img src="/img/x-solid.svg" />
-  //         </span>
-  //       </div>
-  //       <Link to="/" className="cart-icon">
-  //         <img src="/img/cart-shopping-solid.svg" />
-  //       </Link>
-  //       <Link to="/login">로그인</Link>
-  //       <Link to="/signUp">회원가입</Link>
-  //       <Link to="/">고객센터</Link>
-  //       <button className="upload-btn">
-  //         글쓰기
-  //         <img src="/img/chevron-right-solid.svg" />
-  //       </button>
-  //     </div>
-  //   </NavBarCompBox>
-  // );
-
   return (
-    <NavBarCompBox>
+    <NavBarCompBox isOnline={isOnline}>
       <div className="nav-bar-container">
         <Link to="/main" className="logo-icon">
           <img src="/img/TeamLogo.png" />
@@ -101,6 +52,7 @@ const NavBarComponent = ({ onSubmit }) => {
         <Link to="/cart" className="cart-icon">
           <img src="/img/cart-shopping-solid.svg" />
         </Link>
+
         <div className="login-pic">
           <img
             onClick={() => {
@@ -119,8 +71,9 @@ const NavBarComponent = ({ onSubmit }) => {
             />
           )}
         </div>
-        <Link to="/login">로그인</Link>
-        <Link to="/regist">회원가입</Link>
+
+        {isOnline || <Link to="/login">로그인</Link>}
+        {isOnline || <Link to="/regist">회원가입</Link>}
         <Link to="/">고객센터</Link>
       </div>
     </NavBarCompBox>
@@ -232,6 +185,10 @@ const NavBarCompBox = styled.div`
     width: 50px;
     height: 50px;
     position: relative;
+    display: ${(props) => {
+      if (props.isOnline) return "block";
+      else return "none";
+    }};
   }
   .login-pic img {
     width: 50px;

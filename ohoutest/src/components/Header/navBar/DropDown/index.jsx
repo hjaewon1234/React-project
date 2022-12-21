@@ -33,7 +33,7 @@ const DropDown = ({ arr, refs, isOpen, setIsOpen, imgRef }) => {
               onClick={() => {
                 switch (elem) {
                   case "로그아웃":
-                    console.log("로그아웃 스위치");
+                    setIsOpen(!isOpen);
                     axios({
                       url: "http://localhost:8080/logout",
                       method: "POST",

@@ -1,7 +1,7 @@
 import PopupBarComponent from "./Component";
 
-const PopupBarContainer = ({ setSwitcher }) => {
-  return <PopupBarComponent setSwitcher={setSwitcher} />;
+const PopupBarContainer = () => {
+  return <PopupBarComponent />;
 };
 
 export default PopupBarContainer;
