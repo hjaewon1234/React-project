@@ -2,13 +2,30 @@ import { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-const Login2Components = ({ setIsLogin, setUser }) => {
+import { useDispatch } from "react-redux";
+import { action } from "../../../modules/userInfo";
+import { Link } from "react-router-dom";
+import { logInUser } from "../../../modules/Slice/loginSlice";
+
+const Login2Components = ({ setIsLogin, setUser, user }) => {
   const [inputId, setId] = useState("");
   const [inputPw, setPw] = useState("");
+  const [inputName, setName] = useState("");
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  // const loginHandler = () => {
+  //   dispatch(
+  //     logInUser({
+  //       inputId,
+  //       inputName,
+  //     })
+  //   );
+  // };
   const logInHandle = () => {
+    console.log(inputId, inputPw);
     axios({
-      url: "http://localhost:8080/login",
+      url: "/login",
       method: "POST",
       withCredentials: true,
       // client와 server가 쿠키 값을 공유
@@ -17,12 +34,19 @@ const Login2Components = ({ setIsLogin, setUser }) => {
         inputPw: inputPw,
       },
     }).then((result) => {
-      console.log(result.data);
-      console.log(result.data);
       if (result.status === 200) {
         console.log("로그인 성공");
-        window.open("/signUp", "_self");
-        // navigate("/signUp", { replace: true });
+        // window.open("/signUp", "_self");
+        // navigate("/", { replace: true });
+        navigate("/", { replace: true });
+        console.log(result.data, user);
+        if (result.data?.userId)
+          dispatch(
+            action.setUser({
+              userId: result.data.userId,
+              userName: result.data.userName,
+            })
+          );
       }
     });
   };
@@ -45,9 +69,7 @@ const Login2Components = ({ setIsLogin, setUser }) => {
           />
 
           <label> 비밀번호</label>
-          <label className="small">
-            영문, 숫자를 포함한 8자 이상의 비밀번호를 입력해주세요.
-          </label>
+
           <input
             type={"password"}
             value={inputPw}
@@ -56,26 +78,41 @@ const Login2Components = ({ setIsLogin, setUser }) => {
             }}
             placeholder={"비밀번호"}
           />
+          <button
+            onClick={() => {
+              logInHandle();
+            }}
+            // onChange={loginHandler}
+            disabled={
+              inputId.length <= 99 && inputPw.length <= 8 ? true : false
+            }
+          >
+            로그인
+          </button>
         </RegistMidStlye>
-        <button onClick={logInHandle}>로그인</button>
       </RegistMain>
+      <RegistLink>
+        <Link to={"/regist"} style={{ textDecoration: "none" }}>
+          <div> 아직 회원가입을 안하셨나요? </div>
+        </Link>
+      </RegistLink>
     </>
   );
 };
 export default Login2Components;
 
-const KakaoApi = styled.div`
-  button {
-    cursor: pointer;
-  }
+const BoxShadow = styled.div`
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
 `;
 
 const RegistMain = styled.div`
+  margin-top: 33px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   button {
+    margin-top: 15px;
     background-color: rgb(240, 165, 0);
     outline: none;
     border: 0;
@@ -85,6 +122,13 @@ const RegistMain = styled.div`
     font-weight: bold;
     color: rgb(244, 244, 244);
     border-radius: 5px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    transition: 0.4s ease-in-out;
+    &:disabled {
+      transition: 0.8s ease-in-out;
+      background-color: rgb(216, 217, 207);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.1);
+    }
   }
 `;
 const RegistTopStlye = styled.div`
@@ -94,7 +138,7 @@ const RegistTopStlye = styled.div`
 `;
 const RegistMidStlye = styled.div`
   * {
-    margin-bottom: 8px;
+    margin-bottom: 15px;
   }
 
   display: flex;
@@ -113,7 +157,7 @@ const RegistMidStlye = styled.div`
     padding: 7px;
     padding-top: 0px;
     padding-left: 0px;
-    font-size: 14px;
+    font-size: 8px;
     font-weight: 600;
   }
 
@@ -124,8 +168,10 @@ const RegistMidStlye = styled.div`
     outline: none;
     border: 0;
     background-color: rgb(244, 244, 244);
+    border-bottom: solid 1px rgba(216, 217, 207, 0.7);
     padding-left: 10px;
     font-size: 15px;
+    background-color: transparent;
   }
 
   button {
@@ -136,121 +182,16 @@ const RegistMidStlye = styled.div`
   div h6 {
     color: rgb(244, 244, 244);
   }
-  .idBtnOverlap {
-    width: 225px;
-    height: 35px;
-    margin-top: 17px;
-    margin-bottom: 17px;
-  }
-
-  .kakaoAdressP {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .kakaoAdress {
-    width: 170px;
-    height: 50px;
-  }
 `;
-const AcceptStlye = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  flex-direction: column;
-  width: 350px;
-  border: 1.5px solid rgb(244, 244, 244);
-  margin-top: 5px;
-  margin-bottom: 30px;
-  cursor: pointer;
 
+const RegistLink = styled.div`
+  margin-top: 33px;
   div {
-    padding: 0 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 55px;
-    gap: 10px;
-  }
-  div input[type="checkbox"] {
-    display: none;
-  }
-
-  div input[type="checkbox"] + label {
-    display: inline-block;
-    width: 25px;
-    height: 25px;
-    position: relative;
-    border: 1px solid rgb(244, 244, 244);
-  }
-
-  div input[id="check1"]:checked + label::after,
-  div input[id="check2"]:checked + label::after,
-  div input[id="check3"]:checked + label::after,
-  div input[id="check4"]:checked + label::after,
-  div input[id="check5"]:checked + label::after,
-  div input[id="check6"]:checked + label::after {
-    content: "✔";
-    display: inline-block;
-    font-size: 15px;
-    width: 25px;
-    height: 25px;
-    text-align: center;
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    background-color: rgb(240, 165, 0);
-    border-color: rgb(240, 165, 0);
-  }
-
-  div h6 {
-    font-size: 12px;
-    color: rgb(26, 28, 32);
-  }
-
-  div:nth-child(2)::after,
-  div:nth-child(3)::after,
-  div:nth-child(4)::after {
-    margin-left: -5px;
-    content: "(필수)";
-    font-size: 10px;
+    padding-bottom: 7px;
+    border-bottom: solid 1px rgba(216, 217, 207, 0.7);
     color: rgb(240, 165, 0);
-  }
-  div:nth-child(5)::after,
-  div:nth-child(6)::after {
-    margin-left: -5px;
-    content: "(선택)";
-    font-size: 10px;
-    color: rgb(240, 165, 0);
-  }
-
-  div:nth-child(1)::after {
-    margin-left: -5px;
-    content: "선택항목에 대한 동의 포함";
-    font-size: 5px;
+    text-shadow: 1.5px 1.5px rgba(207, 117, 0, 0.1);
     font-weight: bold;
-    color: rgb(240, 165, 0);
-  }
-`;
-
-const LoginStyle = styled.div`
-  margin-bottom: 50px;
-
-  div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-  }
-  div h6 {
-    font-size: 15px;
-  }
-  div h6::after {
-    margin-left: 12px;
-    content: "로그인";
-    text-decoration: underline;
+    font-size: 30px;
   }
 `;

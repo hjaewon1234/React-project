@@ -23,11 +23,16 @@ export const getUserThunk = createAsyncThunk(
 
 const userInfoSlice = createSlice({
   name: "userInfo",
-  initialState: { id: "", pw: "", name: "" },
+  initialState: { userId: "", userName: "" },
   reducers: {
     setUser: (state, action) => {
-      state.userInfo.user = action.payload;
+      console.log(action.payload);
+      return action.payload;
     },
+    // setLogOut(state) {
+    //   console.log(state);
+    //   return state;
+    // },
   },
   extraReducers: (bulider) => {
     // 추가적인 리듀서를 작성한다.
@@ -37,8 +42,8 @@ const userInfoSlice = createSlice({
       })
       .addCase(userInfoThunk.fulfilled, (state, { payload }) => {
         console.log(current(state));
-        // state = state;
-        // state.userInfo.user = action.payload;
+        state = state;
+        state.userInfo.user = action.payload;
         return { ...payload };
       })
       .addCase(userInfoThunk.rejected, (state, action) => {
@@ -57,12 +62,12 @@ const userInfoSlice = createSlice({
         console.log("reject");
       });
   },
-  extraReducers: {
-    [userInfoThunk.fulfilled]: (state, { payload }) => {
-      console.log("fullfilled", current(state));
-      return payload;
-    },
-  },
+  // extraReducers: {
+  //   [userInfoThunk.fulfilled]: (state, { payload }) => {
+  //     console.log("fullfilled", current(state));
+  //     return payload;
+  //   },
+  // },
 });
 
 export const action = userInfoSlice.actions;

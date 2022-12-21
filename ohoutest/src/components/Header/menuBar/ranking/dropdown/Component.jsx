@@ -1,6 +1,10 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import axios from "axios";
+import { action } from "../../../../../modules/search";
+import useDidMountEffect from "../../../../util/useDidMountEffect";
 
 let dropdownElems = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 // rankDb에서 rank 가져오기
@@ -16,26 +20,28 @@ export const DropdownComp = () => {
   const [elemCount, setElemCount] = useState(0);
   const [transYAnim, setTransYAnim] = useState("");
 
+  const dispatch = useDispatch();
+  const navigator = useNavigate();
+
   useEffect(() => {}, [mouseEnter]);
 
   let timeoutId1;
   let timeoutId2;
-
   useEffect(() => {
     clearTimeout(timeoutId1);
-    clearTimeout(timeoutId2);
     setTransYAnim(() => "");
     timeoutId1 = setTimeout(() => {
       setElemCount((state) => (state + 1) % 10);
     }, 1000);
+  }, [selected]);
+
+  useDidMountEffect(() => {
+    clearTimeout(timeoutId2);
+    setSelected(() => dropdownElems[elemCount]);
+    setSelected2(() => dropdownElems[(elemCount + 1) % 10]);
     timeoutId2 = setTimeout(() => {
       setTransYAnim(() => "transYAnim");
     }, 500);
-  }, [selected]);
-
-  useEffect(() => {
-    setSelected(() => dropdownElems[elemCount]);
-    setSelected2(() => dropdownElems[(elemCount + 1) % 10]);
   }, [elemCount]);
 
   return (
@@ -47,43 +53,77 @@ export const DropdownComp = () => {
         setMouseEnter((state) => "");
       }}
     >
-      <div
-        className={`${
-          mouseEnter == "hover" ? "selected " + transYAnim : transYAnim
-        } `}
-      >
-        <div>
-          <span>{elemCount + 1} </span>
-          <img className={"up"} src="./img/caret-up-solid.svg" />
-          {` ${selected}`}
-        </div>
-        <div>
-          <span>{(elemCount + 2) % 10} </span>
-          <img className={"up"} src="./img/caret-up-solid.svg" />
-          {` ${selected2}`}
-        </div>
-      </div>
-      <ul>
-        {dropdownElems.map((item, index) => (
-          <li key={`dropdownElemKey-${index}`}>
-            <span>{index + 1} </span>
-            <img className={"down"} src="./img/caret-down-solid.svg" />{" "}
-            {` ${item}`}
-          </li>
-        ))}
-      </ul>
+      {selected == "1" ? (
+        <></>
+      ) : (
+        <>
+          <div className={`${mouseEnter == "hover" ? "selected " + "" : ""} `}>
+            <div className={transYAnim}>
+              <span>{elemCount + 1} </span>
+              <img className={"up"} src="/api/downloadcaretupsolid.png" />
+              <p>{` ${selected}`}</p>
+            </div>
+            <div className={transYAnim}>
+              <span>
+                {(elemCount + 2) % 10 != 0 ? (elemCount + 2) % 10 : 10}{" "}
+              </span>
+              <img className={"up"} src="/api/downloadcaretupsolid.png" />
+              <p>{` ${selected2}`}</p>
+            </div>
+          </div>
+          <ul>
+            <li>인기제품순위</li>
+            {dropdownElems.map((item, index) => (
+              <li
+                key={`dropdownElemKey-${index}`}
+                onClick={() => {
+                  dispatch(action.setSword(item));
+                  navigator("/search/" + item);
+                }}
+              >
+                <div className="rankDropdownList">
+                  <span>{index + 1} </span>
+                  <img
+                    className={"down"}
+                    src="/api/downloadcaretdownsolid.png"
+                  />
+                </div>{" "}
+                {` ${item}`}
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
     </DropBox>
   );
 };
 
 const DropBox = styled.div`
-  padding: 5px 20px 20px 20px;
-  width: 300px;
-  height: 29px;
+  padding: 5px 0px 24px 20px;
+  width: 500px;
+  height: 34px;
   background-color: #f4f4f4;
   border-radius: 5px;
   overflow-y: hidden;
   overflow-x: hidden;
+
+  & > div {
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+  }
+  & > div > div {
+    display: flex;
+    align-items: center;
+    height: 30px;
+    column-gap: 15px;
+    justify-content: right;
+  }
+  & > div > div > p {
+    white-space: nowrap;
+    overflow-x: hidden;
+    color: #1a1c20;
+  }
 
   span {
     font-weight: 600;
@@ -101,39 +141,42 @@ const DropBox = styled.div`
   }
 
   .transYAnim {
-    animation: translateY 0.5s;
-  }
-
-  .selected {
+    animation: translateY 0.65s;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+
+  .rankDropdownList {
     display: flex;
-    align-items: center;
-    column-gap: 10px;
+    column-gap: 15px;
+  }
+  .rankDropdownList :first-child {
+    width: 20px;
   }
 
   ul {
     position: absolute;
     display: none;
-    right: 10px;
-    width: 280px;
-    margin-top: 10px;
+    right: 0px;
+    width: 480px;
+    top: 30px;
     list-style-type: none;
+    width: inherit;
   }
   .selected + ul {
     display: block;
   }
   ul > li {
     display: flex;
+    justify-content: space-between;
     height: 50px;
-    overflow: hidden;
     white-space: nowrap;
-    text-overflow: ellipsis;
+    overflow: hidden;
     column-gap: 10px;
     padding-left: 20px;
     padding: 10px 0px 10px 20px;
-    background-color: #f4f4f4;
+    background-color: #f4f4f4d3;
     z-index: 2;
     color: #1a1c20;
     width: inherit;
@@ -141,6 +184,19 @@ const DropBox = styled.div`
     span {
       font-weight: 600;
     }
+    cursor: pointer;
+  }
+  ul > li:first-child {
+    width: 100%;
+    justify-content: right;
+    padding-right: 10px;
+    padding-top: 20px;
+    font-weight: 600;
+    border-bottom: 1px solid #1a1c205c;
+  }
+  ul > li:not(:first-child):hover {
+    background-color: #1a1c205c;
+    color: #f4f4f4;
   }
 
   @keyframes translateY {
@@ -148,7 +204,7 @@ const DropBox = styled.div`
       transform: translateY(0px);
     }
     to {
-      transform: translateY(-42px);
+      transform: translateY(-60px);
     }
   }
 `;

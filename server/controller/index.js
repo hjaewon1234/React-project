@@ -1,4 +1,3 @@
-import userDatabase from "../Database.js";
 import jwt from "jsonwebtoken";
 import db from "../models/index.js";
 
@@ -222,7 +221,7 @@ const login = async (req, res, next) => {
     res.send("로그인 되어있습니다.");
   } else {
     const tempUser = await test(req);
-
+    console.log(req.body);
     if (!tempUser) {
       res.status(403).json("Not Authorized");
     } else {
@@ -230,7 +229,7 @@ const login = async (req, res, next) => {
         // access Token 발급
         const accessToken = jwt.sign(
           {
-            username: tempUser.userame,
+            username: tempUser.userName,
             userId: tempUser.userId,
           },
           process.env.ACCESS_SECRET,
@@ -242,7 +241,7 @@ const login = async (req, res, next) => {
         // refresh Token 발급
         const refreshToken = jwt.sign(
           {
-            username: tempUser.username,
+            username: tempUser.userName,
             userId: tempUser.userId,
           },
           process.env.REFRECH_SECRET,
@@ -254,15 +253,21 @@ const login = async (req, res, next) => {
         // token 전송
         res.cookie("accessToken", accessToken, {
           secure: false,
-          httpOnly: true,
+          httpOnly: false,
+          // httpOnly: true,
+          // Credential: true,
         });
 
         res.cookie("refreshToken", refreshToken, {
           secure: false,
-          httpOnly: true,
+          httpOnly: false,
+          // httpOnly: true,
+          // Credential: true,
         });
 
-        res.status(200).json("login success");
+        res
+          .status(200)
+          .json({ userId: tempUser.userId, userName: tempUser.userName });
       } catch (error) {
         res.status(500).json(error);
       }
@@ -281,6 +286,7 @@ const accessToken = async (req, res) => {
     const { userPw, ...others } = userData;
 
     res.status(200).json(others);
+    console.log("othersothersothersothersothers", others);
   } catch (error) {
     res.status(500).json(error);
   }
@@ -308,7 +314,7 @@ const refreshToken = async (req, res) => {
 
     res.cookie("accessToken", accessToken, {
       secure: false,
-      httpOnly: true,
+      httpOnly: false,
     });
 
     res.status(200).json("Access Token Recreated");
@@ -344,7 +350,7 @@ const loginSuccess = async (req, res, next) => {
 
       res.cookie("accessToken", accessToken, {
         secure: false,
-        httpOnly: true,
+        httpOnly: false,
       });
 
       global.userId = data.userId;
@@ -357,8 +363,6 @@ const loginSuccess = async (req, res, next) => {
 const check = (req, res) => {
   if (global.userId) {
     res.status(200).json({ userId: global.userId, userName: global.userName });
-  } else {
-    res.status(400).send("로그인 되어있지 않습니다.");
   }
 };
 
@@ -369,6 +373,8 @@ const logout = (req, res) => {
     global.userId = "";
     global.userName = "";
     res.status(200).json("Logout Success");
+
+    // res.status(200).json({ userId: global.userId, userName: global.userName });
   } catch (error) {
     res.status(500).json(error);
   }

@@ -28,6 +28,7 @@ router.route("/").post((req, res) => {
 // /api/product/
 router.route("/getProducts").post((req, res) => {
   db.Products.findAll().then((data) => {
+    // console.log(data[0].dataValues);
     const sendData = [];
     data.map((item, index) => {
       if (

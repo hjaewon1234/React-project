@@ -9,7 +9,7 @@ const initialState = {
   inputAdress1: "",
 };
 
-export const signUpUser = createAsyncThunk("signUpUser", async (body) => {
+export const signUpUser = createAsyncThunk("/user/signUpUser", async (body) => {
   console.log(body);
   const { data } = await axios
     .post("http://localhost:8080/api/user/getUsers", {
@@ -18,44 +18,69 @@ export const signUpUser = createAsyncThunk("signUpUser", async (body) => {
     })
     .catch((error) => {
       console.log(error);
+    })
+    .then((data) => {
+      console.log(data.data);
+      if (data.data.status == 401) {
+        alert("중복 아이디가 있습니다. 다시 확인해주세요");
+      } else if (data.data.status == 402) {
+        alert("비밀번호 입력을 다시 확인해주세요");
+      } else if (data.data.status == 403) {
+        alert("중복되는 닉네임이 있습니다. 다시 확인해주세요");
+      } else if (data.data.status == 405) {
+        alert("아이디 영문으로만 입력 해주세요");
+      } else if (data.data.status == 200) {
+        alert("회원가입이 완료되었습니다.");
+        window.open("/", "_self");
+      } else {
+      }
     });
   console.log(data);
   return data;
 });
 // axios.post("경로", {담아서 보낼 데이터})
 
-export const overlapId = createAsyncThunk("overlapId", async (body) => {
-  console.log(body);
-  const { data } = await axios
-    .post("http://localhost:8080/api/user/overlapId", {
-      ...body.inputId,
-      body: JSON.stringify(body.inputId),
-    })
-    .then((userId) => {
-      if (userId.inputId) {
-        alert("이미 아이디 있음");
-      } else {
-        alert("이미 아이디 없음");
+export const overlapId = createAsyncThunk(
+  "/user/overlapId",
+  async (inputId) => {
+    console.log(inputId, JSON.stringify(inputId.inputId));
+    const { data } = await axios.post(
+      "http://localhost:8080/api/user/overlapId",
+      {
+        inputId: JSON.stringify(inputId.inputId),
       }
-    });
-  console.log(data);
-  return data;
-});
+    );
+    // .then((data) => {
+    if (data.status == 401) {
+      alert("중복되는 아이디가 있습니다. 다시 확인해주세요");
+    } else if (data.status == 402) {
+      alert("비밀번호 입력을 다시 확인해주세요");
+    } else if (data.status == 403) {
+      alert("중복되는 닉네임이 있습니다. 다시 확인해주세요");
+    } else if (data.status == 405) {
+      alert("아이디 영문으로만 입력 해주세요");
+    } else if (data.status == 200) {
+      alert("중복되는 아이디가 없습니다.");
+    } else {
+    }
+    // });
+    console.log("data", data);
+    return data;
+  }
+);
 
 export const overlapNickName = createAsyncThunk(
-  "overlapNickName",
-  async (body) => {
-    console.log(body);
+  "/user/overlapNickName",
+  async (inputName) => {
     const { data } = await axios
       .post("http://localhost:8080/api/user/overapNickName", {
-        ...body.inputName,
-        body: JSON.stringify(body.inputName),
+        inputName: JSON.stringify(inputName.inputName),
       })
-      .then((userName) => {
-        if (userName.inputName) {
-          alert("이미 닉네임 있음");
-        } else {
-          alert("이미 아이디 없음");
+      .then((data) => {
+        if (data.data.status == 401) {
+          alert("중복되는 닉네임이 있습니다.");
+        } else if (data.data.status == 200) {
+          alert("중복되는 닉네임이 없습니다.");
         }
       });
 
@@ -72,45 +97,47 @@ const registSlice = createSlice({
       state.userRegist.user = action.payload;
     },
   },
-  extraReducers: {
-    [signUpUser.pending]: (state, action) => {
-      console.log("pending");
-    },
-    [signUpUser.fulfilled]: (state, { payload }) => {
-      console.log("fulfilled", payload);
-      console.log(current(state));
-      return payload;
-    },
-    [signUpUser.rejected]: (state, action) => {
-      console.log("rejected");
-    },
-    // 회원가입 //////////////////////////////
+  extraReducers: (bulider) => {
+    // 회원가입
+    bulider
+      .addCase(signUpUser.pending, (state, action) => {
+        console.log("pending");
+      })
+      .addCase(signUpUser.fulfilled, (state, { payload }) => {
+        console.log("fulfilled", payload);
+        console.log(current(state));
+        return { ...payload };
+      })
+      .addCase(signUpUser.rejected, (state, action) => {
+        console.log("rejected");
+      })
 
-    // 중복Id //////////////////////////////
-    [overlapId.pending]: (state, action) => {
-      console.log("pending");
-    },
-    [overlapId.fulfilled]: (state, { payload }) => {
-      console.log("fulfilled", payload);
-      console.log(current(state));
-      return payload;
-    },
-    [overlapId.rejected]: (state, action) => {
-      console.log("rejected");
-    },
+      // 중복ID
+
+      .addCase(overlapId.pending, (state, action) => {
+        console.log("pending");
+      })
+      .addCase(overlapId.fulfilled, (state, { payload }) => {
+        console.log("fulfilled", payload);
+        console.log(current(state));
+        return { ...payload };
+      })
+      .addCase(overlapId.rejected, (state, action) => {
+        console.log("rejected");
+      })
+
+      .addCase(overlapNickName.pending, (state, action) => {
+        console.log("pending");
+      })
+      .addCase(overlapNickName.fulfilled, (state, { payload }) => {
+        console.log("fulfilled", payload);
+        console.log(current(state));
+        return { ...payload };
+      })
+      .addCase(overlapNickName.rejected, (state, action) => {
+        console.log("rejected");
+      });
     // 중복NickName ///////////////////
-
-    [overlapNickName.pending]: (state, action) => {
-      console.log("pending");
-    },
-    [overlapNickName.fulfilled]: (state, { payload }) => {
-      console.log("fulfilled", payload);
-      console.log(current(state));
-      return payload;
-    },
-    [overlapNickName.rejected]: (state, action) => {
-      console.log("rejected");
-    },
   },
 });
 

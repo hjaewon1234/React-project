@@ -18,7 +18,7 @@ export default class Search extends Sequelize.Model {
     );
   }
   static associate(db) {
-    Search.belongsTo(db.Products, {
+    db.Search.belongsTo(db.Products, {
       foreignKey: "products_id",
       targetKey: "id",
     });

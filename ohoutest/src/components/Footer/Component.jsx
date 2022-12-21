@@ -82,7 +82,7 @@ const FooterComponent = () => {
               </div>
             </div>
             <div className="footer-item-img-layer-item">
-              <img src="img/footer/dnv.png" />
+              <img src="/img/footer/dnv.png" />
               <div className="footer-item-img-layer-item-container">
                 <span>
                   고객님이 현금결제한 금액에 대해 우리은행과 채무지급보증 계약을
@@ -101,14 +101,14 @@ const FooterComponent = () => {
             부담합니다.
           </div>
           <div className="footer-item-img-layer footer-item-icon-layer">
-            <img src="img/footer/icons/youtube.svg" />
-            <img src="img/footer/icons/instagram.svg" />
-            <img src="img/footer/icons/facebook.svg" />
-            <img src="img/footer/icons/twitter.svg" />
-            <img src="img/footer/icons/naver.svg" />
-            <img src="img/footer/icons/naverLine.svg" />
-            <img src="img/footer/icons/kakaoTalk.svg" />
-            <img src="img/footer/icons/kakaoStory.svg" />
+            <img src="/img/footer/icons/youtube.svg" />
+            <img src="/img/footer/icons/instagram.svg" />
+            <img src="/img/footer/icons/facebook.svg" />
+            <img src="/img/footer/icons/twitter.svg" />
+            <img src="/img/footer/icons/naver.svg" />
+            <img src="/img/footer/icons/naverLine.svg" />
+            <img src="/img/footer/icons/kakaoTalk.svg" />
+            <img src="/img/footer/icons/kakaoStory.svg" />
           </div>
           <div>
             <div>
@@ -125,6 +125,7 @@ const FooterComponent = () => {
 export default FooterComponent;
 
 const FooterBox = styled.div`
+  margin-top: 50px;
   width: 100%;
   background-color: #e9e9e9;
   font-size: 12px;
@@ -245,6 +246,6 @@ const FooterBox = styled.div`
   .cloned-by {
     margin-top: 3px;
     font-weight: bold;
-    color: #ff9090;
+    color: #f0a500;
   }
 `;

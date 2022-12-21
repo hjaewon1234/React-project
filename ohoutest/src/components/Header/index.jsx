@@ -24,15 +24,18 @@ export default Header;
 const HeaderBox = styled.div`
   width: 100%;
   position: sticky;
-  z-index: 1;
+  z-index: 100;
   left: 0px;
   right: 0px;
   top: 0px;
+
   hr {
     border-bottom: none;
+    border-top: 1px solid #f0a500;
   }
   .fixed-container {
     background-color: #f4f4f4;
     margin: 0 auto;
+    position: relative;
   }
 `;

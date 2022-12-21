@@ -54,8 +54,6 @@ router.route("/qnaInfo").post(async (req, res) => {
     req.body.number * 10,
     req.body.number * 10 + 10
   );
-  console.log(sliceQnaInfo[0].dataValues);
-  console.log(tempDbFind[0].dataValues);
   // 이런 형식으로 보내면 User 라는 칼럼으로 userId, userName이 객체로 들어간다.
   res.send(sliceQnaInfo);
 });
