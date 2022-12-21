@@ -5,6 +5,21 @@ import db from "../models/index.js";
 import Users from "../models/user.js";
 import Qna from "../models/Qna.js";
 import Products from "../models/product.js";
+import fs from "fs";
+
+async function setImages() {
+  await fs.readdir("./Img", (err, datas) => {
+    console.log(datas.length);
+    for (let i = 0; i < datas.length; ++i) {
+      router.get(`/download${encodeURI(datas[i])}`, (req, res) => {
+        fs.readFile("./Img/" + datas[i], (err, data) => {
+          res.writeHead(200, { "Content-Type": "text/html" });
+          res.end(data);
+        });
+      });
+    }
+  });
+}
 
 router.route("/productManage").post(async (req, res) => {
   const productInfo = await db.Products.findAll();
@@ -108,21 +123,43 @@ router.route("/answerQna").post(async (req, res) => {
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "uploads/");
+    cb(null, "Img/");
+    // destination은 저장할 경로
   },
   filename: (req, file, cb) => {
-    const newFileName = file.originalname;
+    const newFileName = (file.originalname = Buffer.from(
+      file.originalname,
+      "latin1"
+    ).toString("utf8"));
     cb(null, newFileName);
   },
 });
 
 const upload = multer({ storage: storage });
+// storage는 저장할 공간에 대한 정보, 디스크나 메모리 저장 기능
 
 router.route("/uploadFile").post(upload.array("file", 4), (req, res) => {
-  console.log(req.files);
-  console.log(req.body);
+  let joinArr = [];
+  for (let i = 0; i < req.files.length; i++) {
+    joinArr.push(req.files[i].originalname);
+  }
+  console.log(typeof parseInt(req.body.price));
+  const intPrice = parseInt(req.body.price);
+  db.Products.create({
+    name: req.body.name,
+    price: intPrice,
+    brand: req.body.brand,
+    description: req.body.description,
+    img: joinArr.join(),
+    category: req.body.smallsort,
+  });
+  setImages();
+  fs.stat("./Img", (error, stats) => console.log("파일크기", stats.size));
+  res.send("작업완료");
 });
 
-// 여러개 파일을 어떻게 받을 지
+// fs를 봐야댄다..
+// 여러개 파일을 어떻게 받을 지 // 변환 // => db에 쑤셔박고 // => 관계
+// 파일들의 이름을 어떻게 설정 해 줄 지
 
 export default router;

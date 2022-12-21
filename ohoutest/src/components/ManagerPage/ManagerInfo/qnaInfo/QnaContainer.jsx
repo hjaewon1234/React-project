@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import QnaComponent from "./QnaComponent";
@@ -9,21 +9,25 @@ const QnaContainer = () => {
   const dispatch = useDispatch();
   const tempQnaInfoThunk = (num) => dispatch(qnaInfoThunk(num));
   const tempQnaPagingThunk = () => dispatch(qnaPagingThunk());
-  const tempChange = useSelector((state) => state.tempStateChange);
 
+  const [color, setColor] = useState(0);
   useEffect(() => {
     tempQnaInfoThunk(0);
     tempQnaPagingThunk();
-  }, [tempChange]);
+  }, []);
+
   const qnaInfo = useSelector((state) => state.qnaInfo);
   const qnaPaging = useSelector((state) => state.qnaPaging);
 
+  console.log(qnaInfo, qnaPaging, color);
   return (
     <QnaComponent
       title={"문의 사항 확인"}
       qnaInfo={qnaInfo}
       qnaPaging={qnaPaging}
       tempQnaInfoThunk={tempQnaInfoThunk}
+      color={color}
+      setColor={setColor}
     />
   );
 };
