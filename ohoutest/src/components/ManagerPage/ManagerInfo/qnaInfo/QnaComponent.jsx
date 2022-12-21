@@ -1,11 +1,17 @@
 import styled from "styled-components";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const QnaComponent = ({ title, qnaInfo, qnaPaging, tempQnaInfoThunk }) => {
+const QnaComponent = ({
+  title,
+  qnaInfo,
+  qnaPaging,
+  tempQnaInfoThunk,
+  color,
+  setColor,
+}) => {
   const [accodion, setAccodion] = useState(true);
-  const [color, setColor] = useState(0);
 
   return (
     <Infodiv>

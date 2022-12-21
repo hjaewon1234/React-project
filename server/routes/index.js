@@ -69,6 +69,7 @@ const users = [
 // });
 
 // 이미지 등록
+
 async function setImages() {
   await fs.readdir("./Img", (err, datas) => {
     for (let i = 0; i < datas.length; ++i) {

@@ -1,8 +1,36 @@
 import styled from "styled-components";
 import { useState } from "react";
 
-const FileAddComponent = ({ title, upload }) => {
+const FileAddComponent = ({
+  title,
+  upload,
+  homeAppArr,
+  furnitureArr,
+  homeAppMiddleFunc,
+  furnitureMiddleFunc,
+  tempImgArr,
+}) => {
   const [accodion, setAccodion] = useState(true);
+  const [bigSort, setBigSort] = useState(0);
+  const [middleSort, setMiddleSort] = useState(0);
+  const [tempImgFile, setTempImgFile] = useState([]);
+
+  function tempImgArr(e) {
+    const imageLists = e.target.files;
+    let imageUrlLists = [...tempImgFile];
+    for (let i = 0; i < imageLists.length; i++) {
+      const currentImageUrl = URL.createObjectURL(imageLists[i]);
+      // URL.createObjectURL은 특정 파일 객체나 데이터의 참조를 가르키는 새로운 객체
+      // URL을 생성하는 메서드 이다. 생성한 값은 현재 창에서 만 유효하다.
+      console.log(currentImageUrl, imageLists[i]);
+      imageUrlLists.push(currentImageUrl);
+    }
+    if (imageUrlLists.length > 4) {
+      imageUrlLists = imageUrlLists.slice(0, 4);
+    }
+
+    setTempImgFile(imageUrlLists);
+  }
 
   return (
     <Infodiv>
@@ -25,13 +53,97 @@ const FileAddComponent = ({ title, upload }) => {
           }}
         >
           <AccoContents>
-            <form encType="multipart/form-data" onSubmit={upload}>
-              <input type="text" name="name" placeholder="name" />
-              <input type="number" name="price" placeholder="price" />
-              <input type="text" name="brand" placeholder="brand" />
-              <input type="text" name="description" placeholder="description" />
-              <input type="file" name="file" multiple />
-              <button type="submit ">상품 추가</button>
+            <form
+              encType="multipart/form-data"
+              onSubmit={upload}
+              acceptCharset="utf-8"
+            >
+              <div>
+                <div>상품 이름 :</div>
+                <div>
+                  <input type="text" name="name" placeholder="name" />
+                </div>
+              </div>
+              <div>
+                <div>상품 가격 :</div>
+                <div>
+                  <input type="number" name="price" placeholder="price" />
+                </div>
+              </div>
+              <div>
+                <div>상품 브랜드명 :</div>
+                <div>
+                  <input type="text" name="brand" placeholder="brand" />
+                </div>
+              </div>
+              <div>
+                <div>상품 설명 :</div>
+                <div>
+                  <input
+                    type="text"
+                    name="description"
+                    placeholder="description"
+                  />
+                </div>
+              </div>
+              <div style={{ alignItems: "center" }}>
+                <div>상품 이미지</div>
+                <div>
+                  {tempImgFile.map((image, index) => (
+                    <img
+                      src={image}
+                      style={{ width: "70px", marginRight: "10px" }}
+                      key={index}
+                    />
+                  ))}
+                </div>
+                <div>
+                  <input
+                    multiple
+                    type="file"
+                    name="file"
+                    onChange={tempImgArr}
+                    onClick={() => setTempImgFile(() => [])}
+                  />
+                </div>
+              </div>
+              <div>
+                <select
+                  name="bigsort"
+                  onChange={(e) => {
+                    setBigSort((state) => (state = e.target.value));
+                  }}
+                >
+                  <option value="0">가구</option>
+                  <option value="1">가전</option>
+                </select>
+                <select
+                  name="middlesort"
+                  onChange={(e) => {
+                    setMiddleSort((state) => (state = e.target.value));
+                  }}
+                >
+                  {bigSort == "0"
+                    ? furnitureArr.map((item, index) => (
+                        <option key={index} value={index}>
+                          {item}
+                        </option>
+                      ))
+                    : homeAppArr.map((item, index) => (
+                        <option key={index} value={index}>
+                          {item}
+                        </option>
+                      ))}
+                </select>
+                <select name="smallsort">
+                  {bigSort == "0"
+                    ? furnitureMiddleFunc(middleSort)
+                    : homeAppMiddleFunc(middleSort)}
+                </select>
+              </div>
+              <div>
+                <button type="submit">상품 추가</button>
+              </div>
             </form>
           </AccoContents>
         </InfoContentDiv>
@@ -59,18 +171,7 @@ const InfoContentDiv = styled.div`
   background-color: #f4f4f4;
   border-radius: 0 0 10px 10px;
 `;
-const PagingDiv = styled.div`
-  display: flex;
-  justify-content: center;
-  column-gap: 10px;
-  padding-bottom: 10px;
-`;
-const NumberBox = styled.div`
-  border: 1px solid gray;
-  border-radius: 5px;
-  width: 20px;
-  cursor: pointer;
-`;
+
 const AccoContents = styled.div`
   padding: 10px;
 
@@ -81,25 +182,33 @@ const AccoContents = styled.div`
 
     row-gap: 20px;
   }
-  & > form > input {
-    width: 70%;
+  & > form > div {
+    display: flex;
+    width: 85%;
+    column-gap: 10px;
     margin: auto;
+    align-item: center;
+    > div > input {
+      width: 350px;
+    }
+  }
+  & > form > div > select {
+    margin-right: 20px;
+    width: 150px;
+    height: 25px;
+  }
+
+  & > form > div > button {
+    border: 1px solid black;
+    padding: 3px;
+    border-radius: 7px;
+    font-weight: bold;
   }
 `;
-const UnitDiv = styled.div`
-  padding: 10px 0;
-  border-bottom: 1px solid black;
-`;
+
 const UpperAcco = styled.div`
   display: flex;
   justify-content: space-between;
   padding-left: 3%;
   cursor: pointer;
-`;
-const ShippingDiv = styled.div`
-  border: 1px solid black;
-  padding: 3px;
-  border-radius: 7px;
-  font-weight: bold;
-  background-color: #f0a500;
 `;

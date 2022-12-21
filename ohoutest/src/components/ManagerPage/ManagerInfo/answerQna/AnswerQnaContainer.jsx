@@ -8,20 +8,28 @@ import { action } from "../../../../modules/tempStateChange";
 const AnswerQnaContainer = () => {
   const dispatch = useDispatch();
   const qnaInfo = useSelector((state) => state.qnaInfo);
-  const tempState = useSelector((state) => state.tempStateChange);
-  const tempStateChange = () =>
-    dispatch(tempStateChange(action.setTempStateChange));
+  const tempQnaInfoThunk = (num) => dispatch(qnaInfoThunk(num));
 
-  const axiosFunc = async (id, answerQnaText) => {
+  const axiosFunc = async (id, answerQnaText, index) => {
     const { data } = await axios.post(
       "http://localhost:8080/api/manager/answerQna",
       { id: id, qnaAnswer: answerQnaText }
     );
 
+    parseInt(qnaInfo[index].id / 10) == qnaInfo[index].id / 10
+      ? tempQnaInfoThunk(qnaInfo[index].id / 10 - 1)
+      : tempQnaInfoThunk(parseInt(qnaInfo[index].id / 10));
+
     return data;
   };
 
-  return <AnswerQnaComponent qnaInfo={qnaInfo} axiosFunc={axiosFunc} />;
+  return (
+    <AnswerQnaComponent
+      qnaInfo={qnaInfo}
+      axiosFunc={axiosFunc}
+      tempQnaInfoThunk={tempQnaInfoThunk}
+    />
+  );
 };
 
 export default AnswerQnaContainer;

@@ -4,12 +4,13 @@ import { useState, useEffect } from "react";
 
 import styled from "styled-components";
 
-const AnswerQnaComponent = ({ qnaInfo, axiosFunc }) => {
+const AnswerQnaComponent = ({ qnaInfo, axiosFunc, tempQnaInfoThunk }) => {
   const { id } = useParams(useLocation());
   const [state, setState] = useState(qnaInfo[id].qnaAnswer);
   // const [dbConnect, setDbConnect] =
   // db통신이 있을때 변하는 걸 useState로 해준다?
-
+  const numberingId = qnaInfo[id].id;
+  console.log(numberingId);
   return (
     <AnswerQnaDiv>
       <AnswerQnaInner>
@@ -18,17 +19,15 @@ const AnswerQnaComponent = ({ qnaInfo, axiosFunc }) => {
           <div>{qnaInfo[id].Product.name}</div>
         </div>
         <div>{qnaInfo[id].qnaText}</div>
-        <textarea onInput={(e) => setState(e.target.value)} value={state} />
+        <textarea
+          onInput={(e) => setState(e.target.value)}
+          value={state || ""}
+        />
+
         <Link to="/managerInfo">
           <button
             onClick={() => {
-              axiosFunc(qnaInfo[id].id, state.toString());
-
-              // 문의사항에 관련된 거를 한번 불러와주면된다.
-              // 불러올 방법은..?=> 결국 db를 무조건 한번 불러와야된다
-              // thunk를 써야된다. num에 대한것을 어떻게 정의해 줄까
-              // 10 / 20 이런거
-              // parseInt(id/10)>id/10 ? id/10 - 1 : parseInt(id/10)
+              axiosFunc(numberingId, state.toString(), id);
             }}
           >
             답변 제출

@@ -109,6 +109,7 @@ const NumberBox = styled.div`
 `;
 const AccoContents = styled.div`
   padding: 10px;
+  white-space: nowrap;
   & > div {
     display: flex;
     justify-content: space-between;
