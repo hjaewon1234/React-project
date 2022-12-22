@@ -51,6 +51,9 @@ const CartProductCardComp = ({
               );
           })}
         </select>
+        <div className="option-count">{`${(
+          price * totalCount[index]
+        ).toLocaleString()} 원`}</div>
       </>
     );
   };
@@ -77,11 +80,11 @@ const CartProductCardComp = ({
       <MainView>
         <img src="/api/downloadLG전자_LG디오스베이직오브제컬렉션1.jpg" />
         <div>
-          <p>
+          <p className="p768px">
             [{brand}] {name}
           </p>
           <div>
-            <div>
+            <div className="p768px">
               <span>무료배송</span>
               <hr />
               <span>일반택배</span>
@@ -102,12 +105,12 @@ const CartProductCardComp = ({
               X
             </div>
           </div>
-          <div>{optionDiv()}</div>
+          <div className="selectDiv">{optionDiv()}</div>
         </div>
       </CountView>
       <div className="optionDiv">
         <span>옵션변경 | 바로구매</span>{" "}
-        <span>{`${price.toLocaleString()} 원`}</span>
+        <span>{`${(price * totalCount[index]).toLocaleString()} 원`}</span>
       </div>
     </CartProductCardBox>
   );
@@ -121,11 +124,35 @@ const CartProductCardBox = styled.div`
   flex-direction: column;
   justify-content: start;
   align-items: start;
+  min-width: 480px;
 
   .optionDiv {
     width: 100%;
     display: flex;
     justify-content: space-between;
+  }
+  .option-count {
+    display: none;
+  }
+  .selectDiv {
+    div {
+      margin: 0px !important;
+    }
+    height: 20px;
+  }
+  @media (max-width: 768px) {
+    & {
+      flex-direction: row;
+    }
+    .container {
+      display: none;
+    }
+    .optionDiv {
+      display: none;
+    }
+    .option-count {
+      display: block;
+    }
   }
 `;
 
@@ -147,6 +174,12 @@ const MainView = styled.div`
     column-gap: 10px;
     display: flex;
     flex-direction: row;
+  }
+
+  @media (max-width: 768px) {
+    .p768px {
+      display: none;
+    }
   }
 `;
 
