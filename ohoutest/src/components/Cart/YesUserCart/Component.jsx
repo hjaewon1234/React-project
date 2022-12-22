@@ -2,17 +2,24 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import CartProductCardContainer from "./CartProductCard/Container";
 
-const YesUserCartComp = ({ totalState, setTotalState, buyOnClick }) => {
+const YesUserCartComp = ({
+  totalState,
+  totalCount,
+  setTotalState,
+  setTotalCount,
+  buyOnClick,
+}) => {
   const [totalPrice, setTotalPrice] = useState(0);
-  console.log("rerender");
   useEffect(() => {
+    const totalArray = totalState.map((item, index) => {
+      return +item * +totalCount[index];
+    });
     setTotalPrice(
-      totalState.reduce((acc, cur) => {
+      totalArray.reduce((acc, cur) => {
         return acc + cur;
       }, 0)
     );
-    console.log(totalPrice);
-  }, [totalState]);
+  }, [totalState, totalCount]);
   return (
     <BigBox>
       <SelectBox></SelectBox>
@@ -22,8 +29,9 @@ const YesUserCartComp = ({ totalState, setTotalState, buyOnClick }) => {
           <hr />
           <div>
             <CartProductCardContainer
-              totalState={totalState}
+              totalCount={totalCount}
               setTotalState={setTotalState}
+              setTotalCount={setTotalCount}
             ></CartProductCardContainer>
           </div>
           <hr />
@@ -66,6 +74,7 @@ export default YesUserCartComp;
 const BigBox = styled.div`
   width: 100%;
   background-color: #afafaf75;
+  min-width: 500px;
 `;
 
 const YesUserCartBox = styled.div`
@@ -74,6 +83,7 @@ const YesUserCartBox = styled.div`
   margin: 20px auto;
   column-gap: 10%;
   padding: 0px 0px 100px 0px;
+  min-width: 460px;
 
   p {
     white-space: nowrap;
@@ -165,6 +175,17 @@ const YesUserCartBox = styled.div`
     }
     button:hover {
       background-color: #cf7500;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    & > div:first-child {
+      width: 100%;
+      margin-bottom: 50px;
+    }
+    & > div:last-child {
+      width: 100%;
     }
   }
 `;

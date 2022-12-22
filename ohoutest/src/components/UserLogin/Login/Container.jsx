@@ -9,7 +9,7 @@
 
 //   const accessToken = () => {
 //     axios({
-//       url: "http://localhost:8080/accesstoken",
+//       url: "/accesstoken",
 //       method: "GET",
 //       withCredentials: true,
 //     });
@@ -17,7 +17,7 @@
 
 //   const refreshToken = () => {
 //     axios({
-//       url: "http://localhost:8080/refreshtoken",
+//       url: "/refreshtoken",
 //       method: "GET",
 //       withCredentials: true,
 //     });
@@ -25,7 +25,7 @@
 
 //   const logout = () => {
 //     axios({
-//       url: "http://localhost:8080/logout",
+//       url: "/logout",
 //       method: "POST",
 //       withCredentials: true,
 //     }).then((result) => {
@@ -38,7 +38,7 @@
 //   useEffect(() => {
 //     try {
 //       axios({
-//         url: "http://localhost:8080/login/success",
+//         url: "/login/success",
 //         method: "GET",
 //         withCredentials: true,
 //       })

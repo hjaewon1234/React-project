@@ -5,14 +5,7 @@ import { useSelector } from "react-redux";
 
 const YesUserCartContainer = ({ userInfo }) => {
   const [totalState, setTotalState] = useState([]);
-
-  useEffect(() => {
-    console.log(userInfo);
-  }, []);
-
-  useEffect(() => {
-    console.log(totalState);
-  }, [totalState]);
+  const [totalCount, setTotalCount] = useState([]);
 
   const buyOnClick = () => {
     axios.post("/api/order/buy", { id: 1, user: userInfo }).then(({ data }) => {
@@ -25,6 +18,8 @@ const YesUserCartContainer = ({ userInfo }) => {
       <YesUserCartComp
         totalState={totalState}
         setTotalState={setTotalState}
+        totalCount={totalCount}
+        setTotalCount={setTotalCount}
         buyOnClick={buyOnClick}
       ></YesUserCartComp>
     </>

@@ -12,7 +12,7 @@ const initialState = {
 export const signUpUser = createAsyncThunk("/user/signUpUser", async (body) => {
   console.log(body);
   const { data } = await axios
-    .post("http://localhost:8080/api/user/getUsers", {
+    .post("/api/user/getUsers", {
       ...body,
       body: JSON.stringify(body),
     })
@@ -44,12 +44,9 @@ export const overlapId = createAsyncThunk(
   "/user/overlapId",
   async (inputId) => {
     console.log(inputId, JSON.stringify(inputId.inputId));
-    const { data } = await axios.post(
-      "http://localhost:8080/api/user/overlapId",
-      {
-        inputId: JSON.stringify(inputId.inputId),
-      }
-    );
+    const { data } = await axios.post("/api/user/overlapId", {
+      inputId: JSON.stringify(inputId.inputId),
+    });
     // .then((data) => {
     if (data.status == 401) {
       alert("중복되는 아이디가 있습니다. 다시 확인해주세요");
@@ -73,7 +70,7 @@ export const overlapNickName = createAsyncThunk(
   "/user/overlapNickName",
   async (inputName) => {
     const { data } = await axios
-      .post("http://localhost:8080/api/user/overapNickName", {
+      .post("/api/user/overapNickName", {
         inputName: JSON.stringify(inputName.inputName),
       })
       .then((data) => {

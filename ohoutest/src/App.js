@@ -5,7 +5,6 @@ import Header from "./components/Header";
 import Main from "./components/Main";
 import Footer from "./components/Footer/Container";
 import SingUp from "./components/index";
-import AnswerQna from "./components/ManagerPage/ManagerInfo/answerQna/AnswerQnaComponent";
 import AnswerQnaContainer from "./components/ManagerPage/ManagerInfo/answerQna/AnswerQnaContainer";
 import PopupBarContainer from "./components/PopupBar/Container";
 import axios from "axios";

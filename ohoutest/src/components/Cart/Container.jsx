@@ -9,10 +9,8 @@ const CartContainer = () => {
   const navigation = useNavigate();
   const [user, setUser] = useState();
   let userInfo = useSelector((state) => state.userInfo);
-  console.log(userInfo);
   useEffect(() => {
     setUser(userInfo);
-    console.log(user);
   }, []);
 
   return (

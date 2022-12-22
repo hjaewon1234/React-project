@@ -5,7 +5,7 @@ import HotListComponent from "./Component";
 
 const axiosPost = (setState) => {
   axios
-    .post("http://localhost:8080/api/product/getProducts", {
+    .post("/api/product/getProducts", {
       boxIdx: 5,
       idx: 40,
     })

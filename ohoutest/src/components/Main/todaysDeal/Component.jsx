@@ -14,11 +14,7 @@ const TodaysDealComponent = ({ itemArr }) => {
             <ItemBox key={`itemArr - ${idx}`}>
               <Link to={"/"}>
                 <div className="today-deal-item-img">
-                  <img
-                    src={`http://localhost:8080/api/download${
-                      elem.img.split(",")[0]
-                    }`}
-                  />
+                  <img src={`/api/download${elem.img.split(",")[0]}`} />
                 </div>
                 <div className="item-container">
                   <div className="item-brand">{elem.brand}</div>

@@ -1,25 +1,62 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import uuid from "react-uuid";
 
 const CartProductCardComp = ({
   brand,
   name,
   price,
   setTotalState,
+  setTotalCount,
   index,
-  totalState,
+  totalCount,
+  count,
 }) => {
   useEffect(() => {
     setTotalState((state) => {
-      console.log(state);
       return [...state, 0];
+    });
+    setTotalCount((state) => {
+      return [...state, +count];
     });
   }, []);
 
-  useEffect(() => {
-    console.log("adf");
-  }, [totalState]);
-  console.log(totalState);
+  const optionDiv = () => {
+    return (
+      <>
+        <select
+          name="count"
+          onChange={(e) => {
+            setTotalCount((state) => {
+              const tempState = [...state];
+              tempState[index] = e.target.value;
+              return tempState;
+            });
+          }}
+          key={uuid()}
+          defaultValue={totalCount[index]}
+        >
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, index) => {
+            if (index == count) {
+              return (
+                <option key={`count-${index}`} value={`${item}`}>
+                  {item}
+                </option>
+              );
+            } else
+              return (
+                <option key={`count-${index}`} value={`${item}`}>
+                  {item}
+                </option>
+              );
+          })}
+        </select>
+        <div className="option-count">{`${(
+          price * totalCount[index]
+        ).toLocaleString()} 원`}</div>
+      </>
+    );
+  };
 
   return (
     <CartProductCardBox>
@@ -33,7 +70,6 @@ const CartProductCardComp = ({
                 !tempState[index]
                   ? (tempState[index] = price)
                   : (tempState[index] = 0);
-                console.log(tempState);
                 return tempState;
               });
             }}
@@ -44,11 +80,11 @@ const CartProductCardComp = ({
       <MainView>
         <img src="/api/downloadLG전자_LG디오스베이직오브제컬렉션1.jpg" />
         <div>
-          <p>
+          <p className="p768px">
             [{brand}] {name}
           </p>
           <div>
-            <div>
+            <div className="p768px">
               <span>무료배송</span>
               <hr />
               <span>일반택배</span>
@@ -60,24 +96,21 @@ const CartProductCardComp = ({
         <div>
           <div>
             <div>{name}</div>
-            <div>X</div>
+            <div
+              className="deleteBtn"
+              onClick={() => {
+                console.log(index, "번째 아이템 삭제 버튼 눌림");
+              }}
+            >
+              X
+            </div>
           </div>
-          <div>
-            <select name="count">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-            </select>
-          </div>
+          <div className="selectDiv">{optionDiv()}</div>
         </div>
       </CountView>
       <div className="optionDiv">
         <span>옵션변경 | 바로구매</span>{" "}
-        <span>{`${price.toLocaleString()} 원`}</span>
+        <span>{`${(price * totalCount[index]).toLocaleString()} 원`}</span>
       </div>
     </CartProductCardBox>
   );
@@ -91,11 +124,35 @@ const CartProductCardBox = styled.div`
   flex-direction: column;
   justify-content: start;
   align-items: start;
+  min-width: 480px;
 
   .optionDiv {
     width: 100%;
     display: flex;
     justify-content: space-between;
+  }
+  .option-count {
+    display: none;
+  }
+  .selectDiv {
+    div {
+      margin: 0px !important;
+    }
+    height: 20px;
+  }
+  @media (max-width: 768px) {
+    & {
+      flex-direction: row;
+    }
+    .container {
+      display: none;
+    }
+    .optionDiv {
+      display: none;
+    }
+    .option-count {
+      display: block;
+    }
   }
 `;
 
@@ -118,10 +175,21 @@ const MainView = styled.div`
     display: flex;
     flex-direction: row;
   }
+
+  @media (max-width: 768px) {
+    .p768px {
+      display: none;
+    }
+  }
 `;
 
 const CountView = styled.div`
   width: 100%;
+  background-color: #afafaf75;
+  padding: 0px 20px;
+  border-radius: 15px;
+  color: #1a1c20;
+  font-weight: 800;
   & > div {
     display: flex;
     flex-direction: column;
@@ -133,6 +201,21 @@ const CountView = styled.div`
   }
   select {
     width: 100px;
+  }
+
+  .deleteBtn {
+    cursor: pointer;
+    background-color: #f0a500;
+    color: #f4f4f4;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+  }
+  .deleteBtn:hover {
+    background-color: #cf7500;
   }
 `;
 
