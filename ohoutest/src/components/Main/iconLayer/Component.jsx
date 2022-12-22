@@ -85,27 +85,33 @@ const IconLayerCompBox = styled.div`
     }
   }
   @media only screen and (max-width: 768px) {
-    width: 400px;
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
     gap: 20px;
-    .icon-item img {
-      width: 60px;
-    }
+
     a {
-      font-size: 14px;
+      font-size: 12px;
+    }
+    .icon-item img {
+      width: 100%;
+    }
+    .icon-item {
+      width: 15%;
     }
   }
   @media only screen and (max-width: 425px) {
-    width: 320px;
-    gap: 15px;
-    justify-content: space-around;
-    .icon-item img {
-      width: 100px;
-    }
+    gap: 0;
+    justify-content: space-between;
     a {
-      font-size: 15px;
+      font-size: 12px;
+    }
+    .icon-item img {
+      width: 100%;
+    }
+    .icon-item {
+      width: 30%;
+      margin: 5px;
     }
   }
 `;

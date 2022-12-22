@@ -5,9 +5,7 @@ import axios from "axios";
 export const qnaPagingThunk = createAsyncThunk(
   "/managerInfo/qnaPageThunk",
   async () => {
-    const { data } = await axios.post(
-      "http://localhost:8080/api/manager/qnaPage"
-    );
+    const { data } = await axios.post("/api/manager/qnaPage");
     console.log(data);
     return data;
   }

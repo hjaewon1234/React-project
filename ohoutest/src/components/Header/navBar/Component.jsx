@@ -1,10 +1,17 @@
 import { Link } from "react-router-dom";
-import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { useEffect, useRef, useState } from "react";
+import styled from "styled-components";
+import axios from "axios";
+
+import { action } from "../../../modules/userInfo.js";
 
 import DropDown from "./DropDown";
 
 const NavBarComponent = ({ onSubmit, isOnline }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [searchInput, setSearchInput] = useState("");
   const loginedMenu = ["마이페이지", "로그아웃"];
   const dropDownRef = useRef();
@@ -12,13 +19,28 @@ const NavBarComponent = ({ onSubmit, isOnline }) => {
   const [isOpen, setIsOpen] = useState(false);
   useEffect(() => {}, [isOpen]);
 
+  const logOutFunc = () => {
+    axios({
+      url: "/logout",
+      method: "POST",
+      withCredentials: true,
+    }).then((result) => {
+      if (result.status === 200) {
+        navigate("/", { replace: true });
+        dispatch(action.setUser({ userId: "", userName: "" }));
+      }
+    });
+  };
+
   return (
     <NavBarCompBox isOnline={isOnline}>
       <div className="nav-bar-container">
         <Link to="/main" className="logo-icon">
           <img src="/img/TeamLogo.png" />
         </Link>
-        <Link to="/">스토어</Link>
+        <Link className="mobile-s-store" to="/">
+          스토어
+        </Link>
         <Link to="/community">커뮤니티</Link>
         <div className="search-box">
           <span className="magnify-icon">
@@ -65,16 +87,30 @@ const NavBarComponent = ({ onSubmit, isOnline }) => {
             <DropDown
               arr={loginedMenu}
               refs={dropDownRef}
-              isOpen={isOpen}
               setIsOpen={setIsOpen}
               imgRef={imgRef}
+              logOutFunc={logOutFunc}
             />
           )}
         </div>
 
         {isOnline || <Link to="/login">로그인</Link>}
         {isOnline || <Link to="/regist">회원가입</Link>}
+        {isOnline && (
+          <Link className="mobile-s" to="/">
+            마이페이지
+          </Link>
+        )}
+        {isOnline && (
+          <Link className="mobile-s" onClick={logOutFunc}>
+            로그아웃
+          </Link>
+        )}
+        <Link className="mobile-s" to="/">
+          장바구니
+        </Link>
         <Link to="/">고객센터</Link>
+        <hr className="mobile-s-hr" />
       </div>
     </NavBarCompBox>
   );
@@ -152,6 +188,9 @@ const NavBarCompBox = styled.div`
     filter: invert(73%) sepia(19%) saturate(6189%) hue-rotate(3deg)
       brightness(96%) contrast(104%);
   }
+  .cart-icon {
+    font-size: 0;
+  }
   .cart-icon img {
     width: 35px;
     height: 35px;
@@ -225,13 +264,133 @@ const NavBarCompBox = styled.div`
   .login-pic .drop-item:hover {
     background-color: #f0a500;
   }
+  .mobile-s {
+    display: none;
+  }
 
   @media only screen and (max-width: 1440px) {
+    .nav-bar-container {
+      width: 900px;
+    }
+    .login-pic .drop-item {
+      font-size: 22px;
+      letter-spacing: 4px;
+      border-radius: 5px;
+    }
   }
   @media only screen and (max-width: 1024px) {
+    .nav-bar-container {
+      width: 700px;
+    }
+    .logo-icon img {
+      width: 100px;
+    }
+    a {
+      font-size: 14px;
+    }
+    span > img {
+      vertical-align: bottom;
+    }
+    input {
+      width: 200px;
+      height: 30px;
+      font-size: 16px;
+      line-height: 30px;
+    }
+    .login-pic .drop-item {
+      font-size: 20px;
+      letter-spacing: 3px;
+      border-radius: 3px;
+    }
+    .login-pic .drop-container {
+      width: 250px;
+      left: -105px;
+      top: 62px;
+    }
+    .login-pic img {
+      width: 35px;
+      height: 35px;
+    }
+    .login-pic {
+      width: 35px;
+      height: 35px;
+    }
+    .cart-icon img {
+      width: 30px;
+      height: 30px;
+    }
   }
   @media only screen and (max-width: 768px) {
+    height: 110px;
+    .nav-bar-container {
+      width: 100%;
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
+    .logo-icon img {
+      width: 120px;
+    }
+    input {
+      width: 90%;
+    }
+    .logo-icon {
+      order: -5;
+      min-width: 43%;
+      margin-top: 5px;
+    }
+    .search-box {
+      order: -3;
+      min-width: 40%;
+      margin-top: 5px;
+      margin-right: 3%;
+      margin-left: 3%;
+    }
+    .search-box span {
+      display: none;
+    }
+    .login-pic .drop-container {
+      width: 200px;
+      left: -80px;
+    }
+    .login-pic {
+      display: none;
+    }
+    .cart-icon {
+      display: none;
+    }
+    .mobile-s {
+      display: block;
+    }
+    a:hover {
+      color: initial;
+    }
+    a {
+      font-size: 12px;
+    }
+    .mobile-s-hr {
+      display: initial;
+      width: 100%;
+      order: -1;
+    }
   }
   @media only screen and (max-width: 425px) {
+    .logo-icon {
+      width: 50%;
+    }
+    .logo-icon img {
+    }
+    .search-box {
+      width: calc(50% - 6%);
+      margin-bottom: 5px;
+    }
+    .nav-bar-container {
+      justify-content: center;
+    }
+    a:not(.logo-icon) {
+      margin-left: 2%;
+    }
+    .mobile-s-store {
+      margin-left: 0;
+    }
   }
 `;

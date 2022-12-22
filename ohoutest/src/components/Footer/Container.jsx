@@ -17,7 +17,7 @@ const FooterContainer = () => {
   useEffect(() => {
     try {
       axios({
-        url: "http://localhost:8080/check",
+        url: "/check",
         method: "GET",
         withCredentials: true,
       })
