@@ -353,8 +353,12 @@ const FooterBox = styled.div`
       flex-wrap: wrap;
       width: 100%;
     }
+    .footer-item-icon-layer img {
+      filter: none;
+    }
   }
   @media only screen and (max-width: 425px) {
+    padding-bottom: 10px;
     .footer-item:first-child,
     .footer-item:nth-child(2) {
       width: 100%;
@@ -370,8 +374,14 @@ const FooterBox = styled.div`
       margin-bottom: 10px;
     }
     .footer-item-icon-layer img {
-      width: 20px;
-      height: 20px;
+      width: 26px;
+      height: 26px;
+    }
+    .mobile-s-col {
+      flex-direction: column;
+    }
+    .mobile-s-gap {
+      row-gap: 5px;
     }
   }
 `;
