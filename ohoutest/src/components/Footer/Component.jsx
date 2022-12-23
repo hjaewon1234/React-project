@@ -27,7 +27,7 @@ const FooterComponent = () => {
           </div>
         </div>
         <div className="footer-item">
-          <div>
+          <div className="mobile-s-gap">
             <div>회사소개</div>
             <div>채용정보</div>
             <div>이용약관</div>
@@ -37,7 +37,7 @@ const FooterComponent = () => {
             <div>공지사항</div>
             <div>안전거래센터</div>
           </div>
-          <div>
+          <div className="mobile-s-gap">
             <div>입점신청</div>
             <div>제휴/광고 문의</div>
             <div>사업자 구매 회원</div>
@@ -50,11 +50,11 @@ const FooterComponent = () => {
           <div>
             <div className="footer-item-company-info">
               (주)버킷플레이스
-              <span>|</span>
+              <span className="span-spacer">|</span>
             </div>
             <div className="footer-item-company-info">
               대표이사 이승재
-              <span>|</span>
+              <span className="span-spacer">|</span>
             </div>
             <div className="footer-item-company-info">
               서울 서초구 서초대로74길 4 삼성생명서초타워 25층, 27층
@@ -63,7 +63,7 @@ const FooterComponent = () => {
           <div>
             <div className="footer-item-company-info">
               contact@bucketplace.net
-              <span>|</span>
+              <span className="span-spacer">|</span>
             </div>
             <div className="footer-item-company-info">
               사업자등록번호 119-86-91245
@@ -73,12 +73,13 @@ const FooterComponent = () => {
           <div className="footer-item-company-info">
             통신판매업신고번호 제2018-서울서초-0580호
           </div>
-          <div className="footer-item-img-layer">
+          <div className="footer-item-img-layer mobile-s-col">
             <div className="footer-item-img-layer-item">
               <img src="/img/footer/isms.png" />
               <div className="footer-item-img-layer-item-container footer-item-img-layer-item-container-left">
                 <span>오늘의집 서비스 운영</span>
-                <span>2021. 09. 08 ~ 2024. 09. 07</span>
+                <br />
+                2021. 09. 08 ~ 2024. 09. 07
               </div>
             </div>
             <div className="footer-item-img-layer-item">
@@ -114,7 +115,7 @@ const FooterComponent = () => {
             <div>
               Copyright 2014. bucketplace, Co., Ltd. All rights reserved.
             </div>
-            <div className="cloned-by">cloned by Team go-to-work</div>
+            <div className="cloned-by">copied by Team go-to-work</div>
           </div>
         </div>
       </div>
@@ -209,9 +210,6 @@ const FooterBox = styled.div`
     display: inline-block;
     margin: 3px 0;
   }
-  .footer-item-company-info span {
-    margin: 0 3px;
-  }
   .footer-item-img-layer-item {
     display: flex;
     gap: 5px;
@@ -225,11 +223,6 @@ const FooterBox = styled.div`
     font-weight: bold;
   }
   .footer-item-img-layer-item-container-left {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-  }
-  .footer-item-img-layer-item-container-left span {
     white-space: nowrap;
   }
   .footer-item-icon-layer img {
@@ -243,11 +236,15 @@ const FooterBox = styled.div`
   .footer-item-icon-layer img:hover {
     filter: none;
   }
+  .span-spacer {
+    margin: 0 3px;
+  }
   .cloned-by {
     margin-top: 3px;
     font-weight: bold;
-    font-size: 1.3em;
+    font-size: 1.4em;
     color: #f0a500;
+    text-align: right;
   }
 
   @media only screen and (max-width: 1440px) {
@@ -287,8 +284,12 @@ const FooterBox = styled.div`
       flex-wrap: wrap;
       width: 100%;
     }
+    .footer-item-icon-layer img {
+      filter: none;
+    }
   }
   @media only screen and (max-width: 425px) {
+    padding-bottom: 10px;
     .footer-item:first-child,
     .footer-item:nth-child(2) {
       width: 100%;
@@ -304,8 +305,83 @@ const FooterBox = styled.div`
       margin-bottom: 10px;
     }
     .footer-item-icon-layer img {
-      width: 20px;
-      height: 20px;
+      width: 26px;
+      height: 26px;
+    }
+    .mobile-s-col {
+      flex-direction: column;
+    }
+    .mobile-s-gap {
+      row-gap: 5px;
+    }
+  }
+
+  @media only screen and (max-width: 1440px) {
+    .footer-container {
+      width: 900px;
+    }
+    .footer-item {
+      padding: 5px 10px;
+    }
+  }
+  @media only screen and (max-width: 1024px) {
+    .footer-container {
+      flex-wrap: wrap;
+      width: 750px;
+    }
+    .footer-item:first-child,
+    .footer-item:nth-child(2) {
+      width: 50%;
+    }
+    .footer-item:nth-child(2) {
+      border-right: none;
+    }
+    .footer-item:last-child {
+      width: 100%;
+    }
+    .footer-item:last-child:before {
+      content: "";
+      width: 100%;
+      height: 10px;
+      border-bottom: 1px solid #c2c2c2;
+      margin-bottom: 10px;
+    }
+  }
+  @media only screen and (max-width: 768px) {
+    margin-top: -30px;
+    .footer-container {
+      flex-wrap: wrap;
+      width: 100%;
+    }
+    .footer-item-icon-layer img {
+      filter: none;
+    }
+  }
+  @media only screen and (max-width: 425px) {
+    padding-bottom: 10px;
+    .footer-item:first-child,
+    .footer-item:nth-child(2) {
+      width: 100%;
+    }
+    .footer-item:nth-child(2) {
+      border: none;
+    }
+    .footer-item:first-child:after {
+      content: "";
+      width: 100%;
+      height: 15px;
+      border-bottom: 1px solid #c2c2c2;
+      margin-bottom: 10px;
+    }
+    .footer-item-icon-layer img {
+      width: 26px;
+      height: 26px;
+    }
+    .mobile-s-col {
+      flex-direction: column;
+    }
+    .mobile-s-gap {
+      row-gap: 5px;
     }
   }
 `;

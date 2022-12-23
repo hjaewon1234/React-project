@@ -26,7 +26,6 @@ const userInfoSlice = createSlice({
   initialState: { userId: "", userName: "" },
   reducers: {
     setUser: (state, action) => {
-      console.log(action.payload);
       return action.payload;
     },
     // setLogOut(state) {
@@ -41,7 +40,6 @@ const userInfoSlice = createSlice({
         console.log("pending");
       })
       .addCase(userInfoThunk.fulfilled, (state, { payload }) => {
-        console.log(current(state));
         state = state;
         state.userInfo.user = action.payload;
         return { ...payload };
@@ -55,7 +53,6 @@ const userInfoSlice = createSlice({
         console.log("pending");
       })
       .addCase(getUserThunk.fulfilled, (state, action) => {
-        console.log("fulfilled", action.payload);
         return state;
       })
       .addCase(getUserThunk.rejected, (state, action) => {

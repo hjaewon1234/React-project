@@ -69,7 +69,11 @@ const LinkBox = styled.div`
     min-width: 500px;
   }
   @media only screen and (max-width: 768px) {
-    min-width: 400px;
+    // min-width: 400px;
+    justify-content: space-around;
+    flex: 1;
+    min-width: 0;
+    gap: 0;
   }
   @media only screen and (max-width: 425px) {
     min-width: 300px;
@@ -97,6 +101,9 @@ const MenuBarCompBox = styled.div`
   @media only screen and (max-width: 1024px) {
   }
   @media only screen and (max-width: 768px) {
+    a:hover {
+      color: initial;
+    }
   }
   @media only screen and (max-width: 425px) {
   }
@@ -119,7 +126,8 @@ const MenuBarContainer = styled.div`
     width: 700px;
   }
   @media only screen and (max-width: 768px) {
-    width: 420px;
+    // width: 420px;
+    width: 100%;
   }
   @media only screen and (max-width: 425px) {
     width: 320px;

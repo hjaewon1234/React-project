@@ -16,7 +16,7 @@ const Login2Container = () => {
   const curUser = useSelector((state) => state.userInfo);
   const logout = () => {
     axios({
-      url: "http://localhost:8080/logout",
+      url: "/logout",
       method: "POST",
       withCredentials: true,
     }).then((result) => {
@@ -39,7 +39,7 @@ const Login2Container = () => {
   // useEffect(() => {
   //   try {
   //     axios({
-  //       url: "http://localhost:8080/check",
+  //       url: "/check",
   //       method: "GET",
   //       withCredentials: true,
   //     })

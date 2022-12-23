@@ -187,7 +187,6 @@ const MainSlideCompBox = styled.div`
   }
   img {
     width: 100%;
-    // object-fit: cover;
   }
   .inner-box {
     overflow: hidden;
@@ -231,20 +230,28 @@ const MainSlideCompBox = styled.div`
   }
 
   @media only screen and (max-width: 1440px) {
+    .btn-container {
+      width: 1000px;
+      font-size: 12px;
+    }
   }
   @media only screen and (max-width: 1024px) {
     .btn-container {
       display: none;
     }
-    a {
-      // height: 300px;
+    .slide-container a img {
+      object-fit: cover;
+      min-height: 220px;
     }
   }
   @media only screen and (max-width: 768px) {
-    a {
-      // height: 250px;
+    .slide-container a img {
+      min-height: 150px;
     }
   }
   @media only screen and (max-width: 425px) {
+    .slide-container a img {
+      min-height: 120px;
+    }
   }
 `;

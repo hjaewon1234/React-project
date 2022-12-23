@@ -16,8 +16,7 @@ export const signUpUser = createAsyncThunk("/user/signUpUser", async (body) => {
   console.log(body);
   // const navigate = useNavigate();
   const { data } = await axios
-
-    .post("http://localhost:8080/api/user/getUsers", {
+    .post("/api/user/getUsers", {
       ...body,
       body: JSON.stringify(body),
     })
@@ -66,12 +65,9 @@ export const overlapId = createAsyncThunk(
   "/user/overlapId",
   async (inputId) => {
     console.log(inputId, JSON.stringify(inputId.inputId));
-    const { data } = await axios.post(
-      "http://localhost:8080/api/user/overlapId",
-      {
-        inputId: JSON.stringify(inputId.inputId),
-      }
-    );
+    const { data } = await axios.post("/api/user/overlapId", {
+      inputId: JSON.stringify(inputId.inputId),
+    });
     // .then((data) => {
     if (data.status == 401) {
       swal({
@@ -105,7 +101,7 @@ export const overlapNickName = createAsyncThunk(
   "/user/overlapNickName",
   async (inputName) => {
     const { data } = await axios
-      .post("http://localhost:8080/api/user/overapNickName", {
+      .post("/api/user/overapNickName", {
         inputName: JSON.stringify(inputName.inputName),
       })
       .then((data) => {

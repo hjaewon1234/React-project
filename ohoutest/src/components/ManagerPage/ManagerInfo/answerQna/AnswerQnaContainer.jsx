@@ -12,10 +12,10 @@ const AnswerQnaContainer = () => {
     dispatch(tempStateChange(action.setTempStateChange));
 
   const axiosFunc = async (id, answerQnaText) => {
-    const { data } = await axios.post(
-      "http://localhost:8080/api/manager/answerQna",
-      { id: id, qnaAnswer: answerQnaText }
-    );
+    const { data } = await axios.post("/api/manager/answerQna", {
+      id: id,
+      qnaAnswer: answerQnaText,
+    });
     console.log(data);
     return data;
   };

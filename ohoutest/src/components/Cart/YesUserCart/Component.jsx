@@ -74,6 +74,7 @@ export default YesUserCartComp;
 const BigBox = styled.div`
   width: 100%;
   background-color: #afafaf75;
+  min-width: 500px;
 `;
 
 const YesUserCartBox = styled.div`
@@ -82,6 +83,7 @@ const YesUserCartBox = styled.div`
   margin: 20px auto;
   column-gap: 10%;
   padding: 0px 0px 100px 0px;
+  min-width: 460px;
 
   p {
     white-space: nowrap;
@@ -173,6 +175,17 @@ const YesUserCartBox = styled.div`
     }
     button:hover {
       background-color: #cf7500;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    & > div:first-child {
+      width: 100%;
+      margin-bottom: 50px;
+    }
+    & > div:last-child {
+      width: 100%;
     }
   }
 `;

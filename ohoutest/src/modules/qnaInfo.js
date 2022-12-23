@@ -5,10 +5,7 @@ import axios from "axios";
 export const qnaInfoThunk = createAsyncThunk(
   "/managerInfo/qnaInfoThunk",
   async (num) => {
-    const { data } = await axios.post(
-      "http://localhost:8080/api/manager/qnaInfo",
-      { number: num }
-    );
+    const { data } = await axios.post("/api/manager/qnaInfo", { number: num });
 
     console.log(data);
     return data;

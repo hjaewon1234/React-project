@@ -1,4 +1,3 @@
-import { useState } from "react";
 import ManagerInfo from "./components/ManagerPage";
 import { Routes, Route } from "react-router-dom";
 import styled from "styled-components";
@@ -6,9 +5,8 @@ import Header from "./components/Header";
 import Main from "./components/Main";
 import Footer from "./components/Footer/Container";
 import SingUp from "./components/index";
-import AnswerQna from "./components/ManagerPage/ManagerInfo/answerQna/AnswerQnaComponent";
 import AnswerQnaContainer from "./components/ManagerPage/ManagerInfo/answerQna/AnswerQnaContainer";
-import PopupBarContainer from "./components/popupBar/Container";
+import PopupBarContainer from "./components/PopupBar/Container";
 import axios from "axios";
 import RegistContainer from "./components/UserLogin/Regist/Container";
 import Login2Container from "./components/UserLogin/Login2/Container";
@@ -19,12 +17,10 @@ import CommunityContainer from "./components/Comunity/Container";
 axios.defaults.withCredentials = true;
 
 function App() {
-  const [switcher, setSwitcher] = useState(false);
-
   return (
     <AppBox>
       {/* <SingUp></SingUp> */}
-      {switcher || <PopupBarContainer setSwitcher={setSwitcher} />}
+      <PopupBarContainer />
       <Header />
       <Routes>
         <Route path="/" element={<Main />}></Route>
