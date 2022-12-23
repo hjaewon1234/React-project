@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useState } from "react";
 import styled from "styled-components";
 
 import ReadMoreHead from "./ReadMoreHead";
@@ -6,16 +7,31 @@ import ReadMoreHead from "./ReadMoreHead";
 // import ReadMoreFoot from "./ReadMoreFoot";
 
 const ReadMore = () => {
-  const getProductItem = () => {
-    axios.post("/api/product/getProductItem").then((data) => {
-      console.log(data.data);
+  const [item, setItem] = useState({});
+  const [input, setInput] = useState(0);
+  const getProductItem = (idx) => {
+    axios.post("/api/product/getProductItem", { id: idx }).then((data) => {
+      setItem(data.data);
     });
   };
 
   return (
     <ReadMoreBox>
-      <button onClick={getProductItem}>요청보내기</button>
-      <ReadMoreHead />
+      <input
+        type="number"
+        value={input}
+        onChange={(e) => {
+          setInput(e.target.value);
+        }}
+      />
+      <button
+        onClick={() => {
+          getProductItem(input);
+        }}
+      >
+        GET
+      </button>
+      <ReadMoreHead item={item} />
       {/* <ReadMoreMain />
       <ReadMoreFoot /> */}
     </ReadMoreBox>
