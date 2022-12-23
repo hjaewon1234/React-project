@@ -1,0 +1,16 @@
+깃 리베이스
+
+cd..
+현재 브랜치에서 내가 작업한 작업물들을 git push를 통해 원격으로 올림
+git pull로 받아줌, 
+git checkout dev : 데브 브렌치로 이동
+git pull : 데브 원격 저장소랑 일치시킴
+
+git checkout 현재브랜치 : 현재 작업중인 브랜치로 이동
+git rebase dev : dev에 쌓인 commit 들을 내 브랜치로 옮김 (dev는 안바뀌고 내꺼만 바꾸는 작업임)
+충돌처리
+git checkout dev : dev로 이동
+git merge 현재브랜치 : 현재브랜치를 dev와 합쳐서 결과물이 dev가 됨
+git push origin dev : 로컬 파일? 을 원격 저장소로 보낸다
+git pull
+현재브랜치로 이동해서 git pull
