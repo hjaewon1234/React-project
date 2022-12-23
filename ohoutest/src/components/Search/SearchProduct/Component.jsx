@@ -107,6 +107,11 @@ const ItemBox = styled.div`
       color: #9f9f9f;
     }
   }
+  @media (max-width: 768px) {
+    & {
+      width: 80%;
+    }
+  }
 `;
 
 const MaxLengthBox = styled.div`

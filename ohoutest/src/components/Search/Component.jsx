@@ -1,9 +1,10 @@
 import SearchProductContainer from "./SearchProduct/Container";
 import BlankSearchPageContainer from "./BlankSearchPage/Container";
 import styled from "styled-components";
+import ResponsiveComp from "../util/ResponsiveComp";
 
 const SearchComponent = ({ itemArr }) => {
-  return (
+  return ResponsiveComp(
     <SearchComponentBox>
       {itemArr.length == 0 ? (
         <BlankSearchPageContainer></BlankSearchPageContainer>
