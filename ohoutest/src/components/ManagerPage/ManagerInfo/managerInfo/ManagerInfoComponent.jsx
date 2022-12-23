@@ -21,7 +21,7 @@ const ManagerInfoComponent = ({
           <div style={{ fontSize: "22px", fontWeight: "bold" }}>{title}</div>
           <div style={{ paddingRight: "3%" }}>
             <img
-              src="./arrow-up-solid.svg"
+              src="/arrow-up-solid.svg"
               style={{
                 width: "22px",
                 rotate: accodion ? "180deg" : "0deg",
@@ -37,35 +37,10 @@ const ManagerInfoComponent = ({
           <AccoContents>
             {productInfo.map((item, index) => (
               <UnitDiv key={index}>
-                {/* {item?.img ? (
-                  item?.img?.split(",").map((innerItem) => {
-                    console.log(innerItem);
-                    console.log(encodeURI(innerItem) + "이건 인코드된거임");
-                    console.log(decodeURI(innerItem) + "이건 디코드된거임");
-                    return (
-                      <img
-                        src={`/api/download${decodeURI(innerItem)}`}
-                        style={{ width: "70px" }}
-                      />
-                    );
-                  })
-                ) : (
-                  <></>
-                )} */}
-
-                {/* {item.img.split(",").map((imgSplit) => (
-                  <img src={`/api/download${imgSplit}.jpg`} />
-                ))} */}
-                {item.img ? (
-                  <>
-                    {/* <img
-                      src={`/api/download${decodeURI(item.img.split(",")[0])}`}
-                      width={"70px"}
-                    /> */}
-                  </>
-                ) : (
-                  "asdf"
-                )}
+                <img
+                  src={`/api/download${decodeURI(item.img)}`}
+                  style={{ width: "70px" }}
+                />
 
                 <div>
                   <div>
@@ -134,6 +109,7 @@ const NumberBox = styled.div`
 `;
 const AccoContents = styled.div`
   padding: 10px;
+  white-space: nowrap;
   & > div {
     display: flex;
     justify-content: space-between;
@@ -144,6 +120,11 @@ const AccoContents = styled.div`
 const UnitDiv = styled.div`
   padding: 10px 0;
   border-bottom: 1px solid black;
+  & > div:first-child > div {
+    overflow: hidden;
+    tex-overflow: ellipsis;
+    white-space: nowrap;
+  }
 `;
 const UpperAcco = styled.div`
   display: flex;

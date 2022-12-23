@@ -38,7 +38,7 @@ const NavBarComponent = ({ onSubmit, isOnline }) => {
         <Link to="/main" className="logo-icon">
           <img src="/img/TeamLogo.png" />
         </Link>
-        <Link className="mobile-s-store" to="/">
+        <Link className="mobile-s-store" to="/readmoretest">
           스토어
         </Link>
         <Link to="/community">커뮤니티</Link>

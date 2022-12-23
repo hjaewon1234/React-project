@@ -3,9 +3,48 @@
 // import styled from "styled-components";
 // import axios from "axios";
 
-// const LoginComponents = ({ setIsLogin, setUser }) => {
-//   const [userId, setId] = useState("");
-//   const [userPw, setPw] = useState("");
+const Login = () => {
+  axios({
+    url: "http://localhost:8080/login",
+    method: "POST",
+    withCredentials: true,
+    data: {
+      userId: inputId,
+      userPw: inputPw,
+    },
+  }).then((result) => {
+    if (result.status === 200) {
+      window.open("/", "_self");
+      // 새로고침 할필요 없이 그냥 상태만 바꿔주면 자동으로 리랜더링 하는데
+    }
+  });
+};
+
+return (
+  <div>
+    <label> 아이디</label>
+    <input
+      type={"text"}
+      value={inputId}
+      onInput={(e) => {
+        setId(e.target.value);
+      }}
+      placeholder={"아이디"}
+    />
+    <label> 비밀번호</label>
+    <input
+      type={"password"}
+      value={inputPw}
+      onInput={(e) => {
+        setPw(e.target.value);
+      }}
+      placeholder={"비밀번호"}
+    />
+    <button onClick={Login} className="loginButton">
+      로그인
+    </button>
+  </div>
+);
 
 //   const Login = () => {
 //     axios({

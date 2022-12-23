@@ -1,19 +1,38 @@
 import { Router } from "express";
 const router = Router();
-
+import multer from "multer";
 import db from "../models/index.js";
 import Users from "../models/user.js";
 import Qna from "../models/Qna.js";
 import Products from "../models/product.js";
-import { where } from "sequelize";
+import fs from "fs";
+
+async function setImages() {
+  await fs.readdir("./Img", (err, datas) => {
+    console.log(datas);
+    for (let i = 0; i < datas.length; ++i) {
+      router.get(`/download${encodeURI(datas[i])}`, (req, res) => {
+        fs.readFile("./Img/" + datas[i], (err, data) => {
+          res.writeHead(200, { "Content-Type": "text/html" });
+          res.end(data);
+        });
+      });
+    }
+  });
+}
 
 router.route("/productManage").post(async (req, res) => {
   const productInfo = await db.Products.findAll();
+
   const sliceInfo = productInfo.slice(
     req.body.number * 10,
     req.body.number * 10 + 10
   );
 
+  sliceInfo.map((item, idx) => {
+    item.img = item.img.split(",")[0];
+  });
+  // 이렇게 해서 sliceInfo 로 사진을 하나씩만 보내줌
   res.send(sliceInfo);
   // 원래는 페이지 정보와 페이징 내용을 같이 보내야 한다.
   // 좀더 생각을 해보자 관계형 db만 하고.
@@ -21,7 +40,7 @@ router.route("/productManage").post(async (req, res) => {
 
 router.route("/productPage").post(async (req, res) => {
   let pageNum = [];
-  console.log("몇번도니");
+
   const pagingLength = (await db.Products.findAll()).length;
 
   for (let i = 0; i < pagingLength / 10; i++) {
@@ -32,8 +51,6 @@ router.route("/productPage").post(async (req, res) => {
 });
 
 router.route("/qnaInfo").post(async (req, res) => {
-  console.log(req.body.number + "req바디님 나와주세요");
-
   const tempDbFind = await Qna.findAll({
     include: [
       { model: Users, attributes: ["userId", "userName"] },
@@ -55,6 +72,7 @@ router.route("/qnaInfo").post(async (req, res) => {
     req.body.number * 10,
     req.body.number * 10 + 10
   );
+
   // 이런 형식으로 보내면 User 라는 칼럼으로 userId, userName이 객체로 들어간다.
   res.send(sliceQnaInfo);
 });
@@ -72,8 +90,6 @@ router.route("/qnaPage").post(async (req, res) => {
 });
 
 router.route("/answerQna").post(async (req, res) => {
-  console.log(req.body);
-
   await db.Qna.update(
     {
       qnaAnswer: req.body.qnaAnswer,
@@ -87,5 +103,98 @@ router.route("/answerQna").post(async (req, res) => {
   // 지금 또 수정해야되는 부분은 qnaAnswer의 값이 있으면 상태를 바꿔준다.
   res.send(req.body);
 });
+
+// const upload = multer({
+//   storage: multer.diskStorage({
+//     destination: (req, file, cb) => {
+//       cb(null, "./upload/");
+//     },
+//     filename: (req, file, cb) => {
+//       cb(null, new Date().valueOf + Path2D.extname(file.originalname));
+//     },
+//   }),
+// });
+
+// router.route("/uploadFile").post(upload.array("img", 4), (req, res) => {
+//   // console.log(req.file);
+
+//   res.send("에라이모르겟다.");
+// });
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "Img/");
+    // destination은 저장할 경로
+  },
+  filename: (req, file, cb) => {
+    const newFileName = (file.originalname = Buffer.from(
+      file.originalname,
+      "latin1"
+    ).toString("utf8"));
+    cb(null, newFileName);
+  },
+});
+
+const upload = multer({ storage: storage });
+// storage는 저장할 공간에 대한 정보, 디스크나 메모리 저장 기능
+
+router.route("/uploadFile").post(upload.array("file", 4), async (req, res) => {
+  let joinArr = [];
+  for (let i = 0; i < req.files.length; i++) {
+    joinArr.push(req.files[i].originalname);
+  }
+  console.log(req.body);
+
+  const intPrice = parseInt(req.body.price);
+  const tempProduct = await db.Products.create({
+    name: req.body.name,
+    price: intPrice,
+    brand: req.body.brand,
+    description: req.body.description,
+    img: joinArr.join(),
+  });
+
+  const tempCa = await db.Category.findOne({
+    where: {
+      id: req.body.smallsort,
+    },
+  });
+  console.log(tempCa);
+  tempCa.addProducts(tempProduct);
+
+  fs.stat("./Img", (error, stats) => console.log("파일크기", stats.size));
+
+  // fs.writeFile("./Img", req.files, (err) => {
+  //   if (err) {
+  //     console.log(err);
+  //     res.status(500).send("서버오류빼애애애애애애애애애애애액");
+  //   }
+  //   res.send("서버오류없음");
+  // });
+
+  // async function setImagesMake(files) {
+  //   await fs.readdir("./Img", (err, datas) => {
+  //     for (let i = 0; i < files.length; i++) {
+  //       if (!datas.includes(files[i].originalname)) {
+  //         router.get(
+  //           `/download${encodeURI(files[i].originalname)}`,
+  //           (req, res) => {
+  //             fs.readFile("./Img/" + files[i], (err, data) => {
+  //               res.writeHead(200, { "Content-Type": "text/html" });
+  //               res.end(data);
+  //             });
+  //           }
+  //         );
+  //       }
+  //     }
+  //   });
+  // }
+
+  res.send("작업완료");
+});
+
+// fs를 봐야댄다..
+// 여러개 파일을 어떻게 받을 지 // 변환 // => db에 쑤셔박고 // => 관계
+// 파일들의 이름을 어떻게 설정 해 줄 지
 
 export default router;
