@@ -30,7 +30,7 @@ export default class Products extends Sequelize.Model {
       through: "shopping_list",
     });
     db.Products.belongsTo(db.Category, {
-      foreignKey: "categoryId",
+      foreignKey: "category",
       targetKey: "id",
     });
     db.Products.hasMany(db.Qna, {
