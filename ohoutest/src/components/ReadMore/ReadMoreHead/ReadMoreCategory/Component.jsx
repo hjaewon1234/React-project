@@ -27,7 +27,10 @@ const ReadMoreCategoryBox = styled.div`
   text-align: initial;
   padding: 3px 10px;
   font-size: 15px;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2f0c756 (상세페이지 UI)
   .categorie-span {
     display: inline-flex;
     aline-items: center;
