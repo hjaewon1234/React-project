@@ -2,10 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const tempStateChange = createSlice({
   name: "tempStateChange",
-  initialState: true,
+  initialState: 0,
   reducers: {
     setTempStateChange: (state, action) => {
-      state = false;
+      const { payload, type } = action;
+      state = payload;
     },
   },
 });

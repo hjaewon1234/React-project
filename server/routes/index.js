@@ -12,6 +12,7 @@ import db from "../models/index.js";
 
 router.use("/", (req, res, next) => {
   console.log("routes/index.js : " + req.url);
+
   next();
 });
 
@@ -83,6 +84,8 @@ async function setImages() {
   });
 }
 setImages();
+
+// 아니 이게 해당 그걸로 똑같이 만들어 주는 거를 모르겟음
 
 router.post("/getImages", (req, res) => {
   fs.readdir("./Img", (err, datas) => {

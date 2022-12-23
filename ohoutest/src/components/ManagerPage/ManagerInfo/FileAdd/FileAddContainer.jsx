@@ -1,5 +1,6 @@
 import FileAddComponent from "./FileAddComponent";
 import uploadFile from "./fileComponents/fileAPI";
+import axios from "axios";
 
 const FileAddContainer = () => {
   const upload = async (e) => {
@@ -351,6 +352,10 @@ const FileAddContainer = () => {
         ));
     }
   }
+
+  const axiosImgFunc = async (files) => {
+    await axios.post("http://localhost:8080/api");
+  };
 
   return (
     <FileAddComponent

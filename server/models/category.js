@@ -23,7 +23,7 @@ export default class Category extends Sequelize.Model {
 
   static associate(db) {
     db.Category.hasMany(db.Products, {
-      foreignKey: "id",
+      foreignKey: "categoryId",
       sourceKey: "id",
       as: "Products",
     });

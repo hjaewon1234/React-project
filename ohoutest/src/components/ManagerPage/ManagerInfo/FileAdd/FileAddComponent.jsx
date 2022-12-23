@@ -14,6 +14,7 @@ const FileAddComponent = ({
   const [bigSort, setBigSort] = useState(0);
   const [middleSort, setMiddleSort] = useState(0);
   const [tempImgFile, setTempImgFile] = useState([]);
+  const [productName, setProductName] = useState("");
 
   function tempImgArr(e) {
     const imageLists = e.target.files;
@@ -61,7 +62,12 @@ const FileAddComponent = ({
               <div>
                 <div>상품 이름 :</div>
                 <div>
-                  <input type="text" name="name" placeholder="name" />
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="name"
+                    onChange={(e) => setProductName(e.target.value)}
+                  />
                 </div>
               </div>
               <div>
@@ -142,7 +148,14 @@ const FileAddComponent = ({
                 </select>
               </div>
               <div>
-                <button type="submit">상품 추가</button>
+                <button
+                  type="submit"
+                  onClick={() =>
+                    alert(productName + " 상품이 등록 되었습니다.")
+                  }
+                >
+                  상품 추가
+                </button>
               </div>
             </form>
           </AccoContents>

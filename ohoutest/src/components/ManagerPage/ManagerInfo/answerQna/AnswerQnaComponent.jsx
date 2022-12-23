@@ -23,16 +23,24 @@ const AnswerQnaComponent = ({ qnaInfo, axiosFunc, tempQnaInfoThunk }) => {
           onInput={(e) => setState(e.target.value)}
           value={state || ""}
         />
-
-        <Link to="/managerInfo">
-          <button
-            onClick={() => {
-              axiosFunc(numberingId, state.toString(), id);
-            }}
-          >
-            답변 제출
-          </button>
-        </Link>
+        <LinkDiv>
+          <div>
+            <Link to="/managerInfo">
+              <button>답변 취소</button>
+            </Link>
+          </div>
+          <div>
+            <Link to="/managerInfo">
+              <button
+                onClick={() => {
+                  axiosFunc(numberingId, state.toString(), id);
+                }}
+              >
+                답변 제출
+              </button>
+            </Link>
+          </div>
+        </LinkDiv>
       </AnswerQnaInner>
     </AnswerQnaDiv>
   );
@@ -71,4 +79,9 @@ const AnswerQnaInner = styled.div`
     boreder: none;
     padding: auto;
   }
+`;
+
+const LinkDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
