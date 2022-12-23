@@ -29,6 +29,7 @@ const SearchContainer = () => {
   useEffect(() => {
     console.log("itemArr", itemArr);
   }, [itemArr]);
+
   return <SearchComponent itemArr={itemArr} />;
 };
 

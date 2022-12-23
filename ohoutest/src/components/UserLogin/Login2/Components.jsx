@@ -39,7 +39,6 @@ const Login2Components = ({ setIsLogin, setUser, user }) => {
         // window.open("/signUp", "_self");
         // navigate("/", { replace: true });
         navigate("/", { replace: true });
-        console.log(result.data, user);
         if (result.data?.userId)
           dispatch(
             action.setUser({
@@ -53,7 +52,7 @@ const Login2Components = ({ setIsLogin, setUser, user }) => {
 
   return (
     <>
-      <RegistMain autoClose>
+      <RegistMain>
         <RegistTopStlye>
           <h3>로그인</h3>
         </RegistTopStlye>

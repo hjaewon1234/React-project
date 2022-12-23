@@ -28,8 +28,6 @@ export default ResponsiveComp;
 
 const MainBox = styled.div`
   width: 100%;
-  background-color: #f4f4f4;
-  color: #f4f4f4;
 `;
 const XLBox = styled.div`
   margin: auto;
@@ -44,5 +42,4 @@ const XLBox = styled.div`
       return "425px";
     }
   }};
-  background-color: #1a1c20;
 `;
