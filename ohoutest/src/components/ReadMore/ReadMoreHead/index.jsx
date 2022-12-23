@@ -8,12 +8,29 @@ const ReadMoreHead = ({ item }) => {
   return (
     <ReadMoreHeadBox>
       <ReadMoreCategoryContainer item={item} />
-      <ReadMoreImageContainer />
-      <ReadMoreOrderInfoContainer />
+      <div className="head-box-inner">
+        <ReadMoreImageContainer item={item} />
+        <ReadMoreOrderInfoContainer />
+      </div>
     </ReadMoreHeadBox>
   );
 };
 
-const ReadMoreHeadBox = styled.div``;
+const ReadMoreHeadBox = styled.div`
+  border: 1px solid red;
+  margin: 0 auto;
+  width: 1200px;
+  padding: 5px;
+
+  .head-box-inner {
+    width: 100%;
+    display: flex;
+  }
+  .head-box-inner > div,
+  .head-box-inner > div + div {
+    border: 1px solid black;
+    flex: 1;
+  }
+`;
 
 export default ReadMoreHead;

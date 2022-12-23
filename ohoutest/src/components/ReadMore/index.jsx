@@ -11,7 +11,6 @@ const ReadMore = () => {
   const [input, setInput] = useState(0);
   const getProductItem = (idx) => {
     axios.post("/api/product/getProductItem", { id: idx }).then((data) => {
-      console.log(data.data);
       setItem(data.data);
     });
   };
@@ -39,6 +38,8 @@ const ReadMore = () => {
   );
 };
 
-const ReadMoreBox = styled.div``;
+const ReadMoreBox = styled.div`
+  width: 100%;
+`;
 
 export default ReadMore;
