@@ -11,6 +11,7 @@ const ReadMore = () => {
   const [input, setInput] = useState(0);
   const getProductItem = (idx) => {
     axios.post("/api/product/getProductItem", { id: idx }).then((data) => {
+      console.log(data.data);
       setItem(data.data);
     });
   };
