@@ -11,7 +11,6 @@ import { Link } from "react-router-dom";
 import React from "react";
 import ModalContainer from "../Modal/Container";
 import ModalComponents from "../Modal/Component";
-
 const RegistComponents = () => {
   // const dispathch = useDispatch();
 
