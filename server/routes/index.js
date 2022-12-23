@@ -109,35 +109,35 @@ router.post("/getImages", (req, res) => {
 // });
 
 // 제품 등록
-fs.readFile("./data/product.json", "utf-8", function (err, data) {
-  if (err) {
-    console.error(err.message);
-  } else {
-    JSON.parse(data).forEach((item) => {
-      try {
-        db.Category.findOne({
-          where: { smallsort: item.category?.smallsort },
-        }).then((data) => {
-          if (!data) {
-            console.log("왜없음?", item);
-          } else {
-            console.log(data.id, item.img);
-            db.Products.create({
-              name: item.name,
-              price: item.price,
-              brand: item.brand,
-              description: item.description,
-              category: data.id,
-              img: item.img,
-            });
-          }
-        });
-      } catch (err) {
-        console.error(err);
-      }
-    });
-  }
-});
+// fs.readFile("./data/product.json", "utf-8", function (err, data) {
+//   if (err) {
+//     console.error(err.message);
+//   } else {
+//     JSON.parse(data).forEach((item) => {
+//       try {
+//         db.Category.findOne({
+//           where: { smallsort: item.category?.smallsort },
+//         }).then((data) => {
+//           if (!data) {
+//             console.log("왜없음?", item);
+//           } else {
+//             console.log(data.id, item.img);
+//             db.Products.create({
+//               name: item.name,
+//               price: item.price,
+//               brand: item.brand,
+//               description: item.description,
+//               category: data.id,
+//               img: item.img,
+//             });
+//           }
+//         });
+//       } catch (err) {
+//         console.error(err);
+//       }
+//     });
+//   }
+// });
 
 router.use("/login", login);
 
