@@ -25,7 +25,11 @@
     "sass": "^1.56.2",
     "styled-components": "^5.3.6",
     "sweetalert": "^2.1.2",
-    "web-vitals": "^2.1.0"
+    "web-vitals": "^2.1.0",
+    "canvas-sketch": "^0.7.6",
+    "canvas-sketch-util": "^1.10.0",
+    "colormap": "^2.3.2",
+    "eases": "^1.0.8"
   },
   "scripts": {
     "start": "react-scripts start",

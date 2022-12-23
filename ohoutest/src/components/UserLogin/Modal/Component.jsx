@@ -3,8 +3,8 @@ import DaumPostcode from "react-daum-postcode";
 
 const ModalComponents = (props) => {
   const { open, close, header } = props;
-  console.log(props);
-  console.log(props.open);
+  // console.log(props);
+  // console.log(props.open);
 
   const complete = (data) => {
     let fullAddress = data.address;

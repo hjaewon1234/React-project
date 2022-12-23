@@ -5,10 +5,11 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { action } from "../../../modules/userInfo.js";
 import styled from "styled-components";
-import ModalContainer from "../Modal/Container.jsx";
+// import ModalContainer from "../Modal/Container.jsx";
+// import ParticleTest from "../Particle/Components";
 
 const Login2Container = () => {
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
   const [user, setUser] = useState({});
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -70,7 +71,7 @@ const Login2Container = () => {
           </>
         ) : (
           <Login2Components
-            user={user}
+            // user={user}
             setUser={setUser}
             setIsLogin={setIsLogin}
           ></Login2Components>
