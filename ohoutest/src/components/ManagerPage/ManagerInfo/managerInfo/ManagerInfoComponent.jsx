@@ -120,6 +120,11 @@ const AccoContents = styled.div`
 const UnitDiv = styled.div`
   padding: 10px 0;
   border-bottom: 1px solid black;
+  & > div:first-child > div {
+    overflow: hidden;
+    tex-overflow: ellipsis;
+    white-space: nowrap;
+  }
 `;
 const UpperAcco = styled.div`
   display: flex;

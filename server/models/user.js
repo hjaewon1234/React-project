@@ -27,6 +27,10 @@ export default class Users extends Sequelize.Model {
           type: Sequelize.STRING(255),
           allowNull: true,
         },
+        userImg: {
+          type: Sequelize.STRING(255),
+          allowNull: true,
+        },
       },
       {
         sequelize,

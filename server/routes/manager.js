@@ -9,7 +9,7 @@ import fs from "fs";
 
 async function setImages() {
   await fs.readdir("./Img", (err, datas) => {
-    console.log(datas.length);
+    console.log(datas);
     for (let i = 0; i < datas.length; ++i) {
       router.get(`/download${encodeURI(datas[i])}`, (req, res) => {
         fs.readFile("./Img/" + datas[i], (err, data) => {
@@ -138,23 +138,58 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 // storage는 저장할 공간에 대한 정보, 디스크나 메모리 저장 기능
 
-router.route("/uploadFile").post(upload.array("file", 4), (req, res) => {
+router.route("/uploadFile").post(upload.array("file", 4), async (req, res) => {
   let joinArr = [];
   for (let i = 0; i < req.files.length; i++) {
     joinArr.push(req.files[i].originalname);
   }
-  console.log(typeof parseInt(req.body.price));
+  console.log(req.body);
+
   const intPrice = parseInt(req.body.price);
-  db.Products.create({
+  const tempProduct = await db.Products.create({
     name: req.body.name,
     price: intPrice,
     brand: req.body.brand,
     description: req.body.description,
     img: joinArr.join(),
-    category: req.body.smallsort,
   });
-  setImages();
+
+  const tempCa = await db.Category.findOne({
+    where: {
+      id: req.body.smallsort,
+    },
+  });
+  console.log(tempCa);
+  tempCa.addProducts(tempProduct);
+
   fs.stat("./Img", (error, stats) => console.log("파일크기", stats.size));
+
+  // fs.writeFile("./Img", req.files, (err) => {
+  //   if (err) {
+  //     console.log(err);
+  //     res.status(500).send("서버오류빼애애애애애애애애애애애액");
+  //   }
+  //   res.send("서버오류없음");
+  // });
+
+  // async function setImagesMake(files) {
+  //   await fs.readdir("./Img", (err, datas) => {
+  //     for (let i = 0; i < files.length; i++) {
+  //       if (!datas.includes(files[i].originalname)) {
+  //         router.get(
+  //           `/download${encodeURI(files[i].originalname)}`,
+  //           (req, res) => {
+  //             fs.readFile("./Img/" + files[i], (err, data) => {
+  //               res.writeHead(200, { "Content-Type": "text/html" });
+  //               res.end(data);
+  //             });
+  //           }
+  //         );
+  //       }
+  //     }
+  //   });
+  // }
+
   res.send("작업완료");
 });
 

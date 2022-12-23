@@ -6,15 +6,15 @@ import Header from "./components/Header";
 import Main from "./components/Main";
 import Footer from "./components/Footer/Container";
 import SingUp from "./components/index";
-import AnswerQna from "./components/ManagerPage/ManagerInfo/answerQna/AnswerQnaComponent";
 import AnswerQnaContainer from "./components/ManagerPage/ManagerInfo/answerQna/AnswerQnaContainer";
-import PopupBarContainer from "./components/PopupBar/Container";
+import PopupBarContainer from "./components/popupBar/Container";
 import axios from "axios";
 import RegistContainer from "./components/UserLogin/Regist/Container";
 import Login2Container from "./components/UserLogin/Login2/Container";
 import SearchContainer from "./components/Search/Container";
 import CartContainer from "./components/Cart/Container";
 import CommunityContainer from "./components/Comunity/Container";
+import UserPage from "./components/userPage";
 
 axios.defaults.withCredentials = true;
 
@@ -47,6 +47,7 @@ function App() {
         />
         <Route path="/cart" element={<CartContainer />}></Route>
         <Route path="/community" element={<CommunityContainer />} />
+        <Route path="/userPage" element={<UserPage />} />
       </Routes>
       <Footer />
       <div style={{ backgroundColor: "#1a1c20" }}></div>
