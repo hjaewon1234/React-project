@@ -2,10 +2,17 @@ import { useState } from "react";
 import styled from "styled-components";
 
 import MyList from "./MyList";
+import ShippingStatus from "./myShopping/ShippingStatus";
+import CartContainer from "../../../Cart/Container";
+import MyQnaList from "./myShopping/MyQnaList";
 
 const UserPageUpperHeader = () => {
   const [clickColor, setClickColor] = useState(0);
+  // 가장 위에 나의 쇼핑 // 나의 리뷰 // 설정 을 나누는 상태
   const [myList, setMyList] = useState(0);
+  // 가장 위에 것들 을 나누고 다음것들을 나누는거 (주문배송내역조회 // 나의 방바구니 // 나의 문의내역)
+  const [listClick, setListClick] = useState(0);
+  // 주문배송내역에 조회에 배송준비 // 배송중 // 배송 완료에 대한 상태
   const myShoppingArr = ["주문배송내역 조회", "나의 장바구니", "나의 문의내역"];
   const MyReviewArr = ["리뷰쓰기", "내가 작성한 리뷰"];
   const myOptionArr = ["회원정보수정", "비밀번호 변경"];
@@ -59,6 +66,38 @@ const UserPageUpperHeader = () => {
           <></>
         )}
       </UserPageHeader>
+
+      {clickColor == 0 && myList == 0 ? (
+        <UserPageInfo>
+          <ShippingDiv>
+            <ShippingItem
+              onClick={() => setListClick((state) => (state = 0))}
+              style={{ color: listClick == 0 ? "#f0a500" : "black" }}
+            >
+              배송준비
+            </ShippingItem>
+            <ShippingItem
+              onClick={() => setListClick((state) => (state = 1))}
+              style={{ color: listClick == 1 ? "#f0a500" : "black" }}
+            >
+              배송중
+            </ShippingItem>
+            <ShippingItem
+              onClick={() => setListClick((state) => (state = 2))}
+              style={{ color: listClick == 2 ? "#f0a500" : "black" }}
+            >
+              배송 완료
+            </ShippingItem>
+          </ShippingDiv>
+          <ShippingStatus listClick={listClick} />
+        </UserPageInfo>
+      ) : (
+        <></>
+      )}
+      {clickColor == 0 && myList == 1 ? <CartContainer /> : <></>}
+      {clickColor == 0 && myList == 2 ? <MyQnaList /> : <></>}
+
+      {/* 추후에 여기에 배송 관련 데이터들을 넘겨주고, 그걸 map 돌리면 될듯  */}
     </div>
   );
 };
@@ -81,21 +120,35 @@ const UserPageUpperItem = styled.div`
     color: #f0a500;
   }
 `;
-const UserPageUnderItem = styled.div`
-  cursor: pointer;
-  font-weight: bold;
-  &:hover {
-    color: #f0a500;
-  }
-`;
-const UserPageUnderHeaderDiv = styled.div`
+const UserPageInfo = styled.div`
   width: 100%;
-  display: flex;
-  column-gap: 20px;
-  padding: 10px;
-  justify-content: center;
+  padding-top: 20px;
 `;
-
+const ShippingDiv = styled.div`
+  width: 50%;
+  margin: auto;
+  justify-content: center;
+  border: 1px solid #f0a500;
+  border-radius: 10px;
+  display: flex;
+  column-gap: 100px;
+`;
+const ShippingUnderDiv = styled.div`
+  width: 50%;
+  margin: auto;
+  border: 1px solid #f0a500;
+  border-radius: 10px;
+`;
+const ShippingItem = styled.div`
+  font-size: 30px;
+  cursor: pointer;
+  margin: 15px;
+`;
+const ShippingUnderItem = styled.div`
+  font-size: 20px;
+  cursor: pointer;
+  margin: 15px;
+`;
 const UserPageHeader = styled.div`
   width: 100%;
   border-bottom: 1px solid #f0a500;
