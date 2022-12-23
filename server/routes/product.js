@@ -1,4 +1,5 @@
 import { Router } from "express";
+import Category from "../models/category.js";
 const router = Router();
 
 import db from "../models/index.js";
@@ -43,9 +44,41 @@ router.route("/getProducts").post((req, res) => {
 });
 
 router.route("/getProductItem").post((req, res) => {
-  console.log(req.body);
-  res.send("ㅎㅇㅎㅇ");
+  // db.Products.findAll()
+  db.Products.findOne({
+    where: { id: req.body.id },
+    include: [{ model: Category }],
+  })
+    .then((data) => {
+      res.send(data);
+    })
+    // .then((data) => {
+    //   console.log(data.dataValues.category);
+    //   return data.dataValues;
+    // })
+    // .then((data) => {
+    //   db.Category.findOne({ where: { id: data.category } }).then(
+    //     (categoryData) => {
+    //       res.send({ ...data, categoryData });
+    //     }
+    //   );
+    // })
+    .catch((err) => {
+      console.error(err);
+      res.end();
+    });
 });
+
+// router.route("/getProductItem").post(async (req, res) => {
+//   console.log(req.body);
+//   try {
+//     const getItem = await db.Products.findAll();
+//     res.send(getItem);
+//   } catch (err) {
+//     console.error(err);
+//     res.end();
+//   }
+// });
 
 router.route("/getTopten").post((req, res) => {
   db.Search.findAll({ order: [["count", "DESC"]] }).then((data) => {

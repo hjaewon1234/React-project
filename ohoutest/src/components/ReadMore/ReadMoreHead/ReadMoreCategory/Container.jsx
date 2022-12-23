@@ -1,10 +1,14 @@
 import ReadMoreCategoryComponent from "./Component";
 
-const ReadMoreCategoryContainer = ({ testProduct, testCategory }) => {
+const ReadMoreCategoryContainer = ({ item }) => {
+  const bigsort = item.Category?.bigsort;
+  const middlesort = item.Category?.middlesort;
+  const smallsort = item.Category?.smallsort;
   return (
     <ReadMoreCategoryComponent
-      testProduct={testProduct}
-      testCategory={testCategory}
+      bigsort={bigsort}
+      middlesort={middlesort}
+      smallsort={smallsort}
     />
   );
 };
