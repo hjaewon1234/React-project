@@ -7,6 +7,8 @@
 저장
 
 routes\index 카테고리 등록, 제품등록
+카테고리를 먼저 해야함
+
 
 하다가 db is not defined 뜨면 맨위에 import db
 
