@@ -7,7 +7,7 @@ const initialState = {
 
 // export const logInUser = createAsyncThunk("logInUser", async (body) => {
 //   console.log(body);
-//   const { data } = await axios.post("http://localhost:8080/api/login/success", {
+//   const { data } = await axios.post("/api/login/success", {
 //     ...body,
 //     body: JSON.stringify(body),
 //   });
@@ -18,7 +18,7 @@ const initialState = {
 
 export const logInUser = createAsyncThunk("/login/logInUser", async (body) => {
   console.log(body);
-  const { data } = await axios.get("http://localhost:8080/api/login/success", {
+  const { data } = await axios.get("/api/login/success", {
     ...body,
     body: JSON.stringify(...body),
   });

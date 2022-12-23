@@ -36,6 +36,7 @@ const CategoriesComponent = ({
             </Link>
           );
         })}
+        {/* <img className="plus-img" src="/img/plus-solid.svg" /> */}
       </div>
     </CategoriesCompBox>
   );
@@ -44,14 +45,17 @@ const CategoriesComponent = ({
 export default CategoriesComponent;
 
 const CategoriesCompBox = styled.div`
-  width: 1200px;
   margin: 0 auto;
   margin-top: 50px;
   position: relative;
+  width: 1200px;
   overflow: hidden;
+
   .subtitle {
     display: flex;
     justify-content: space-between;
+    width: 1200px;
+    margin: 0 auto;
     margin-bottom: 20px;
   }
   .subtitle div {
@@ -62,6 +66,7 @@ const CategoriesCompBox = styled.div`
   .categories-container {
     display: flex;
     transition: transform 0.4s;
+    margin: 0 auto;
   }
   .categories-container img {
     width: 100px;
@@ -107,5 +112,52 @@ const CategoriesCompBox = styled.div`
   }
   .categories-btn-right {
     right: 0px;
+  }
+  .plus-img{
+    width: 100px;
+    height: 127px;
+    margin: 0 auto;
+    cursor: pointer;
+  }
+
+  @media only screen and (max-width: 1440px) {
+    width: 900px;
+    .categories-container a {
+      margin: 0 5px;
+    }
+    .categories-container img {
+      width: 80px;
+    }
+  }
+  @media only screen and (max-width: 1024px) {
+    width: 700px;
+    .categories-container a {
+      margin: 0 2.5px;
+    }
+    .categories-container img {
+      width: 65px;
+    }
+  }
+  }
+  @media only screen and (max-width: 768px) {
+    width: 100%;
+    .categories-btn-left,
+    .categories-btn-right {
+      display: none !important;
+    }
+    .categories-container{
+      flex-wrap: wrap;
+      gap: 30px;
+      transform: translate(0) !important;
+    }
+    .categories-container a {
+      margin: 0 auto;
+    }
+    .categories-container img {
+      width: 100px;
+    }
+  }
+  @media only screen and (max-width: 425px) {
+    display: none;
   }
 `;

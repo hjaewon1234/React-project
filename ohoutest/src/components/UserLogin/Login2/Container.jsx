@@ -5,9 +5,11 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { action } from "../../../modules/userInfo.js";
 import styled from "styled-components";
+// import ModalContainer from "../Modal/Container.jsx";
+// import ParticleTest from "../Particle/Components";
 
 const Login2Container = () => {
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
   const [user, setUser] = useState({});
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -22,7 +24,7 @@ const Login2Container = () => {
 
   const logout = () => {
     axios({
-      url: "http://localhost:8080/logout",
+      url: "/logout",
       method: "POST",
       withCredentials: true,
     }).then((result) => {
@@ -45,7 +47,7 @@ const Login2Container = () => {
   // useEffect(() => {
   //   try {
   //     axios({
-  //       url: "http://localhost:8080/check",
+  //       url: "/check",
   //       method: "GET",
   //       withCredentials: true,
   //     })
@@ -67,20 +69,22 @@ const Login2Container = () => {
   // }, []);
 
   return (
-    <div>
-      {isLogin ? (
-        <>
-          <h3>{user.userName} 님이 로그인했습니다.</h3>
-          <button onClick={logout}>Logout</button>
-        </>
-      ) : (
-        <Login2Components
-          user={user}
-          setUser={setUser}
-          setIsLogin={setIsLogin}
-        ></Login2Components>
-      )}
-    </div>
+    <>
+      <div>
+        {isLogin ? (
+          <>
+            <h3>{user.userName} 님이 로그인했습니다.</h3>
+            <button onClick={logout}>Logout</button>
+          </>
+        ) : (
+          <Login2Components
+            // user={user}
+            setUser={setUser}
+            setIsLogin={setIsLogin}
+          ></Login2Components>
+        )}
+      </div>
+    </>
   );
 };
 

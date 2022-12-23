@@ -26,20 +26,24 @@ const CategoriesContainer = () => {
   const categoriesRef = useRef();
   const categoriesSlide = (curr, locate) => {
     setCurrentItem(curr);
-    categoriesRef.current.style.transform = `translate(-${locate}px)`;
+    categoriesRef.current.style.transform = `translate(-${locate}%)`;
   };
   const left = () => {
     if (currentItem === 3) {
       categoriesSlide(1, 0);
+    } else if (currentItem === 6) {
+      categoriesSlide(1, 0);
     } else if (currentItem === 8) {
-      categoriesSlide(3, 240);
+      categoriesSlide(3, 30);
     }
   };
   const right = () => {
     if (currentItem === 1) {
-      categoriesSlide(6, 600);
+      categoriesSlide(6, 50);
+    } else if (currentItem === 3) {
+      categoriesSlide(8, 70);
     } else if (currentItem === 6) {
-      categoriesSlide(8, 840);
+      categoriesSlide(8, 70);
     }
   };
 

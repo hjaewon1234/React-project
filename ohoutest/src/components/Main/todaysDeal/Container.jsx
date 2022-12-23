@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import TodaysDealComponent from "./Component";
 
 const axiosPost = (setState) => {
-  axios
-    .post("http://localhost:8080/api/product/getProducts", {
+  axios // 요청보냄
+    .post("/api/product/getProducts", {
       boxIdx: 1,
       idx: 4,
     })

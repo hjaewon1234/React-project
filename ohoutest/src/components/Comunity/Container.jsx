@@ -21,7 +21,6 @@ const CommunityContainer = () => {
         importance: importance,
       })
       .then(({ data }) => {
-        console.log(data);
         return getChatData();
       });
   };

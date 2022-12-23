@@ -230,14 +230,28 @@ const MainSlideCompBox = styled.div`
   }
 
   @media only screen and (max-width: 1440px) {
+    .btn-container {
+      width: 1000px;
+      font-size: 12px;
+    }
   }
   @media only screen and (max-width: 1024px) {
-    & .btn-container {
+    .btn-container {
       display: none;
+    }
+    .slide-container a img {
+      object-fit: cover;
+      min-height: 220px;
     }
   }
   @media only screen and (max-width: 768px) {
+    .slide-container a img {
+      min-height: 150px;
+    }
   }
   @media only screen and (max-width: 425px) {
+    .slide-container a img {
+      min-height: 120px;
+    }
   }
 `;

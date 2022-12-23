@@ -11,7 +11,7 @@ const Header = () => {
     <HeaderBox>
       <div className="fixed-container" ref={fixedRef}>
         <NavBarContainer />
-        <hr />
+        <hr className="mobile-s-hr-spacer" />
         <MenuBarContainer />
         <hr />
       </div>
@@ -37,5 +37,11 @@ const HeaderBox = styled.div`
     background-color: #f4f4f4;
     margin: 0 auto;
     position: relative;
+  }
+
+  @media only screen and (max-width: 768px) {
+    .mobile-s-hr-spacer {
+      margin-top: 5px;
+    }
   }
 `;

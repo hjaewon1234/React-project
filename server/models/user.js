@@ -54,5 +54,9 @@ export default class Users extends Sequelize.Model {
       foreignKey: "users_id",
       targetKey: "id",
     });
+    db.Users.hasMany(db.Cart, {
+      foreignKey: "users_id",
+      targetKey: "id",
+    });
   }
 }

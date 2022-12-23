@@ -13,11 +13,7 @@ const HotListComponent = ({ itemArr }) => {
             <ItemBox key={`itemArr - ${idx}`}>
               <Link to={"/"}>
                 <div className="hot-list-item-img">
-                  <img
-                    src={`http://localhost:8080/api/download${
-                      elem.img.split(",")[0]
-                    }`}
-                  />
+                  <img src={`/api/download${elem.img.split(",")[0]}`} />
                 </div>
                 <div className="item-container">
                   <div className="item-brand">{elem.brand}</div>
@@ -41,6 +37,7 @@ const HotListCompBox = styled.div`
   width: 1200px;
   margin: 0 auto;
   margin-top: 50px;
+
   .subtitle {
     display: flex;
     justify-content: space-between;
@@ -58,11 +55,30 @@ const HotListCompBox = styled.div`
     justify-content: space-between;
     word-break: break-word;
   }
+
+  @media only screen and (max-width: 1440px) {
+    width: 900px;
+  }
+  @media only screen and (max-width: 1024px) {
+    width: 700px;
+    .hot-list-container {
+      gap: 5px;
+    }
+  }
+  @media only screen and (max-width: 768px) {
+    width: 100%;
+    .hot-list-container {
+      gap: 0;
+    }
+  }
+  @media only screen and (max-width: 425px) {
+  }
 `;
 
 const ItemBox = styled.div`
   width: 24%;
   margin-bottom: 30px;
+
   img {
     width: 100%;
     transition: transform 0.2s;
@@ -102,5 +118,26 @@ const ItemBox = styled.div`
     .item-name {
       color: #9f9f9f;
     }
+  }
+
+  @media only screen and (max-width: 1440px) {
+  }
+  @media only screen and (max-width: 1024px) {
+  }
+  @media only screen and (max-width: 768px) {
+    width: 40%;
+    flex-grow: 1;
+    padding: 3%;
+    border-bottom: 1px solid lightgrey;
+    &:hover {
+      img {
+        transform: none;
+      }
+      .item-name {
+        color: #424242;
+      }
+    }
+  }
+  @media only screen and (max-width: 425px) {
   }
 `;

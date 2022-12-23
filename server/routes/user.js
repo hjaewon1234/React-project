@@ -53,7 +53,7 @@ router.post("/getUsers", async (req, res) => {
         console.log("아이디 있음");
         res.send({ status: 401 });
       }
-    } else if (curUser1) {
+    } else if (curUser1 === req.body.inputPw) {
       console.log("비밀번호 확인");
       res.send({ status: 402 });
     } else if (curUser2) {

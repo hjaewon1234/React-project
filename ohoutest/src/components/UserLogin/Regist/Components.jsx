@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import styled from "styled-components";
-import Post from "../../../modules/Api/kakaoApi";
+// import Post from "../../../modules/Api/kakaoApi";
 import {
   signUpUser,
   overlapId,
@@ -9,6 +9,8 @@ import {
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import React from "react";
+import ModalContainer from "../Modal/Container";
+import ModalComponents from "../Modal/Component";
 const RegistComponents = () => {
   // const dispathch = useDispatch();
 
@@ -48,6 +50,9 @@ const RegistComponents = () => {
   const [checked4, setChecked4] = useState(false);
   const [checked5, setChecked5] = useState(false);
 
+  const [value, setValue] = useState("");
+  const input = useRef(null);
+
   const onChangeId = (e) => {
     const currentId = e.target.value;
     setId(currentId);
@@ -66,8 +71,8 @@ const RegistComponents = () => {
     const currentName = e.target.value;
     setName(currentName);
 
-    if (currentName.length < 3 || currentName.length > 5) {
-      setNameMessage("닉네임은 3글자 이상 5글자 이하로 입력해주세요!");
+    if (currentName.length < 3 || currentName.length > 15) {
+      setNameMessage("닉네임은 3글자 이상 8글자 이하로 입력해주세요!");
       setIsName(false);
     } else {
       setNameMessage("사용가능한 닉네임 입니다.");
@@ -81,9 +86,7 @@ const RegistComponents = () => {
     const passwordRegExp =
       /(?=.*\d{1,50})(?=.*[~`!@#$%\^&*()-+=]{1,50})(?=.*[a-zA-Z]{2,50}).{8,50}$/;
     if (!passwordRegExp.test(currentPassword)) {
-      setPasswordMessage(
-        "숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요."
-      );
+      setPasswordMessage("8~15 사이 숫자+영문+특수문자로 입력해주세요.");
       setIsPassword(false);
     } else {
       setPasswordMessage("안전한 비밀번호 입니다.");
@@ -175,7 +178,7 @@ const RegistComponents = () => {
     setPopup(!popup);
   };
 
-  console.log(allChecked);
+  // console.log(allChecked);
   const handelAllChecked = (e) => {
     setAllchecked(!allChecked);
     setChecked1(!allChecked);
@@ -183,6 +186,21 @@ const RegistComponents = () => {
     setChecked3(!allChecked);
     setChecked4(!allChecked);
     setChecked5(!allChecked);
+  };
+
+  const handelSingleChecked = (e) => {
+    const arrCheck = [
+      setChecked1(!checked1),
+      setChecked2(!checked2),
+      setChecked3(!checked3),
+      setChecked4(!checked4),
+      setChecked5(!checked5),
+    ];
+    if (checked1) {
+      setCheckItems((prev) => [...prev], arrCheck);
+    } else {
+      setCheckItems(checkItems.filter((el) => el !== arrCheck));
+    }
   };
 
   const handelChecked1 = (e) => {
@@ -203,11 +221,43 @@ const RegistComponents = () => {
   const handelChecked5 = (e) => {
     setChecked5(!checked5);
   };
+  const [modalOpen, setModalOpen] = useState(false);
+  const openModal = (data) => {
+    setModalOpen(!modalOpen);
+  };
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
+  const handleClick = () => {
+    setValue("");
+    input.current.focus();
+  };
+
+  const [movElement, setMovElement] = useState(false);
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    if (!inputRef.current) return;
+    window.addEventListener("input", inputEvent);
+    return () => {
+      window.removeEventListener("input", inputEvent);
+    };
+  }, [inputRef.current]);
+
+  const inputEvent = () => {
+    const inputTest = inputRef.current.getBoundingClientRect();
+
+    console.log(inputTest);
+    setMovElement(inputTest);
+  };
 
   return (
     <>
-      <KakaoApi>
-        <RegistMain autoClose>
+      <ModalContainer></ModalContainer>
+      <KakaoApi ref={inputRef}>
+        {/* <KakaoApi> */}
+        <RegistMain>
           <RegistTopStlye>
             <h3>회원가입</h3>
           </RegistTopStlye>
@@ -222,6 +272,7 @@ const RegistComponents = () => {
               pattern="[a-zA-Z0-9]"
               onChange={onChangeId}
               placeholder={"아이디"}
+              maxLength={12}
             />
             <p className="message"> {idMessage} </p>
             <button
@@ -242,6 +293,7 @@ const RegistComponents = () => {
               }}
               placeholder={"비밀번호"}
               onChange={onChangePassword}
+              maxLength={15}
             />
             <p className="message">{passwordMessage}</p>
             <label> 비밀번호 확인</label>
@@ -253,6 +305,7 @@ const RegistComponents = () => {
               }}
               onChange={onChangePasswordConfirm}
               placeholder={"비밀번호 확인"}
+              maxLength={15}
             />
             <p className="message">{passwordConfirmMessage}</p>
             <label> 닉네임</label>
@@ -262,8 +315,9 @@ const RegistComponents = () => {
               onInput={(e) => {
                 setName(e.target.value);
               }}
-              placeholder={"닉네임 (3~15자)"}
+              placeholder={"닉네임 (3~8자)"}
               onChange={onChangeName}
+              maxLength={8}
             />
             <p className="message">{nameMessage}</p>
             <button
@@ -298,25 +352,39 @@ const RegistComponents = () => {
                 setAdress(e.target.value);
               }}
               placeholder={"나머지 주소"}
+              maxLength={12}
             />
-            {popup && (
+            {/* {popup && (
               <Post
                 popup={popup}
                 autoClose
                 company={inputAdress1}
                 setcompany={setinputAdress1}
               ></Post>
+            )} */}
+            {modalOpen && (
+              <>
+                <ModalComponents
+                  // autoClose
+                  company={inputAdress1}
+                  setcompany={setinputAdress1}
+                  open={modalOpen}
+                  close={closeModal}
+                  header="주소 찾기"
+                ></ModalComponents>
+              </>
             )}
-            <div className="kakaoAdressP" value={""}>
-              <button className="kakaoAdress" onClick={handleComplete}>
+            <div className="kakaoAdressP">
+              <button className="kakaoAdress" onClick={openModal}>
                 주소 찾기
               </button>
+              {/* <button className="kakaoAdress" onClick={handleComplete}>
+                주소 찾기
+              </button> */}
               <button
-                className="kakaoAdress"
+                className="kakaoAdress1"
                 disabled={inputAdress.length <= 5 ? true : false}
-              >
-                주소 입력
-              </button>
+              ></button>
             </div>
             <label> 약관동의</label>
           </RegistMidStlye>
@@ -414,11 +482,14 @@ const RegistComponents = () => {
                   onClick={() => {
                     registHandle();
                   }}
-                  checked={checkItems.includes(data.id) ? true : false}
+                  // checked={checkItems.includes(data.id) ? true : false}
                   disabled={
                     inputId.length <= 5 ||
                     inputPw.length <= 7 ||
-                    inputName.length <= 2
+                    inputPw1.length <= 7 ||
+                    inputName.length <= 2 ||
+                    inputAdress.length <= 5 ||
+                    inputAdress1.address.length <= 1
                       ? true
                       : false
                   }
@@ -473,6 +544,14 @@ const RegistComponents = () => {
   );
 };
 export default RegistComponents;
+
+const ParticleStyle = styled.div`
+  Particle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+`;
 
 const KakaoApi = styled.div`
   button {
@@ -579,11 +658,32 @@ const RegistMidStlye = styled.div`
     height: 50px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
     transition: 0.4s ease-in-out;
-    &:disabled {
+    &:disabled::before {
+      content: "비 활성화";
+      width: 150px;
       transition: 0.8s ease-in-out;
       background-color: rgb(216, 217, 207);
       box-shadow: 0 20px 45px rgba(0, 0, 0, 0.1);
     }
+  }
+  .kakaoAdress1 {
+    width: 170px;
+    height: 50px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    transition: 0.4s ease-in-out;
+    &:disabled::before {
+      font-size: 13px;
+      content: "나머지 주소 입력 해주세요";
+      width: 150px;
+      transition: 0.8s ease-in-out;
+      background-color: rgb(216, 217, 207);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  .kakaoAdress1::before {
+    font-size: 13px;
+    content: "나머지 주소 입력 완료";
   }
   .message {
     font-size: 12px;
