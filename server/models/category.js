@@ -4,7 +4,6 @@ export default class Category extends Sequelize.Model {
   static init(sequelize) {
     return super.init(
       {
-        id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
         bigsort: { type: Sequelize.STRING(255), allowNull: true },
         middlesort: { type: Sequelize.STRING(255), allowNull: true },
         smallsort: { type: Sequelize.STRING(255), allowNull: true },

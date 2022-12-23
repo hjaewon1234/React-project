@@ -4,7 +4,6 @@ export default class Products extends Sequelize.Model {
   static init(sequelize) {
     return super.init(
       {
-        id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
         name: { type: Sequelize.STRING(255), allowNull: true },
         price: { type: Sequelize.INTEGER, allowNull: true },
         brand: { type: Sequelize.STRING(255), allowNull: true },
