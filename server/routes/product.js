@@ -42,6 +42,11 @@ router.route("/getProducts").post((req, res) => {
   });
 });
 
+router.route("/getProductItem").post((req, res) => {
+  console.log(req.body);
+  res.send("ㅎㅇㅎㅇ");
+});
+
 router.route("/getTopten").post((req, res) => {
   db.Search.findAll({ order: [["count", "DESC"]] }).then((data) => {
     const countAry = [];
