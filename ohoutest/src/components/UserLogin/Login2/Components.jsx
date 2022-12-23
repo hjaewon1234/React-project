@@ -39,7 +39,6 @@ const Login2Components = ({ setIsLogin, setUser, user }) => {
         // window.open("/signUp", "_self");
         // navigate("/", { replace: true });
         navigate("/", { replace: true });
-        console.log(result.data, user);
         if (result.data?.userId)
           dispatch(
             action.setUser({
