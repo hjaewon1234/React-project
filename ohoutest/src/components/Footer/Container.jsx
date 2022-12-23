@@ -4,9 +4,17 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { action } from "../../modules/userInfo";
 import useDidMountEffect from "../util/useDidMountEffect";
+import Combochecker from "../util/combochecker";
+import { useNavigate } from "react-router-dom";
+
 const FooterContainer = () => {
   const dispatch = useDispatch();
   const [curUser, setcurUser] = useState("");
+  const navigate = useNavigate();
+
+  const goToAdmin = () => {
+    navigate("/managerInfo");
+  };
 
   useDidMountEffect(() => {
     console.log(curUser);
@@ -32,6 +40,8 @@ const FooterContainer = () => {
     } catch (error) {
       console.log(error);
     }
+
+    Combochecker(goToAdmin);
   }, []);
 
   return <FooterComponent />;
