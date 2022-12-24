@@ -38,11 +38,7 @@ export default ReadMoreImageComponent;
 
 const ReadMoreImageBox = styled.div`
   display: flex;
-<<<<<<< HEAD
   flex-basis: 20% !important;
-=======
-  flex-basis: 13%;
->>>>>>> 2f0c756 (상세페이지 UI)
   padding: 10px;
 
   .img-box-left,
@@ -54,11 +50,7 @@ const ReadMoreImageBox = styled.div`
   .img-box-left img {
     border-radius: 10px;
     cursor: pointer;
-<<<<<<< HEAD
     width: 75px;
-=======
-    width: 72px;
->>>>>>> 2f0c756 (상세페이지 UI)
     margin-right: 10px;
   }
   .img-box-left img + img {

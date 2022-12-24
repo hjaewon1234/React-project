@@ -10,21 +10,15 @@ const ReadMoreHead = ({ item }) => {
       <ReadMoreCategoryContainer item={item} />
       <div className="head-box-inner">
         <ReadMoreImageContainer item={item} />
-<<<<<<< HEAD
+
         <ReadMoreOrderInfoContainer item={item} />
-=======
-        <ReadMoreOrderInfoContainer />
->>>>>>> 2f0c756 (상세페이지 UI)
       </div>
     </ReadMoreHeadBox>
   );
 };
 
 const ReadMoreHeadBox = styled.div`
-<<<<<<< HEAD
-=======
   border: 1px solid red;
->>>>>>> 2f0c756 (상세페이지 UI)
   margin: 0 auto;
   width: 1200px;
   padding: 5px;
@@ -35,10 +29,7 @@ const ReadMoreHeadBox = styled.div`
   }
   .head-box-inner > div,
   .head-box-inner > div + div {
-<<<<<<< HEAD
-=======
     border: 1px solid black;
->>>>>>> 2f0c756 (상세페이지 UI)
     flex: 1;
   }
 `;
