@@ -27,6 +27,7 @@ const ReadMoreCategoryBox = styled.div`
   text-align: initial;
   padding: 3px 10px;
   font-size: 15px;
+
   .categorie-span {
     display: inline-flex;
     aline-items: center;
