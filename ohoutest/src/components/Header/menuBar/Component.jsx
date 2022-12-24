@@ -54,7 +54,7 @@ const LinkBox = styled.div`
 
   a {
     text-decoration: none;
-    color: black;
+    color: initial;
     font-weight: bold;
   }
   a:hover {
@@ -89,7 +89,7 @@ const MenuBarCompBox = styled.div`
 
   a {
     text-decoration: none;
-    color: black;
+    color: initial;
     font-weight: bold;
   }
   a:hover {

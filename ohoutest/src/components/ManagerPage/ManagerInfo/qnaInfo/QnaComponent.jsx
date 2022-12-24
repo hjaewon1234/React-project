@@ -158,7 +158,7 @@ const QnaDiv = styled.div`
   padding: 3px;
   border-radius: 7px;
   font-weight: bold;
-  background-color: black;
+  background: black;
 
   & a {
     text-decoration: none;

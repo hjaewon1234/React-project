@@ -38,7 +38,7 @@ export default ReadMoreImageComponent;
 
 const ReadMoreImageBox = styled.div`
   display: flex;
-  flex-basis: 13%;
+  flex-basis: 20% !important;
   padding: 10px;
 
   .img-box-left,
@@ -50,7 +50,7 @@ const ReadMoreImageBox = styled.div`
   .img-box-left img {
     border-radius: 10px;
     cursor: pointer;
-    width: 72px;
+    width: 75px;
     margin-right: 10px;
   }
   .img-box-left img + img {
