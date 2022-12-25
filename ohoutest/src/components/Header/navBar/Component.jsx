@@ -130,7 +130,7 @@ const NavBarCompBox = styled.div`
   }
   a {
     text-decoration: none;
-    color: black;
+    color: initial;
     font-weight: bold;
   }
   a:hover {
