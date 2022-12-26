@@ -1,13 +1,13 @@
 import { Link, useLocation, useParams } from "react-router-dom";
 
 import { useState, useEffect } from "react";
-
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 
 const MyQnaModalComponent = () => {
   // const [dbConnect, setDbConnect] =
   // db통신이 있을때 변하는 걸 useState로 해준다?
-
+  const userId = useSelector((state) => state.userInfo);
   return (
     <AnswerQnaDiv>
       <AnswerQnaInner>
@@ -19,7 +19,7 @@ const MyQnaModalComponent = () => {
         <QnaContents>123</QnaContents>
         <LinkDiv>
           <div>
-            <Link to="/userPage">
+            <Link to={`/${userId.userId}/userPage/myShopping`}>
               <button>확인 완료</button>
             </Link>
           </div>

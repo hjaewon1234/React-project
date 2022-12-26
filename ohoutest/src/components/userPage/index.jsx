@@ -4,7 +4,11 @@ import { Route, Routes } from "react-router-dom";
 import UserMainPageContainer from "./userMainPage/UserMainPageContainer";
 
 const UserPage = () => {
-  return <UserMainPageContainer />;
+  return (
+    <>
+      <UserMainPageContainer />
+    </>
+  );
 };
 
 export default UserPage;

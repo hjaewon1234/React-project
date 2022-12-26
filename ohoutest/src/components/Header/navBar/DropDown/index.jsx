@@ -1,6 +1,8 @@
 import { nanoid } from "@reduxjs/toolkit";
 import { useEffect } from "react";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const DropDown = ({ arr, refs, setIsOpen, imgRef, logOutFunc }) => {
   const handler = ({ target }) => {
@@ -8,6 +10,9 @@ const DropDown = ({ arr, refs, setIsOpen, imgRef, logOutFunc }) => {
       setIsOpen((prev) => !prev);
     }
   };
+  const userId = useSelector((state) => state.userInfo);
+  const userRealId = userId.userId;
+  const navigate = useNavigate();
   useEffect(() => {
     window.addEventListener("click", handler);
     return () => {
@@ -30,6 +35,8 @@ const DropDown = ({ arr, refs, setIsOpen, imgRef, logOutFunc }) => {
                     logOutFunc();
                     return;
                   case "마이페이지":
+                    navigate(`/${userRealId}/userPage/myShopping`);
+
                     return;
                 }
               }}

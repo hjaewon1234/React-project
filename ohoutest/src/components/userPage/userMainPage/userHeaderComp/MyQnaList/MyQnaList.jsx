@@ -1,6 +1,12 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 const MyQnaList = () => {
+  const num = 0;
+  const userId = useSelector((state) => state.userInfo);
+  const userRealId = userId.userId;
+  console.log(userId);
   return (
     <UserPageInfo>
       <QnaOutterDiv>
@@ -18,7 +24,9 @@ const MyQnaList = () => {
                   <QnaDiv>답변 상태</QnaDiv>
                 </div>
                 <QnaGoDiv>
-                  <Link to={`/userPage/0`}>답변에 대한걸 확인하기</Link>
+                  <Link to={`/${userRealId}/userPage/myShopping/:${num}`}>
+                    답변에 대한걸 확인하기
+                  </Link>
                 </QnaGoDiv>
               </UnitDiv>
             </AccoContents>

@@ -7,6 +7,7 @@ import search from "./search.js";
 import fs from "fs";
 import login from "./login.js";
 import community from "./community.js";
+import userPage from "./userPage.js";
 import order from "./order.js";
 import readMore from "./readMore.js";
 import db from "../models/index.js";
@@ -26,6 +27,7 @@ router.use("/community", community);
 router.use("/order", order);
 router.use("/readmore", readMore);
 router.use("/cart", cart);
+router.use("/userPage", userPage);
 
 // db에 아무 정보가 없을 시 첫 아이템을 db에 넣어준다.
 
