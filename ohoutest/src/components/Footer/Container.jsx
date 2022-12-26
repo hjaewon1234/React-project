@@ -2,12 +2,12 @@ import FooterComponent from "./Component";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { action } from "../../modules/userInfo";
+import { action as userAction } from "../../modules/userInfo";
 import useDidMountEffect from "../util/useDidMountEffect";
 import Combochecker from "../util/combochecker";
 import { useNavigate } from "react-router-dom";
 
-const FooterContainer = () => {
+const FooterContainer = ({ socket }) => {
   const dispatch = useDispatch();
   const [curUser, setcurUser] = useState("");
   const navigate = useNavigate();
@@ -17,8 +17,9 @@ const FooterContainer = () => {
   };
 
   useDidMountEffect(() => {
-    if (document.cookie) dispatch(action.setUser(curUser));
-    else dispatch(action.setUser({ userId: "", userName: "" }));
+    if (document.cookie) dispatch(userAction.setUser(curUser));
+    else dispatch(userAction.setUser({ userId: "", userName: "" }));
+    console.log(socket);
   }, [curUser]);
 
   useEffect(() => {

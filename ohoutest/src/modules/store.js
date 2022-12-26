@@ -5,6 +5,7 @@ import { reducer as registSlice } from "./Slice/registSlice";
 import { reducer as loginSlice } from "./Slice/loginSlice";
 import { reducer as productPagingReducer } from "./productPaging";
 import { reducer as searchReducer } from "./search";
+import { reducer as socketReducer } from "./socket";
 
 import { reducer as qnaInfoReducer } from "./qnaInfo";
 import { reducer as qnaPagingReducer } from "./qnaPaging";
@@ -22,6 +23,7 @@ export const store = configureStore({
     qnaPaging: qnaPagingReducer,
     answerQna: answerQnaReducer,
     tempStateChange: tempStateChangeReducer,
+    socket: socketReducer,
   },
 });
 export default store;

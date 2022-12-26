@@ -27,6 +27,7 @@
     "redux": "^4.2.0",
     "redux-persist": "^6.0.0",
     "sass": "^1.56.2",
+    "socket.io-client": "^4.5.4",
     "styled-components": "^5.3.6",
     "sweetalert": "^2.1.2",
     "web-vitals": "^2.1.0"

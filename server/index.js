@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import socket from "./socket/socket.js";
 import {
   login,
   accessToken,
@@ -54,6 +55,8 @@ model.sequelize
   });
 // region: db-end
 
-app.listen(process.env.PORT, () => {
+const server = app.listen(process.env.PORT, () => {
   console.log(`server is on ${process.env.PORT}`);
 });
+
+socket(server);
