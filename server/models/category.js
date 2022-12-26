@@ -22,10 +22,10 @@ export default class Category extends Sequelize.Model {
   }
 
   static associate(db) {
-    // db.Category.hasMany(db.Products, {
-    //   foreignKey: "categoryId",
-    //   sourceKey: "id",
-    //   as: "Products",
-    // });
+    db.Category.hasMany(db.Products, {
+      foreignKey: "category_id",
+      sourceKey: "id",
+      as: "Products",
+    });
   }
 }

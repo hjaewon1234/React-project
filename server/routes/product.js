@@ -80,7 +80,7 @@ router.route("/getProductItem").post((req, res) => {
 //   }
 // });
 
-router.route("/getTopten").post((req, res) => {
+router.route("/getTopten").post(async (req, res) => {
   db.Search.findAll({ order: [["count", "DESC"]] }).then((data) => {
     const countAry = [];
 
