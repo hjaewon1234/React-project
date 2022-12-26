@@ -554,9 +554,9 @@ const RegistComponents = () => {
           </LoginStyle>
         </RegistMain>
       </KakaoApi>
-      <ParticleStyle>
+      {/* <ParticleStyle>
         <ParticleTest></ParticleTest>
-      </ParticleStyle>
+      </ParticleStyle> */}
     </>
   );
 };
