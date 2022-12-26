@@ -1,18 +1,27 @@
 import styled from "styled-components";
-
+import { Link } from "react-router-dom";
 const MyQnaList = () => {
   return (
     <UserPageInfo>
       <QnaOutterDiv>
-        <QnaUpperDiv>여기는 문의 내역 적히는 곳이야</QnaUpperDiv>
+        <QnaUpperDiv>나의 문의 내역</QnaUpperDiv>
       </QnaOutterDiv>
       <ShippingDiv>
         <UnitDiv>
           <div>
-            <div>[dsfasdfdsafsdafasd ] [sdfasdfasdfsafasdfdsa]</div>
-          </div>
-          <div style={{ display: "flex", columnGap: "10px" }}>
-            <QnaDiv style={{ backgroundColor: "lightblue" }}></QnaDiv>
+            <AccoContents>
+              <UnitDiv>
+                <div>
+                  <div>[브랜드명] 내가 구매한 상품</div>
+                </div>
+                <div>
+                  <QnaDiv>답변 상태</QnaDiv>
+                </div>
+                <QnaGoDiv>
+                  <Link to={`/userPage/0`}>답변에 대한걸 확인하기</Link>
+                </QnaGoDiv>
+              </UnitDiv>
+            </AccoContents>
           </div>
         </UnitDiv>
       </ShippingDiv>
@@ -40,7 +49,6 @@ const QnaOutterDiv = styled.div`
 `;
 const UnitDiv = styled.div`
   padding: 10px 0;
-
   display: flex;
 `;
 const ShippingDiv = styled.div`
@@ -57,5 +65,21 @@ const QnaDiv = styled.div`
   padding: 3px;
   border-radius: 7px;
   font-weight: bold;
-  background-color: black;
+`;
+
+const QnaGoDiv = styled.div`
+  border: 1px solid black;
+  padding: 3px;
+  border-radius: 7px;
+  font-weight: bold;
+  cursor: pointer;
+`;
+const AccoContents = styled.div`
+  padding: 10px;
+  & > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 20px;
+  }
 `;

@@ -17,6 +17,9 @@ import ReadMore from "./components/ReadMore";
 import UserPage from "./components/userPage";
 import ParticleTest from "./components/UserLogin/Particle/Components";
 
+import MyQnaModalContainer from "./components/userPage/userMainPage/userHeaderComp/MyQnaModal/MyQnaModalContainer";
+import UserMainPageContainer from "./components/userPage/userMainPage/UserMainPageContainer";
+import MyQnaContainer from "./components/userPage/userMainPage/userHeaderComp/MyQnaList/MyQnaListContainer";
 axios.defaults.withCredentials = true;
 
 function App() {
@@ -48,6 +51,15 @@ function App() {
         <Route path="/community" element={<CommunityContainer />} />
         <Route path="/readmoretest" element={<ReadMore />} />
         <Route path="/userPage" element={<UserPage />} />
+        <Route
+          path="/userPage/0"
+          element={
+            <>
+              <MyQnaModalContainer />
+              <MyQnaContainer />
+            </>
+          }
+        />
       </Routes>
       <Footer />
       <div style={{ backgroundColor: "#1a1c20" }}></div>{" "}
