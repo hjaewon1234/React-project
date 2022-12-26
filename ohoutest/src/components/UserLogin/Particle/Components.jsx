@@ -34,7 +34,7 @@ const ParticleTest = () => {
   // window.addEventListener("click", onClick);
 
   const settings = {
-    dimensions: [1080, 1080],
+    dimensions: [720, 720],
     animate: true,
   };
 
@@ -58,11 +58,11 @@ const ParticleTest = () => {
     // const Data = Context.getImageData(0, 0, width, height).data;
 
     let pos = [];
-    const numCircles = 12;
-    const gapCircles = 5;
-    const gapDot = 5;
-    let dotRadius = 5;
-    let cirRadius = 2;
+    const numCircles = 5;
+    const gapCircles = 4;
+    const gapDot = 30;
+    let dotRadius = 2;
+    let cirRadius = 200;
     const fitRadius = dotRadius;
 
     elCanvas = canvas;
@@ -118,7 +118,7 @@ const ParticleTest = () => {
     }
 
     return ({ context, width, height }) => {
-      context.fillStyle = "white";
+      context.fillStyle = "#f4f4f4";
       context.fillRect(0, 0, width, height);
 
       // context.drawImage(Canvas, 1200, 1200);
@@ -168,7 +168,7 @@ const ParticleTest = () => {
 
     cursor.x = x;
     cursor.y = y;
-    console.log(cursor);
+    // console.log(cursor);
   };
 
   const onMouseUp = () => {
@@ -179,22 +179,22 @@ const ParticleTest = () => {
     cursor.y = 9999;
   };
 
-  (function () {
-    document.addEventListener("keydown", function (e) {
-      const keyCode = e.keyCode;
-      console.log("입력된 key " + e.key);
+  // (function () {
+  //   document.addEventListener("keydown", function (e) {
+  //     const keyCode = e.keyCode;
+  //     console.log("입력된 key " + e.key);
 
-      // if (keyCode == 13) {
-      //   // Enter key
-      //   document.dispatchEvent(new KeyboardEvent("keydown", { key: "e" }));
-      //   // document.dispatchEvent(new KeyboardEvent('keyup', {key: 'e'}));
-      // } else if (keyCode == 9) {
-      //   // Tab key
-      //   document.dispatchEvent(new KeyboardEvent("keydown", { key: "t" }));
-      //   // document.dispatchEvent(new KeyboardEvent('keyup', {key: 't'}));
-      // }
-    });
-  })();
+  //     // if (keyCode == 13) {
+  //     //   // Enter key
+  //     //   document.dispatchEvent(new KeyboardEvent("keydown", { key: "e" }));
+  //     //   // document.dispatchEvent(new KeyboardEvent('keyup', {key: 'e'}));
+  //     // } else if (keyCode == 9) {
+  //     //   // Tab key
+  //     //   document.dispatchEvent(new KeyboardEvent("keydown", { key: "t" }));
+  //     //   // document.dispatchEvent(new KeyboardEvent('keyup', {key: 't'}));
+  //     // }
+  //   });
+  // })();
 
   // const onKeyDown = (e) => {
   //   window.addEventListener("keydown", onKeyMove);
@@ -324,8 +324,13 @@ const ParticleTest = () => {
       ...settings,
       canvas: ref.current,
     });
+    // }, []);
   }, [ref]);
-  return <canvas ref={ref} />;
+  return (
+    <>
+      <canvas ref={ref} />
+    </>
+  );
 };
 
 export default ParticleTest;

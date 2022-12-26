@@ -239,29 +239,29 @@ const RegistComponents = () => {
     input.current.focus();
   };
 
-  const [movElement, setMovElement] = useState(false);
-  const inputRef = useRef(null);
+  // const [movElement, setMovElement] = useState(false);
+  // const inputRef = useRef(null);
 
-  useEffect(() => {
-    if (!inputRef.current) return;
-    window.addEventListener("input", inputEvent);
-    return () => {
-      window.removeEventListener("input", inputEvent);
-    };
-  }, [inputRef.current]);
+  // useEffect(() => {
+  //   if (!inputRef.current) return;
+  //   window.addEventListener("input", inputEvent);
+  //   return () => {
+  //     window.removeEventListener("input", inputEvent);
+  //   };
+  // }, [inputRef.current]);
 
-  const inputEvent = () => {
-    const inputTest = inputRef.current.getBoundingClientRect();
+  // const inputEvent = () => {
+  //   const inputTest = inputRef.current.getBoundingClientRect();
 
-    console.log(inputTest);
-    setMovElement(inputTest);
-  };
+  //   console.log(inputTest);
+  //   setMovElement(inputTest);
+  // };
 
   return (
     <>
       <ModalContainer></ModalContainer>
-      <KakaoApi ref={inputRef}>
-        {/* <KakaoApi> */}
+      {/* <KakaoApi ref={inputRef}> */}
+      <KakaoApi>
         <RegistMain>
           <RegistTopStlye>
             <h3>회원가입</h3>
@@ -499,10 +499,10 @@ const RegistComponents = () => {
                   // checked={checkItems.includes(data.id) ? true : false}
                   disabled={
                     inputId.length <= 5 ||
-                    inputPw.length <= 7 ||
-                    inputPw1.length <= 7 ||
+                    inputPw.length <= 6 ||
+                    inputPw1.length <= 6 ||
                     inputName.length <= 2 ||
-                    inputAdress.length <= 5 ||
+                    inputAdress.length <= 3 ||
                     inputAdress1.address.length <= 1
                       ? true
                       : false
@@ -554,17 +554,19 @@ const RegistComponents = () => {
           </LoginStyle>
         </RegistMain>
       </KakaoApi>
-      <ParticleStyle>
+      {/* <ParticleStyle>
         <ParticleTest></ParticleTest>
-      </ParticleStyle>
+      </ParticleStyle> */}
     </>
   );
 };
 export default RegistComponents;
 
 const ParticleStyle = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
   ParticleTest {
-    background-color: transparent;
   }
 `;
 

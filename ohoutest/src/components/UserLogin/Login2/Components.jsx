@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { action } from "../../../modules/userInfo";
 import { Link } from "react-router-dom";
 import { logInUser } from "../../../modules/Slice/loginSlice";
+import ParticleTest from "../Particle/Components";
 
 const Login2Components = ({ setIsLogin, setUser, user }) => {
   const [inputId, setId] = useState("");
@@ -66,9 +67,7 @@ const Login2Components = ({ setIsLogin, setUser, user }) => {
             }}
             placeholder={"로그인"}
           />
-
           <label> 비밀번호</label>
-
           <input
             type={"password"}
             value={inputPw}
@@ -87,7 +86,10 @@ const Login2Components = ({ setIsLogin, setUser, user }) => {
             }
           >
             로그인
-          </button>
+          </button>{" "}
+          {/* <ParticleStyle>
+            <ParticleTest></ParticleTest>
+          </ParticleStyle> */}
         </RegistMidStlye>
       </RegistMain>
       <RegistLink>
@@ -99,7 +101,14 @@ const Login2Components = ({ setIsLogin, setUser, user }) => {
   );
 };
 export default Login2Components;
-
+const ParticleStyle = styled.div`
+  position: absolute;
+  z-index: 5;
+  top: -20px;
+  ParticleStyle {
+    background-color: rgb(240, 165, 0);
+  }
+`;
 const BoxShadow = styled.div`
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
 `;
@@ -139,7 +148,6 @@ const RegistMidStlye = styled.div`
   * {
     margin-bottom: 15px;
   }
-
   display: flex;
   justify-content: center;
   align-items: center;
