@@ -8,8 +8,6 @@ const YesUserCartComp = ({
   setTotalState,
   setTotalCount,
   buyOnClick,
-  item,
-  getCartItem,
 }) => {
   const [totalPrice, setTotalPrice] = useState(0);
   useEffect(() => {
@@ -34,8 +32,6 @@ const YesUserCartComp = ({
               totalCount={totalCount}
               setTotalState={setTotalState}
               setTotalCount={setTotalCount}
-              item={item}
-              getCartItem={getCartItem}
             ></CartProductCardContainer>
           </div>
           <hr />

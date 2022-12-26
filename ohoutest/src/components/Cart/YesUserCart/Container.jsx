@@ -36,6 +36,7 @@ const YesUserCartContainer = ({ userInfo }) => {
         buyOnClick={buyOnClick}
         item={item}
         getCartItem={getCartItem}
+        setItem={setItem}
       ></YesUserCartComp>
     </>
   );
