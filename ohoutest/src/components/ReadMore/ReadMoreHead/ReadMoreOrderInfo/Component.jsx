@@ -34,7 +34,13 @@ const ReadMoreOrderInfoComponent = ({ brand, name, price }) => {
           >
             <img src="/img/minus-solid.svg" />
           </button>
-          <input type="number" value={orderCount} />
+          <input
+            type="number"
+            value={orderCount}
+            onChange={({ target: { value } }) => {
+              setOrderCount(+value);
+            }}
+          />
           <button
             onClick={() => {
               setOrderCount((prev) => prev + 1);
