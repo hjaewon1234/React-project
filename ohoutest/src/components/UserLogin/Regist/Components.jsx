@@ -90,10 +90,12 @@ const RegistComponents = () => {
     if (!passwordRegExp.test(currentPassword)) {
       setPasswordMessage("8~15 사이 숫자+영문+특수문자로 입력해주세요.");
       setIsPassword(false);
-    } else if (inputPw1 !== currentPassword) {
-      setPasswordMessage("입력한 비밀번호 확인과 같지 않습니다.");
-      setIsPassword(false);
-    } else {
+    }
+    //  else if (inputPw1 !== currentPassword) {
+    //   setPasswordMessage("입력한 비밀번호 확인과 같지 않습니다.");
+    //   setIsPassword(false);
+    // }
+    else {
       setPasswordMessage("안전한 비밀번호 입니다.");
       setIsPassword(true);
     }
@@ -502,7 +504,7 @@ const RegistComponents = () => {
                     inputPw.length <= 7 ||
                     inputPw1.length <= 7 ||
                     inputName.length <= 2 ||
-                    inputAdress.length <= 5 ||
+                    inputAdress.length <= 3 ||
                     inputAdress1.address.length <= 1
                       ? true
                       : false
