@@ -14,9 +14,14 @@ const RegistContainer = () => {
   };
   return (
     <>
+      <ParticleStyle>
+        <ParticleTest></ParticleTest>
+      </ParticleStyle>
       {params.id == undefined ? (
         <>
-          <RegistComponents></RegistComponents>
+          <RegistStyle>
+            <RegistComponents></RegistComponents>
+          </RegistStyle>
         </>
       ) : (
         <div>
@@ -29,3 +34,16 @@ const RegistContainer = () => {
 };
 
 export default RegistContainer;
+const ParticleStyle = styled.div`
+  position: absolute;
+  z-index: 1;
+  top: 100px;
+  left: 200px;
+  left ParticleStyle {
+    background-color: rgb(240, 165, 0);
+  }
+`;
+
+const RegistStyle = styled.div`
+  z-index: 3;
+`;
