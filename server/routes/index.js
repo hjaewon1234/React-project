@@ -128,6 +128,8 @@ function setProduct() {
                     description: item.description,
                     category: data.id,
                     img: item.img,
+                  }).then((product) => {
+                    data.addProducts(product);
                   });
                 }
               });
@@ -190,7 +192,7 @@ function setSearch() {
     }
   });
 }
-setSearch();
+// setSearch();
 
 router.use("/login", login);
 
