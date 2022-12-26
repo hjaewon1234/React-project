@@ -13,9 +13,7 @@ const MenuBarComponent = () => {
     currentScroll = window.scrollY;
     currentScroll > prevScroll ? (isDown = true) : (isDown = false);
     if (isDown) {
-      console.log("내림");
     } else {
-      console.log("올림");
     }
     prevScroll = currentScroll;
   };
