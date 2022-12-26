@@ -8,17 +8,13 @@ const CartProductCardContainer = ({
   setItem,
 }) => {
   const deleteLocalItem = (idx) => {
-    const tempArr = [
-      ...item.slice(0, idx - 1),
-      ...item.slice(idx + 1, item.length - 1),
-    ];
-    // console.log(idx);
-    // console.log(tempArr);
-    // console.log(...item.slice(0, idx - 1));
-    // setItem((prev) => {
-    //   return [...prev].splice(idx, 1);
-    // });
-    // setItem(tempArr);
+    const tempArr = [];
+    for (let i = 0; i < item.length; i++) {
+      if (idx !== i) {
+        tempArr.push(item[i]);
+      }
+    }
+    setItem(tempArr);
   };
 
   return (
