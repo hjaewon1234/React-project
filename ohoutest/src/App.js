@@ -49,7 +49,7 @@ function App() {
         />
         <Route path="/cart" element={<CartContainer />}></Route>
         <Route path="/community" element={<CommunityContainer />} />
-        <Route path="/readmoretest" element={<ReadMore />} />
+        <Route path="/readmore/:productId" element={<ReadMore />} />
         <Route path="/userPage" element={<UserPage />} />
         <Route
           path="/userPage/0"

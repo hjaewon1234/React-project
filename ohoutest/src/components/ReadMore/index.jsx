@@ -1,5 +1,6 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
 import ReadMoreHead from "./ReadMoreHead";
@@ -8,29 +9,26 @@ import ReadMoreHead from "./ReadMoreHead";
 
 const ReadMore = () => {
   const [item, setItem] = useState({});
-  const [input, setInput] = useState(0);
-  const getProductItem = (idx) => {
-    axios.post("/api/product/getProductItem", { id: idx }).then((data) => {
-      setItem(data.data);
-    });
+  const { productId } = useParams();
+
+  const getProductItem = (pdtId) => {
+    axios
+      .post("/api/product/getProductItem", { id: pdtId })
+      .then((data) => {
+        setItem(data.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
+  useEffect(() => {
+    getProductItem(productId);
+  }, []);
+
+  window.scrollTo(0, 0);
 
   return (
     <ReadMoreBox>
-      <input
-        type="number"
-        value={input}
-        onChange={(e) => {
-          setInput(e.target.value);
-        }}
-      />
-      <button
-        onClick={() => {
-          getProductItem(input);
-        }}
-      >
-        GET
-      </button>
       <ReadMoreHead item={item} />
       {/* <ReadMoreMain />
       <ReadMoreFoot /> */}

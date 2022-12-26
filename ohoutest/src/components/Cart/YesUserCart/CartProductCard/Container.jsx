@@ -1,33 +1,46 @@
-import { useEffect, useState } from "react";
 import CartProductCardComp from "./Component";
 
 const CartProductCardContainer = ({
   totalCount,
   setTotalState,
   setTotalCount,
+  item,
+  setItem,
 }) => {
+  const deleteLocalItem = (idx) => {
+    const tempArr = [
+      ...item.slice(0, idx - 1),
+      ...item.slice(idx + 1, item.length - 1),
+    ];
+    // console.log(idx);
+    // console.log(tempArr);
+    // console.log(...item.slice(0, idx - 1));
+    // setItem((prev) => {
+    //   return [...prev].splice(idx, 1);
+    // });
+    // setItem(tempArr);
+  };
+
   return (
     <>
-      <CartProductCardComp
-        brand={"달팽이리빙"}
-        name={"푸벨드마망 라운드 원터치 휴지통(7L)"}
-        price={12900}
-        totalCount={totalCount}
-        setTotalState={setTotalState}
-        setTotalCount={setTotalCount}
-        index={0}
-        count={3}
-      ></CartProductCardComp>
-      <CartProductCardComp
-        brand={"달팽이빙빙"}
-        name={"휴지통(20L)"}
-        price={99900}
-        totalCount={totalCount}
-        setTotalState={setTotalState}
-        setTotalCount={setTotalCount}
-        index={1}
-        count={2}
-      ></CartProductCardComp>
+      {item.map((elem, idx) => {
+        const img = elem.Product.img.split(",")[0];
+        return (
+          <CartProductCardComp
+            brand={elem.Product.brand}
+            name={elem.Product.name}
+            price={elem.Product.price}
+            totalCount={totalCount}
+            setTotalState={setTotalState}
+            setTotalCount={setTotalCount}
+            index={idx}
+            count={elem.count}
+            key={`item - ${idx}`}
+            img={img}
+            deleteLocalItem={deleteLocalItem}
+          />
+        );
+      })}
     </>
   );
 };
