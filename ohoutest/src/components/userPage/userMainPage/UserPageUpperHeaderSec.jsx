@@ -7,9 +7,8 @@ import ShippingStatus from "./myShopping/ShippingStatus";
 import CartContainer from "../../../Cart/Container";
 import MyQnaList from "./MyQnaList/MyQnaList";
 import { Link } from "react-router-dom";
-import MyOptionContainer from "../myOption/MyOptionContainer";
 
-const UserPageUpperHeader = () => {
+const UserPageUpperHeaderSec = () => {
   const [clickColor, setClickColor] = useState(0);
   // 가장 위에 나의 쇼핑 // 나의 리뷰 // 설정 을 나누는 상태
   const [myList, setMyList] = useState(0);
@@ -98,16 +97,14 @@ const UserPageUpperHeader = () => {
         <></>
       )}
       {clickColor == 0 && myList == 1 ? <CartContainer /> : <></>}
-      {clickColor == 0 && myList == 2 ? <MyQnaList /> : <></>}
-
-      {clickColor == 2 && myList == 0 ? <MyOptionContainer /> : <></>}
+      <MyQnaList />
 
       {/* 추후에 여기에 배송 관련 데이터들을 넘겨주고, 그걸 map 돌리면 될듯  */}
     </div>
   );
 };
 
-export default UserPageUpperHeader;
+export default UserPageUpperHeaderSec;
 
 const UserPageUpperHeaderDiv = styled.div`
   width: 100%;
@@ -138,13 +135,22 @@ const ShippingDiv = styled.div`
   display: flex;
   column-gap: 100px;
 `;
-
+const ShippingUnderDiv = styled.div`
+  width: 50%;
+  margin: auto;
+  border: 1px solid #f0a500;
+  border-radius: 10px;
+`;
 const ShippingItem = styled.div`
   font-size: 30px;
   cursor: pointer;
   margin: 15px;
 `;
-
+const ShippingUnderItem = styled.div`
+  font-size: 20px;
+  cursor: pointer;
+  margin: 15px;
+`;
 const UserPageHeader = styled.div`
   width: 100%;
   border-bottom: 1px solid #f0a500;

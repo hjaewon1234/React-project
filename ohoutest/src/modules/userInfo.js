@@ -26,6 +26,7 @@ const userInfoSlice = createSlice({
   initialState: { userId: "", userName: "" },
   reducers: {
     setUser: (state, action) => {
+      console.log(action);
       return action.payload;
     },
     // setLogOut(state) {

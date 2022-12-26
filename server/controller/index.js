@@ -221,6 +221,7 @@ const login = async (req, res, next) => {
     res.send("로그인 되어있습니다.");
   } else {
     const tempUser = await test(req);
+    console.log(tempUser);
     console.log(req.body);
     if (!tempUser) {
       res.status(403).json("Not Authorized");
@@ -265,9 +266,12 @@ const login = async (req, res, next) => {
           // Credential: true,
         });
 
-        res
-          .status(200)
-          .json({ userId: tempUser.userId, userName: tempUser.userName });
+        res.status(200).json({
+          userId: tempUser.userId,
+          userName: tempUser.userName,
+          userAddress: tempUser.userAddress,
+          userAddress1: tempUser.userAddress1,
+        });
       } catch (error) {
         res.status(500).json(error);
       }

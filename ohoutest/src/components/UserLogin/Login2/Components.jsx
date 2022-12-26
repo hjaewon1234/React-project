@@ -34,6 +34,7 @@ const Login2Components = ({ setIsLogin, setUser, user }) => {
         inputPw: inputPw,
       },
     }).then((result) => {
+      console.log(result);
       if (result.status === 200) {
         console.log("로그인 성공");
         // window.open("/signUp", "_self");
@@ -44,6 +45,8 @@ const Login2Components = ({ setIsLogin, setUser, user }) => {
             action.setUser({
               userId: result.data.userId,
               userName: result.data.userName,
+              userAddress: result.data.userAddress,
+              userAddress1: result.data.userAddress1,
             })
           );
       }

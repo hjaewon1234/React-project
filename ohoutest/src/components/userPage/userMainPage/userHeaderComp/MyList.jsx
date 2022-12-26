@@ -1,13 +1,17 @@
 import styled from "styled-components";
+import { useNavigate } from "react-router";
 
 const MyList = ({ myarr, myList, setMyList }) => {
+  const navigate = useNavigate();
   return (
     <div>
       <UserPageUnderHeaderDiv>
         {myarr.map((item, index) => {
           return (
             <UserPageUnderItem
-              onClick={() => setMyList((state) => (state = index))}
+              onClick={() => {
+                setMyList((state) => (state = index));
+              }}
               style={{ color: myList == index ? "#f0a500" : "black" }}
               key={index}
             >

@@ -6,7 +6,8 @@ import Main from "./components/Main";
 import Footer from "./components/Footer/Container";
 import SingUp from "./components/index";
 import AnswerQnaContainer from "./components/ManagerPage/ManagerInfo/answerQna/AnswerQnaContainer";
-import PopupBarContainer from "./components/PopupBar/Container";
+
+import PopupBarContainer from "./components/popupBar/Container";
 import axios from "axios";
 import RegistContainer from "./components/UserLogin/Regist/Container";
 import Login2Container from "./components/UserLogin/Login2/Container";
@@ -20,6 +21,8 @@ import ParticleTest from "./components/UserLogin/Particle/Components";
 import MyQnaModalContainer from "./components/userPage/userMainPage/userHeaderComp/MyQnaModal/MyQnaModalContainer";
 import UserMainPageContainer from "./components/userPage/userMainPage/UserMainPageContainer";
 import MyQnaContainer from "./components/userPage/userMainPage/userHeaderComp/MyQnaList/MyQnaListContainer";
+import UserMainPageComponent from "./components/userPage/userMainPage/UserMainPageComponent";
+import UserPageUpperHeaderSec from "./components/userPage/userMainPage/userHeaderComp/UserPageUpperHeader";
 axios.defaults.withCredentials = true;
 
 function App() {
@@ -50,15 +53,10 @@ function App() {
         <Route path="/cart" element={<CartContainer />}></Route>
         <Route path="/community" element={<CommunityContainer />} />
         <Route path="/readmoretest" element={<ReadMore />} />
-        <Route path="/userPage" element={<UserPage />} />
+
         <Route
-          path="/userPage/0"
-          element={
-            <>
-              <MyQnaModalContainer />
-              <MyQnaContainer />
-            </>
-          }
+          path="/:userId/userPage/myShopping"
+          element={<UserMainPageComponent />}
         />
       </Routes>
       <Footer />
