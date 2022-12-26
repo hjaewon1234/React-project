@@ -12,7 +12,7 @@ const Combochecker = (goToAdmin) => {
       }
     } else {
       count = 0;
-      console.log("콤보 실패");
+      // console.log("콤보 실패");
     }
   });
 };

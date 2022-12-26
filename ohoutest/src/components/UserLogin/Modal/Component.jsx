@@ -99,6 +99,7 @@ const ModalCompoStyled = styled.div`
     top: 15px;
     right: 15px;
     width: 30px;
+    height:30px;
     font-size: 21px;
     font-weight: 700;
     text-align: center;

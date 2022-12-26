@@ -11,6 +11,8 @@ import { Link } from "react-router-dom";
 import React from "react";
 import ModalContainer from "../Modal/Container";
 import ModalComponents from "../Modal/Component";
+import ParticleTest from "../Particle/Components";
+
 const RegistComponents = () => {
   // const dispathch = useDispatch();
 
@@ -87,6 +89,9 @@ const RegistComponents = () => {
       /(?=.*\d{1,50})(?=.*[~`!@#$%\^&*()-+=]{1,50})(?=.*[a-zA-Z]{2,50}).{8,50}$/;
     if (!passwordRegExp.test(currentPassword)) {
       setPasswordMessage("8~15 사이 숫자+영문+특수문자로 입력해주세요.");
+      setIsPassword(false);
+    } else if (inputPw1 !== currentPassword) {
+      setPasswordMessage("입력한 비밀번호 확인과 같지 않습니다.");
       setIsPassword(false);
     } else {
       setPasswordMessage("안전한 비밀번호 입니다.");
@@ -274,7 +279,10 @@ const RegistComponents = () => {
               placeholder={"아이디"}
               maxLength={12}
             />
-            <p className="message"> {idMessage} </p>
+            <p className={isId ? "messageGreen" : "messageRed"}>
+              {" "}
+              {idMessage}{" "}
+            </p>
             <button
               className="idBtnOverlap"
               onClick={() => {
@@ -295,7 +303,9 @@ const RegistComponents = () => {
               onChange={onChangePassword}
               maxLength={15}
             />
-            <p className="message">{passwordMessage}</p>
+            <p className={isPassword ? "messageGreen" : "messageRed"}>
+              {passwordMessage}
+            </p>
             <label> 비밀번호 확인</label>
             <input
               type={"password"}
@@ -307,7 +317,9 @@ const RegistComponents = () => {
               placeholder={"비밀번호 확인"}
               maxLength={15}
             />
-            <p className="message">{passwordConfirmMessage}</p>
+            <p className={isPasswordConfirm ? "messageGreen" : "messageRed"}>
+              {passwordConfirmMessage}
+            </p>
             <label> 닉네임</label>
             <input
               type={"text"}
@@ -319,7 +331,9 @@ const RegistComponents = () => {
               onChange={onChangeName}
               maxLength={8}
             />
-            <p className="message">{nameMessage}</p>
+            <p className={isname ? "messageGreen" : "messageRed"}>
+              {nameMessage}
+            </p>
             <button
               className="idBtnOverlap"
               onClick={() => {
@@ -383,7 +397,7 @@ const RegistComponents = () => {
               </button> */}
               <button
                 className="kakaoAdress1"
-                disabled={inputAdress.length <= 5 ? true : false}
+                disabled={inputAdress.length <= 3 ? true : false}
               ></button>
             </div>
             <label> 약관동의</label>
@@ -540,16 +554,17 @@ const RegistComponents = () => {
           </LoginStyle>
         </RegistMain>
       </KakaoApi>
+      <ParticleStyle>
+        <ParticleTest></ParticleTest>
+      </ParticleStyle>
     </>
   );
 };
 export default RegistComponents;
 
 const ParticleStyle = styled.div`
-  Particle {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  ParticleTest {
+    background-color: transparent;
   }
 `;
 
@@ -688,6 +703,14 @@ const RegistMidStlye = styled.div`
   .message {
     font-size: 12px;
     color: green;
+  }
+  .messageGreen {
+    font-size: 12px;
+    color: green;
+  }
+  .messageRed {
+    font-size: 12px;
+    color: red;
   }
 `;
 const AcceptStlye = styled.div`
