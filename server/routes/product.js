@@ -43,6 +43,16 @@ router.route("/getProducts").post((req, res) => {
   });
 });
 
+router.route("/getAllProducts").post((req, res) => {
+  db.Products.findAll()
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+});
+
 router.route("/getProductItem").post((req, res) => {
   // db.Products.findAll()
   db.Products.findOne({

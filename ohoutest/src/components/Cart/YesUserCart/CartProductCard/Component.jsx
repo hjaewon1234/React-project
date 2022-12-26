@@ -11,6 +11,8 @@ const CartProductCardComp = ({
   index,
   totalCount,
   count,
+  img,
+  deleteLocalItem,
 }) => {
   useEffect(() => {
     setTotalState((state) => {
@@ -78,7 +80,7 @@ const CartProductCardComp = ({
         </label>
       </div>
       <MainView>
-        <img src="/api/downloadLG전자_LG디오스베이직오브제컬렉션1.jpg" />
+        <img src={`/api/download${img}`} />
         <div>
           <p className="p768px">
             [{brand}] {name}
@@ -99,6 +101,7 @@ const CartProductCardComp = ({
             <div
               className="deleteBtn"
               onClick={() => {
+                deleteLocalItem(index);
                 console.log(index, "번째 아이템 삭제 버튼 눌림");
               }}
             >

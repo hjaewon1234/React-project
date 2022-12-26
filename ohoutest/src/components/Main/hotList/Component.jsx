@@ -11,7 +11,7 @@ const HotListComponent = ({ itemArr }) => {
         {itemArr.map((elem, idx) => {
           return (
             <ItemBox key={`itemArr - ${idx}`}>
-              <Link to={"/"}>
+              <Link to={`/readmore/${elem.id}`}>
                 <div className="hot-list-item-img">
                   <img src={`/api/download${elem.img.split(",")[0]}`} />
                 </div>

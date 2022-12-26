@@ -8,7 +8,7 @@ const CartComponent = ({ navigate }) => {
       </div>
       <button
         onClick={() => {
-          navigate("/");
+          navigate("/login");
         }}
       >
         상품 담으러 가기

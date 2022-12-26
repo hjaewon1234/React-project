@@ -18,7 +18,6 @@ const ReadMoreHead = ({ item }) => {
 };
 
 const ReadMoreHeadBox = styled.div`
-  border: 1px solid red;
   margin: 0 auto;
   width: 1200px;
   padding: 5px;
@@ -29,7 +28,6 @@ const ReadMoreHeadBox = styled.div`
   }
   .head-box-inner > div,
   .head-box-inner > div + div {
-    border: 1px solid black;
     flex: 1;
   }
 `;

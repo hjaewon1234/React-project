@@ -12,7 +12,7 @@ const TodaysDealComponent = ({ itemArr }) => {
         {itemArr.map((elem, idx) => {
           return (
             <ItemBox key={`itemArr - ${idx}`}>
-              <Link to={"/"}>
+              <Link to={`/readmore/${elem.id}`}>
                 <div className="today-deal-item-img">
                   <img src={`/api/download${elem.img.split(",")[0]}`} />
                 </div>

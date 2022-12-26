@@ -1,7 +1,8 @@
 import { useState } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
-const ReadMoreOrderInfoComponent = ({ brand, name, price }) => {
+const ReadMoreOrderInfoComponent = ({ brand, name, price, addCart }) => {
   const [orderCount, setOrderCount] = useState(1);
   let totalSum = orderCount * price;
 
@@ -19,16 +20,17 @@ const ReadMoreOrderInfoComponent = ({ brand, name, price }) => {
       <div className="to-store">
         <img src="/img/store.png" />
         <span>{brand}</span>
-        <a href="http://naver.com" target={"_blank"}>
+        {/* <a href="http://naver.com" target={"_blank"}>
           <span>브랜드홈</span>
           <img src="/img/chevron-right-solid.svg" />
-        </a>
+        </a> */}
       </div>
       <hr />
       <div className="order-count">
         <div>
           <button
             onClick={() => {
+              if (orderCount < 2) return;
               setOrderCount((prev) => prev - 1);
             }}
           >
@@ -56,8 +58,18 @@ const ReadMoreOrderInfoComponent = ({ brand, name, price }) => {
       </div>
       <hr />
       <div className="order-btn">
-        <button>장바구니</button>
-        <button>주문하기</button>
+        <Link>
+          <button>장바구니</button>
+        </Link>
+        <Link to={"/cart"}>
+          <button
+            onClick={() => {
+              addCart(orderCount);
+            }}
+          >
+            주문하기
+          </button>
+        </Link>
       </div>
       <div className="order-ad">
         <img src="/img/read-more-ad.webp" />
@@ -189,6 +201,10 @@ const ReadMoreOrderInfoBox = styled.div`
     font-weight: bold;
     cursor: pointer;
   }
+  // .order-btn > button > a {
+  //   text-decoration: none;
+  //   color: unset;
+  // }
   .order-btn > button:first-child {
     color: #f0a500;
     border: 1px solid #f0a500;
