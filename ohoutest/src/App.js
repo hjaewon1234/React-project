@@ -13,6 +13,7 @@ import Login2Container from "./components/UserLogin/Login2/Container";
 import SearchContainer from "./components/Search/Container";
 import CartContainer from "./components/Cart/Container";
 import CommunityContainer from "./components/Comunity/Container";
+import ParticleTest from "./components/UserLogin/Particle/Components";
 
 axios.defaults.withCredentials = true;
 
@@ -45,7 +46,7 @@ function App() {
         <Route path="/community" element={<CommunityContainer />} />
       </Routes>
       <Footer />
-      <div style={{ backgroundColor: "#1a1c20" }}></div>
+      <div style={{ backgroundColor: "#1a1c20" }}></div>{" "}
     </AppBox>
   );
 }

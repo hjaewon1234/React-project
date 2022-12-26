@@ -1,6 +1,7 @@
 import RegistComponents from "./Components";
 import { useParams } from "react-router-dom";
 import ParticleTest from "../Particle/Components";
+import styled from "styled-components";
 
 const RegistContainer = () => {
   const params = useParams();
@@ -15,7 +16,6 @@ const RegistContainer = () => {
     <>
       {params.id == undefined ? (
         <>
-          <ParticleTest></ParticleTest>
           <RegistComponents></RegistComponents>
         </>
       ) : (

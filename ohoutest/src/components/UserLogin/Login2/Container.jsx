@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { action } from "../../../modules/userInfo.js";
 import styled from "styled-components";
 // import ModalContainer from "../Modal/Container.jsx";
-// import ParticleTest from "../Particle/Components";
+import ParticleTest from "../Particle/Components";
 
 const Login2Container = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -64,7 +64,7 @@ const Login2Container = () => {
   return (
     <>
       <div>
-        {isLogin ? (
+        {!isLogin ? (
           <>
             <h3>{user.userName} 님이 로그인했습니다.</h3>
             <button onClick={logout}>Logout</button>

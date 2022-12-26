@@ -3,7 +3,8 @@ import random from "canvas-sketch-util/random";
 import math from "canvas-sketch-util/math";
 // import eases from "eases";
 import colormap from "colormap";
-// import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
+import React from "react";
 // import imgA from "./assets/1.png";
 
 const ParticleTest = () => {
@@ -24,9 +25,16 @@ const ParticleTest = () => {
   //   console.log(inputTest);
   //   setMovElement(inputTest);
   // };
+  // const timer = setInterval(() => {
+  //   console.log("Tick!");
+  // });
+  // const onClick = () => {
+  //   console.log("Screen clicked!");
+  // };
+  // window.addEventListener("click", onClick);
 
   const settings = {
-    dimensions: [720, 720],
+    dimensions: [1080, 1080],
     animate: true,
   };
 
@@ -122,6 +130,29 @@ const ParticleTest = () => {
         particle.draw(context);
       });
     };
+
+    // return {
+    //   render({ context, width, height, frame }) {
+    //     context.fillStyle = "white";
+    //     context.fillRect(0, 0, width, height);
+
+    //     // context.drawImage(Canvas, 1200, 1200);
+
+    //     particles.sort((a, b) => a.scale - b.scale);
+
+    //     particles.forEach((particle) => {
+    //       particle.update();
+    //       particle.draw(context);
+    //     });
+    //     // Render your content...
+    //   },
+
+    //   unload() {
+    //     // Dispose of side-effects
+    //     clearInterval(timer);
+    //     window.removeEventListener("click", onClick);
+    //   },
+    // };
   };
 
   const onMouseDown = (e) => {
@@ -202,7 +233,7 @@ const ParticleTest = () => {
   // };
   // start();
 
-  canvasSketch(sketch, settings);
+  // canvasSketch(sketch, settings);
 
   class Particle {
     constructor({ x, y, radius = 10, colA }) {
@@ -286,6 +317,15 @@ const ParticleTest = () => {
       context.restore();
     }
   }
+
+  const ref = React.createRef();
+  useEffect(() => {
+    canvasSketch(sketch, {
+      ...settings,
+      canvas: ref.current,
+    });
+  }, [ref]);
+  return <canvas ref={ref} />;
 };
 
 export default ParticleTest;
@@ -313,12 +353,7 @@ export default ParticleTest;
 
 //     imgAContext.drawImage(imgA, 0, 0);
 
-//     const imgAData = imgAContext.getImageData(
-//       0,
-//       0,
-//       imgA.width,
-//       imgA.height
-//     ).data;
+//     const imgAData = imgAContext.getImageData(0, 0, imgA.width, imgA.height).data;
 
 //     // let pos = [];
 //     const numCircles = 30;
@@ -333,9 +368,7 @@ export default ParticleTest;
 
 //     for (let i = 0; i < numCircles; i++) {
 //       const circumference = Math.PI * 2 * cirRadius;
-//       const numFit = i
-//         ? Math.floor(circumference / (fitRadius * 2 + gapDot))
-//         : 1;
+//       const numFit = i ? Math.floor(circumference / (fitRadius * 2 + gapDot)) : 1;
 //       const fitSlice = (Math.PI * 2) / numFit;
 //       let ix, iy, idx, r, g, b, colA;
 //       for (let j = 0; j < numFit; j++) {
@@ -516,3 +549,5 @@ export default ParticleTest;
 //     }
 //   }
 // };
+
+// export default ParticleTest;
