@@ -4,7 +4,8 @@ import styled from "styled-components";
 import MyList from "./MyList";
 import ShippingStatus from "./myShopping/ShippingStatus";
 import CartContainer from "../../../Cart/Container";
-import MyQnaList from "./myShopping/MyQnaList";
+import MyQnaList from "./MyQnaList/MyQnaList";
+import { Link } from "react-router-dom";
 
 const UserPageUpperHeader = () => {
   const [clickColor, setClickColor] = useState(0);
@@ -56,7 +57,9 @@ const UserPageUpperHeader = () => {
           <></>
         )}
         {clickColor == 1 ? (
-          <MyList myarr={MyReviewArr} myList={myList} setMyList={setMyList} />
+          <Link to={"/userPage/cart"}>
+            <MyList myarr={MyReviewArr} myList={myList} setMyList={setMyList} />
+          </Link>
         ) : (
           <></>
         )}
