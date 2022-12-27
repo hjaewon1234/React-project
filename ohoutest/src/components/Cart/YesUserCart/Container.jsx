@@ -1,7 +1,6 @@
 import YesUserCartComp from "./Component";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
 
 const YesUserCartContainer = ({ userInfo }) => {
   const [totalState, setTotalState] = useState([]);
@@ -24,10 +23,8 @@ const YesUserCartContainer = ({ userInfo }) => {
   };
   useEffect(() => {
     getCartItem();
+    window.scrollTo(0, 0);
   }, []);
-
-  // window.scrollTo(0, 0);
-  // console.log(item);
 
   return (
     <>
@@ -38,7 +35,7 @@ const YesUserCartContainer = ({ userInfo }) => {
         setTotalCount={setTotalCount}
         buyOnClick={buyOnClick}
         item={item}
-        setItem={setItem}
+        getCartItem={getCartItem}
       ></YesUserCartComp>
     </>
   );
