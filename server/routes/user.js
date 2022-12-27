@@ -128,49 +128,4 @@ router.post("/frontCookie", async (req, res) => {
   }
 });
 
-// router.post("/frontCookie", async (req, res) => {
-//   try {
-//     const token = req.cookies.accessToken;
-//     const data = jwt.verify(token, process.env.ACCESS_SECRET);
-//     const tempUser = await test({ body: { inputId: data.userId } });
-//     global.userId = tempUser.userId;
-//     global.userName = tempUser.userName;
-//   } catch (error) {
-//     try {
-//       const token = req.cookies.refreshToken;
-//       const data = jwt.verify(token, process.env.REFRECH_SECRET);
-//       const tempUser = await test({ body: { inputId: data.userId } });
-//       // access Token 새로 발급
-//       const accessToken = jwt.sign(
-//         {
-//           username: tempUser.userame,
-//           userId: tempUser.userId,
-//         },
-//         process.env.ACCESS_SECRET,
-//         {
-//           expiresIn: "10m",
-//           issuer: "About Tech",
-//         }
-//       );
-
-//       res.cookie("accessToken", accessToken, {
-//         secure: false,
-//         httpOnly: true,
-//       });
-
-//       global.userId = data.userId;
-//       global.userName = data.userName;
-
-//       if (global.userId) {
-//         console.log("global.userIdglobal.userIdglobal.userId", global.userId);
-//         res
-//           .status(200)
-//           .json({ userId: global.userId, userName: global.userName });
-//       } else {
-//         res.status(400).send("쿠키 발급 안됨");
-//       }
-//     } catch (error) {}
-//   }
-// });
-
 export default router;

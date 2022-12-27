@@ -16,53 +16,46 @@ import cart from "./cart.js";
 
 const router = Router();
 
-router.use("/", (req, res, next) => {
-  console.log("routes/index.js : " + req.url);
+// router.use("/", (req, res, next) => {
+//   try {
+//     const tempUser = jwt.verify(
+//       req.cookies.accessToken,
+//       process.env.ACCESS_SECRET
+//     );
+//     req.userData = {};
+//     req.userData.userId = tempUser.userId;
+//     req.userData.userName = tempUser.userName;
+//   } catch (err) {
+//     try {
+//       const data = jwt.verify(token, process.env.REFRECH_SECRET);
+//       const accessToken = jwt.sign(
+//         {
+//           userName: data.userName,
+//           userId: data.userId,
+//         },
+//         process.env.ACCESS_SECRET,
+//         {
+//           expiresIn: "30m",
+//           issuer: "About Tech",
+//         }
+//       );
 
-  next();
-});
+//       res.cookie("accessToken", accessToken, {
+//         secure: false,
+//         httpOnly: false,
+//       });
+
+//       req.userData.userId = data.userId;
+//       req.userData.userName = data.userName;
+//     } catch (error) {
+//       req.userData = {};
+//     }
+//   } finally {
+//     next();
+//   }
+// });
 
 router.use("/user", user);
-
-router.use("/", (req, res, next) => {
-  try {
-    const tempUser = jwt.verify(
-      req.cookies.accessToken,
-      process.env.ACCESS_SECRET
-    );
-    req.userData = {};
-    req.userData.userId = tempUser.userId;
-    req.userData.userName = tempUser.userName;
-  } catch (err) {
-    try {
-      const data = jwt.verify(token, process.env.REFRECH_SECRET);
-      const accessToken = jwt.sign(
-        {
-          username: data.username,
-          userId: data.userId,
-        },
-        process.env.ACCESS_SECRET,
-        {
-          expiresIn: "30m",
-          issuer: "About Tech",
-        }
-      );
-
-      res.cookie("accessToken", accessToken, {
-        secure: false,
-        httpOnly: false,
-      });
-
-      req.userData.userId = data.userId;
-      req.userData.userName = data.userName;
-    } catch (error) {
-      req.userData = {};
-    }
-  } finally {
-    next();
-  }
-});
-
 router.use("/product", product);
 router.use("/manager", manager);
 router.use("/search", search);
@@ -71,31 +64,6 @@ router.use("/order", order);
 router.use("/readmore", readMore);
 router.use("/cart", cart);
 router.use("/userPage", userPage);
-
-// db에 아무 정보가 없을 시 첫 아이템을 db에 넣어준다.
-
-const products = [
-  {
-    name: "크리스마스 트리 오너먼트 볼 장식 15종",
-    price: 2100,
-    brand: "플라워트리",
-    description: `플라워트리의 크리스마스 준비는 수박이 달고 맛있는 여름부터 시작해요.
-    기분 좋아야 하는 특별한날 기대에 못미치는 상품을 받으면 안돼서에요
-    상품 한개 한개 오랜 시간을 두고 꼼꼼히 선택했어요.
-    누적된 피드백과 의견 주신 내용을 최대한 반영하려 많은 노력도 담았지요.`,
-    img: "treeBall1,treeBall2,treeBall3",
-  },
-];
-
-const users = [
-  {
-    userId: "aaa",
-    userPw: "aaa",
-    userName: "내가유저다",
-    phone: "010-1234-5678",
-    address: "천호동",
-  },
-];
 
 // 관계 맺음
 // db.Users.findOne({ where: { id: 1 } }).then((user) => {

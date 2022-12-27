@@ -23,6 +23,7 @@ const FooterContainer = ({ socket }) => {
   }, [curUser]);
 
   useEffect(() => {
+    console.log("try check axios");
     try {
       axios({
         url: "/check",
@@ -30,12 +31,17 @@ const FooterContainer = ({ socket }) => {
         withCredentials: true,
       })
         .then((result) => {
+          console.log(result);
           if (result.data) {
             setcurUser(result.data);
           }
         })
         .catch((error) => {
+          console.log(error);
           console.error(error);
+        })
+        .finally(() => {
+          console.log("finally");
         });
     } catch (error) {
       console.log(error);

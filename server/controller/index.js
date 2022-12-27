@@ -21,7 +21,7 @@ const login = async (req, res, next) => {
     // access Token 발급
     const accessToken = jwt.sign(
       {
-        username: tempUser.userName,
+        userName: tempUser.userName,
         userId: tempUser.userId,
       },
       process.env.ACCESS_SECRET,
@@ -33,7 +33,7 @@ const login = async (req, res, next) => {
     // refresh Token 발급
     const refreshToken = jwt.sign(
       {
-        username: tempUser.userName,
+        userName: tempUser.userName,
         userId: tempUser.userId,
       },
       process.env.REFRECH_SECRET,
@@ -92,7 +92,7 @@ const refreshToken = async (req, res) => {
     // access Token 새로 발급
     const accessToken = jwt.sign(
       {
-        username: data.username,
+        userName: data.userName,
         userId: data.userId,
       },
       process.env.ACCESS_SECRET,
@@ -155,12 +155,50 @@ const loginSuccess = async (req, res, next) => {
 };
 
 const check = (req, res) => {
-  if (global.userId) {
+  try {
+    const tempUser = jwt.verify(
+      req.cookies.accessToken,
+      process.env.ACCESS_SECRET
+    );
+    req.userData = {};
+    req.userData.userId = tempUser.userId;
+    req.userData.userName = tempUser.userName;
+  } catch (err) {
+    try {
+      const data = jwt.verify(token, process.env.REFRECH_SECRET);
+      const accessToken = jwt.sign(
+        {
+          userName: data.userName,
+          userId: data.userId,
+        },
+        process.env.ACCESS_SECRET,
+        {
+          expiresIn: "30m",
+          issuer: "About Tech",
+        }
+      );
+
+      res.cookie("accessToken", accessToken, {
+        secure: false,
+        httpOnly: false,
+      });
+
+      req.userData.userId = data.userId;
+      req.userData.userName = data.userName;
+    } catch (error) {
+      req.userData = {};
+    }
+  }
+  console.log("체크체크체크체크체크체크", req.userData, req.cookies);
+
+  if (req.userData?.userId) {
     res.status(200).json({
       userId: req.userData.userId,
       userName: req.userData.userName,
       userPw: req.userData.userPw,
     });
+  } else {
+    res.status(403).json("req.userData가 없는뎅 ?");
   }
 };
 
@@ -168,7 +206,7 @@ const logout = (req, res) => {
   try {
     console.log(
       "ㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇ",
-      req.userData.userId,
+      req.userData?.userId,
       req.userData?.userName,
       req.userData?.userPw
     );
