@@ -8,7 +8,22 @@ const YesUserCartContainer = ({ userInfo }) => {
   const [item, setItem] = useState([]);
 
   const buyOnClick = () => {
-    axios.post("/api/order/buy", { id: 1, user: userInfo }).then(({ data }) => {
+    const tempBuyAry = [];
+    console.log(item);
+    totalState.map((stateItem, index) => {
+      if (stateItem != 0) {
+        tempBuyAry.push({
+          price: stateItem,
+          num: totalCount[index],
+          productId: item[index].products_id,
+          userId: item[index].users_id,
+          id: item[index].id,
+        });
+      }
+    });
+    console.log(tempBuyAry);
+
+    axios.post("/api/order/buy", tempBuyAry).then(({ data }) => {
       console.log(data);
     });
   };
@@ -36,6 +51,8 @@ const YesUserCartContainer = ({ userInfo }) => {
         buyOnClick={buyOnClick}
         item={item}
         getCartItem={getCartItem}
+        setItem={setItem}
+        userInfo={userInfo}
       ></YesUserCartComp>
     </>
   );

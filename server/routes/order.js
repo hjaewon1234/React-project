@@ -8,20 +8,35 @@ router.route("/").post((req, res) => {
 });
 
 router.route("/buy").post((req, res) => {
-  // OrderTable user와 product 둘 다 관계 맺었을 때 넣는 방법
-  db.Users.findOne({ where: { id: 1 } }).then((user) => {
-    db.Products.findOne({ where: { id: 3 } }).then((product) => {
-      db.Order.create({ count: 1 })
-        .then((order) => {
-          user.addOrder(order);
-          product.addOrder(order);
-          return order;
-        })
-        .then((data) => {
-          res.send(data);
-        });
+  console.log("바디다", req.body);
+  const sendAry = [];
+  const len = req.body.length;
+  console.log(req.body.productId);
+  req.body.map((item) => {
+    db.Users.findOne({ where: { id: item.userId } }).then((user) => {
+      db.Products.findOne({ where: { id: item.productId } }).then((product) => {
+        db.Order.create({ count: item.num })
+          .then((order) => {
+            user.addOrder(order);
+            product.addOrder(order);
+            return order;
+          })
+          .then((data) => {
+            sendAry.push(data);
+          });
+        db.Cart.destroy({ where: { id: item.id } });
+      });
     });
   });
+  // .then(() => {
+  //   res.send(sendAry);
+  // });
+  const intervalId = setInterval(() => {
+    if (sendAry.length == len) {
+      clearInterval(intervalId);
+      res.send(sendAry);
+    }
+  }, 100);
 });
 
 export default router;
