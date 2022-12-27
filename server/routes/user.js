@@ -60,12 +60,14 @@ router.post("/getUsers", async (req, res) => {
       console.log("닉네임 확인");
       res.send({ status: 403 });
     } else {
+      console.log("야호야호야호야호", req.body);
       await db.Users.create({
         userName: req.body.inputName,
         userId: req.body.inputId,
         userPw: crypto.SHA256(req.body.inputPw).toString(),
-        userAddress: req.body.inputAdress,
-        userAddress1: req.body.inputAdress1,
+        userAddress: req.body.address,
+        userAddress1: req.body.inputAdress,
+        userImg: req.body.userImg,
       });
       console.log("회원가입이 완료되었습니다.");
       res.send({ status: 200 });

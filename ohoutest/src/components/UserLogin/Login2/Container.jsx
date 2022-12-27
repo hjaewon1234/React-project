@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { action } from "../../../modules/userInfo.js";
+import swal from "sweetalert";
 import styled from "styled-components";
 // import ModalContainer from "../Modal/Container.jsx";
 
@@ -34,6 +35,13 @@ const Login2Container = () => {
         // setUser(result.data);
         navigate("/", { replace: true });
         dispatch(action.setUser({ userId: "", userName: "" }));
+      } else if (result.status === 402) {
+        swal({
+          title: "사용가능한 닉네임입니다.",
+          showCancelButton: true,
+          confirmButtonColor: "#F0A500",
+          confirmButtonText: "확인",
+        });
       }
     });
   };

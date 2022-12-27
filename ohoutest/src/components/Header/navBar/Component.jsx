@@ -95,8 +95,28 @@ const NavBarComponent = ({ onSubmit, isOnline }) => {
           )}
         </div>
 
-        {isOnline || <Link to="/login">로그인</Link>}
-        {isOnline || <Link to="/regist">회원가입</Link>}
+        {isOnline || (
+          <Link to="/login">
+            <div
+              onClick={() => {
+                window.open("/login", "_self");
+              }}
+            >
+              로그인
+            </div>
+          </Link>
+        )}
+        {isOnline || (
+          <Link to="/regist">
+            <div
+              onClick={() => {
+                window.open("/regist", "_self");
+              }}
+            >
+              회원가입
+            </div>
+          </Link>
+        )}
         {isOnline && (
           <Link className="mobile-s" to="/">
             마이페이지

@@ -131,6 +131,7 @@ const FooterBox = styled.div`
   background-color: #e9e9e9;
   font-size: 12px;
   padding: 30px 0 30px;
+  z-index: 5;
   .footer-container {
     width: 1200px;
     display: flex;

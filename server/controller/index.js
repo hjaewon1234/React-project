@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import db from "../models/index.js";
+import crypto from "crypto-js";
 
 // const test = async (req) => {
 //   const curUser = await db.Users.findOne({
@@ -211,67 +212,78 @@ import db from "../models/index.js";
 
 const test = async (req) => {
   const curUser = await db.Users.findOne({
-    where: { userId: req.body.inputId },
+    where: {
+      userId: req.body.inputId,
+    },
   });
-  return curUser;
+  console.log(
+    "pw비교 : ",
+    curUser.dataValues.userPw,
+    req.body.inputPw,
+    crypto.SHA256(req.body.inputPw).toString()
+  );
+  if (curUser.dataValues.userPw == crypto.SHA256(req.body.inputPw).toString()) {
+    return curUser;
+  } else {
+    return undefined;
+  }
 };
 
 const login = async (req, res, next) => {
-  if (global.userId) {
-    res.send("로그인 되어있습니다.");
-  } else {
-    const tempUser = await test(req);
-    console.log(req.body);
-    if (!tempUser) {
-      res.status(403).json("Not Authorized");
-    } else {
-      try {
-        // access Token 발급
-        const accessToken = jwt.sign(
-          {
-            username: tempUser.userName,
-            userId: tempUser.userId,
-          },
-          process.env.ACCESS_SECRET,
-          {
-            expiresIn: "10m",
-            issuer: "About Tech",
-          }
-        );
-        // refresh Token 발급
-        const refreshToken = jwt.sign(
-          {
-            username: tempUser.userName,
-            userId: tempUser.userId,
-          },
-          process.env.REFRECH_SECRET,
-          {
-            expiresIn: "24h",
-            issuer: "About Tech",
-          }
-        );
-        // token 전송
-        res.cookie("accessToken", accessToken, {
-          secure: false,
-          httpOnly: false,
-          // httpOnly: true,
-          // Credential: true,
-        });
-
-        res.cookie("refreshToken", refreshToken, {
-          secure: false,
-          httpOnly: false,
-          // httpOnly: true,
-          // Credential: true,
-        });
-
-        res
-          .status(200)
-          .json({ userId: tempUser.userId, userName: tempUser.userName });
-      } catch (error) {
-        res.status(500).json(error);
+  // const tempUser1 = await test1(req);
+  // console.log(
+  //   "tempUser1tempUser1tempUser1tempUser1tempUser1tempUser1tempUser1tempUser1tempUser1",
+  //   tempUser1
+  // );
+  const tempUser = await test(req);
+  console.log("tempUser: ", tempUser);
+  if (tempUser) {
+    // access Token 발급
+    const accessToken = jwt.sign(
+      {
+        username: tempUser.userName,
+        userId: tempUser.userId,
+      },
+      process.env.ACCESS_SECRET,
+      {
+        expiresIn: "10m",
+        issuer: "About Tech",
       }
-    }
+    );
+    // refresh Token 발급
+    const refreshToken = jwt.sign(
+      {
+        username: tempUser.userName,
+        userId: tempUser.userId,
+      },
+      process.env.REFRECH_SECRET,
+      {
+        expiresIn: "24h",
+        issuer: "About Tech",
+      }
+    );
+    // token 전송
+    res.cookie("accessToken", accessToken, {
+      secure: false,
+      httpOnly: false,
+      // httpOnly: true,
+      // Credential: true,
+    });
+
+    res.cookie("refreshToken", refreshToken, {
+      secure: false,
+      httpOnly: false,
+      // httpOnly: true,
+      // Credential: true,
+    });
+
+    res.status(200).json({
+      userId: tempUser?.userId,
+      userName: tempUser?.userName,
+      userPw: tempUser?.userPw,
+    });
+  } else {
+    res.status(402).json("유저 못찾음");
   }
 };
 
@@ -282,9 +294,7 @@ const accessToken = async (req, res) => {
     const token = req.cookies.accessToken;
     const data = jwt.verify(token, process.env.ACCESS_SECRET);
     const userData = tempUser.userId === data.req.body.InputId;
-
     const { userPw, ...others } = userData;
-
     res.status(200).json(others);
     console.log("othersothersothersothersothers", others);
   } catch (error) {
@@ -330,6 +340,7 @@ const loginSuccess = async (req, res, next) => {
     const tempUser = await test({ body: { inputId: data.userId } });
     global.userId = tempUser.userId;
     global.userName = tempUser.userName;
+    global.userPw = tempUser.userPw;
   } catch (error) {
     try {
       const token = req.cookies.refreshToken;
@@ -355,6 +366,7 @@ const loginSuccess = async (req, res, next) => {
 
       global.userId = data.userId;
       global.userName = data.userName;
+      global.userPw = data.userPw;
     } catch (error) {}
   }
   next();
@@ -362,7 +374,11 @@ const loginSuccess = async (req, res, next) => {
 
 const check = (req, res) => {
   if (global.userId) {
-    res.status(200).json({ userId: global.userId, userName: global.userName });
+    res.status(200).json({
+      userId: global.userId,
+      userName: global.userName,
+      userPw: global.userPw,
+    });
   }
 };
 
@@ -372,6 +388,7 @@ const logout = (req, res) => {
     res.clearCookie("refreshToken");
     global.userId = "";
     global.userName = "";
+    // global.userPw = "";
     res.status(200).json("Logout Success");
 
     // res.status(200).json({ userId: global.userId, userName: global.userName });

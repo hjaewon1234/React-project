@@ -5,13 +5,13 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { action } from "../../../modules/userInfo";
 import { Link } from "react-router-dom";
-import { logInUser } from "../../../modules/Slice/loginSlice";
 import ParticleTest from "../Particle/Components";
-
+import { ParticleTest1 } from "../Particle/Components";
+import swal from "sweetalert";
 const Login2Components = ({ setIsLogin, setUser, user }) => {
   const [inputId, setId] = useState("");
   const [inputPw, setPw] = useState("");
-  const [inputName, setName] = useState("");
+  // const [inputName, setName] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -47,6 +47,13 @@ const Login2Components = ({ setIsLogin, setUser, user }) => {
               userName: result.data.userName,
             })
           );
+      } else if (result.status === 402) {
+        swal({
+          title: "중복되는 아이디가 있습니다. 다른 아이디를 사용하세요",
+          showCancelButton: true,
+          confirmButtonColor: "#F0A500",
+          confirmButtonText: "확인",
+        });
       }
     });
   };
@@ -87,28 +94,56 @@ const Login2Components = ({ setIsLogin, setUser, user }) => {
           >
             로그인
           </button>{" "}
-          {/* <ParticleStyle>
-            <ParticleTest></ParticleTest>
-          </ParticleStyle> */}
+          <RegistLink>
+            <Link
+              // to={"/regist"}
+              style={{ textDecoration: "none" }}
+            >
+              <div
+                onClick={() => {
+                  window.open("/regist", "_self");
+                }}
+              >
+                아직 회원가입을 안하셨나요?{" "}
+              </div>
+            </Link>
+          </RegistLink>
         </RegistMidStlye>
+        <ParticleStyle>
+          <ParticleStyle1>
+            <ParticleTest></ParticleTest>
+          </ParticleStyle1>
+          <ParticleStyle2>
+            <ParticleTest1></ParticleTest1>
+          </ParticleStyle2>
+        </ParticleStyle>
       </RegistMain>
-      <RegistLink>
-        <Link to={"/regist"} style={{ textDecoration: "none" }}>
-          <div> 아직 회원가입을 안하셨나요? </div>
-        </Link>
-      </RegistLink>
     </>
   );
 };
 export default Login2Components;
+
 const ParticleStyle = styled.div`
+  background-color: transparent;
   position: absolute;
-  z-index: 5;
-  top: -20px;
-  ParticleStyle {
-    background-color: rgb(240, 165, 0);
-  }
+  z-index: 1;
+  top: -280px;
+  left: 10px;
 `;
+const ParticleStyle1 = styled.div`
+  background-color: transparent;
+  position: absolute;
+  z-index: 1;
+  top: 455px;
+  left: 380px;
+`;
+const ParticleStyle2 = styled.div`
+  position: absolute;
+  z-index: 1;
+  top: 325px;
+  left: 770px;
+`;
+
 const BoxShadow = styled.div`
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
 `;
@@ -148,6 +183,7 @@ const RegistMidStlye = styled.div`
   * {
     margin-bottom: 15px;
   }
+  z-index: 5;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -193,6 +229,7 @@ const RegistMidStlye = styled.div`
 
 const RegistLink = styled.div`
   margin-top: 33px;
+
   div {
     padding-bottom: 7px;
     border-bottom: solid 1px rgba(216, 217, 207, 0.7);

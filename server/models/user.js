@@ -11,19 +11,11 @@ export default class Users extends Sequelize.Model {
           type: Sequelize.STRING(45),
           allowNull: true,
         },
-        phone: {
-          type: Sequelize.STRING(255),
-          allowNull: true,
-        },
         userAddress: {
           type: Sequelize.STRING(255),
           allowNull: true,
         },
         userAddress1: {
-          type: Sequelize.STRING(255),
-          allowNull: true,
-        },
-        publish: {
           type: Sequelize.STRING(255),
           allowNull: true,
         },
