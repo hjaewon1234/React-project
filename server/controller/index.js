@@ -271,6 +271,7 @@ const login = async (req, res, next) => {
           userName: tempUser.userName,
           userAddress: tempUser.userAddress,
           userAddress1: tempUser.userAddress1,
+          userImg: tempUser.userImg,
         });
       } catch (error) {
         res.status(500).json(error);

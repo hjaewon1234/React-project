@@ -47,6 +47,7 @@ const Login2Components = ({ setIsLogin, setUser, user }) => {
               userName: result.data.userName,
               userAddress: result.data.userAddress,
               userAddress1: result.data.userAddress1,
+              userImg: result.data.userImg,
             })
           );
       }

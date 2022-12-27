@@ -1,6 +1,7 @@
 import { Router } from "express";
 const router = Router();
 import multer from "multer";
+import CryptoJS from "crypto-js";
 
 import db from "../models/index.js";
 
@@ -24,9 +25,34 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-router.route("/uploadFile").post(upload.single("userFile"), (req, res) => {
+router.route("/uploadFile").post(upload.single("file"), async (req, res) => {
+  console.log(req.body);
   console.log(req.file);
-  res.send(req.body);
+  console.log(req.file.originalname);
+  await db.Users.update(
+    {
+      userName: req.body.name,
+      userAddress: req.body.address,
+      userAddress1: req.body.address1,
+      userImg: req.file.originalname,
+    },
+    { where: { userId: req.body.userId } }
+  );
+
+  res.send(req.body.file);
+});
+
+router.route("/passwordChange").post(async (req, res) => {
+  console.log(req.body, "하이");
+  const crytoPw = CryptoJS.SHA256(req.body.data).toString();
+
+  await db.Users.update(
+    {
+      userPw: crytoPw,
+    },
+    { where: { userId: req.body.userId } }
+  );
+  res.send("끝낫다.");
 });
 
 export default router;

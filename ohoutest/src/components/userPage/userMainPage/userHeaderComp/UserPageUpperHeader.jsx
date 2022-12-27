@@ -100,7 +100,16 @@ const UserPageUpperHeader = () => {
       {clickColor == 0 && myList == 1 ? <CartContainer /> : <></>}
       {clickColor == 0 && myList == 2 ? <MyQnaList /> : <></>}
 
-      {clickColor == 2 && myList == 0 ? <MyOptionContainer /> : <></>}
+      {clickColor == 2 && myList == 0 ? (
+        <MyOptionContainer myList={0} />
+      ) : (
+        <></>
+      )}
+      {clickColor == 2 && myList == 1 ? (
+        <MyOptionContainer myList={1} />
+      ) : (
+        <></>
+      )}
 
       {/* 추후에 여기에 배송 관련 데이터들을 넘겨주고, 그걸 map 돌리면 될듯  */}
     </div>
