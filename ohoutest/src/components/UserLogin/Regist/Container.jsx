@@ -32,6 +32,7 @@ const RegistContainer = () => {
           <ParticleTest1></ParticleTest1>
         </ParticleStyle5>
       </ParticleStyle>
+
       {params.id == undefined ? (
         <>
           <RegistStyle>
@@ -49,7 +50,6 @@ const RegistContainer = () => {
 };
 
 export default RegistContainer;
-
 const RegistStyle = styled.div`
   z-index: 3;
   position: relative;
