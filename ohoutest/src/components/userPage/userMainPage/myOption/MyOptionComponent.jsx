@@ -96,7 +96,7 @@ const MyOptionComponent = ({ upload, userInfo }) => {
 
                 <div
                   className="kakaoAdress1"
-                  disabled={inputAdress.length <= 3 ? true : false}
+                  disabled={inputAdress?.length <= 3 ? true : false}
                 ></div>
               </div>
             </div>
