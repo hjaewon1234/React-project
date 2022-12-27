@@ -95,13 +95,15 @@ const FileAddComponent = ({
               <div style={{ alignItems: "center" }}>
                 <div>상품 이미지</div>
                 <div>
-                  {/* {tempImgFile.map((image, index) => (
-                    <img
-                      src={image}
-                      style={{ width: "70px", marginRight: "10px" }}
-                      key={index}
-                    />
-                  ))} */}
+                  {tempImgFile.map((image, index) => {
+                    return (
+                      <img
+                        src={image}
+                        style={{ width: "70px", marginRight: "10px" }}
+                        key={index}
+                      />
+                    );
+                  })}
                 </div>
                 <div>
                   <input
@@ -109,7 +111,7 @@ const FileAddComponent = ({
                     type="file"
                     name="file"
                     onChange={tempImgArr}
-                    onClick={() => setTempImgFile(() => [])}
+                    onClick={() => setTempImgFile((state) => state)}
                   />
                 </div>
               </div>

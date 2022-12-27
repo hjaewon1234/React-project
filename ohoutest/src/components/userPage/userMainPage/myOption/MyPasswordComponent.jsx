@@ -1,150 +1,129 @@
-import { useState } from "react";
-
 import styled from "styled-components";
-import ModalComponents from "../../../UserLogin/Modal/Component";
+import { useRef, useState, useEffect } from "react";
 
-const MyOptionComponent = ({ upload, userInfo }) => {
-  const [modalOpen, setModalOpen] = useState(false);
+// import Post from "../../../modules/Api/kakaoApi";
 
-  const [nameChange, setNameChange] = useState(userInfo.userName);
-  const [inputAdress, setInputAdress] = useState(userInfo.userAddress);
-  const [inputAdress1, setinputAdress1] = useState(userInfo.userAddress1);
+import {
+  signUpUser,
+  overlapId,
+  overlapNickName,
+} from "../../../../modules/Slice/registSlice";
+import { useDispatch } from "react-redux";
 
-  const [tempImgFile, setTempImgFile] = useState([]);
-  console.log(userInfo);
-  const openModal = (data) => {
-    setModalOpen(!modalOpen);
+import React from "react";
+
+const MyPasswordComponent = ({ passwordChange, userInfo }) => {
+  const [inputPw, setPw] = useState("");
+  const [inputPw1, setPw1] = useState("");
+  const [passwordMessage, setPasswordMessage] = React.useState("");
+  const [passwordConfirmMessage, setPasswordConfirmMessage] =
+    React.useState("");
+
+  const [isPassword, setIsPassword] = React.useState(false);
+  const [isPasswordConfirm, setIsPasswordConfirm] = React.useState(false);
+  const onChangePassword = (e) => {
+    const currentPassword = e.target.value;
+    setPw(currentPassword);
+    const passwordRegExp =
+      /(?=.*\d{1,50})(?=.*[~`!@#$%\^&*()-+=]{1,50})(?=.*[a-zA-Z]{2,50}).{8,50}$/;
+    if (!passwordRegExp.test(currentPassword)) {
+      setPasswordMessage("8~15 사이 숫자+영문+특수문자로 입력해주세요.");
+      setIsPassword(false);
+    }
+    //  else if (inputPw1 !== currentPassword) {
+    //   setPasswordMessage("입력한 비밀번호 확인과 같지 않습니다.");
+    //   setIsPassword(false);
+    // }
+    else {
+      setPasswordMessage("안전한 비밀번호 입니다.");
+      setIsPassword(true);
+    }
   };
-  const closeModal = () => {
-    setModalOpen(false);
+  const onChangePasswordConfirm = (e) => {
+    const currentPasswordConfirm = e.target.value;
+    setPw1(currentPasswordConfirm);
+    if (inputPw !== currentPasswordConfirm) {
+      setPasswordConfirmMessage("입력한 비밀번호와 같지 않습니다.");
+      setIsPasswordConfirm(false);
+    } else {
+      setPasswordConfirmMessage("비밀번호가 확인 되었습니다.");
+      setIsPasswordConfirm(true);
+    }
   };
-
-  function tempImgArr(e) {
-    const imageLists = e.target.files[0];
-    const currentImageUrl = URL.createObjectURL(imageLists);
-    setTempImgFile(currentImageUrl);
-  }
-
   return (
     <>
       <ShippingUnderDiv>
         <div>
-          <h2>회원 정보 수정</h2>
+          <h2>비밀번호 변경</h2>
         </div>
-        <form
-          encType="multipart/form-data"
-          onSubmit={upload}
-          acceptCharset="utf-8"
-        >
-          <RegistMidStlye>
-            <div>
-              <label>
-                <h3>닉네임 </h3>
-              </label>
-              <input
-                value={nameChange}
-                name="name"
-                type="text"
-                onChange={(e) => setNameChange(e.target.value)}
-              />
-            </div>
-          </RegistMidStlye>
-          <RegistMidStlye>
-            <div>
-              <label>
-                <h3>주소</h3>
-              </label>
-              <div className="address_search">
-                <input
-                  className="user_enroll_text"
-                  placeholder="주소 찾기 버튼을 눌러주세요"
-                  type="text"
-                  required={true}
-                  name="address1"
-                  value={inputAdress1}
-                  onChange={(e) => setinputAdress1(e.target.value)}
-                  disabled
-                />
-              </div>
-              <input
-                type={"text"}
-                value={inputAdress}
-                name="address"
-                onInput={(e) => {
-                  setInputAdress(e.target.value);
-                }}
-                placeholder={"나머지 주소"}
-                maxLength={12}
-              />
-
-              {modalOpen && (
-                <>
-                  <ModalComponents
-                    // autoClose
-                    company={inputAdress1}
-                    setcompany={setinputAdress1}
-                    open={modalOpen}
-                    close={closeModal}
-                    header="주소 찾기"
-                  ></ModalComponents>
-                </>
-              )}
-              <div className="kakaoAdressP">
-                <div className="kakaoAdress" onClick={openModal}>
-                  주소 찾기
-                </div>
-
-                <div
-                  className="kakaoAdress1"
-                  disabled={inputAdress.length <= 3 ? true : false}
-                ></div>
-              </div>
-            </div>
-          </RegistMidStlye>
-
-          <RegistMidStlye>
-            <div>
-              <label>
-                <h3>프로필 이미지</h3>
-                <div>
-                  {tempImgFile.length == 0 ? (
-                    <img
-                      src={`/api/download${userInfo.userImg}`}
-                      style={{ borderRadius: "100%", width: "300px" }}
-                    />
-                  ) : (
-                    <img
-                      src={tempImgFile}
-                      style={{ borderRadius: "100%", width: "300px" }}
-                    />
-                  )}
-                </div>
-                <div>
-                  <input
-                    multiple
-                    type="file"
-                    name="file"
-                    onChange={(e) => tempImgArr(e)}
-                    onClick={() => setTempImgFile(() => [])}
-                  />
-                </div>
-              </label>
-            </div>
-          </RegistMidStlye>
+        <div>
+          <div>
+            <h4>새 비밀번호</h4>
+          </div>
+          <div>
+            <h4>
+              영문, 숫자, 특수문자 를 포함한 8자 이상의 비밀번호를 입력해주세요.
+            </h4>
+          </div>
+          <div>
+            <input
+              type={"password"}
+              value={inputPw}
+              onInput={(e) => {
+                setPw(e.target.value);
+              }}
+              placeholder={"비밀번호"}
+              onChange={onChangePassword}
+              maxLength={15}
+            />
+          </div>
+          <div>
+            <p className={isPassword ? "messageGreen" : "messageRed"}>
+              {passwordMessage}
+            </p>
+          </div>
+          <div>
+            <label>
+              <h4> 비밀번호 확인</h4>
+            </label>
+          </div>
+          <div>
+            <input
+              type={"password"}
+              value={inputPw1}
+              onInput={(e) => {
+                setPw1(e.target.value);
+              }}
+              onChange={onChangePasswordConfirm}
+              placeholder={"비밀번호 확인"}
+              maxLength={15}
+            />
+          </div>
+          <div>
+            <p className={isPasswordConfirm ? "messageGreen" : "messageRed"}>
+              {passwordConfirmMessage}
+            </p>
+          </div>
           <RegistMidStlye>
             <button
-              type="submit"
-              onClick={() => alert("회원 정보가 수정 되었습니다.")}
+              onClick={() => {
+                if (inputPw == inputPw1) {
+                  alert("비밀 번호가 수정 되었습니다.");
+                  passwordChange(inputPw, userInfo.userId);
+                } else {
+                  alert("비밀번호가 서로 다릅니다.");
+                }
+              }}
             >
-              회원 정보 수정
+              비밀 번호 수정
             </button>
           </RegistMidStlye>
-        </form>
+        </div>
       </ShippingUnderDiv>
     </>
   );
 };
-export default MyOptionComponent;
+export default MyPasswordComponent;
 
 const ShippingUnderDiv = styled.div`
   width: 50%;
@@ -153,11 +132,25 @@ const ShippingUnderDiv = styled.div`
   margin-top: 20px;
   border: 1px solid #f0a500;
   border-radius: 10px;
-  & > div {
+  & > div > div {
+    margin: 20px 10px 20px;
+    display: flex;
+    justify-contents: center;
+  }
+  & > div:first-child {
     text-align: left;
-    margin: 40px 10px 20px;
+    margin: 20px 10px 20px;
     display: flex;
     column-gap: 10px;
+  }
+  & > div:nth-child(2) {
+    display: flex;
+    flex-direction: column;
+
+    & > div {
+      display: flex;
+      justify-content: center;
+    }
   }
   & > h2 {
     margin-top: 10px;
@@ -173,6 +166,14 @@ const ShippingUnderDiv = styled.div`
     padding-left: 10px;
     font-size: 15px;
     background-color: transparent;
+  }
+  .messageGreen {
+    font-size: 12px;
+    color: green;
+  }
+  .messageRed {
+    font-size: 12px;
+    color: red;
   }
 `;
 const RegistMidStlye = styled.div`
