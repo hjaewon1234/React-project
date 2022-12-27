@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useState } from "react";
 
 import CartProductCardComp from "./Component";
 
@@ -10,9 +11,12 @@ const CartProductCardContainer = ({
   getCartItem,
   totalState,
 }) => {
+  const [deleteItemModalOpen, setDeleteItemModalOpen] = useState(false);
+
   const deleteItem = (index) => {
-    if (window.confirm("정말로 삭제하시겠습니까?")) {
-      axios.post("/api/cart/deleteitem", { idx: item[index].id }).then(() => {
+    axios
+      .post("/api/cart/deleteitem", { idx: item[index].id })
+      .then(() => {
         getCartItem();
         setTotalCount((prev) => {
           return prev.filter((item, idx) => idx != index);
@@ -20,8 +24,10 @@ const CartProductCardContainer = ({
         setTotalState((prev) => {
           return prev.filter((item, idx) => idx != index);
         });
+      })
+      .then(() => {
+        setDeleteItemModalOpen(!deleteItemModalOpen);
       });
-    }
   };
 
   return (
@@ -42,6 +48,8 @@ const CartProductCardContainer = ({
             key={`item - ${idx}`}
             img={img}
             deleteItem={deleteItem}
+            deleteItemModalOpen={deleteItemModalOpen}
+            setDeleteItemModalOpen={setDeleteItemModalOpen}
           />
         );
       })}

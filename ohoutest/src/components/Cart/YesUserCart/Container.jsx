@@ -1,15 +1,17 @@
 import YesUserCartComp from "./Component";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const YesUserCartContainer = ({ userInfo }) => {
   const [totalState, setTotalState] = useState([]);
   const [totalCount, setTotalCount] = useState([]);
+  const [nonBuyModalOpen, setNonBuyModalOpen] = useState(false);
   const [item, setItem] = useState([]);
+  const navigate = useNavigate();
 
   const buyOnClick = () => {
     const tempBuyAry = [];
-    console.log(item);
     totalState.map((stateItem, index) => {
       if (stateItem != 0) {
         tempBuyAry.push({
@@ -21,10 +23,13 @@ const YesUserCartContainer = ({ userInfo }) => {
         });
       }
     });
-    console.log(tempBuyAry);
+    if (tempBuyAry.length < 1) {
+      setNonBuyModalOpen(!nonBuyModalOpen);
+      return;
+    }
 
     axios.post("/api/order/buy", tempBuyAry).then(({ data }) => {
-      console.log(data);
+      if (!data.length < 1) navigate("/main");
     });
   };
 
@@ -54,6 +59,8 @@ const YesUserCartContainer = ({ userInfo }) => {
         getCartItem={getCartItem}
         setItem={setItem}
         userInfo={userInfo}
+        nonBuyModalOpen={nonBuyModalOpen}
+        setNonBuyModalOpen={setNonBuyModalOpen}
       ></YesUserCartComp>
     </>
   );

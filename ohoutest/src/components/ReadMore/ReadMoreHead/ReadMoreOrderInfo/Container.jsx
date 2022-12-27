@@ -1,8 +1,11 @@
+import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+
 import ReadMoreOrderInfoComponent from "./Component";
 
 const ReadMoreOrderInfoContainer = ({ item }) => {
+  const [cartModalOpen, setCartModalOpen] = useState(false);
   const navigate = useNavigate();
   const brand = item?.brand;
   const name = item?.name;
@@ -18,13 +21,7 @@ const ReadMoreOrderInfoContainer = ({ item }) => {
         .then(() => {
           if (isNavigate) navigate(`/cart`);
           else {
-            if (
-              window.confirm(
-                "장바구니에 추가 되었습니다. 장바구니로 이동하시겠습니까?"
-              )
-            ) {
-              navigate(`/cart`);
-            }
+            setCartModalOpen(!cartModalOpen);
           }
         });
     } catch (err) {
@@ -38,6 +35,8 @@ const ReadMoreOrderInfoContainer = ({ item }) => {
       name={name}
       price={price}
       addCart={addCart}
+      cartModalOpen={cartModalOpen}
+      setCartModalOpen={setCartModalOpen}
     />
   );
 };

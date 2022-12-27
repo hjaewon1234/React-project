@@ -1,11 +1,17 @@
-import { useState } from "react";
 import styled from "styled-components";
+import { useState } from "react";
 
 import PublicModalBase from "../../../PublicModalBase";
 
-const ReadMoreOrderInfoComponent = ({ brand, name, price, addCart }) => {
+const ReadMoreOrderInfoComponent = ({
+  brand,
+  name,
+  price,
+  addCart,
+  cartModalOpen,
+  setCartModalOpen,
+}) => {
   const [orderCount, setOrderCount] = useState(1);
-  const [cartModalOpen, setCartModalOpen] = useState(true);
 
   let totalSum = orderCount * price;
 
@@ -87,10 +93,16 @@ const ReadMoreOrderInfoComponent = ({ brand, name, price, addCart }) => {
       {cartModalOpen && (
         <PublicModalBase>
           <div className="cart-modal">
-            <div className="cart-modal-head">알림</div>
+            <div className="cart-modal-head">알 림</div>
             <div className="cart-modal-inner">
               <div>상품을 장바구니로 담았습니다</div>
-              <button>확인</button>
+              <button
+                onClick={() => {
+                  setCartModalOpen(!cartModalOpen);
+                }}
+              >
+                확 인
+              </button>
             </div>
           </div>
         </PublicModalBase>
@@ -246,11 +258,18 @@ const ReadMoreOrderInfoBox = styled.div`
     width: 500px;
     height: 300px;
     background: #f4f4f4;
+    border-radius: 20px;
   }
   .cart-modal-head {
     width: 100%;
-    text-align: center;
+    height: 50px;
     background: #f0a500;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    font-size: 27px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .cart-modal .cart-modal-inner {
     font-size: 24px;
@@ -260,7 +279,7 @@ const ReadMoreOrderInfoBox = styled.div`
     align-items: center;
   }
   .cart-modal .cart-modal-inner > div {
-    margin-bottom: 10%;
+    margin: 10% 0;
   }
   .cart-modal .cart-modal-inner > button {
     width: 200px;
@@ -268,5 +287,7 @@ const ReadMoreOrderInfoBox = styled.div`
     background: #f0a500;
     border: none;
     border-radius: 15px;
+    font-size: 20px;
+    cursor: pointer;
   }
 `;
