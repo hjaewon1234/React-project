@@ -11,6 +11,9 @@ const ChatContainer = () => {
       setChatValue("");
     }
   };
+  const onChatting = (e) => {
+    setChatValue((state) => state + e.nativeEvent.data);
+  };
   useEffect(() => {
     socket.on("upload", (data) => {
       setChatAry((state) => [...state, data]);
@@ -21,9 +24,8 @@ const ChatContainer = () => {
     <ChatComponent
       onChatEnter={onChatEnter}
       chatValue={chatValue}
-      setChatValue={setChatValue}
       chatAry={chatAry}
-      setChatAry={setChatAry}
+      onChatting={onChatting}
     />
   );
 };

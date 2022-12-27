@@ -99,7 +99,7 @@ router.route("/getTopten").post(async (req, res) => {
         const curItemName = await db.Products.findOne({
           where: { id: item.dataValues.products_id },
         });
-        countAry.push(curItemName.name);
+        countAry.push(curItemName?.name);
         if (countAry.length >= 10) {
           resolve(countAry);
         }

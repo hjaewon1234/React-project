@@ -1,13 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-const ChatComponent = ({
-  onChatEnter,
-  chatValue,
-  setChatValue,
-  chatAry,
-  setChatAry,
-}) => {
+const ChatComponent = ({ onChatEnter, chatValue, chatAry, onChatting }) => {
   const [inputRangeValue, setInputRangeValue] = useState(50);
   const [viewChat, setViewChatBox] = useState(true);
 
@@ -31,8 +25,8 @@ const ChatComponent = ({
             <div>World3</div>
           </WorldSelectBox>
           <ViewChatBox>
-            {chatAry.map((item) => {
-              return <div>{item}</div>;
+            {chatAry.map((item, index) => {
+              return <div key={`chatAry-${index}`}>{item}</div>;
             })}
           </ViewChatBox>
           <SliderBox opacity={inputRangeValue / 100}>
@@ -60,7 +54,7 @@ const ChatComponent = ({
               onChatEnter(e);
             }}
             onChange={(e) => {
-              setChatValue((state) => state + e.nativeEvent.data);
+              onChatting(e);
             }}
             value={chatValue}
           />
