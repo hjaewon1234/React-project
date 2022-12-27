@@ -1,7 +1,6 @@
 import ReadMoreCategoryComponent from "./Component";
 
 const ReadMoreCategoryContainer = ({ item }) => {
-  console.log(item);
   const bigsort = item.Category?.bigsort;
   const middlesort = item.Category?.middlesort;
   const smallsort = item.Category?.smallsort;

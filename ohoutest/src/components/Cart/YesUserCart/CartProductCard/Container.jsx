@@ -1,3 +1,5 @@
+import axios from "axios";
+
 import CartProductCardComp from "./Component";
 
 const CartProductCardContainer = ({
@@ -5,16 +7,14 @@ const CartProductCardContainer = ({
   setTotalState,
   setTotalCount,
   item,
-  setItem,
+  getCartItem,
 }) => {
-  const deleteLocalItem = (idx) => {
-    const tempArr = [];
-    for (let i = 0; i < item.length; i++) {
-      if (idx !== i) {
-        tempArr.push(item[i]);
-      }
+  const deleteLocalItem = (index) => {
+    if (window.confirm("정말로 삭제하시겠습니까?")) {
+      axios.post("/api/cart/deleteitem", { idx: item[index].id }).then(() => {
+        getCartItem();
+      });
     }
-    setItem(tempArr);
   };
 
   return (

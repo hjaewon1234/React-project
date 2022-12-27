@@ -6,7 +6,7 @@ const ReadMoreCategoryComponent = ({ bigsort, middlesort, smallsort }) => {
     <ReadMoreCategoryBox>
       <div>
         <span className="categorie-span">
-          <Link to={"/"}>{bigsort}</Link>
+          <Link>{bigsort}</Link>
           <img className="chevron-right" src="/img/chevron-right-solid.svg" />
         </span>
         <span className="categorie-span">

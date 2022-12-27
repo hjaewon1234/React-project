@@ -63,4 +63,17 @@ router.route("/getCartItem").post(async (req, res) => {
   }
 });
 
+router.route("/deleteitem").post(async (req, res) => {
+  try {
+    const target = await db.Cart.findOne({
+      where: { id: req.body.idx },
+    });
+    await target.destroy();
+    res.send();
+  } catch (err) {
+    console.error(err);
+    res.end();
+  }
+});
+
 export default router;

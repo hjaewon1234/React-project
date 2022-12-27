@@ -58,18 +58,20 @@ const ReadMoreOrderInfoComponent = ({ brand, name, price, addCart }) => {
       </div>
       <hr />
       <div className="order-btn">
-        <Link>
-          <button>장바구니</button>
-        </Link>
-        <Link to={"/cart"}>
-          <button
-            onClick={() => {
-              addCart(orderCount);
-            }}
-          >
-            주문하기
-          </button>
-        </Link>
+        <button
+          onClick={() => {
+            addCart(orderCount, false);
+          }}
+        >
+          장바구니
+        </button>
+        <button
+          onClick={() => {
+            addCart(orderCount, true);
+          }}
+        >
+          주문하기
+        </button>
       </div>
       <div className="order-ad">
         <img src="/img/read-more-ad.webp" />

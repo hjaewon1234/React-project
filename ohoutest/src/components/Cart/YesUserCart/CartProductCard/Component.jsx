@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
 import uuid from "react-uuid";
 
@@ -102,7 +102,6 @@ const CartProductCardComp = ({
               className="deleteBtn"
               onClick={() => {
                 deleteLocalItem(index);
-                console.log(index, "번째 아이템 삭제 버튼 눌림");
               }}
             >
               X
