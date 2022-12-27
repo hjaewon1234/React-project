@@ -14,7 +14,9 @@ router.route("/damgi").post((req, res) => {
 
 router.route("/addcart").post(async (req, res) => {
   try {
-    const user = await db.Users.findOne({ where: { userId: global.userId } });
+    const user = await db.Users.findOne({
+      where: { userId: req.userData.userId },
+    });
     const product = await db.Products.findOne({
       where: { id: req.body.productId },
     });
@@ -42,7 +44,7 @@ router.route("/addcart").post(async (req, res) => {
 router.route("/getCartItem").post(async (req, res) => {
   try {
     const userIndex = await db.Users.findOne({
-      where: { user_id: global.userId },
+      where: { user_id: req.userData.userId },
     });
     const addedItem = await db.Cart.findAll({
       where: {
