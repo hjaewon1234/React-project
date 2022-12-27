@@ -9,7 +9,7 @@ const YesUserCartComp = ({
   setTotalCount,
   buyOnClick,
   item,
-  setItem,
+  getCartItem,
 }) => {
   const [totalPrice, setTotalPrice] = useState(0);
   useEffect(() => {
@@ -27,7 +27,7 @@ const YesUserCartComp = ({
       <SelectBox></SelectBox>
       <YesUserCartBox>
         <div className="">
-          <div>달팽이리빙 배송</div>
+          <div>{userInfo.userName}님의 장바구니 현황</div>
           <hr />
           <div>
             <CartProductCardContainer
@@ -35,7 +35,7 @@ const YesUserCartComp = ({
               setTotalState={setTotalState}
               setTotalCount={setTotalCount}
               item={item}
-              setItem={setItem}
+              getCartItem={getCartItem}
             ></CartProductCardContainer>
           </div>
           <hr />

@@ -40,12 +40,17 @@ const ReadMoreOrderInfoComponent = ({ brand, name, price, addCart }) => {
             type="number"
             value={orderCount}
             onChange={({ target: { value } }) => {
+              if (value < 2) value = 1;
+              else if (value > 999) value = 999;
               setOrderCount(+value);
             }}
           />
           <button
             onClick={() => {
-              setOrderCount((prev) => prev + 1);
+              setOrderCount((prev) => {
+                if (prev > 998) return 999;
+                return prev + 1;
+              });
             }}
           >
             <img src="/img/plus-solid.svg" />

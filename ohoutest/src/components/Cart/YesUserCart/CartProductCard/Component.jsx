@@ -12,7 +12,8 @@ const CartProductCardComp = ({
   totalCount,
   count,
   img,
-  deleteLocalItem,
+  deleteItem,
+  totalState,
 }) => {
   useEffect(() => {
     setTotalState((state) => {
@@ -23,40 +24,84 @@ const CartProductCardComp = ({
     });
   }, []);
 
+  // const optionDiv = () => {
+  //   return (
+  //     <>
+  //       <select
+  //         name="count"
+  //         onChange={(e) => {
+  //           setTotalCount((state) => {
+  //             const tempState = [...state];
+  //             tempState[index] = e.target.value;
+  //             return tempState;
+  //           });
+  //         }}
+  //         key={uuid()}
+  //         defaultValue={totalCount[index] ? totalCount[index] : 0}
+  //       >
+  //         {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, index) => {
+  //           if (index == count) {
+  //             return (
+  //               <option key={`count-${index}`} value={`${item}`}>
+  //                 {item}
+  //               </option>
+  //             );
+  //           } else
+  //             return (
+  //               <option key={`count-${index}`} value={`${item}`}>
+  //                 {item}
+  //               </option>
+  //             );
+  //         })}
+  //       </select>
+  //       <div className="option-count">{`${(
+  //         price * totalCount[index]
+  //       ).toLocaleString()} 원`}</div>
+  //     </>
+  //   );
+  // };
+
   const optionDiv = () => {
     return (
-      <>
-        <select
-          name="count"
-          onChange={(e) => {
-            setTotalCount((state) => {
-              const tempState = [...state];
-              tempState[index] = e.target.value;
-              return tempState;
+      <div>
+        <button
+          onClick={() => {
+            setTotalCount((prev) => {
+              if ([...prev][index] === 1) return prev;
+              const temp = [...prev];
+              temp[index]--;
+              return temp;
             });
           }}
-          key={uuid()}
-          defaultValue={totalCount[index]}
         >
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, index) => {
-            if (index == count) {
-              return (
-                <option key={`count-${index}`} value={`${item}`}>
-                  {item}
-                </option>
-              );
-            } else
-              return (
-                <option key={`count-${index}`} value={`${item}`}>
-                  {item}
-                </option>
-              );
-          })}
-        </select>
-        <div className="option-count">{`${(
-          price * totalCount[index]
-        ).toLocaleString()} 원`}</div>
-      </>
+          <img src="/img/minus-solid.svg" />
+        </button>
+        <input
+          type="number"
+          value={totalCount.length ? totalCount[index] : 0}
+          onChange={(e) => {
+            setTotalCount((prev) => {
+              const temp = [...prev];
+              temp[index] = e.target.value;
+              if (temp[index] > 1000) temp[index] = 999;
+              else if (temp[index] < 2) temp[index] = 1;
+              return temp;
+            });
+          }}
+        />
+        <button
+          onClick={() => {
+            setTotalCount((prev) => {
+              const temp = [...prev];
+              temp[index]++;
+              if (temp[index] > 999) temp[index] = 999;
+              return temp;
+            });
+          }}
+        >
+          <img src="/img/plus-solid.svg" />
+        </button>
+      </div>
     );
   };
 
@@ -66,7 +111,7 @@ const CartProductCardComp = ({
         <label className="container">
           <input
             type="checkbox"
-            onClick={() => {
+            onChange={() => {
               setTotalState((state) => {
                 let tempState = [...state];
                 !tempState[index]
@@ -75,6 +120,7 @@ const CartProductCardComp = ({
                 return tempState;
               });
             }}
+            checked={totalState[index] ? true : false}
           />{" "}
           오늘출발 평일 12:00까지 결제시
         </label>
@@ -101,7 +147,7 @@ const CartProductCardComp = ({
             <div
               className="deleteBtn"
               onClick={() => {
-                deleteLocalItem(index);
+                deleteItem(index);
               }}
             >
               X
@@ -137,10 +183,38 @@ const CartProductCardBox = styled.div`
     display: none;
   }
   .selectDiv {
-    div {
-      margin: 0px !important;
-    }
+  }
+  .selectDiv button {
+    width: 20px;
     height: 20px;
+    border: none;
+    cursor: pointer;
+    padding: 2px;
+  }
+  .selectDiv button img {
+    width: 14px;
+  }
+  .selectDiv input {
+    width: 50px;
+    height: 20px;
+    border: none;
+    background: #f4f4f4;
+    font-size: 16px;
+    text-align: center;
+  }
+  .selectDiv input:focus {
+    outline: none;
+  }
+  .selectDiv input[type="number"]::-webkit-outer-spin-button,
+  .selectDiv input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .selectDiv > div {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    border: 1px solid #f0a500;
   }
   @media (max-width: 768px) {
     & {
