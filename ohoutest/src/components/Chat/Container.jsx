@@ -16,7 +16,7 @@ const ChatContainer = () => {
   };
   useEffect(() => {
     socket.on("upload", (data) => {
-      setChatAry((state) => [...state, data]);
+      setChatAry((state) => [data, ...state]);
     });
   }, []);
 

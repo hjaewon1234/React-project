@@ -23,36 +23,12 @@ import UserMainPageContainer from "./components/userPage/userMainPage/UserMainPa
 import MyQnaContainer from "./components/userPage/userMainPage/userHeaderComp/MyQnaList/MyQnaListContainer";
 import UserMainPageComponent from "./components/userPage/userMainPage/UserMainPageComponent";
 import UserPageUpperHeaderSec from "./components/userPage/userMainPage/userHeaderComp/UserPageUpperHeader";
+import ChatContainer from "./components/Chat/Container";
 import { useEffect, useRef, useState } from "react";
 import { socket, SOCKET_EVENT } from "./service/socket.js";
 axios.defaults.withCredentials = true;
 
 function App() {
-  const prevNickname = useRef(null); // prevNickname 변경은 컴포넌트를 리렌더링 하지 않습니다.
-  const [nickname, setNickname] = useState("김첨지");
-
-  useEffect(() => {
-    if (prevNickname.current) {
-      socket.emit(SOCKET_EVENT.UPDATE_NICKNAME, {
-        // 서버에는 이전 닉네임과 바뀐 닉네임을 전송해준다.
-        prevNickname: prevNickname.current,
-        nickname,
-      });
-    } else {
-      socket.emit(SOCKET_EVENT.JOIN_ROOM, { nickname });
-    }
-  }, [nickname]);
-
-  useEffect(() => {
-    socket.emit("message", "hihi");
-    socket.on("upload", (data) => {
-      console.log(data);
-    });
-    socket.on("enter", (data) => {
-      console.log(data);
-    });
-  }, []);
-
   return (
     <AppBox>
       {/* <SingUp></SingUp> */}
@@ -86,6 +62,7 @@ function App() {
           element={<UserMainPageComponent />}
         />
       </Routes>
+      <ChatContainer />
       <Footer />
       <div style={{ backgroundColor: "#1a1c20" }}></div>{" "}
     </AppBox>
