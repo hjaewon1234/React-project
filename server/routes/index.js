@@ -1,5 +1,6 @@
 import { Router } from "express";
-const router = Router();
+import jwt from "jsonwebtoken";
+
 import user from "./user.js";
 import product from "./product.js";
 import manager from "./manager.js";
@@ -13,6 +14,8 @@ import readMore from "./readMore.js";
 import db from "../models/index.js";
 import cart from "./cart.js";
 
+const router = Router();
+
 router.use("/", (req, res, next) => {
   console.log("routes/index.js : " + req.url);
 
@@ -20,6 +23,46 @@ router.use("/", (req, res, next) => {
 });
 
 router.use("/user", user);
+
+router.use("/", (req, res, next) => {
+  try {
+    const tempUser = jwt.verify(
+      req.cookies.accessToken,
+      process.env.ACCESS_SECRET
+    );
+    req.userData = {};
+    req.userData.userId = tempUser.userId;
+    req.userData.userName = tempUser.userName;
+  } catch (err) {
+    try {
+      const data = jwt.verify(token, process.env.REFRECH_SECRET);
+      const accessToken = jwt.sign(
+        {
+          username: data.username,
+          userId: data.userId,
+        },
+        process.env.ACCESS_SECRET,
+        {
+          expiresIn: "30m",
+          issuer: "About Tech",
+        }
+      );
+
+      res.cookie("accessToken", accessToken, {
+        secure: false,
+        httpOnly: false,
+      });
+
+      req.userData.userId = data.userId;
+      req.userData.userName = data.userName;
+    } catch (error) {
+      req.userData = {};
+    }
+  } finally {
+    next();
+  }
+});
+
 router.use("/product", product);
 router.use("/manager", manager);
 router.use("/search", search);
