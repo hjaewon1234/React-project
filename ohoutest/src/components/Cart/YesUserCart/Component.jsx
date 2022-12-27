@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+
 import CartProductCardContainer from "./CartProductCard/Container";
+import PublicModalBase from "../../PublicModalBase";
 
 const YesUserCartComp = ({
   totalState,
@@ -11,6 +13,8 @@ const YesUserCartComp = ({
   item,
   getCartItem,
   userInfo,
+  nonBuyModalOpen,
+  setNonBuyModalOpen,
 }) => {
   const [totalPrice, setTotalPrice] = useState(0);
   useEffect(() => {
@@ -28,7 +32,9 @@ const YesUserCartComp = ({
       <SelectBox></SelectBox>
       <YesUserCartBox>
         <div className="">
-          <div>{userInfo.userName}님의 장바구니 현황</div>
+          <div className="inner-head">
+            {userInfo.userName}님의 장바구니 현황
+          </div>
           <hr />
           <div>
             <CartProductCardContainer
@@ -71,6 +77,27 @@ const YesUserCartComp = ({
           </div>
         </SummaryBox>
       </YesUserCartBox>
+      {nonBuyModalOpen && (
+        <PublicModalBase>
+          <div className="cart-modal">
+            <div className="cart-modal-head">알 림</div>
+            <div className="cart-modal-inner">
+              <div>
+                올바른 주문이 아닙니다
+                <br />
+                다시 시도해 주십시오
+              </div>
+              <button
+                onClick={() => {
+                  setNonBuyModalOpen(!nonBuyModalOpen);
+                }}
+              >
+                확 인
+              </button>
+            </div>
+          </div>
+        </PublicModalBase>
+      )}
     </BigBox>
   );
 };
@@ -81,6 +108,43 @@ const BigBox = styled.div`
   width: 100%;
   background-color: #afafaf75;
   min-width: 500px;
+  .cart-modal {
+    width: 500px;
+    height: 300px;
+    background: #f4f4f4;
+    border-radius: 20px;
+  }
+  .cart-modal-head {
+    width: 100%;
+    height: 50px;
+    background: #f0a500;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    font-size: 27px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+  }
+  .cart-modal .cart-modal-inner {
+    font-size: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .cart-modal .cart-modal-inner > div {
+    margin: 10% 0;
+  }
+  .cart-modal .cart-modal-inner > button {
+    width: 200px;
+    height: 50px;
+    background: #f0a500;
+    border: none;
+    border-radius: 15px;
+    font-size: 20px;
+    cursor: pointer;
+  }
 `;
 
 const YesUserCartBox = styled.div`
@@ -103,7 +167,7 @@ const YesUserCartBox = styled.div`
     background-color: #f4f4f4;
     div {
     }
-    div:nth-child(1) {
+    .inner-head {
       margin: 10px 0px;
     }
     div:nth-child(3) {
@@ -178,6 +242,7 @@ const YesUserCartBox = styled.div`
       font-size: 1.2rem;
       background-color: #f0a500;
       font-weight: 800;
+      cursor: pointer;
     }
     button:hover {
       background-color: #cf7500;

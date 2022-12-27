@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import styled from "styled-components";
-import uuid from "react-uuid";
+
+import PublicModalBase from "../../../PublicModalBase";
 
 const CartProductCardComp = ({
   brand,
@@ -14,6 +15,8 @@ const CartProductCardComp = ({
   img,
   deleteItem,
   totalState,
+  deleteItemModalOpen,
+  setDeleteItemModalOpen,
 }) => {
   useEffect(() => {
     setTotalState((state) => {
@@ -63,7 +66,7 @@ const CartProductCardComp = ({
 
   const optionDiv = () => {
     return (
-      <div>
+      <div className="inc-dec-cont">
         <button
           onClick={() => {
             setTotalCount((prev) => {
@@ -157,9 +160,37 @@ const CartProductCardComp = ({
         </div>
       </CountView>
       <div className="optionDiv">
-        <span>옵션변경 | 바로구매</span>{" "}
+        {/* <span>옵션변경 | 바로구매</span>{" "} */}
         <span>{`${(price * totalCount[index]).toLocaleString()} 원`}</span>
       </div>
+      {deleteItemModalOpen && (
+        <PublicModalBase>
+          <div className="del-cart-modal">
+            <div className="del-cart-modal-head">알 림</div>
+            <div className="del-cart-modal-inner">
+              <div>정말로 삭제하시겠습니까?</div>
+              <div className="btn-cont">
+                <button
+                  className="del-cart-modal-inner-btn"
+                  onClick={() => {
+                    setDeleteItemModalOpen(!deleteItemModalOpen);
+                  }}
+                >
+                  확 인
+                </button>
+                <button
+                  className="del-cart-modal-inner-btn"
+                  onClick={() => {
+                    setDeleteItemModalOpen(!deleteItemModalOpen);
+                  }}
+                >
+                  취 소
+                </button>
+              </div>
+            </div>
+          </div>
+        </PublicModalBase>
+      )}
     </CartProductCardBox>
   );
 };
@@ -174,29 +205,15 @@ const CartProductCardBox = styled.div`
   align-items: start;
   min-width: 480px;
 
-  .optionDiv {
-    width: 100%;
+  .inc-dec-cont {
     display: flex;
-    justify-content: space-between;
-  }
-  .option-count {
-    display: none;
-  }
-  .selectDiv {
-  }
-  .selectDiv button {
-    width: 20px;
-    height: 20px;
-    border: none;
-    cursor: pointer;
-    padding: 2px;
-  }
-  .selectDiv button img {
-    width: 14px;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #f0a500;
   }
   .selectDiv input {
     width: 50px;
-    height: 20px;
+    height: 25px;
     border: none;
     background: #f4f4f4;
     font-size: 16px;
@@ -205,30 +222,55 @@ const CartProductCardBox = styled.div`
   .selectDiv input:focus {
     outline: none;
   }
-  .selectDiv input[type="number"]::-webkit-outer-spin-button,
-  .selectDiv input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+  .selectDiv button {
+    width: 20px;
+    height: 20px;
+    border: none;
+    cursor: pointer;
+    padding: 2px;
+    height: 100%;
   }
-  .selectDiv > div {
+  .selectDiv button img {
+    width: 14px;
+  }
+  .del-cart-modal {
+    width: 500px;
+    height: 300px;
+    background: #f4f4f4;
+    border-radius: 20px;
+  }
+  .del-cart-modal-head {
+    width: 100%;
+    height: 50px;
+    background: #f0a500;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    font-size: 27px;
     display: flex;
-    align-content: center;
     justify-content: center;
-    border: 1px solid #f0a500;
+    align-items: center;
   }
-  @media (max-width: 768px) {
-    & {
-      flex-direction: row;
-    }
-    .container {
-      display: none;
-    }
-    .optionDiv {
-      display: none;
-    }
-    .option-count {
-      display: block;
-    }
+  .del-cart-modal .del-cart-modal-inner {
+    font-size: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .del-cart-modal .del-cart-modal-inner > div {
+    margin: 10% 0;
+  }
+  .del-cart-modal-inner-btn {
+    width: 200px;
+    height: 50px;
+    background: #f0a500;
+    border: none;
+    border-radius: 15px;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  .del-cart-modal-inner-btn + button {
+    margin-left: 20px;
   }
 `;
 
@@ -292,6 +334,11 @@ const CountView = styled.div`
   }
   .deleteBtn:hover {
     background-color: #cf7500;
+  }
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
   }
 `;
 
