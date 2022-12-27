@@ -1,9 +1,12 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+
+import PublicModalBase from "../../../PublicModalBase";
 
 const ReadMoreOrderInfoComponent = ({ brand, name, price, addCart }) => {
   const [orderCount, setOrderCount] = useState(1);
+  const [cartModalOpen, setCartModalOpen] = useState(true);
+
   let totalSum = orderCount * price;
 
   return (
@@ -81,6 +84,17 @@ const ReadMoreOrderInfoComponent = ({ brand, name, price, addCart }) => {
       <div className="order-ad">
         <img src="/img/read-more-ad.webp" />
       </div>
+      {cartModalOpen && (
+        <PublicModalBase>
+          <div className="cart-modal">
+            <div className="cart-modal-head">알림</div>
+            <div className="cart-modal-inner">
+              <div>상품을 장바구니로 담았습니다</div>
+              <button>확인</button>
+            </div>
+          </div>
+        </PublicModalBase>
+      )}
     </ReadMoreOrderInfoBox>
   );
 };
@@ -227,5 +241,32 @@ const ReadMoreOrderInfoBox = styled.div`
   .order-ad img {
     width: 100%;
     cursor: pointer;
+  }
+  .cart-modal {
+    width: 500px;
+    height: 300px;
+    background: #f4f4f4;
+  }
+  .cart-modal-head {
+    width: 100%;
+    text-align: center;
+    background: #f0a500;
+  }
+  .cart-modal .cart-modal-inner {
+    font-size: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .cart-modal .cart-modal-inner > div {
+    margin-bottom: 10%;
+  }
+  .cart-modal .cart-modal-inner > button {
+    width: 200px;
+    height: 50px;
+    background: #f0a500;
+    border: none;
+    border-radius: 15px;
   }
 `;

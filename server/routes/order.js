@@ -7,36 +7,27 @@ router.route("/").post((req, res) => {
   res.send(req.body);
 });
 
-router.route("/buy").post((req, res) => {
-  console.log("바디다", req.body);
+router.route("/buy").post(async (req, res) => {
   const sendAry = [];
-  const len = req.body.length;
-  console.log(req.body.productId);
-  req.body.map((item) => {
-    db.Users.findOne({ where: { id: item.userId } }).then((user) => {
-      db.Products.findOne({ where: { id: item.productId } }).then((product) => {
-        db.Order.create({ count: item.num })
-          .then((order) => {
-            user.addOrder(order);
-            product.addOrder(order);
-            return order;
-          })
-          .then((data) => {
-            sendAry.push(data);
-          });
-        db.Cart.destroy({ where: { id: item.id } });
+  try {
+    for (let i = 0; i < req.body.length; i++) {
+      const userData = await db.Users.findOne({
+        where: { id: req.body[i].userId },
       });
-    });
-  });
-  // .then(() => {
-  //   res.send(sendAry);
-  // });
-  const intervalId = setInterval(() => {
-    if (sendAry.length == len) {
-      clearInterval(intervalId);
-      res.send(sendAry);
+      const product = await db.Products.findOne({
+        where: { id: req.body[i].productId },
+      });
+      const order = await db.Order.create({ count: req.body[i].num });
+      userData.addOrder(order);
+      product.addOrder(order);
+      sendAry.push(order);
+      await db.Cart.destroy({ where: { id: req.body[i].id } });
     }
-  }, 100);
+    res.send(sendAry);
+  } catch (err) {
+    console.error(err);
+    res.end();
+  }
 });
 
 export default router;
