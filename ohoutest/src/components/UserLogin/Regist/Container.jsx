@@ -54,13 +54,13 @@ const ParticleStyle = styled.div`
   position: absolute;
   z-index: 1;
   top: 334px;
-  left: 210px;
+  left: 10%;
 `;
 const ParticleStyle1 = styled.div`
   position: absolute;
   z-index: 1;
   top: 245px;
-  left: -15px;
+  left: -5%;
 `;
 const ParticleStyle2 = styled.div`
   position: absolute;

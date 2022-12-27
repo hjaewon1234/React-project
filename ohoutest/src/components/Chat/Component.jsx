@@ -187,6 +187,7 @@ const ViewBox = styled.div`
   bottom: 0;
   display: ${(props) => (props.view ? "none" : "block")};
   background-color: #525252;
+  z-index: 10;
   img {
     filter: brightness(0) invert(1);
     width: 10px;
