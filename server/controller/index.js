@@ -280,7 +280,9 @@ const login = async (req, res, next) => {
     res.status(200).json({
       userId: tempUser?.userId,
       userName: tempUser?.userName,
-      userPw: tempUser?.userPw,
+      userAddress: tempUser?.userAddress,
+      userAddress1: tempUser?.userAddress1,
+      userImg: tempUser?.userImg,
     });
   } else {
     res.status(402).json("유저 못찾음");

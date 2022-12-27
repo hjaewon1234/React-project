@@ -7,7 +7,7 @@ import Footer from "./components/Footer/Container";
 import SingUp from "./components/index";
 import AnswerQnaContainer from "./components/ManagerPage/ManagerInfo/answerQna/AnswerQnaContainer";
 
-import PopupBarContainer from "./components/popupBar/Container";
+import PopupBarContainer from "./components/PopupBar/Container";
 import axios from "axios";
 import RegistContainer from "./components/UserLogin/Regist/Container";
 import Login2Container from "./components/UserLogin/Login2/Container";
@@ -23,6 +23,8 @@ import UserMainPageContainer from "./components/userPage/userMainPage/UserMainPa
 import MyQnaContainer from "./components/userPage/userMainPage/userHeaderComp/MyQnaList/MyQnaListContainer";
 import UserMainPageComponent from "./components/userPage/userMainPage/UserMainPageComponent";
 import UserPageUpperHeaderSec from "./components/userPage/userMainPage/userHeaderComp/UserPageUpperHeader";
+import { useEffect, useRef, useState } from "react";
+import { socket, SOCKET_EVENT } from "./service/socket.js";
 axios.defaults.withCredentials = true;
 
 function App() {
