@@ -26,21 +26,33 @@ export const signUpUser = createAsyncThunk("/user/signUpUser", async (body) => {
     .then((data) => {
       console.log(data.data);
       if (data.data.status == 401) {
-        swal("중복되는 아이디가 있습니다. 다시 확인해주세요", {
-          buttons: {
-            확인: true,
-          },
+        swal({
+          title: "중복되는 아이디가 있습니다. 다시 확인해주세요",
+          showCancelButton: true,
+          confirmButtonColor: "#F0A500",
+          confirmButtonText: "확인",
         });
       } else if (data.data.status == 402) {
-        alert("비밀번호 입력을 다시 확인해주세요");
+        swal({
+          title: "비밀번호 입력을 다시 확인해주세요",
+          showCancelButton: true,
+          confirmButtonColor: "#F0A500",
+          confirmButtonText: "확인",
+        });
       } else if (data.data.status == 403) {
-        swal("중복되는 닉네임이 있습니다. 다시 확인해주세요", {
-          buttons: {
-            확인: true,
-          },
+        swal({
+          title: "중복되는 닉네임이 있습니다. 다시 확인해주세요",
+          showCancelButton: true,
+          confirmButtonColor: "#F0A500",
+          confirmButtonText: "확인",
         });
       } else if (data.data.status == 405) {
-        alert("아이디 영문으로만 입력 해주세요");
+        swal({
+          title: "아이디 영문으로만 입력 해주세요",
+          showCancelButton: true,
+          confirmButtonColor: "#F0A500",
+          confirmButtonText: "확인",
+        });
       } else if (data.data.status == 200) {
         swal({
           title: "회원가입이 완료 되었습니다.",
@@ -77,11 +89,27 @@ export const overlapId = createAsyncThunk(
         confirmButtonText: "확인",
       });
     } else if (data.status == 402) {
-      alert("비밀번호가 정장적으로 입력이 되지 않았습니다. 다시 확인해주세요");
+      swal({
+        title:
+          "비밀번호가 정장적으로 입력이 되지 않았습니다. 다시 확인해주세요",
+        showCancelButton: true,
+        confirmButtonColor: "#F0A500",
+        confirmButtonText: "확인",
+      });
     } else if (data.status == 403) {
-      alert("중복되는 닉네임이 있습니다. 다시 확인해주세요");
+      swal({
+        title: "중복되는 닉네임이 있습니다. 다시 확인해주세요",
+        showCancelButton: true,
+        confirmButtonColor: "#F0A500",
+        confirmButtonText: "확인",
+      });
     } else if (data.status == 405) {
-      alert("아이디 영문으로만 입력 해주세요");
+      swal({
+        title: "아이디는 영문으로만 입력 해주세요",
+        showCancelButton: true,
+        confirmButtonColor: "#F0A500",
+        confirmButtonText: "확인",
+      });
     } else if (data.status == 200) {
       swal({
         title: "사용가능한 아이디입니다.",

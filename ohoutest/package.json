@@ -15,6 +15,7 @@
     "canvas-sketch": "^0.7.6",
     "canvas-sketch-util": "^1.10.0",
     "colormap": "^2.3.2",
+    "crypto-js": "^4.1.1",
     "eases": "^1.0.8",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.0",

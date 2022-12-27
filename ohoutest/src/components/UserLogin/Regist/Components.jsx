@@ -90,15 +90,18 @@ const RegistComponents = () => {
     if (!passwordRegExp.test(currentPassword)) {
       setPasswordMessage("8~15 사이 숫자+영문+특수문자로 입력해주세요.");
       setIsPassword(false);
-    }
-    //  else if (inputPw1 !== currentPassword) {
-    //   setPasswordMessage("입력한 비밀번호 확인과 같지 않습니다.");
-    //   setIsPassword(false);
-    // }
-    else {
+    } else if (currentPassword != inputPw1) {
+      setPasswordMessage("비밀번호 확인에 입력된 비밀번호와 다릅니다.");
+      setIsPassword(false);
+    } else if (passwordRegExp.test(currentPassword)) {
       setPasswordMessage("안전한 비밀번호 입니다.");
       setIsPassword(true);
+    } else {
     }
+    // else {
+    //   setPasswordMessage("안전한 비밀번호 입니다.");
+    //   setIsPassword(true);
+    // }
   };
   const onChangePasswordConfirm = (e) => {
     const currentPasswordConfirm = e.target.value;
@@ -121,6 +124,7 @@ const RegistComponents = () => {
         inputName,
         inputAdress,
         ...inputAdress1,
+        userImg: "1",
       })
     );
   };
@@ -505,7 +509,9 @@ const RegistComponents = () => {
                     inputPw1.length <= 6 ||
                     inputName.length <= 2 ||
                     inputAdress.length <= 3 ||
-                    inputAdress1.address.length <= 1
+                    inputAdress1.address.length <= 1 ||
+                    inputPw.length !== inputPw1.length ||
+                    inputPw !== inputPw1
                       ? true
                       : false
                   }
@@ -549,10 +555,18 @@ const RegistComponents = () => {
           </AcceptStlye>
 
           <LoginStyle>
-            <Link to={"/signUp"} style={{ textDecoration: "none" }}>
-              <div> 이미 아이디가 있으신가요? </div>
+            <Link
+              //  to={"/signUp"}
+              style={{ textDecoration: "none" }}
+            >
+              <div
+                onClick={() => {
+                  window.open("/signUp", "_self");
+                }}
+              >
+                이미 아이디가 있으신가요?{" "}
+              </div>
             </Link>
-            {/* <h6>이미 아이디가 있으신가요? </h6> */}
           </LoginStyle>
         </RegistMain>
       </KakaoApi>
@@ -723,7 +737,6 @@ const AcceptStlye = styled.div`
   align-items: flex-start;
   flex-direction: column;
   width: 350px;
-  border: 1.5px solid rgb(244, 244, 244);
   margin-top: 5px;
   margin-bottom: 30px;
   cursor: pointer;

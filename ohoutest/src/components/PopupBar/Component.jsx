@@ -50,6 +50,7 @@ const PopupBarCompBox = styled.div`
   a {
     width: 50%;
     font-size: 0;
+    z-index: 5;
   }
   .popup-left {
     margin-right: 65px;
