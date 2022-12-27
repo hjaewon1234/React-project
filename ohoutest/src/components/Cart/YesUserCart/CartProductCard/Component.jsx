@@ -190,6 +190,34 @@ const CartProductCardComp = ({
       <div className="option-div">
         <span>{`${(price * totalCount[index]).toLocaleString()} 원`}</span>
       </div>
+      {deleteItemModalOpen && (
+        <PublicModalBase>
+          <div className="del-cart-modal">
+            <div className="del-cart-modal-head">알 림</div>
+            <div className="del-cart-modal-inner">
+              <div>정말로 삭제하시겠습니까?</div>
+              <div className="btn-cont">
+                <button
+                  className="del-cart-modal-inner-btn"
+                  onClick={() => {
+                    setDeleteItemModalOpen(!deleteItemModalOpen);
+                  }}
+                >
+                  확 인
+                </button>
+                <button
+                  className="del-cart-modal-inner-btn"
+                  onClick={() => {
+                    setDeleteItemModalOpen(!deleteItemModalOpen);
+                  }}
+                >
+                  취 소
+                </button>
+              </div>
+            </div>
+          </div>
+        </PublicModalBase>
+      )}
     </CartProductCardBox>
   );
 };
