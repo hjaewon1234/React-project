@@ -166,8 +166,15 @@ const check = (req, res) => {
 
 const logout = (req, res) => {
   try {
+    console.log(
+      "ㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇ",
+      req.userData.userId,
+      req.userData?.userName,
+      req.userData?.userPw
+    );
     res.clearCookie("accessToken");
     res.clearCookie("refreshToken");
+    req.userData = {};
     // global.userPw = "";
     res.status(200).json("Logout Success");
 
