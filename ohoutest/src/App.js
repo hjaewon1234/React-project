@@ -22,6 +22,7 @@ import UserMainPageContainer from "./components/userPage/userMainPage/UserMainPa
 import MyQnaContainer from "./components/userPage/userMainPage/userHeaderComp/MyQnaList/MyQnaListContainer";
 import { useEffect, useRef, useState } from "react";
 import { socket, SocketContext, SOCKET_EVENT } from "../src/service/socket.js";
+import ChatContainer from "./components/Chat/Container";
 
 axios.defaults.withCredentials = true;
 
@@ -90,6 +91,7 @@ function App() {
             }
           />
         </Routes>
+        <ChatContainer />
         <Footer />
         <div style={{ backgroundColor: "#1a1c20" }}></div>{" "}
       </AppBox>

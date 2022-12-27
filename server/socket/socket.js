@@ -10,6 +10,7 @@ export default function (server) {
   });
 
   io.on("connection", (socket) => {
+    socket.join("");
     socket.on("JOIN_ROOM", (data) => {
       io.emit("enter", data);
     });
