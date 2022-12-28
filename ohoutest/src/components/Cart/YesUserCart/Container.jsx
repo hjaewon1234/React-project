@@ -17,7 +17,7 @@ const YesUserCartContainer = ({ userInfo }) => {
     axios
       .post("/api/cart/getCartItem")
       .then((data) => {
-        setItem(data.data);
+        setItem(data.data || []);
       })
       .catch((err) => console.error(err));
   };
