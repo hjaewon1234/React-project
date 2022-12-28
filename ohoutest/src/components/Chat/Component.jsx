@@ -176,6 +176,7 @@ const InputBox = styled.div`
 `;
 
 const ViewBox = styled.div`
+  z-index: 10;
   padding: 10px 20px;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
