@@ -403,9 +403,6 @@ const NavBarCompBox = styled.div`
       width: calc(50% - 6%);
       margin-bottom: 5px;
     }
-    .nav-bar-container {
-      justify-content: center;
-    }
     a:not(.logo-icon) {
       margin-left: 2%;
     }
