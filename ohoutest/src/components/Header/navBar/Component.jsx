@@ -126,7 +126,7 @@ const NavBarComponent = ({ onSubmit, isOnline, userImg }) => {
             로그아웃
           </Link>
         )}
-        <Link className="mobile-s" to="/">
+        <Link className="mobile-s" to="/cart">
           장바구니
         </Link>
         <Link to="/">고객센터</Link>

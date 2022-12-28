@@ -17,8 +17,4 @@ const PublicModalBaseBox = styled.div`
   z-index: 100;
   top: 0;
   left: 0;
-
-  & button:bover {
-    background: #cf7500 !important;
-  }
 `;

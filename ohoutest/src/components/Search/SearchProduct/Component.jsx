@@ -10,7 +10,7 @@ const SearchProductComp = ({ itemArr }) => {
           {itemArr?.map((elem, idx) => {
             return (
               <ItemBox key={`itemArr - ${idx}`}>
-                <Link to={"/"}>
+                <Link>
                   <div className="today-deal-item-img">
                     <img src={`/api/download${elem.img.split(",")[0]}`} />
                   </div>

@@ -43,4 +43,10 @@ const ReadMoreCategoryBox = styled.div`
     filter: invert(55%) sepia(17%) saturate(194%) hue-rotate(164deg)
       brightness(96%) contrast(94%);
   }
+
+  @media only screen and (max-width: 768px) {
+    font-size: 13px;
+  }
+  @media only screen and (max-width: 425px) {
+  }
 `;

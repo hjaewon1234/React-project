@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const CartComponent = ({ navigate }) => {
+const CartComponent = ({ navigate, target }) => {
   return (
     <CartBox>
       <div>
@@ -8,7 +8,7 @@ const CartComponent = ({ navigate }) => {
       </div>
       <button
         onClick={() => {
-          navigate("/login");
+          navigate(`/${target}`);
         }}
       >
         상품 담으러 가기
