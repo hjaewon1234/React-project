@@ -21,7 +21,7 @@ const QnaContainer = () => {
   console.log(qnaInfo, qnaPaging, color);
   return (
     <QnaComponent
-      title={"문의 사항 확인"}
+      title={"리뷰 확인 하기"}
       qnaInfo={qnaInfo}
       qnaPaging={qnaPaging}
       tempQnaInfoThunk={tempQnaInfoThunk}

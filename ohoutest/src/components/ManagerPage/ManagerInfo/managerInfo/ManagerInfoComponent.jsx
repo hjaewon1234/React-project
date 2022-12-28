@@ -94,6 +94,7 @@ const Infodiv = styled.div`
 const InfoContentDiv = styled.div`
   background-color: #f4f4f4;
   border-radius: 0 0 10px 10px;
+  font-weight: bold;
 `;
 const PagingDiv = styled.div`
   display: flex;

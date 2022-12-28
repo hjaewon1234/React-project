@@ -189,7 +189,7 @@ const InfoContentDiv = styled.div`
 
 const AccoContents = styled.div`
   padding: 10px;
-
+  font-weight: bold;
   & > form {
     display: flex;
     flex-direction: column;
