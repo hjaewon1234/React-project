@@ -34,7 +34,7 @@ const ParticleTest = () => {
   // window.addEventListener("click", onClick);
 
   const settings = {
-    dimensions: [420, 420],
+    dimensions: [360, 360],
     animate: true,
   };
 

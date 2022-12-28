@@ -114,10 +114,10 @@ const Login2Components = ({ setIsLogin, setUser, user }) => {
           </RegistLink>
         </RegistMidStlye>
         <ParticleStyle>
-          <ParticleStyle1>
+          <ParticleStyle1 className="Particle1 Particle2">
             <ParticleTest></ParticleTest>
           </ParticleStyle1>
-          <ParticleStyle2>
+          <ParticleStyle2 className="Particle1 Particle3">
             <ParticleTest1></ParticleTest1>
           </ParticleStyle2>
         </ParticleStyle>
@@ -129,19 +129,107 @@ export default Login2Components;
 
 const ParticleStyle = styled.div`
   background-color: transparent;
-  position: absolute;
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
   z-index: 1;
-  top: -280px;
-  left: 10px;
+  top: -900px;
+  right: 400px;
+  width: 100vh;
+
+  .Particle2 {
+    z-index: 2;
+    display: block;
+    top: 335px;
+    left: 1100px;
+    animation-direction: reverse;
+    animation: effect1 5.7s infinite alternate ease-in-out;
+  }
+  .Particle3 {
+    display: block;
+    top: 355px;
+    left: 790px;
+    animation-direction: reverse;
+    animation: effect2 5.7s infinite alternate ease-in-out;
+  }
+  @keyframes effect1 {
+    from {
+      top: 55px;
+      left: 500px;
+      transform: rotate(270deg);
+    }
+    to {
+      left: 1100px;
+
+      transform: rotate(70deg);
+    }
+  }
+  @keyframes effect2 {
+    from {
+      top: 50px;
+      right: 290px;
+      transform: rotate(70deg);
+    }
+    to {
+      right: 820px;
+      transform: rotate(280deg);
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .Particle1 {
+      display: none;
+    }
+    .Particle2 {
+      display: block;
+      top: 455px;
+      left: 650px;
+      animation-direction: alternate;
+      animation: effect1 6.3s infinite alternate ease-in-out;
+    }
+    .Particle3 {
+      display: block;
+      z-index: 1;
+      top: 355px;
+      right: 220px;
+      animation-direction: reverse;
+      animation: effect2 5.7s infinite alternate ease-in-out;
+    }
+    @keyframes effect1 {
+      from {
+        top: 50px;
+        left: 650px;
+
+        transform: rotate(45deg);
+      }
+      to {
+        top: -350px;
+        left: 600px;
+
+        transform: rotate(210deg);
+      }
+    }
+    @keyframes effect2 {
+      from {
+        top: 50px;
+        right: 220px;
+        transform: rotate(70deg);
+      }
+      to {
+        right: 760px;
+        transform: rotate(280deg);
+      }
+    }
+  }
 `;
 const ParticleStyle1 = styled.div`
-  background-color: transparent;
+  flex: 1;
   position: absolute;
   z-index: 1;
   top: 455px;
   left: 380px;
 `;
 const ParticleStyle2 = styled.div`
+  flex: 1;
   position: absolute;
   z-index: 1;
   top: 325px;
@@ -158,6 +246,7 @@ const RegistMain = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  height: 53vh;
   button {
     margin-top: 15px;
     background-color: rgb(240, 165, 0);
@@ -177,8 +266,57 @@ const RegistMain = styled.div`
       box-shadow: 0 20px 45px rgba(0, 0, 0, 0.1);
     }
   }
+  @media screen and (min-width: 1280px) {
+    height: 71vh;
+  }
+  @media screen and (max-width: 1280px) {
+    height: 65vh;
+  }
+  @media screen and (max-width: 1024px) {
+    height: 78vh;
+  }
+  @media screen and (max-width: 912px) {
+    height: 42vh;
+  }
+  @media screen and (max-width: 820px) {
+    height: 51vh;
+  }
+  @media screen and (max-width: 768px) {
+    height: 55vh;
+    margin-bottom: 55px;
+  }
+  @media screen and (max-width: 540px) {
+    height: 92vh;
+    scale: 0.9;
+  }
+  @media screen and (max-width: 414px) {
+    height: 51.5vh;
+    scale: 0.9;
+  }
+  @media screen and (max-width: 412px) {
+    margin-bottom: 55px;
+    height: 45vh;
+    scale: 0.8;
+  }
+  @media screen and (max-width: 393px) {
+    height: 51vh;
+    scale: 0.85;
+  }
+  @media screen and (max-width: 375px) {
+    height: 55vh;
+    scale: 0.8;
+  }
+  @media screen and (max-width: 360px) {
+    height: 65vh;
+    scale: 0.8;
+  }
+  @media screen and (max-width: 280px) {
+    height: 43vh;
+    scale: 0.55;
+  }
 `;
 const RegistTopStlye = styled.div`
+  z-index: 5;
   border-bottom: 1px solid rgb(244, 244, 244);
   margin-bottom: 20px;
   width: 350px;
