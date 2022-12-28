@@ -124,7 +124,7 @@ const RegistComponents = () => {
         inputName,
         inputAdress,
         ...inputAdress1,
-        userImg: "1",
+        userImg: "loginDefault.jpeg",
       })
     );
   };

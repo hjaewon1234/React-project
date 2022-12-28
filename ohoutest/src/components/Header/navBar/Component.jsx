@@ -10,7 +10,7 @@ import { action } from "../../../modules/userInfo.js";
 
 import DropDown from "./DropDown";
 
-const NavBarComponent = ({ onSubmit, isOnline }) => {
+const NavBarComponent = ({ onSubmit, isOnline, userImg }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [searchInput, setSearchInput] = useState("");
@@ -81,7 +81,7 @@ const NavBarComponent = ({ onSubmit, isOnline }) => {
             onClick={() => {
               setIsOpen(!isOpen);
             }}
-            src="/img/loginDefault.jpeg"
+            src={`/api/download${userImg}`}
             ref={imgRef}
           />
           {isOpen && (

@@ -1,9 +1,16 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-const ChatComponent = ({ onChatEnter, chatValue, chatAry, onChatting }) => {
+const ChatComponent = ({
+  onChatEnter,
+  chatValue,
+  chatAry,
+  onChatting,
+  setWorld,
+}) => {
   const [inputRangeValue, setInputRangeValue] = useState(50);
-  const [viewChat, setViewChatBox] = useState(true);
+  const [viewChat, setViewChatBox] = useState(false);
+  const [serverColor, setServerColor] = useState(0);
 
   return (
     <>
@@ -19,14 +26,78 @@ const ChatComponent = ({ onChatEnter, chatValue, chatAry, onChatting }) => {
       <ChatBox opacity={inputRangeValue / 100} view={viewChat}>
         <ChattingBox opacity={inputRangeValue / 100}>
           <WorldSelectBox opacity={inputRangeValue / 100}>
-            <div>전체</div>
-            <div>World1</div>
-            <div>World2</div>
-            <div>World3</div>
+            <WorldDiv
+              onClick={() => {
+                setServerColor((state) => (state = 0));
+                setWorld("whole");
+              }}
+              style={{
+                backgroundColor:
+                  serverColor == 0
+                    ? "rgb(200, 200, 200)"
+                    : `rgba(20,22,36,${inputRangeValue / 100})`,
+                color: serverColor == 0 ? "black" : "white",
+              }}
+            >
+              전체
+            </WorldDiv>
+            <WorldDiv
+              onClick={() => {
+                setServerColor((state) => (state = 1));
+                setWorld("world1");
+              }}
+              style={{
+                backgroundColor:
+                  serverColor == 1
+                    ? "rgb(200, 200, 200)"
+                    : `rgba(20,22,36,${inputRangeValue / 100})`,
+                color: serverColor == 1 ? "black" : "white",
+              }}
+            >
+              World1
+            </WorldDiv>
+            <WorldDiv
+              onClick={() => {
+                setServerColor((state) => (state = 2));
+                setWorld("world2");
+              }}
+              style={{
+                backgroundColor:
+                  serverColor == 2
+                    ? "rgb(200, 200, 200)"
+                    : `rgba(20,22,36,${inputRangeValue / 100})`,
+                color: serverColor == 2 ? "black" : "white",
+              }}
+            >
+              World2
+            </WorldDiv>
+            <WorldDiv
+              onClick={() => {
+                setServerColor((state) => (state = 3));
+                setWorld("world3");
+              }}
+              style={{
+                backgroundColor:
+                  serverColor == 3
+                    ? "rgb(200, 200, 200)"
+                    : `rgba(20,22,36,${inputRangeValue / 100})`,
+                color: serverColor == 3 ? "black" : "white",
+              }}
+            >
+              World3
+            </WorldDiv>
           </WorldSelectBox>
           <ViewChatBox>
             {chatAry.map((item, index) => {
-              return <div key={`chatAry-${index}`}>{item}</div>;
+              return (
+                <div
+                  key={`chatAry-${index}`}
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
+                  <div key={`chat-${index}`}>{item.userName}</div>
+                  <div key={`chatValue-${index}`}>{item.chatValue}</div>
+                </div>
+              );
             })}
           </ViewChatBox>
           <SliderBox opacity={inputRangeValue / 100}>
@@ -49,7 +120,6 @@ const ChatComponent = ({ onChatEnter, chatValue, chatAry, onChatting }) => {
         </ChattingBox>
         <InputBox opacity={inputRangeValue / 100}>
           <input
-            type="text"
             onKeyDown={(e) => {
               onChatEnter(e);
             }}
@@ -138,19 +208,6 @@ const WorldSelectBox = styled.div`
   flex-direction: column;
   row-gap: 1%;
   cursor: pointer;
-
-  & > div {
-    font-weight: 600;
-    background-color: rgba(20, 22, 36, ${(props) => props.opacity});
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 24%;
-    &:hover {
-      background-color: rgb(200, 200, 200);
-      color: black;
-    }
-  }
 `;
 
 const InputBox = styled.div`
@@ -181,6 +238,7 @@ const ViewBox = styled.div`
   border-top-right-radius: 15px;
   padding-bottom: 30px;
   color: white;
+  z-index: 10;
   font-weight: 600;
   position: fixed;
   right: 50px;
@@ -209,5 +267,18 @@ const ViewChatBox = styled.div`
     padding: 5px 0px;
     padding-right: 20px;
     text-align: right;
+  }
+`;
+
+const WorldDiv = styled.div`
+  font-weight: 600;
+  background-color: rgba(20, 22, 36, ${(props) => props.opacity});
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 24%;
+  &:hover {
+    background-color: rgb(200, 200, 200);
+    color: black;
   }
 `;
