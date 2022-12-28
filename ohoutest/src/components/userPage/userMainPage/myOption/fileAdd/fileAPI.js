@@ -6,7 +6,7 @@ const uploadFile = async (file) => {
       "http://localhost:8080/api/userPage/uploadFile",
       file
     );
-
+    window.location.replace("/");
     return data;
   } catch (e) {
     alert("실패함");

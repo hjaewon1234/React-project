@@ -31,4 +31,8 @@ const InfoContainerBox = styled.div`
   & > div {
     margin-top: 60px;
   }
+  @media (max-width: 400px) {
+    padding: 50px 0px;
+    min-width: 300px;
+  }
 `;

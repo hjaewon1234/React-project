@@ -37,14 +37,14 @@ const ManagerInfoComponent = ({
           <AccoContents>
             {productInfo.map((item, index) => (
               <UnitDiv key={index}>
-                <img
-                  src={`/api/download${decodeURI(item.img)}`}
-                  style={{ width: "70px" }}
-                />
+                <img src={`/api/download${decodeURI(item.img)}`} />
 
                 <div>
-                  <div>
-                    [ {item.brand} ] {item.name}
+                  <div className="textBox">
+                    <span>
+                      <span className="brand">[ {item.brand} ]</span>{" "}
+                      {item.name}
+                    </span>
                   </div>
                 </div>
                 <div style={{ display: "flex", columnGap: "10px" }}>
@@ -84,6 +84,7 @@ const Infodiv = styled.div`
   display: flex;
   text-align: center;
   & > div {
+    overflow-x: hidden;
     margin: auto;
     width: 70%;
     background-color: #f0a500;
@@ -100,6 +101,7 @@ const PagingDiv = styled.div`
   justify-content: center;
   column-gap: 10px;
   padding-bottom: 10px;
+  min-width: 200px;
 `;
 const NumberBox = styled.div`
   border: 1px solid gray;
@@ -118,12 +120,39 @@ const AccoContents = styled.div`
   }
 `;
 const UnitDiv = styled.div`
+  width: 100%;
   padding: 10px 0;
   border-bottom: 1px solid black;
   & > div:first-child > div {
     overflow: hidden;
-    tex-overflow: ellipsis;
+    text-overflow: ellipsis;
     white-space: nowrap;
+  }
+  img {
+    width: 70px;
+  }
+  @media (max-width: 1280px) {
+    img {
+      width: 50px;
+    }
+    font-size: 0.8rem;
+  }
+  @media (max-width: 1024px) {
+    img {
+      display: none;
+    }
+  }
+  @media (max-width: 920px) {
+    font-size: 0.6rem;
+  }
+  @media (max-width: 738px) {
+    .brand {
+      display: none;
+    }
+    .textBox {
+      width: 100%;
+      overflow-x: hidden;
+    }
   }
 `;
 const UpperAcco = styled.div`
@@ -131,6 +160,7 @@ const UpperAcco = styled.div`
   justify-content: space-between;
   padding-left: 3%;
   cursor: pointer;
+  min-width: 200px;
 `;
 const ShippingDiv = styled.div`
   border: 1px solid black;
@@ -138,4 +168,7 @@ const ShippingDiv = styled.div`
   border-radius: 7px;
   font-weight: bold;
   background-color: #f0a500;
+  @media (max-width: 682px) {
+    display: none;
+  }
 `;

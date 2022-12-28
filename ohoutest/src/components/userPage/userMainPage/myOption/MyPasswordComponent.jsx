@@ -67,6 +67,7 @@ const MyPasswordComponent = ({ passwordChange, userInfo }) => {
           </div>
           <div>
             <input
+              className="inputBox"
               type={"password"}
               value={inputPw}
               onInput={(e) => {
@@ -87,8 +88,9 @@ const MyPasswordComponent = ({ passwordChange, userInfo }) => {
               <h4> 비밀번호 확인</h4>
             </label>
           </div>
-          <div>
+          <div className="inputBox">
             <input
+              className="inputBox"
               type={"password"}
               value={inputPw1}
               onInput={(e) => {
@@ -135,7 +137,7 @@ const ShippingUnderDiv = styled.div`
   & > div > div {
     margin: 20px 10px 20px;
     display: flex;
-    justify-contents: center;
+    justify-content: center;
   }
   & > div:first-child {
     text-align: left;
@@ -166,6 +168,9 @@ const ShippingUnderDiv = styled.div`
     padding-left: 10px;
     font-size: 15px;
     background-color: transparent;
+  }
+  .inputBox {
+    width: 90%;
   }
   .messageGreen {
     font-size: 12px;
@@ -218,7 +223,7 @@ const RegistMidStlye = styled.div`
     background-color: rgb(240, 165, 0);
     outline: none;
     border: 0;
-    width: 350px;
+    width: 90%;
     height: 45px;
     font-size: 18px;
     font-weight: bold;

@@ -60,14 +60,14 @@ export const DropdownComp = () => {
           <div className={`${mouseEnter == "hover" ? "selected " + "" : ""} `}>
             <div className={transYAnim}>
               <span>{elemCount + 1} </span>
-              <img className={"up"} src="/api/downloadcaretupsolid.png" />
+              {/* <img className={"up"} src="/api/downloadcaretupsolid.png" /> */}
               <p>{` ${selected}`}</p>
             </div>
             <div className={transYAnim}>
               <span>
                 {(elemCount + 2) % 10 != 0 ? (elemCount + 2) % 10 : 10}{" "}
               </span>
-              <img className={"up"} src="/api/downloadcaretupsolid.png" />
+              {/* <img className={"up"} src="/api/downloadcaretupsolid.png" /> */}
               <p>{` ${selected2}`}</p>
             </div>
           </div>
@@ -83,10 +83,10 @@ export const DropdownComp = () => {
               >
                 <div className="rankDropdownList">
                   <span>{index + 1} </span>
-                  <img
+                  {/* <img
                     className={"down"}
                     src="/api/downloadcaretdownsolid.png"
-                  />
+                  /> */}
                 </div>{" "}
                 {` ${item}`}
               </li>

@@ -60,7 +60,7 @@ const FileAddComponent = ({
               acceptCharset="utf-8"
             >
               <div>
-                <div>상품 이름 :</div>
+                <div className="tagName">상품 이름 :</div>
                 <div>
                   <input
                     type="text"
@@ -71,19 +71,19 @@ const FileAddComponent = ({
                 </div>
               </div>
               <div>
-                <div>상품 가격 :</div>
+                <div className="tagName">상품 가격 :</div>
                 <div>
                   <input type="number" name="price" placeholder="price" />
                 </div>
               </div>
               <div>
-                <div>상품 브랜드명 :</div>
+                <div className="tagName">상품 브랜드명 :</div>
                 <div>
                   <input type="text" name="brand" placeholder="brand" />
                 </div>
               </div>
               <div>
-                <div>상품 설명 :</div>
+                <div className="tagName">상품 설명 :</div>
                 <div>
                   <input
                     type="text"
@@ -93,7 +93,7 @@ const FileAddComponent = ({
                 </div>
               </div>
               <div style={{ alignItems: "center" }}>
-                <div>상품 이미지</div>
+                <div className="tagName">상품 이미지</div>
                 <div>
                   {tempImgFile.map((image, index) => {
                     return (
@@ -115,7 +115,7 @@ const FileAddComponent = ({
                   />
                 </div>
               </div>
-              <div>
+              <div className="selectBox">
                 <select
                   name="bigsort"
                   onChange={(e) => {
@@ -170,6 +170,11 @@ const FileAddComponent = ({
 export default FileAddComponent;
 
 const Infodiv = styled.div`
+  .tagName {
+    text-align: left;
+    min-width: 120px;
+    width: 200px;
+  }
   width: 100%;
   margin: 30px 0;
   display: flex;
@@ -179,6 +184,16 @@ const Infodiv = styled.div`
     width: 70%;
     background-color: #f0a500;
     border-radius: 10px;
+  }
+  @media (max-width: 700px) {
+    .selectBox {
+      flex-direction: column;
+    }
+  }
+  @media (max-width: 530px) {
+    .tagName {
+      display: none;
+    }
   }
 `;
 
@@ -202,9 +217,9 @@ const AccoContents = styled.div`
     width: 85%;
     column-gap: 10px;
     margin: auto;
-    align-item: center;
+    align-items: center;
     > div > input {
-      width: 350px;
+      width: 100%;
     }
   }
   & > form > div > select {

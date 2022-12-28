@@ -29,7 +29,7 @@ const ChatNoticeComponent = ({ title, noticeChager, chatNotice }) => {
               <div>
                 <h2>공지사항</h2>
               </div>
-              <div>
+              <div className="inputBox">
                 <input
                   onChange={(e) => setChatValue(e.target.value)}
                   value={chatValue}
@@ -99,9 +99,12 @@ const RegistMidStlye = styled.div`
     font-size: 14px;
     font-weight: 600;
   }
+  .inputBox {
+    width: 100%;
+  }
   input {
     border-radius: 5px;
-    width: 350px;
+    width: 90%;
     height: 45px;
     outline: none;
     border: 0;
@@ -116,7 +119,7 @@ const RegistMidStlye = styled.div`
     background-color: rgb(240, 165, 0);
     outline: none;
     border: 0;
-    width: 350px;
+    width: 90%;
     height: 45px;
     font-size: 18px;
     font-weight: bold;

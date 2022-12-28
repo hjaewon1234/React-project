@@ -6,7 +6,7 @@ const TodaysDealComponent = ({ itemArr }) => {
     <TodaysDealCompBox>
       <div className="subtitle">
         <div>오늘의딜</div>
-        <Link to={"/"}>더보기</Link>
+        {/* <Link to={"/"}>더보기</Link> */}
       </div>
       <div className="today-deal-container">
         {itemArr.map((elem, idx) => {
@@ -52,7 +52,7 @@ const TodaysDealCompBox = styled.div`
     font-size: 24px;
   }
   .subtitle :last-child {
-    color: rgb(255, 119, 119);
+    /* color: rgb(255, 119, 119); */
     letter-spacing: -1px;
     text-decoration: none;
   }

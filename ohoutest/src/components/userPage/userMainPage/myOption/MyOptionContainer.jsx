@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 const MyOptionContainer = ({ myList }) => {
   const userInfo = useSelector((state) => state.userInfo);
-  console.log(myList);
   const upload = async (e) => {
     e.preventDefault();
     const formData = new FormData();

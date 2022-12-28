@@ -10,9 +10,9 @@ const Main = () => {
   return (
     <MainBox>
       <MainSlideContainer />
-      <IconLayerContainer />
+      {/* <IconLayerContainer /> */}
       <TodaysDealContainer />
-      <CategoriesContainer />
+      {/* <CategoriesContainer /> */}
       <HotListContainer />
     </MainBox>
   );

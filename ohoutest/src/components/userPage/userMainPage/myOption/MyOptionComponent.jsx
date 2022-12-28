@@ -110,12 +110,12 @@ const MyOptionComponent = ({ upload, userInfo }) => {
                   {tempImgFile.length == 0 ? (
                     <img
                       src={`/api/download${userInfo.userImg}`}
-                      style={{ borderRadius: "100%", width: "300px" }}
+                      style={{ borderRadius: "100%", width: "80%" }}
                     />
                   ) : (
                     <img
                       src={tempImgFile}
-                      style={{ borderRadius: "100%", width: "300px" }}
+                      style={{ borderRadius: "100%", width: "80%" }}
                     />
                   )}
                 </div>
@@ -148,7 +148,6 @@ export default MyOptionComponent;
 
 const ShippingUnderDiv = styled.div`
   width: 50%;
-
   margin: auto;
   margin-top: 20px;
   border: 1px solid #f0a500;
@@ -164,7 +163,7 @@ const ShippingUnderDiv = styled.div`
   }
   input {
     border-radius: 5px;
-    width: 350px;
+    width: 100%;
     height: 45px;
     outline: none;
     border: 0;
@@ -176,10 +175,13 @@ const ShippingUnderDiv = styled.div`
   }
 `;
 const RegistMidStlye = styled.div`
+  width: 100%;
   * {
     margin-bottom: 8px;
   }
-
+  > div {
+    width: 80%;
+  }
   display: flex;
   justify-content: center;
   align-items: center;
@@ -202,7 +204,7 @@ const RegistMidStlye = styled.div`
   }
   input {
     border-radius: 5px;
-    width: 350px;
+    width: 100%;
     height: 45px;
     outline: none;
     border: 0;
@@ -217,7 +219,7 @@ const RegistMidStlye = styled.div`
     background-color: rgb(240, 165, 0);
     outline: none;
     border: 0;
-    width: 350px;
+    width: 60%;
     height: 45px;
     font-size: 18px;
     font-weight: bold;
@@ -235,7 +237,7 @@ const RegistMidStlye = styled.div`
     background-color: rgb(240, 165, 0);
     outline: none;
     border: 0;
-    width: 200px;
+    width: 40%;
     height: 45px;
     font-size: 18px;
     font-weight: bold;
@@ -253,7 +255,7 @@ const RegistMidStlye = styled.div`
     background-color: rgb(240, 165, 0);
     outline: none;
     border: 0;
-    width: 200px;
+    width: 40%;
     height: 45px;
     font-size: 18px;
     font-weight: bold;

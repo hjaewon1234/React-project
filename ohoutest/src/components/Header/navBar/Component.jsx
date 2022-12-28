@@ -41,7 +41,7 @@ const NavBarComponent = ({ onSubmit, isOnline, userImg }) => {
         <Link className="mobile-s-store" to="/">
           스토어
         </Link>
-        <Link to="/community">커뮤니티</Link>
+        {/* <Link to="/community">커뮤니티</Link> */}
         <div className="search-box">
           <span className="magnify-icon">
             <img src="/img/magnifying-glass-solid.svg" />
@@ -129,7 +129,7 @@ const NavBarComponent = ({ onSubmit, isOnline, userImg }) => {
         <Link className="mobile-s" to="/">
           장바구니
         </Link>
-        <Link to="/">고객센터</Link>
+        {/* <Link to="/">고객센터</Link> */}
         <hr className="mobile-s-hr" />
       </div>
     </NavBarCompBox>
