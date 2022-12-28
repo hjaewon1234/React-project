@@ -20,7 +20,7 @@ const CartContainer = () => {
           <YesUserCartContainer userInfo={userInfo}></YesUserCartContainer>
         </CartContainerBox>
       ) : (
-        <CartComponent navigate={navigation} />
+        <CartComponent navigate={navigation} target="login" />
       )}
     </>
   );

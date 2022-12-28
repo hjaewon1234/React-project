@@ -284,7 +284,7 @@ const ReadMoreOrderInfoBox = styled.div`
   }
   .cart-modal-head {
     width: 100%;
-    height: 50px;
+    height: 15%;
     background: #f0a500;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
@@ -293,15 +293,18 @@ const ReadMoreOrderInfoBox = styled.div`
     justify-content: center;
     align-items: center;
   }
+  .cart-modal-inner {
+    height: 85%;
+    justify-content: space-evenly;
+  }
   .cart-modal .cart-modal-inner {
     font-size: 24px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
   }
   .cart-modal .cart-modal-inner > div {
-    margin: 10% 0;
+    margin: 0;
   }
   .cart-modal .cart-modal-inner > button {
     width: 200px;
@@ -311,5 +314,53 @@ const ReadMoreOrderInfoBox = styled.div`
     border-radius: 15px;
     font-size: 20px;
     cursor: pointer;
+  }
+  .cart-modal .cart-modal-inner > button:hover {
+    background: #cf7500 !important;
+  }
+
+  @media only screen and (max-width: 1440px) {
+  }
+  @media only screen and (max-width: 1024px) {
+    .product-brand {
+      font-size: 12px;
+    }
+    .product-name {
+      font-size: 23px;
+    }
+    .product-price {
+      font-size: 27px;
+    }
+    .product-delivery {
+      font-size: 12px;
+    }
+    .to-store span {
+      font-size: 12px;
+    }
+    .order-sum > div:first-child {
+      font-size: 16px;
+    }
+    .order-sum > div:last-child {
+      font-size: 27px;
+    }
+    .order-btn button {
+      font-size: 20px;
+    }
+    .order-ad {
+      display: none;
+    }
+  }
+  @media only screen and (max-width: 768px) {
+    .cart-modal {
+      width: 100%;
+    }
+    .cart-modal-head {
+    }
+    .cart-modal-inner {
+      font-size: 22px !important;
+      text-align: center;
+    }
+  }
+  @media only screen and (max-width: 425px) {
   }
 `;

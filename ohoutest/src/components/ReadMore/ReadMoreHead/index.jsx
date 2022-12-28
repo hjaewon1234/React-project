@@ -13,6 +13,9 @@ const ReadMoreHead = ({ item }) => {
 
         <ReadMoreOrderInfoContainer item={item} />
       </div>
+      <div className="mobile-order-ad">
+        <img src="/img/read-more-ad.webp" />
+      </div>
     </ReadMoreHeadBox>
   );
 };
@@ -29,6 +32,34 @@ const ReadMoreHeadBox = styled.div`
   .head-box-inner > div,
   .head-box-inner > div + div {
     flex: 1;
+  }
+  .mobile-order-ad {
+    display: none;
+  }
+
+  @media only screen and (max-width: 1440px) {
+    width: 900px;
+  }
+  @media only screen and (max-width: 1024px) {
+    width: 700px;
+    .mobile-order-ad {
+      display: block;
+      cursor: pointer;
+      font-size: 0;
+    }
+    .mobile-order-ad img {
+      width: 100%;
+      border-radius: 0;
+    }
+  }
+  @media only screen and (max-width: 768px) {
+    width: 100%;
+    padding: 0;
+    .head-box-inner {
+      flex-direction: column;
+    }
+  }
+  @media only screen and (max-width: 425px) {
   }
 `;
 

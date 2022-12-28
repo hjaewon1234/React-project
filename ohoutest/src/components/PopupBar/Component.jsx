@@ -38,6 +38,7 @@ const PopupBarCompBox = styled.div`
     filter: invert(100%) sepia(96%) saturate(0%) hue-rotate(96deg)
       brightness(106%) contrast(104%);
     cursor: pointer;
+    z-index: 5;
   }
   a:first-child {
     background-color: rgb(137, 86, 238);
