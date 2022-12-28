@@ -354,8 +354,6 @@ const ReadMoreOrderInfoBox = styled.div`
     .cart-modal {
       width: 100%;
     }
-    .cart-modal-head {
-    }
     .cart-modal-inner {
       font-size: 22px !important;
       text-align: center;

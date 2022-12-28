@@ -26,6 +26,7 @@ const CartBox = styled.div`
   justify-content: center;
   align-items: center;
   height: 500px;
+
   & button {
     border: none;
     margin-top: 30px;

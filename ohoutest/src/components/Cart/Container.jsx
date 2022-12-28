@@ -34,4 +34,17 @@ const CartContainerBox = styled.div`
   }
   width: 80%;
   margin: 50px auto;
+
+  @media only screen and (max-width: 1440px) {
+    width: 900px;
+  }
+  @media only screen and (max-width: 1024px) {
+    width: 700px;
+  }
+  @media only screen and (max-width: 768px) {
+    width: 100%;
+    margin: 0;
+  }
+  @media only screen and (max-width: 425px) {
+  }
 `;
