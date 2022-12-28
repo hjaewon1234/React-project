@@ -38,35 +38,26 @@ const QnaComponent = ({
               return (
                 <UnitDiv key={index}>
                   <div>
+                    <img
+                      src={`/api/download${item.Product.img.split(",")[0]}`}
+                      style={{ width: "70px" }}
+                    />
+                  </div>
+                  <div>
                     <div>
                       [ {item.User.userId} ] [{item.Product.brand}]{" "}
                       {item.Product.name}
                     </div>
                   </div>
                   <div style={{ display: "flex", columnGap: "10px" }}>
-                    {item.qnaState ? (
-                      <QnaDiv style={{ backgroundColor: "lightblue" }}>
-                        <Link
-                          to={`/managerInfo/qnaAnswer/${index}`}
-                          style={{ color: "black" }}
-                        >
-                          답변수정
-                        </Link>
-                      </QnaDiv>
-                    ) : (
-                      <QnaDiv>
-                        <Link to={`/managerInfo/qnaAnswer/${index}`}>
-                          답변하기
-                        </Link>
-                      </QnaDiv>
-                    )}
-                    {item.qnaState ? (
-                      <ShippingDiv style={{ backgroundColor: "green" }}>
-                        답변 완료
-                      </ShippingDiv>
-                    ) : (
-                      <ShippingDiv>답변 대기</ShippingDiv>
-                    )}
+                    <QnaDiv style={{ backgroundColor: "lightblue" }}>
+                      <Link
+                        to={`/managerInfo/qnaAnswer/${index}`}
+                        style={{ color: "black" }}
+                      >
+                        리뷰 확인
+                      </Link>
+                    </QnaDiv>
                   </div>
                 </UnitDiv>
               );
@@ -119,6 +110,7 @@ const PagingDiv = styled.div`
 const InfoContentDiv = styled.div`
   background-color: #f4f4f4;
   border-radius: 0 0 10px 10px;
+  font-weight: bold;
 `;
 
 const NumberBox = styled.div`

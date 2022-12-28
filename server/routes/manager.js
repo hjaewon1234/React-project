@@ -4,6 +4,7 @@ import multer from "multer";
 import db from "../models/index.js";
 import Users from "../models/user.js";
 import Qna from "../models/Qna.js";
+import Review from "../models/review.js";
 import Products from "../models/product.js";
 import fs from "fs";
 
@@ -51,10 +52,10 @@ router.route("/productPage").post(async (req, res) => {
 });
 
 router.route("/qnaInfo").post(async (req, res) => {
-  const tempDbFind = await Qna.findAll({
+  const tempDbFind = await Review.findAll({
     include: [
-      { model: Users, attributes: ["userId", "userName"] },
-      { model: Products, attributes: ["brand", "name", "price"] },
+      { model: Users, attributes: ["userId", "userName", "userImg"] },
+      { model: Products, attributes: ["brand", "name", "price", "img"] },
     ],
     // include는 배열이고, 그 배열에서 뽑고싶은 관계를 맺은 데이터
     // model: 관계 맺은 테이블 명 // attributes : 가지고 오고 싶은 칼럼명
@@ -80,7 +81,7 @@ router.route("/qnaInfo").post(async (req, res) => {
 router.route("/qnaPage").post(async (req, res) => {
   let qnapageNum = [];
 
-  const qnapagingLength = (await db.Qna.findAll()).length;
+  const qnapagingLength = (await db.Review.findAll()).length;
 
   for (let i = 0; i < qnapagingLength / 10; i++) {
     qnapageNum.push(i);

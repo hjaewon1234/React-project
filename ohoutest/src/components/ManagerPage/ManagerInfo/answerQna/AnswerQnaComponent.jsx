@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 
 import styled from "styled-components";
 
-const AnswerQnaComponent = ({ qnaInfo, axiosFunc, tempQnaInfoThunk }) => {
+const AnswerQnaComponent = ({ qnaInfo }) => {
   const { id } = useParams(useLocation());
   const [state, setState] = useState(qnaInfo[id].qnaAnswer);
   // const [dbConnect, setDbConnect] =
@@ -15,29 +15,28 @@ const AnswerQnaComponent = ({ qnaInfo, axiosFunc, tempQnaInfoThunk }) => {
     <AnswerQnaDiv>
       <AnswerQnaInner>
         <div>
-          <div>{qnaInfo[id].User.userId}</div>
+          <div>
+            <img
+              src={`/api/download${qnaInfo[id].User.userImg}`}
+              style={{ width: "100px", borderRadius: "100%" }}
+            />
+          </div>
+          <div> {qnaInfo[id].User.userName}</div>
+        </div>
+        <div>
+          <div>
+            <img
+              src={`/api/download${qnaInfo[id].Product.img.split(",")[0]}`}
+              style={{ width: "100px" }}
+            />
+          </div>
           <div>{qnaInfo[id].Product.name}</div>
         </div>
-        <div>{qnaInfo[id].qnaText}</div>
-        <textarea
-          onInput={(e) => setState(e.target.value)}
-          value={state || ""}
-        />
+        <div>{qnaInfo[id].text}</div>
         <LinkDiv>
           <div>
             <Link to="/managerInfo">
-              <button>답변 취소</button>
-            </Link>
-          </div>
-          <div>
-            <Link to="/managerInfo">
-              <button
-                onClick={() => {
-                  axiosFunc(numberingId, state.toString(), id);
-                }}
-              >
-                답변 제출
-              </button>
+              <button>리뷰 확인</button>
             </Link>
           </div>
         </LinkDiv>
@@ -68,9 +67,23 @@ const AnswerQnaInner = styled.div`
   width: 50%;
   z-index: 2;
   & > div {
-    margin: 10px 0;
+    padding: 30px 0;
     display: flex;
+
     column-gap: 50px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-bottom: 1px solid #f0a500;
+  }
+  & > div:nth-child(2) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  & > div:nth-child(1) {
+    display: flex;
+
+    align-items: center;
   }
   textarea {
     width: 100%;
@@ -84,4 +97,13 @@ const AnswerQnaInner = styled.div`
 const LinkDiv = styled.div`
   display: flex;
   justify-content: space-between;
+  & > div > a > button {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: black;
+    border-radius: 10px;
+    width: 100px;
+    border: 1px solid #f0a500;
+    background-color: #f0a500;
+  }
 `;
