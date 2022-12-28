@@ -112,6 +112,11 @@ const OrderArrListCompBox = styled.div`
   img {
     width: 100px;
   }
+  @media only screen and (max-width: 600px) {
+    img {
+      display: none;
+    }
+  }
 `;
 
 const InfoBox = styled.div`
@@ -120,10 +125,21 @@ const InfoBox = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  @media only screen and (max-width: 1024px) {
+    span {
+      font-size: 0.8rem;
+    }
+  }
+  @media only screen and (max-width: 600px) {
+    span {
+      font-size: 0.6rem;
+    }
+  }
 `;
 
 const ReviewBtn = styled.button`
   width: 10%;
+  min-width: 80px;
   margin: 20px 50px;
   font-weight: 600;
   background-color: rgb(240, 165, 0);
