@@ -81,7 +81,7 @@ const CartProductCardComp = ({
         </button>
         <input
           type="number"
-          value={totalCount.length ? totalCount[index] : 0}
+          value={totalCount[index] || 0}
           onChange={(e) => {
             setTotalCount((prev) => {
               const temp = [...prev];
@@ -150,7 +150,7 @@ const CartProductCardComp = ({
             <div
               className="deleteBtn"
               onClick={() => {
-                deleteItem(index);
+                setDeleteItemModalOpen(index);
               }}
             >
               X
@@ -159,11 +159,7 @@ const CartProductCardComp = ({
           <div className="selectDiv">{optionDiv()}</div>
         </div>
       </CountView>
-      <div className="optionDiv">
-        {/* <span>옵션변경 | 바로구매</span>{" "} */}
-        <span>{`${(price * totalCount[index]).toLocaleString()} 원`}</span>
-      </div>
-      {deleteItemModalOpen && (
+      {deleteItemModalOpen > -1 && (
         <PublicModalBase>
           <div className="del-cart-modal">
             <div className="del-cart-modal-head">알 림</div>
@@ -173,7 +169,7 @@ const CartProductCardComp = ({
                 <button
                   className="del-cart-modal-inner-btn"
                   onClick={() => {
-                    setDeleteItemModalOpen(!deleteItemModalOpen);
+                    deleteItem(deleteItemModalOpen);
                   }}
                 >
                   확 인
@@ -181,7 +177,7 @@ const CartProductCardComp = ({
                 <button
                   className="del-cart-modal-inner-btn"
                   onClick={() => {
-                    setDeleteItemModalOpen(!deleteItemModalOpen);
+                    setDeleteItemModalOpen(-1);
                   }}
                 >
                   취 소
@@ -191,6 +187,9 @@ const CartProductCardComp = ({
           </div>
         </PublicModalBase>
       )}
+      <div className="option-div">
+        <span>{`${(price * totalCount[index]).toLocaleString()} 원`}</span>
+      </div>
     </CartProductCardBox>
   );
 };

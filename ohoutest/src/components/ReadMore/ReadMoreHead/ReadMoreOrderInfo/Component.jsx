@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import PublicModalBase from "../../../PublicModalBase";
 
@@ -10,8 +11,11 @@ const ReadMoreOrderInfoComponent = ({
   addCart,
   cartModalOpen,
   setCartModalOpen,
+  nonLoginModalOpen,
+  setNonLoginModalOpen,
 }) => {
   const [orderCount, setOrderCount] = useState(1);
+  const navigate = useNavigate();
 
   let totalSum = orderCount * price;
 
@@ -99,6 +103,24 @@ const ReadMoreOrderInfoComponent = ({
               <button
                 onClick={() => {
                   setCartModalOpen(!cartModalOpen);
+                }}
+              >
+                확 인
+              </button>
+            </div>
+          </div>
+        </PublicModalBase>
+      )}
+      {nonLoginModalOpen && (
+        <PublicModalBase>
+          <div className="cart-modal">
+            <div className="cart-modal-head">알 림</div>
+            <div className="cart-modal-inner">
+              <div>먼저 로그인을 해주세요</div>
+              <button
+                onClick={() => {
+                  // setNonLoginModalOpen(!nonLoginModalOpen);
+                  navigate("/login");
                 }}
               >
                 확 인

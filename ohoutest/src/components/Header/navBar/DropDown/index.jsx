@@ -36,7 +36,6 @@ const DropDown = ({ arr, refs, setIsOpen, imgRef, logOutFunc }) => {
                     return;
                   case "마이페이지":
                     navigate(`/${userRealId}/userPage/myShopping`);
-
                     return;
                 }
               }}
