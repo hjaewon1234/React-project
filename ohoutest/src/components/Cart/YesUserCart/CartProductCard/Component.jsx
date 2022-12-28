@@ -271,6 +271,9 @@ const CartProductCardBox = styled.div`
   .del-cart-modal-inner-btn + button {
     margin-left: 20px;
   }
+  .del-cart-modal button:hover {
+    background: #cf7500 !important;
+  }
 `;
 
 const MainView = styled.div`

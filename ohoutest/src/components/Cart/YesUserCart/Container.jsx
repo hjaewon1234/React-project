@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import YesUserCartComp from "./Component";
@@ -9,8 +8,10 @@ const YesUserCartContainer = ({ userInfo }) => {
   const [totalState, setTotalState] = useState([]);
   const [totalCount, setTotalCount] = useState([]);
   const [nonBuyModalOpen, setNonBuyModalOpen] = useState(false);
+  const [buyModalOpen, setBuyModalOpen] = useState(false);
+  const [confirmBuyModalOpen, setConfirmBuyModalOpen] = useState(false);
   const [item, setItem] = useState([]);
-  const navigate = useNavigate();
+
   const [isOnline, setIsOnline] = useState(false);
   const state = useSelector((state) => state);
   useEffect(() => {
@@ -36,8 +37,25 @@ const YesUserCartContainer = ({ userInfo }) => {
       return;
     }
 
+    setConfirmBuyModalOpen(!confirmBuyModalOpen);
+  };
+
+  const executePurchase = () => {
+    const tempBuyAry = [];
+    totalState.map((stateItem, index) => {
+      if (stateItem != 0) {
+        tempBuyAry.push({
+          price: stateItem,
+          num: totalCount[index],
+          productId: item[index].products_id,
+          userId: item[index].users_id,
+          id: item[index].id,
+        });
+      }
+    });
+
     axios.post("/api/order/buy", tempBuyAry).then(({ data }) => {
-      if (!data.length < 1) navigate("/main");
+      if (!data.length < 1) setBuyModalOpen(!buyModalOpen);
     });
   };
 
@@ -69,6 +87,11 @@ const YesUserCartContainer = ({ userInfo }) => {
         userInfo={userInfo}
         nonBuyModalOpen={nonBuyModalOpen}
         setNonBuyModalOpen={setNonBuyModalOpen}
+        buyModalOpen={buyModalOpen}
+        setBuyModalOpen={setBuyModalOpen}
+        confirmBuyModalOpen={confirmBuyModalOpen}
+        setConfirmBuyModalOpen={setConfirmBuyModalOpen}
+        executePurchase={executePurchase}
       ></YesUserCartComp>
     </>
   );

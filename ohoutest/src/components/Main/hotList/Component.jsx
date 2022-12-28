@@ -10,7 +10,7 @@ const HotListComponent = ({ itemArr }) => {
       <div className="hot-list-container">
         {itemArr.map((elem, idx) => {
           return (
-            <ItemBox key={`itemArr - ${idx}`}>
+            <ItemBox itemArr={itemArr} key={`itemArr - ${idx}`}>
               <Link to={`/readmore/${elem.id}`}>
                 <div className="hot-list-item-img">
                   <img src={`/api/download${elem.img.split(",")[0]}`} />
@@ -50,10 +50,10 @@ const HotListCompBox = styled.div`
   }
   .hot-list-container {
     display: flex;
-    gap: 10px;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
     word-break: break-word;
+    flex-grow: 1;
   }
 
   @media only screen and (max-width: 1440px) {
@@ -61,15 +61,9 @@ const HotListCompBox = styled.div`
   }
   @media only screen and (max-width: 1024px) {
     width: 700px;
-    .hot-list-container {
-      gap: 5px;
-    }
   }
   @media only screen and (max-width: 768px) {
     width: 100%;
-    .hot-list-container {
-      gap: 0;
-    }
   }
   @media only screen and (max-width: 425px) {
   }
@@ -77,6 +71,7 @@ const HotListCompBox = styled.div`
 
 const ItemBox = styled.div`
   width: 24%;
+  margin: 0 0.5%;
   margin-bottom: 30px;
 
   img {
@@ -128,6 +123,8 @@ const ItemBox = styled.div`
     width: 40%;
     flex-grow: 1;
     padding: 3%;
+    margin-left: 0;
+    margin-right: 0;
     border-bottom: 1px solid lightgrey;
     &:hover {
       img {
@@ -136,6 +133,19 @@ const ItemBox = styled.div`
       .item-name {
         color: #424242;
       }
+    }
+    &:last-child {
+      ${(props) =>
+        props.itemArr.length % 2 === 0
+          ? ""
+          : "margin-bottom: 0;flex-grow: 0;width: 50%;border-bottom: none;"}
+    }
+    &:last-child,
+    &:nth-child(${(props) => props.itemArr.length - 1}) {
+      ${(props) =>
+        props.itemArr.length % 2 === 0
+          ? "margin-bottom: 0;border-bottom: none;"
+          : ""}
     }
   }
   @media only screen and (max-width: 425px) {

@@ -280,7 +280,7 @@ const FooterBox = styled.div`
     }
   }
   @media only screen and (max-width: 768px) {
-    margin-top: -30px;
+    margin-top: 0;
     .footer-container {
       width: 100%;
     }
