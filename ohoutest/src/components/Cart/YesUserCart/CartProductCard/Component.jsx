@@ -27,43 +27,6 @@ const CartProductCardComp = ({
     });
   }, []);
 
-  // const optionDiv = () => {
-  //   return (
-  //     <>
-  //       <select
-  //         name="count"
-  //         onChange={(e) => {
-  //           setTotalCount((state) => {
-  //             const tempState = [...state];
-  //             tempState[index] = e.target.value;
-  //             return tempState;
-  //           });
-  //         }}
-  //         key={uuid()}
-  //         defaultValue={totalCount[index] ? totalCount[index] : 0}
-  //       >
-  //         {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, index) => {
-  //           if (index == count) {
-  //             return (
-  //               <option key={`count-${index}`} value={`${item}`}>
-  //                 {item}
-  //               </option>
-  //             );
-  //           } else
-  //             return (
-  //               <option key={`count-${index}`} value={`${item}`}>
-  //                 {item}
-  //               </option>
-  //             );
-  //         })}
-  //       </select>
-  //       <div className="option-count">{`${(
-  //         price * totalCount[index]
-  //       ).toLocaleString()} 원`}</div>
-  //     </>
-  //   );
-  // };
-
   const optionDiv = () => {
     return (
       <div className="inc-dec-cont">
@@ -146,7 +109,7 @@ const CartProductCardComp = ({
       <CountView>
         <div>
           <div>
-            <div>{name}</div>
+            <div className="count-view-name">{name}</div>
             <div
               className="deleteBtn"
               onClick={() => {
@@ -202,7 +165,6 @@ const CartProductCardBox = styled.div`
   flex-direction: column;
   justify-content: start;
   align-items: start;
-  min-width: 480px;
 
   .inc-dec-cont {
     display: flex;
@@ -267,6 +229,9 @@ const CartProductCardBox = styled.div`
     border-radius: 15px;
     font-size: 20px;
     cursor: pointer;
+    @media only screen and (max-width: 425px) {
+      width: 100px;
+    }
   }
   .del-cart-modal-inner-btn + button {
     margin-left: 20px;
@@ -274,12 +239,25 @@ const CartProductCardBox = styled.div`
   .del-cart-modal button:hover {
     background: #cf7500 !important;
   }
+
+  @media only screen and (max-width: 768px) {
+    & + &:before {
+      content: "";
+      width: 100%;
+      height: 20px;
+      border-top: 1px solid #f0a500;
+    }
+  }
+  @media only screen and (max-width: 425px) {
+    padding: 0 5px;
+  }
 `;
 
 const MainView = styled.div`
   display: flex;
   column-gap: 20px;
   margin: 10px 0px;
+
   & > div {
     display: flex;
     flex-direction: column;
@@ -296,10 +274,19 @@ const MainView = styled.div`
     flex-direction: row;
   }
 
-  @media (max-width: 768px) {
+  @media only screen and (max-width: 1440px) {
     .p768px {
-      display: none;
+      white-space: initial;
+      text-align: initial;
     }
+  }
+  @media only screen and (max-width: 1024px) {
+    // width: 700px;
+  }
+  @media only screen and (max-width: 768px) {
+    // width: 420px;
+  }
+  @media only screen and (max-width: 425px) {
   }
 `;
 
@@ -310,6 +297,7 @@ const CountView = styled.div`
   border-radius: 15px;
   color: #1a1c20;
   font-weight: 800;
+
   & > div {
     display: flex;
     flex-direction: column;
@@ -328,7 +316,7 @@ const CountView = styled.div`
     background-color: #f0a500;
     color: #f4f4f4;
     width: 25px;
-    height: 25px;
+    height: 23px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -341,6 +329,10 @@ const CountView = styled.div`
   input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
+  }
+
+  .count-view-name {
+    text-align: initial;
   }
 `;
 

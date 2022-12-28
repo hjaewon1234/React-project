@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import styled from "styled-components";
 
 import CartProductCardComp from "./Component";
 

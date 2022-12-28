@@ -8,7 +8,9 @@ const test = async (req) => {
       userId: req.body.inputId,
     },
   });
-  if (curUser.dataValues.userPw == crypto.SHA256(req.body.inputPw).toString()) {
+  if (
+    curUser?.dataValues.userPw == crypto.SHA256(req.body.inputPw).toString()
+  ) {
     return curUser;
   } else {
     return undefined;

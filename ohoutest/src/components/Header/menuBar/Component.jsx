@@ -67,7 +67,6 @@ const LinkBox = styled.div`
     min-width: 500px;
   }
   @media only screen and (max-width: 768px) {
-    // min-width: 400px;
     justify-content: space-around;
     flex: 1;
     min-width: 0;

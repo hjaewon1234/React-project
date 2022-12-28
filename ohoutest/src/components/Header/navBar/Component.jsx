@@ -38,7 +38,7 @@ const NavBarComponent = ({ onSubmit, isOnline, userImg }) => {
         <Link to="/main" className="logo-icon">
           <img src="/img/TeamLogo.png" />
         </Link>
-        <Link className="mobile-s-store" to="/">
+        <Link className="mobile-s-store mobile-s-store-first" to="/">
           스토어
         </Link>
         <Link to="/community">커뮤니티</Link>
@@ -408,6 +408,9 @@ const NavBarCompBox = styled.div`
     }
     a:not(.logo-icon) {
       margin-left: 2%;
+    }
+    a.mobile-s-store-first {
+      margin: 0;
     }
     .mobile-s-store {
       margin-left: 0;

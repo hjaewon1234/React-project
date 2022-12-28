@@ -139,6 +139,7 @@ const YesUserCartComp = ({
                   <div>선택된 상품을 주문합니다</div>
                   <div>
                     <button
+                      className="conf-cart-modal-inner-btn"
                       onClick={() => {
                         executePurchase();
                         setConfirmBuyModalOpen(!confirmBuyModalOpen);
@@ -147,6 +148,7 @@ const YesUserCartComp = ({
                       확 인
                     </button>
                     <button
+                      className="conf-cart-modal-inner-btn"
                       onClick={() => {
                         setConfirmBuyModalOpen(!confirmBuyModalOpen);
                       }}
@@ -169,7 +171,6 @@ export default YesUserCartComp;
 const BigBox = styled.div`
   width: 100%;
   background-color: #afafaf75;
-  min-width: 500px;
   .cart-modal {
     width: 500px;
     height: 300px;
@@ -254,6 +255,23 @@ const BigBox = styled.div`
   .conf-cart-modal .conf-cart-modal-inner > div button:hover {
     background: #cf7500 !important;
   }
+
+  @media only screen and (max-width: 768px) {
+    .cart-modal {
+      width: 100%;
+    }
+    .cart-modal-inner {
+      font-size: 22px !important;
+      text-align: center;
+    }
+    .conf-cart-modal {
+      width: 100%;
+    }
+    .conf-cart-modal-inner {
+      font-size: 22px !important;
+      text-align: center;
+    }
+  }
 `;
 
 const YesUserCartBox = styled.div`
@@ -262,7 +280,6 @@ const YesUserCartBox = styled.div`
   margin: 20px auto;
   column-gap: 10%;
   padding: 0px 0px 100px 0px;
-  min-width: 460px;
 
   p {
     white-space: nowrap;
@@ -367,6 +384,9 @@ const YesUserCartBox = styled.div`
     & > div:last-child {
       width: 100%;
     }
+  }
+  @media (max-width: 768px) {
+    margin-bottom: 0;
   }
 `;
 
