@@ -32,7 +32,6 @@ const RegistContainer = () => {
           <ParticleTest1></ParticleTest1>
         </ParticleStyle5>
       </ParticleStyle>
-
       {params.id == undefined ? (
         <>
           <RegistStyle>

@@ -100,8 +100,8 @@ const RegistComponents = () => {
     } else {
       setPasswordMessage("안전한 비밀번호 입니다.");
       setIsPassword(true);
-    } else {
     }
+
     // else {
     //   setPasswordMessage("안전한 비밀번호 입니다.");
     //   setIsPassword(true);
