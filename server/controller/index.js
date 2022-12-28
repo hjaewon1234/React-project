@@ -154,7 +154,7 @@ const loginSuccess = async (req, res, next) => {
   next();
 };
 
-const check = (req, res) => {
+const check = async (req, res) => {
   try {
     const tempUser = jwt.verify(
       req.cookies.accessToken,
@@ -162,7 +162,13 @@ const check = (req, res) => {
     );
     req.userData = {};
     req.userData.userId = tempUser.userId;
-    req.userData.userName = tempUser.userName;
+    const userDbData = await db.Users.findOne({
+      where: { userId: tempUser.userId },
+    });
+    req.userData.userName = userDbData.dataValues.userName;
+    req.userData.userImg = userDbData.dataValues.userImg;
+    req.userData.userAddress = userDbData.dataValues.userAddress;
+    req.userData.userAddress1 = userDbData.dataValues.userAddress1;
   } catch (err) {
     try {
       const data = jwt.verify(token, process.env.REFRECH_SECRET);
@@ -196,6 +202,9 @@ const check = (req, res) => {
       userId: req.userData.userId,
       userName: req.userData.userName,
       userPw: req.userData.userPw,
+      userImg: req.userData.userImg,
+      userAddress: req.userData.userAddress,
+      userAddress1: req.userData.userAddress1,
     });
   } else {
     res.status(403).json("req.userData가 없는뎅 ?");
@@ -204,12 +213,6 @@ const check = (req, res) => {
 
 const logout = (req, res) => {
   try {
-    console.log(
-      "ㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇ",
-      req.userData?.userId,
-      req.userData?.userName,
-      req.userData?.userPw
-    );
     res.clearCookie("accessToken");
     res.clearCookie("refreshToken");
     req.userData = {};
