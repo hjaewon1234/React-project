@@ -1,7 +1,9 @@
-import YesUserCartComp from "./Component";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+
+import YesUserCartComp from "./Component";
 
 const YesUserCartContainer = ({ userInfo }) => {
   const [totalState, setTotalState] = useState([]);
@@ -9,6 +11,12 @@ const YesUserCartContainer = ({ userInfo }) => {
   const [nonBuyModalOpen, setNonBuyModalOpen] = useState(false);
   const [item, setItem] = useState([]);
   const navigate = useNavigate();
+  const [isOnline, setIsOnline] = useState(false);
+  const state = useSelector((state) => state);
+  useEffect(() => {
+    if (state.userInfo.userId) setIsOnline(true);
+    else setIsOnline(false);
+  });
 
   const buyOnClick = () => {
     const tempBuyAry = [];
@@ -34,8 +42,9 @@ const YesUserCartContainer = ({ userInfo }) => {
   };
 
   const getCartItem = () => {
+    if (!isOnline) return;
     axios
-      .post("/api/cart/getCartItem")
+      .post("/api/cart/getCartItem", { userId: state.userInfo.userId })
       .then((data) => {
         setItem(data.data || []);
       })
@@ -44,7 +53,7 @@ const YesUserCartContainer = ({ userInfo }) => {
   useEffect(() => {
     getCartItem();
     window.scrollTo(0, 0);
-  }, []);
+  }, [isOnline]);
 
   return (
     <>

@@ -169,6 +169,7 @@ const check = async (req, res) => {
     req.userData.userImg = userDbData.dataValues.userImg;
     req.userData.userAddress = userDbData.dataValues.userAddress;
     req.userData.userAddress1 = userDbData.dataValues.userAddress1;
+    console.log("req.userData : ", req.userData);
   } catch (err) {
     try {
       const data = jwt.verify(token, process.env.REFRECH_SECRET);
@@ -195,7 +196,6 @@ const check = async (req, res) => {
       req.userData = {};
     }
   }
-  console.log("체크체크체크체크체크체크", req.userData, req.cookies);
 
   if (req.userData?.userId) {
     res.status(200).json({

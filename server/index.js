@@ -36,8 +36,8 @@ app.use(
 );
 app.set("port", process.env.PORT || 8080);
 
-app.use("/", loginSuccess);
 app.use("/api", routes);
+app.use("/", loginSuccess);
 app.get("/check", check);
 app.post("/login", login);
 app.get("/accesstoken", accessToken);

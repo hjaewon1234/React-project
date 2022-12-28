@@ -44,7 +44,7 @@ router.route("/addcart").post(async (req, res) => {
 router.route("/getCartItem").post(async (req, res) => {
   try {
     const userIndex = await db.Users.findOne({
-      where: { user_id: req.userData.userId },
+      where: { user_id: req.body.userId },
     });
     const addedItem = await db.Cart.findAll({
       where: {
