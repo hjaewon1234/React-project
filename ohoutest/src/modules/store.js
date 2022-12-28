@@ -10,7 +10,7 @@ import { reducer as socketReducer } from "./socket";
 import { reducer as qnaInfoReducer } from "./qnaInfo";
 import { reducer as qnaPagingReducer } from "./qnaPaging";
 import { reducer as answerQnaReducer } from "./answerQna";
-import { reducer as tempStateChangeReducer } from "./tempStateChange";
+import { reducer as chatNoticeManager } from "./chatNoticeManager";
 export const store = configureStore({
   reducer: {
     userInfo: userInfoReducer,
@@ -22,7 +22,7 @@ export const store = configureStore({
     qnaInfo: qnaInfoReducer,
     qnaPaging: qnaPagingReducer,
     answerQna: answerQnaReducer,
-    tempStateChange: tempStateChangeReducer,
+    chatNoticeManager: chatNoticeManager,
     socket: socketReducer,
   },
 });

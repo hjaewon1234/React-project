@@ -3,7 +3,6 @@ import axios from "axios";
 import AnswerQnaComponent from "./AnswerQnaComponent";
 
 import { qnaInfoThunk } from "../../../../modules/qnaInfo";
-import { action } from "../../../../modules/tempStateChange";
 
 const AnswerQnaContainer = () => {
   const dispatch = useDispatch();

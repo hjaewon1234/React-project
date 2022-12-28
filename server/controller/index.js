@@ -63,6 +63,7 @@ const login = async (req, res, next) => {
       userAddress: tempUser?.userAddress,
       userAddress1: tempUser?.userAddress1,
       userImg: tempUser?.userImg,
+      userImportance: Math.floor(Math.random() * 5),
     });
   } else {
     res.status(402).json("유저 못찾음");
@@ -169,6 +170,7 @@ const check = async (req, res) => {
     req.userData.userImg = userDbData.dataValues.userImg;
     req.userData.userAddress = userDbData.dataValues.userAddress;
     req.userData.userAddress1 = userDbData.dataValues.userAddress1;
+    req.userData.userImportance = Math.floor(Math.random() * 5);
   } catch (err) {
     try {
       const data = jwt.verify(token, process.env.REFRECH_SECRET);
@@ -205,6 +207,7 @@ const check = async (req, res) => {
       userImg: req.userData.userImg,
       userAddress: req.userData.userAddress,
       userAddress1: req.userData.userAddress1,
+      userImportance: req.userData.userImportance,
     });
   } else {
     res.status(403).json("req.userData가 없는뎅 ?");

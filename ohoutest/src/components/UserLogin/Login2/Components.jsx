@@ -49,6 +49,7 @@ const Login2Components = ({ setIsLogin, setUser, user }) => {
               userAddress: result.data.userAddress,
               userAddress1: result.data.userAddress1,
               userImg: result.data.userImg,
+              userImportance: result.data.userImportance,
             })
           );
       } else if (result.status === 402) {

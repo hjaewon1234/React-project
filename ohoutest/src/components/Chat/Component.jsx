@@ -7,6 +7,8 @@ const ChatComponent = ({
   chatAry,
   onChatting,
   setWorld,
+  noticeInfo,
+  setChatValue,
 }) => {
   const [inputRangeValue, setInputRangeValue] = useState(50);
   const [viewChat, setViewChatBox] = useState(false);
@@ -44,7 +46,7 @@ const ChatComponent = ({
             <WorldDiv
               onClick={() => {
                 setServerColor((state) => (state = 1));
-                setWorld("world1");
+                setWorld(() => "world1");
               }}
               style={{
                 backgroundColor:
@@ -59,7 +61,7 @@ const ChatComponent = ({
             <WorldDiv
               onClick={() => {
                 setServerColor((state) => (state = 2));
-                setWorld("world2");
+                setWorld(() => "world2");
               }}
               style={{
                 backgroundColor:
@@ -74,7 +76,7 @@ const ChatComponent = ({
             <WorldDiv
               onClick={() => {
                 setServerColor((state) => (state = 3));
-                setWorld("world3");
+                setWorld(() => "world3");
               }}
               style={{
                 backgroundColor:
@@ -93,12 +95,27 @@ const ChatComponent = ({
                 <div
                   key={`chatAry-${index}`}
                   style={{ display: "flex", justifyContent: "space-between" }}
+                  className={`imp${item.importance}`}
                 >
-                  <div key={`chat-${index}`}>{item.userName}</div>
-                  <div key={`chatValue-${index}`}>{item.chatValue}</div>
+                  <div key={`chat-${index}`}>{item.name}</div>
+                  <div key={`chatValue-${index}`}>{item.text}</div>
                 </div>
               );
             })}
+            <div
+              style={{
+                backgroundColor: "red",
+                position: "absolute",
+                top: "0",
+                width: "77.9%",
+                display: "flex",
+                justifyContent: "space-between",
+                fontWeight: "bold",
+                fontSize: "20px",
+              }}
+            >
+              <div>{noticeInfo}</div>
+            </div>
           </ViewChatBox>
           <SliderBox opacity={inputRangeValue / 100}>
             <button
@@ -120,13 +137,15 @@ const ChatComponent = ({
         </ChattingBox>
         <InputBox opacity={inputRangeValue / 100}>
           <input
-            onKeyDown={(e) => {
+            onKeyUp={(e) => {
               onChatEnter(e);
             }}
             onChange={(e) => {
-              onChatting(e);
+              // onChatting(e);
+              setChatValue(e.target.value);
             }}
             value={chatValue}
+            type={"text"}
           />
         </InputBox>
       </ChatBox>
@@ -268,6 +287,21 @@ const ViewChatBox = styled.div`
     padding: 5px 0px;
     padding-right: 20px;
     text-align: right;
+  }
+  & > div.imp0 {
+    color: lightgray;
+  }
+  & > div.imp1 {
+    color: lightgreen;
+  }
+  & > div.imp2 {
+    color: skyblue;
+  }
+  & > div.imp3 {
+    color: purple;
+  }
+  & > div.imp4 {
+    color: gold;
   }
 `;
 

@@ -12,16 +12,11 @@ export default function (server) {
   });
 
   io.on("connection", (socket) => {
-    socket.on("ROOM", (data) => {
+    socket.on("ROOM", () => {
       worldsArr.map((item) => {
-        if (socket.rooms.has(item) && data != item) {
-          socket.leave(item);
-        }
+        socket.join(item);
       });
-
-      socket.join(data, () => {
-        console.log(data, "방입장");
-      });
+      console.log(socket.rooms);
     });
     socket.on("JOIN_ROOM", (data) => {
       console.log(data);
@@ -30,11 +25,16 @@ export default function (server) {
 
     socket.on("message", (data) => {
       console.log("client가 보낸 데이터 : ", data);
-      io.emit("upload", data);
+
+      console.log(socket.rooms);
+      io.to(data.room).emit("upload", data);
     });
 
     socket.on("leaveUser", (nick) => {
       io.emit("out", nick);
+    });
+    socket.on("disconnect", () => {
+      console.log("disconnect");
     });
   });
 }
