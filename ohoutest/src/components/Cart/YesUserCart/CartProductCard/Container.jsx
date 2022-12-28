@@ -11,23 +11,19 @@ const CartProductCardContainer = ({
   getCartItem,
   totalState,
 }) => {
-  const [deleteItemModalOpen, setDeleteItemModalOpen] = useState(false);
+  const [deleteItemModalOpen, setDeleteItemModalOpen] = useState(-1);
 
   const deleteItem = (index) => {
-    axios
-      .post("/api/cart/deleteitem", { idx: item[index].id })
-      .then(() => {
-        getCartItem();
-        setTotalCount((prev) => {
-          return prev.filter((item, idx) => idx != index);
-        });
-        setTotalState((prev) => {
-          return prev.filter((item, idx) => idx != index);
-        });
-      })
-      .then(() => {
-        setDeleteItemModalOpen(!deleteItemModalOpen);
+    axios.post("/api/cart/deleteitem", { idx: item[index].id }).then(() => {
+      getCartItem();
+      setDeleteItemModalOpen(-1);
+      setTotalCount((prev) => {
+        return prev.filter((item, idx) => idx != index);
       });
+      setTotalState((prev) => {
+        return prev.filter((item, idx) => idx != index);
+      });
+    });
   };
 
   return (

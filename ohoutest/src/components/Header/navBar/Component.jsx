@@ -4,10 +4,9 @@ import { useDispatch } from "react-redux";
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
+
 import ParticleTest from "../../UserLogin/Particle/Components";
-
 import { action } from "../../../modules/userInfo.js";
-
 import DropDown from "./DropDown";
 
 const NavBarComponent = ({ onSubmit, isOnline, userImg }) => {
