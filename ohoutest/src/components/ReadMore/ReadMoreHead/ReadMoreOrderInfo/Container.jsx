@@ -28,6 +28,7 @@ const ReadMoreOrderInfoContainer = ({ item }) => {
     try {
       await axios
         .post("/api/cart/addcart", {
+          userId: state.userInfo.userId,
           productId: item.id,
           count: orderCount,
         })

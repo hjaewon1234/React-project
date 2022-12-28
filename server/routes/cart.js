@@ -15,7 +15,7 @@ router.route("/damgi").post((req, res) => {
 router.route("/addcart").post(async (req, res) => {
   try {
     const user = await db.Users.findOne({
-      where: { userId: req.userData.userId },
+      where: { userId: req.body.userId },
     });
     const product = await db.Products.findOne({
       where: { id: req.body.productId },
