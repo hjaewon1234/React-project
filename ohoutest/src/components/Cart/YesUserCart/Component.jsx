@@ -139,7 +139,6 @@ const YesUserCartComp = ({
                   <div>선택된 상품을 주문합니다</div>
                   <div>
                     <button
-                      className="conf-cart-modal-inner-btn"
                       onClick={() => {
                         executePurchase();
                         setConfirmBuyModalOpen(!confirmBuyModalOpen);
@@ -148,7 +147,6 @@ const YesUserCartComp = ({
                       확 인
                     </button>
                     <button
-                      className="conf-cart-modal-inner-btn"
                       onClick={() => {
                         setConfirmBuyModalOpen(!confirmBuyModalOpen);
                       }}
@@ -248,6 +246,9 @@ const BigBox = styled.div`
     border-radius: 15px;
     font-size: 20px;
     cursor: pointer;
+    @media only screen and (max-width: 425px) {
+      width: 100px;
+    }
   }
   .conf-cart-modal .conf-cart-modal-inner > div button + button {
     margin-left: 20px;

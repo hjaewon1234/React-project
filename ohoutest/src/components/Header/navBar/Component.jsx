@@ -1,7 +1,6 @@
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { useEffect, useRef, useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useRef, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 
@@ -17,7 +16,8 @@ const NavBarComponent = ({ onSubmit, isOnline, userImg }) => {
   const dropDownRef = useRef();
   const imgRef = useRef();
   const [isOpen, setIsOpen] = useState(false);
-  useEffect(() => {}, [isOpen]);
+  const userId = useSelector((state) => state.userInfo);
+  const userRealId = userId.userId;
 
   const logOutFunc = () => {
     axios({
@@ -117,7 +117,7 @@ const NavBarComponent = ({ onSubmit, isOnline, userImg }) => {
           </Link>
         )}
         {isOnline && (
-          <Link className="mobile-s" to="/">
+          <Link className="mobile-s" to={`/${userRealId}/userPage/myShopping`}>
             마이페이지
           </Link>
         )}
