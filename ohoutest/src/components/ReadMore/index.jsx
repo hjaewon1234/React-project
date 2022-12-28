@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
 import ReadMoreHead from "./ReadMoreHead";
+import ReadMoreReviewContainer from "./ReadMoreReview/Container";
 // import ReadMoreMain from "./ReadMoreMain";
 // import ReadMoreFoot from "./ReadMoreFoot";
 
@@ -32,6 +33,7 @@ const ReadMore = () => {
       <ReadMoreHead item={item} />
       {/* <ReadMoreMain />
       <ReadMoreFoot /> */}
+      <ReadMoreReviewContainer productId={productId} />
     </ReadMoreBox>
   );
 };

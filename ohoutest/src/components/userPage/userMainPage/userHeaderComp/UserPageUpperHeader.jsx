@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router";
 
@@ -8,6 +8,10 @@ import CartContainer from "../../../Cart/Container";
 import MyQnaList from "./MyQnaList/MyQnaList";
 import { Link } from "react-router-dom";
 import MyOptionContainer from "../myOption/MyOptionContainer";
+import OrderArrListComp from "./OrderArrListComp";
+import MyReviewComp from "./MyReviewComp";
+import { useSelector } from "react-redux";
+import axios from "axios";
 
 const UserPageUpperHeader = () => {
   const [clickColor, setClickColor] = useState(0);
@@ -19,7 +23,20 @@ const UserPageUpperHeader = () => {
   const myShoppingArr = ["주문배송내역 조회", "나의 장바구니", "나의 문의내역"];
   const MyReviewArr = ["리뷰쓰기", "내가 작성한 리뷰"];
   const myOptionArr = ["회원정보수정", "비밀번호 변경"];
+  const [orderArr, setOrderArr] = useState([]);
   const navigate = useNavigate();
+
+  const userInfo = useSelector((state) => state.userInfo);
+  useEffect(() => {
+    if (userInfo.userId) {
+      axios
+        .post("/api/order/getOrder", { userId: userInfo.userId })
+        .then(({ data }) => {
+          setOrderArr(data);
+        });
+    }
+  }, [userInfo]);
+
   return (
     <div>
       <UserPageHeader>
@@ -59,7 +76,28 @@ const UserPageUpperHeader = () => {
           <></>
         )}
         {clickColor == 1 ? (
-          <MyList myarr={MyReviewArr} myList={myList} setMyList={setMyList} />
+          <>
+            <MyList myarr={MyReviewArr} myList={myList} setMyList={setMyList} />
+            {/* 리뷰쓰기 */}
+            {myList == 0 ? (
+              <div>
+                {orderArr.map((item, index) => {
+                  return (
+                    <OrderArrListComp
+                      key={"orderArrComp-" + index}
+                      productId={item.products_id}
+                      createdAt={item.createdAt}
+                      index={index}
+                    />
+                  );
+                })}
+              </div>
+            ) : (
+              <></>
+            )}
+            {/* 내가 작성한 리뷰 */}
+            {myList == 1 ? <MyReviewComp></MyReviewComp> : <></>}
+          </>
         ) : (
           <></>
         )}

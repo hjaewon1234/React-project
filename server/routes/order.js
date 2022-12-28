@@ -30,4 +30,18 @@ router.route("/buy").post(async (req, res) => {
   }
 });
 
+router.route("/getOrder").post((req, res) => {
+  db.Users.findOne({ where: { userId: req.body.userId } }).then((user) => {
+    console.log("user : ", user.dataValues.id);
+    db.Order.findAll({
+      include: [{ model: db.Users }],
+      where: {
+        users_id: user.dataValues.id,
+      },
+    }).then((data) => {
+      res.send(data);
+    });
+  });
+});
+
 export default router;

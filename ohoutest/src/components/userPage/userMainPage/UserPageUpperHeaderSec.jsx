@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router";
 
@@ -7,6 +7,8 @@ import ShippingStatus from "./myShopping/ShippingStatus";
 import CartContainer from "../../../Cart/Container";
 import MyQnaList from "./MyQnaList/MyQnaList";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useSelector } from "react-redux";
 
 const UserPageUpperHeaderSec = () => {
   const [clickColor, setClickColor] = useState(0);
@@ -19,6 +21,7 @@ const UserPageUpperHeaderSec = () => {
   const MyReviewArr = ["리뷰쓰기", "내가 작성한 리뷰"];
   const myOptionArr = ["회원정보수정", "비밀번호 변경"];
   const navigate = useNavigate();
+
   return (
     <div>
       <UserPageHeader>

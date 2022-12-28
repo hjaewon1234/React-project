@@ -12,6 +12,7 @@ import TopTen from "./topten.js";
 import Chat from "./chat.js";
 import Order from "./order.js";
 import Cart from "./cart.js";
+import Review from "./review.js";
 
 const db = {
   Users,
@@ -23,6 +24,7 @@ const db = {
   Chat,
   Order,
   Cart,
+  Review,
 };
 
 import Sequelize from "sequelize";
@@ -45,6 +47,7 @@ TopTen.init(sequelize);
 Chat.init(sequelize);
 Order.init(sequelize);
 Cart.init(sequelize);
+Review.init(sequelize);
 
 Object.keys(db).forEach((modelName) => {
   if (db[modelName].associate) {

@@ -43,6 +43,12 @@ router.route("/getProducts").post((req, res) => {
   });
 });
 
+router.route("/getProductFromId").post((req, res) => {
+  db.Products.findOne({ where: { id: req.body.productId } }).then((data) => {
+    res.send(data.dataValues);
+  });
+});
+
 router.route("/getAllProducts").post((req, res) => {
   db.Products.findAll()
     .then((data) => {
@@ -136,6 +142,65 @@ router.route("/getTopten").post(async (req, res) => {
             res.send(topAry);
           });
         });
+    });
+  });
+});
+
+router.route("/reviewProduct").post(async (req, res) => {
+  const user = await db.Users.findOne({
+    where: { userId: req.body.userId },
+  });
+  const product = await db.Products.findOne({
+    where: { id: req.body.productId },
+  });
+  const review = await db.Review.create({ text: req.body.text });
+  user.addReview(review);
+  product.addReview(review);
+  res.send();
+});
+
+router.route("/getReviews").post(async (req, res) => {
+  const productAry = [];
+  let intervalId;
+  const user = await db.Users.findOne({
+    where: {
+      userId: req.body.userId,
+    },
+  });
+  const review = await db.Review.findAll({
+    where: { users_id: user.dataValues.id },
+  });
+  review.map((item, index) => {
+    db.Products.findOne({ where: { id: item.products_id } }).then((product) => {
+      productAry.push({ product: product.dataValues, review: review[index] });
+    });
+  });
+  intervalId = setInterval(() => {
+    if (productAry.length == review.length) {
+      clearInterval(intervalId);
+      res.send(productAry);
+    }
+  }, 100);
+});
+
+router.route("/getReviewsFromProductId").post(async (req, res) => {
+  let userAry = [];
+  db.Review.findAll({
+    include: [
+      {
+        model: db.Products,
+      },
+    ],
+    where: { products_id: req.body.productId },
+  }).then((data) => {
+    data.map((item) => {
+      db.Users.findOne({ where: { id: item.users_id } }).then((user) => {
+        console.log(user.dataValues.userName);
+        userAry.push({ userName: user.dataValues.userName, data: item });
+        if (userAry.length == data.length) {
+          res.send(userAry);
+        }
+      });
     });
   });
 });
