@@ -5,6 +5,7 @@ import ManagerInfoContainer from "./ManagerInfo/managerInfo/ManagerInfoContainer
 import AnswerQna from "./ManagerInfo/answerQna/AnswerQnaComponent";
 import QnaContainer from "./ManagerInfo/qnaInfo/QnaContainer";
 import FileAddContainer from "./ManagerInfo/FileAdd/FileAddContainer";
+import ChatNoticeContainer from "./ManagerInfo/chatNotice/ChatNoticeContainer";
 
 const ManagerInfo = () => {
   return (
@@ -12,9 +13,11 @@ const ManagerInfo = () => {
       <Routes>
         <Route path="/managerInfo/qnaAnswer/:id" element={<AnswerQna />} />
       </Routes>
-      <ManagerInfoContainer />;
-      <QnaContainer />;
+
+      <ManagerInfoContainer />
+      <QnaContainer />
       <FileAddContainer />
+      <ChatNoticeContainer />
     </InfoContainerBox>
   );
 };
@@ -25,4 +28,7 @@ const InfoContainerBox = styled.div`
   background-color: #1a1c20;
   width: 100%;
   padding: 50px;
+  & > div {
+    margin-top: 60px;
+  }
 `;

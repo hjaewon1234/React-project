@@ -7,6 +7,7 @@ export default class Chat extends Sequelize.Model {
         name: { type: Sequelize.STRING(255), allowNull: true },
         text: { type: Sequelize.STRING(255), allowNull: true },
         importance: { type: Sequelize.STRING(255), allowNull: true },
+        room: { type: Sequelize.STRING(255), allowNull: true },
       },
       {
         sequelize,

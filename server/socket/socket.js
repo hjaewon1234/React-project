@@ -1,5 +1,7 @@
 import { Server } from "socket.io";
 
+const worldsArr = ["whole", "world1", "world2", "world3"];
+
 export default function (server) {
   const io = new Server(server, {
     cors: {
@@ -10,8 +12,19 @@ export default function (server) {
   });
 
   io.on("connection", (socket) => {
-    socket.join("");
+    socket.on("ROOM", (data) => {
+      worldsArr.map((item) => {
+        if (socket.rooms.has(item) && data != item) {
+          socket.leave(item);
+        }
+      });
+
+      socket.join(data, () => {
+        console.log(data, "방입장");
+      });
+    });
     socket.on("JOIN_ROOM", (data) => {
+      console.log(data);
       io.emit("enter", data);
     });
 

@@ -9,6 +9,8 @@ import { action } from "../../../modules/search";
 const NavBarContainer = () => {
   const [isOnline, setIsOnline] = useState(false);
   const state = useSelector((state) => state);
+  const userInfo = useSelector((state) => state.userInfo);
+  const userImg = userInfo.userImg;
   const dispatch = useDispatch();
   const navigation = useNavigate();
   const onSubmit = (value) => {
@@ -25,7 +27,13 @@ const NavBarContainer = () => {
     if (state.userInfo.userId) setIsOnline(true);
     else setIsOnline(false);
   });
-  return <NavBarComponent onSubmit={onSubmit} isOnline={isOnline} />;
+  return (
+    <NavBarComponent
+      onSubmit={onSubmit}
+      isOnline={isOnline}
+      userImg={userImg}
+    />
+  );
 };
 
 export default NavBarContainer;
