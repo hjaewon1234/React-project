@@ -1,0 +1,216 @@
+import { Router } from "express";
+import jwt from "jsonwebtoken";
+
+import user from "./user.js";
+import product from "./product.js";
+import manager from "./manager.js";
+import search from "./search.js";
+import fs from "fs";
+import login from "./login.js";
+import community from "./community.js";
+import userPage from "./userPage.js";
+import order from "./order.js";
+import readMore from "./readMore.js";
+import db from "../models/index.js";
+import cart from "./cart.js";
+
+const router = Router();
+
+// router.use("/", (req, res, next) => {
+//   try {
+//     const tempUser = jwt.verify(
+//       req.cookies.accessToken,
+//       process.env.ACCESS_SECRET
+//     );
+//     req.userData = {};
+//     req.userData.userId = tempUser.userId;
+//     req.userData.userName = tempUser.userName;
+//   } catch (err) {
+//     try {
+//       const data = jwt.verify(token, process.env.REFRECH_SECRET);
+//       const accessToken = jwt.sign(
+//         {
+//           userName: data.userName,
+//           userId: data.userId,
+//         },
+//         process.env.ACCESS_SECRET,
+//         {
+//           expiresIn: "30m",
+//           issuer: "About Tech",
+//         }
+//       );
+
+//       res.cookie("accessToken", accessToken, {
+//         secure: false,
+//         httpOnly: false,
+//       });
+
+//       req.userData.userId = data.userId;
+//       req.userData.userName = data.userName;
+//     } catch (error) {
+//       req.userData = {};
+//     }
+//   } finally {
+//     next();
+//   }
+// });
+
+router.use("/user", user);
+router.use("/product", product);
+router.use("/manager", manager);
+router.use("/search", search);
+router.use("/community", community);
+router.use("/order", order);
+router.use("/readmore", readMore);
+router.use("/cart", cart);
+router.use("/userPage", userPage);
+
+// 관계 맺음
+// db.Users.findOne({ where: { id: 1 } }).then((user) => {
+//   db.Products.findOne({ where: { id: 1 } }).then((product) => {
+//     user.addProducts(product);
+//     product.addUsers(user);
+//   });
+// });
+
+// db.Users.findAll().then((data) => {
+//   if (data.length === 0) {
+//     db.Users.create(users[0]);
+//   }
+// });
+
+// db.Products.findAll().then((data) => {
+//   console.log(data);
+//   if (data.length === 0) {
+//     db.Products.create(products[0]);
+//   }
+// });
+
+// 이미지 등록
+// 얘는 살아있어야함
+async function setImages() {
+  await fs.readdir("./Img", (err, datas) => {
+    for (let i = 0; i < datas.length; ++i) {
+      router.get(`/download${encodeURI(datas[i])}`, (req, res) => {
+        fs.readFile("./Img/" + datas[i], (err, data) => {
+          res.writeHead(200, { "Content-Type": "text/html" });
+          res.end(data);
+        });
+      });
+    }
+  });
+}
+setImages();
+
+async function setTopTen() {
+  db.TopTen.findAll().then(async (data) => {
+    if (data.length == 0) {
+      for (let i = 0; i < 10; ++i) {
+        await db.TopTen.create({ rank: i + 1, productName: i + 1 });
+      }
+    }
+  });
+}
+setTopTen();
+
+// 아니 이게 해당 그걸로 똑같이 만들어 주는 거를 모르겟음
+
+router.post("/getImages", (req, res) => {
+  fs.readdir("./Img", (err, datas) => {
+    res.send(datas);
+  });
+});
+
+// 제품 등록
+function setProduct() {
+  db.Products.findAll().then((data) => {
+    if (data.length == 0) {
+      fs.readFile("./data/product.json", "utf-8", function (err, data) {
+        if (err) {
+          console.error(err.message);
+        } else {
+          JSON.parse(data).forEach((item) => {
+            try {
+              db.Category.findOne({
+                where: { smallsort: item.category.smallsort },
+              }).then((data) => {
+                if (!data) {
+                  console.log("왜없음?", item);
+                } else {
+                  console.log(data.id, item.img);
+                  db.Products.create({
+                    name: item.name,
+                    price: item.price,
+                    brand: item.brand,
+                    description: item.description,
+                    category: data.id,
+                    img: item.img,
+                  }).then((product) => {
+                    data.addProducts(product);
+                  });
+                }
+              });
+            } catch (err) {
+              console.error(err);
+            }
+          });
+        }
+      });
+    }
+  });
+}
+
+// 카테고리 등록
+function setCategory() {
+  db.Category.findAll().then((data) => {
+    if (data.length == 0) {
+      fs.readFile("./data/category.json", "utf-8", function (err, data) {
+        if (err) {
+          console.error(err.message);
+        } else {
+          const curJsonData = JSON.parse(data);
+          let count = 0;
+          curJsonData.forEach((item) => {
+            try {
+              db.Category.create(item).then(() => {
+                count++;
+              });
+            } catch (err) {
+              console.error(err);
+            }
+          });
+
+          let intervalId = setInterval(() => {
+            if (count >= curJsonData.length) {
+              clearInterval(intervalId);
+              setProduct();
+            }
+          }, 100);
+        }
+      });
+    }
+  });
+}
+setCategory();
+
+const productIdAry = [30, 31, 32, 37, 45, 46, 33, 38, 39, 42, 44];
+function setSearch() {
+  db.Search.findAll().then((data) => {
+    if (data.length == 0) {
+      try {
+        productIdAry.map((item) => {
+          db.Products.findOne({ where: { id: item } }).then((product) => {
+            db.Search.create({ count: 0 }).then((search) => {
+              product.addSearch(search);
+            });
+          });
+        });
+      } catch {}
+    }
+  });
+}
+// setSearch();
+
+router.use("/login", login);
+
+export default router;
