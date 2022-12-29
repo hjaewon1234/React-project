@@ -37,7 +37,7 @@ const QnaComponent = ({
             {qnaInfo.map((item, index) => {
               return (
                 <UnitDiv key={index}>
-                  <div>
+                  <div className="img">
                     <img
                       src={`/api/download${item.Product.img.split(",")[0]}`}
                       style={{ width: "70px" }}
@@ -45,19 +45,19 @@ const QnaComponent = ({
                   </div>
                   <div>
                     <div>
-                      [ {item.User.userId} ] [{item.Product.brand}]{" "}
-                      {item.Product.name}
+                      <span className="brand"> [{item.Product.brand}]</span>{" "}
+                      {item.Product.name.split("(")[0]}
                     </div>
                   </div>
                   <div style={{ display: "flex", columnGap: "10px" }}>
-                    <QnaDiv style={{ backgroundColor: "lightblue" }}>
+                    <ShippingDiv>
                       <Link
                         to={`/managerInfo/qnaAnswer/${index}`}
                         style={{ color: "black" }}
                       >
                         리뷰 확인
                       </Link>
-                    </QnaDiv>
+                    </ShippingDiv>
                   </div>
                 </UnitDiv>
               );
@@ -121,6 +121,7 @@ const NumberBox = styled.div`
 `;
 const AccoContents = styled.div`
   padding: 10px;
+  white-space: nowrap;
   & > div {
     display: flex;
     justify-content: space-between;
@@ -129,8 +130,40 @@ const AccoContents = styled.div`
   }
 `;
 const UnitDiv = styled.div`
+  width: 100%;
   padding: 10px 0;
   border-bottom: 1px solid black;
+  & > div:first-child > div {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  @media (max-width: 1280px) {
+    img {
+      width: 50px;
+    }
+    font-size: 0.8rem;
+  }
+  @media (max-width: 1024px) {
+    .img {
+      display: none;
+    }
+    img {
+      display: none;
+    }
+  }
+  @media (max-width: 920px) {
+    font-size: 0.6rem;
+  }
+  @media (max-width: 770px) {
+    .brand {
+      display: none;
+    }
+    .textBox {
+      width: 100%;
+      overflow-x: hidden;
+    }
+  }
 `;
 const UpperAcco = styled.div`
   display: flex;
@@ -143,7 +176,14 @@ const ShippingDiv = styled.div`
   padding: 3px;
   border-radius: 7px;
   font-weight: bold;
-  background-color: #f0a500;
+  background-color: skyblue;
+  & a {
+    text-decoration: none;
+    color: #f4f4f4;
+  }
+  @media (max-width: 682px) {
+    display: none;
+  }
 `;
 const QnaDiv = styled.div`
   border: 1px solid black;

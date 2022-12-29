@@ -178,18 +178,31 @@ const UserPageInfo = styled.div`
 `;
 const ShippingDiv = styled.div`
   width: 50%;
+  min-width: 350px;
   margin: auto;
   justify-content: center;
   border: 1px solid #f0a500;
   border-radius: 10px;
   display: flex;
   column-gap: 100px;
+  @media only screen and (max-width: 1000px) {
+    column-gap: 50px;
+  }
 `;
 
 const ShippingItem = styled.div`
-  font-size: 30px;
+  font-size: 1.8rem;
+  font-weight: 600;
   cursor: pointer;
   margin: 15px;
+  white-space: nowrap;
+  @media only screen and (max-width: 1268px) {
+    font-size: 1.3rem;
+  }
+  @media only screen and (max-width: 1000px) {
+    font-size: 1.3rem;
+    margin: 15px 0px;
+  }
 `;
 
 const UserPageHeader = styled.div`

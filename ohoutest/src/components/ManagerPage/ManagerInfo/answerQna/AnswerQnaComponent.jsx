@@ -24,7 +24,7 @@ const AnswerQnaComponent = ({ qnaInfo }) => {
           <div> {qnaInfo[id].User.userName}</div>
         </div>
         <div>
-          <div>
+          <div className="imgDiv">
             <img
               src={`/api/download${qnaInfo[id].Product.img.split(",")[0]}`}
               style={{ width: "100px" }}
@@ -66,6 +66,7 @@ const AnswerQnaInner = styled.div`
   padding: 20px;
   width: 50%;
   z-index: 2;
+  min-width: 350px;
   & > div {
     padding: 30px 0;
     display: flex;
@@ -88,6 +89,11 @@ const AnswerQnaInner = styled.div`
     resize: none;
     boreder: none;
     padding: auto;
+  }
+  @media (max-width: 900px) {
+    .imgDiv {
+      display: none;
+    }
   }
 `;
 

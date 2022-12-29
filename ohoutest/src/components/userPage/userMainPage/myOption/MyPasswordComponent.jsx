@@ -112,6 +112,7 @@ const MyPasswordComponent = ({ passwordChange, userInfo }) => {
                 if (inputPw == inputPw1) {
                   alert("비밀 번호가 수정 되었습니다.");
                   passwordChange(inputPw, userInfo.userId);
+                  window.location.replace("/");
                 } else {
                   alert("비밀번호가 서로 다릅니다.");
                 }

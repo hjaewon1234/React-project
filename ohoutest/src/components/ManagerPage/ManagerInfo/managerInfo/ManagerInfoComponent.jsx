@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import { useState } from "react";
-
+import dayjs from "dayjs";
 // 여기도 추후에 숫자를 어떻게 받을 지 생각을 하고
 // 숫자를 눌럿을 때 임시 랜더링으로 파일을 다시 불러오면 될 것 같음.
 
@@ -13,6 +13,59 @@ const ManagerInfoComponent = ({
 }) => {
   const [accodion, setAccodion] = useState(true);
   const [color, setColor] = useState(0);
+
+  const myProductInfoBox = () => {
+    try {
+      return productInfo.map((item, index) => {
+        const itemTime = dayjs(new Date(item.createdAt).toString()).format(
+          "YYYY-MM-DD"
+        );
+        const nowTime = dayjs(new Date(Date.now()).toString()).format(
+          "YYYY-MM-DD"
+        );
+        const shippingStatus = nowTime.split("-")[2] - itemTime.split("-")[2];
+        return (
+          <UnitDiv key={index}>
+            <img
+              src={`/api/download${decodeURI(item.Product.img.split(",")[0])}`}
+            />
+
+            <div>
+              <div className="textBox">
+                <span>
+                  <span className="brand">[ {item.Product.brand} ]</span>{" "}
+                  {item.Product.name}
+                </span>
+              </div>
+            </div>
+            <div style={{ display: "flex", columnGap: "10px" }}>
+              {shippingStatus == 0 ? (
+                <ShippingDiv>배송준비</ShippingDiv>
+              ) : (
+                <></>
+              )}
+              {shippingStatus == 1 ? (
+                <ShippingDiv style={{ backgroundColor: "skyblue" }}>
+                  배송 중
+                </ShippingDiv>
+              ) : (
+                <></>
+              )}
+              {shippingStatus == 2 ? (
+                <ShippingDiv style={{ backgroundColor: "lightgreen" }}>
+                  배송 완료
+                </ShippingDiv>
+              ) : (
+                <></>
+              )}
+            </div>
+          </UnitDiv>
+        );
+      });
+    } catch (error) {
+      return <div></div>;
+    }
+  };
 
   return (
     <Infodiv>
@@ -34,25 +87,7 @@ const ManagerInfoComponent = ({
             display: accodion ? "none" : "block",
           }}
         >
-          <AccoContents>
-            {productInfo.map((item, index) => (
-              <UnitDiv key={index}>
-                <img src={`/api/download${decodeURI(item.img)}`} />
-
-                <div>
-                  <div className="textBox">
-                    <span>
-                      <span className="brand">[ {item.brand} ]</span>{" "}
-                      {item.name}
-                    </span>
-                  </div>
-                </div>
-                <div style={{ display: "flex", columnGap: "10px" }}>
-                  <ShippingDiv>배송 중</ShippingDiv>
-                </div>
-              </UnitDiv>
-            ))}
-          </AccoContents>
+          <AccoContents>{myProductInfoBox()}</AccoContents>
 
           <PagingDiv>
             {productPaging.map((item, index) => (
