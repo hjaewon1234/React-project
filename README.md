@@ -34,4 +34,4 @@
 
 ---
 
-[Notion 기능 상세 링크](https://receptive-scarer-d8a.notion.site/66f23281cab242008afbe6edc57e8c10)
+[Notion ](https://receptive-scarer-d8a.notion.site/2267d6db456448ed972873e5cf6def10)
