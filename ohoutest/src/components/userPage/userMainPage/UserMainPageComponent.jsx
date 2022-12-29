@@ -2,10 +2,10 @@ import styled from "styled-components";
 
 import UserPageUpperHeader from "./userHeaderComp/UserPageUpperHeader";
 
-const UserMainPageComponent = ({ colorNum }) => {
+const UserMainPageComponent = () => {
   return (
     <div style={{ width: "100%" }}>
-      <UserPageUpperHeader colorNum={colorNum} />
+      <UserPageUpperHeader />
     </div>
   );
 };
