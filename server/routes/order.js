@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { where } from "sequelize";
 const router = Router();
 
 import db from "../models/index.js";
@@ -42,6 +43,36 @@ router.route("/getOrder").post((req, res) => {
       res.send(data);
     });
   });
+});
+
+router.route("/getUserShipping").post(async (req, res) => {
+  const userInfo = await db.Users.findOne({
+    where: { userId: req.body.userId },
+  });
+  const productOrder = await db.Order.findAll({
+    include: [
+      {
+        model: db.Products,
+        attributes: ["brand", "name", "price", "img", "id"],
+      },
+    ],
+    where: {
+      users_id: userInfo.id,
+    },
+  });
+  res.send(productOrder);
+});
+
+router.route("/getAllShipping").post(async (req, res) => {
+  const productOrder = await db.Order.findAll({
+    include: [
+      {
+        model: db.Products,
+        attributes: ["brand", "name", "price", "img", "id"],
+      },
+    ],
+  });
+  res.send(productOrder);
 });
 
 export default router;

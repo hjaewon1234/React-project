@@ -61,14 +61,14 @@ const MyOptionComponent = ({ upload, userInfo }) => {
                   type="text"
                   required={true}
                   name="address1"
-                  value={inputAdress}
+                  value={inputAdress1}
                   onChange={(e) => setinputAdress1(e.target.value)}
                   disabled
                 />
               </div>
               <input
                 type={"text"}
-                value={inputAdress1}
+                value={inputAdress}
                 name="address"
                 onInput={(e) => {
                   setInputAdress(e.target.value);

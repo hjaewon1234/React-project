@@ -1,35 +1,173 @@
 import styled from "styled-components";
-
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import dayjs from "dayjs";
 const ShippingStatus = ({ listClick }) => {
+  const userInfo = useSelector((state) => state.userInfo);
+  const [productState, setProductState] = useState([]);
+  const navigate = useNavigate();
+  const userShipping = async () => {
+    const { data } = await axios.post("/api/order/getUserShipping", {
+      userId: userInfo.userId,
+    });
+    console.log(data);
+
+    setProductState(data);
+  };
+  useEffect(() => {
+    if (userInfo.userId) {
+      userShipping();
+    }
+  }, []);
+  console.log(dayjs(new Date(Date.now()).toString()).format("YYYY-MM-DD"));
   return (
     <UserPageInfo>
       {listClick == 0 ? (
-        <ShippingUnderDiv>
-          <ShippingUnderItem>여기는 </ShippingUnderItem>
-          <ShippingUnderItem>배송중인</ShippingUnderItem>
-          <ShippingUnderItem>상품이</ShippingUnderItem>
-          <ShippingUnderItem>차지할 공간</ShippingUnderItem>
-        </ShippingUnderDiv>
+        <div>
+          {productState.map((item, index) => {
+            const itemTime = dayjs(new Date(item.createdAt).toString()).format(
+              "YYYY-MM-DD"
+            );
+            const nowTime = dayjs(new Date(Date.now()).toString()).format(
+              "YYYY-MM-DD"
+            );
+            const shippingStatus =
+              nowTime.split("-")[2] - itemTime.split("-")[2];
+            if (shippingStatus == 0) {
+              return (
+                <ShippingUnderDiv>
+                  <ShippingUnderItem
+                    onClick={() => {
+                      navigate(`/readmore/${item.Product.id}`);
+                    }}
+                    key={`shipping-${index}`}
+                  >
+                    <div className="imgDiv">
+                      <img
+                        src={`/api/download${
+                          item.Product.img.toString().split(",")[0]
+                        }`}
+                      />
+                    </div>
+                    <div className="nameDiv">
+                      [{item.Product.brand}] [
+                      {item.Product.name.toString().split("(")[0]}]
+                    </div>
+                    <div className="orderCountDiv">주문 : {item.count} </div>
+                    <div className="orderDiv">
+                      주문 일시 :{" "}
+                      {dayjs(new Date(item.createdAt).toString()).format(
+                        "YYYY-MM-DD"
+                      )}
+                    </div>
+                  </ShippingUnderItem>{" "}
+                </ShippingUnderDiv>
+              );
+            } else {
+              return <></>;
+            }
+          })}
+        </div>
       ) : (
         <></>
       )}
       {listClick == 1 ? (
-        <ShippingUnderDiv>
-          <ShippingUnderItem>여기는 </ShippingUnderItem>
-          <ShippingUnderItem>배송준비</ShippingUnderItem>
-          <ShippingUnderItem>상품이</ShippingUnderItem>
-          <ShippingUnderItem>차지할 공간</ShippingUnderItem>
-        </ShippingUnderDiv>
+        <div>
+          {productState.map((item, index) => {
+            const itemTime = dayjs(new Date(item.createdAt).toString()).format(
+              "YYYY-MM-DD"
+            );
+            const nowTime = dayjs(new Date(Date.now()).toString()).format(
+              "YYYY-MM-DD"
+            );
+            const shippingStatus =
+              nowTime.split("-")[2] - itemTime.split("-")[2];
+            if (shippingStatus == 1) {
+              return (
+                <ShippingUnderDiv>
+                  <ShippingUnderItem
+                    onClick={() => {
+                      navigate(`/readmore/${item.Product.id}`);
+                    }}
+                    key={`shipping-${index}`}
+                  >
+                    <div className="imgDiv">
+                      <img
+                        src={`/api/download${
+                          item.Product.img.toString().split(",")[0]
+                        }`}
+                      />
+                    </div>
+                    <div className="nameDiv">
+                      [{item.Product.brand}] [
+                      {item.Product.name.toString().split("(")[0]}]
+                    </div>
+                    <div className="orderCountDiv">주문 : {item.count} </div>
+                    <div className="orderDiv">
+                      주문 일시 :{" "}
+                      {dayjs(new Date(item.createdAt).toString()).format(
+                        "YYYY-MM-DD"
+                      )}
+                    </div>
+                  </ShippingUnderItem>{" "}
+                </ShippingUnderDiv>
+              );
+            } else {
+              return <></>;
+            }
+          })}
+        </div>
       ) : (
         <></>
       )}
       {listClick == 2 ? (
-        <ShippingUnderDiv>
-          <ShippingUnderItem>여기는 </ShippingUnderItem>
-          <ShippingUnderItem>배송완료</ShippingUnderItem>
-          <ShippingUnderItem>상품이</ShippingUnderItem>
-          <ShippingUnderItem>차지할 공간</ShippingUnderItem>
-        </ShippingUnderDiv>
+        <div>
+          {productState.map((item, index) => {
+            const itemTime = dayjs(new Date(item.createdAt).toString()).format(
+              "YYYY-MM-DD"
+            );
+            const nowTime = dayjs(new Date(Date.now()).toString()).format(
+              "YYYY-MM-DD"
+            );
+            const shippingStatus =
+              nowTime.split("-")[2] - itemTime.split("-")[2];
+            if (shippingStatus > 1) {
+              return (
+                <ShippingUnderDiv>
+                  <ShippingUnderItem
+                    onClick={() => {
+                      navigate(`/readmore/${item.Product.id}`);
+                    }}
+                    key={`shipping-${index}`}
+                  >
+                    <div className="imgDiv">
+                      <img
+                        src={`/api/download${
+                          item.Product.img.toString().split(",")[0]
+                        }`}
+                      />
+                    </div>
+                    <div className="nameDiv">
+                      [{item.Product.brand}] [
+                      {item.Product.name.toString().split("(")[0]}]
+                    </div>
+                    <div className="orderCountDiv">주문 : {item.count} </div>
+                    <div className="orderDiv">
+                      주문 일시 :{" "}
+                      {dayjs(new Date(item.createdAt).toString()).format(
+                        "YYYY-MM-DD"
+                      )}
+                    </div>
+                  </ShippingUnderItem>
+                </ShippingUnderDiv>
+              );
+            } else {
+              return <></>;
+            }
+          })}
+        </div>
       ) : (
         <></>
       )}
@@ -44,11 +182,34 @@ const ShippingUnderDiv = styled.div`
   margin: auto;
   border: 1px solid #f0a500;
   border-radius: 10px;
+  min-width: 300px;
+  @media only screen and (max-width: 1240px) {
+    font-size: 0.95rem;
+    .orderCountDiv {
+      display: none;
+    }
+  }
+  @media only screen and (max-width: 1000px) {
+    font-size: 0.9rem;
+  }
+  @media only screen and (max-width: 800px) {
+    font-size: 0.9rem;
+    .orderDiv {
+      display: none;
+    }
+  }
 `;
 const ShippingUnderItem = styled.div`
-  font-size: 20px;
-  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: bold;
+  column-gap: 10px;
   margin: 15px;
+  cursor: pointer;
+  padding: 10px;
+  border: 3px solid black;
+  border-radius: 10px;
 `;
 const UserPageInfo = styled.div`
   width: 100%;
