@@ -20,7 +20,7 @@ const UserPageUpperHeader = () => {
   // 가장 위에 것들 을 나누고 다음것들을 나누는거 (주문배송내역조회 // 나의 방바구니 // 나의 문의내역)
   const [listClick, setListClick] = useState(0);
   // 주문배송내역에 조회에 배송준비 // 배송중 // 배송 완료에 대한 상태
-  const myShoppingArr = ["주문배송내역 조회", "나의 장바구니", "나의 문의내역"];
+  const myShoppingArr = ["주문배송내역 조회", "나의 장바구니"];
   const MyReviewArr = ["리뷰쓰기", "내가 작성한 리뷰"];
   const myOptionArr = ["회원정보수정", "비밀번호 변경"];
   const [orderArr, setOrderArr] = useState([]);

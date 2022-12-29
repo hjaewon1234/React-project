@@ -69,21 +69,18 @@ const AnswerQnaInner = styled.div`
   & > div {
     padding: 30px 0;
     display: flex;
-
+    justify-content: center;
+    align-items: center;
     column-gap: 50px;
     font-size: 1.2rem;
     font-weight: bold;
     border-bottom: 1px solid #f0a500;
   }
-  & > div:nth-child(2) {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  & > div:nth-child(1) {
+
+  & > div:last-child {
     display: flex;
 
-    align-items: center;
+    justify-content: right;
   }
   textarea {
     width: 100%;
