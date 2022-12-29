@@ -51,81 +51,52 @@ const RegistContainer = () => {
 export default RegistContainer;
 const RegistStyle = styled.div`
   z-index: 3;
-  position: relative;
-  top: -829px;
-  height: 74vh;
-  @media screen and (min-width: 1024px) {
-    top: -829px;
-    height: 74vh;
-  }
+
   @media screen and (max-width: 1280px) {
-    top: -812px;
-    height: 79vh;
-    .desktop {
-    }
   }
   @media screen and (max-width: 1024px) {
-    top: -589px;
-    height: 143vh;
   }
   @media screen and (max-width: 912px) {
-    top: -1357px;
-    height: 6vh;
   }
   @media screen and (max-width: 820px) {
-    top: -1184px;
-    height: 21vh;
   }
   @media screen and (max-width: 768px) {
-    top: -1020px;
-    height: 49vh;
   }
   @media screen and (max-width: 540px) {
-    top: -751px;
-    height: 92vh;
+    margin-top: -50px;
     scale: 0.9;
   }
   @media screen and (max-width: 414px) {
-    top: -926px;
-    height: 51.5vh;
     scale: 0.9;
   }
   @media screen and (max-width: 412px) {
-    top: -943px;
-    height: 50vh;
     scale: 0.9;
   }
   @media screen and (max-width: 393px) {
-    top: -887px;
-    height: 51vh;
     scale: 0.85;
   }
   @media screen and (max-width: 375px) {
-    top: -714px;
-    height: 93vh;
+    margin-top: -70px;
     scale: 0.85;
   }
   @media screen and (max-width: 360px) {
-    top: -766px;
-    height: 81vh;
+    margin-bottom: -70px;
     scale: 0.85;
   }
-  @media screen and (max-width: 280px) {
-    top: -717px;
-    height: 63vh;
+  @media (max-width: 280px) {
     scale: 0.68;
   }
 `;
 
 const ParticleStyle = styled.div`
   display: flex;
-  flex-wrap: nowrap;
-  position: relative;
+  flex-wrap: wrap;
+  position: fixed;
   z-index: 1;
-  top: 200px;
-  left: -180px;
+  top: 0;
   height: 100vh;
-  width: 100vh;
+  width: 100vw;
+  overflow: hidden;
 
   .Particle2 {
     display: block;
@@ -151,7 +122,7 @@ const ParticleStyle = styled.div`
   .Particle5 {
     display: block;
     top: -250px;
-    left: 615px;
+    right: 100px;
     animation-direction: reverse;
     animation: effect1 6.5s infinite alternate ease-in-out;
   }

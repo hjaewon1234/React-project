@@ -132,47 +132,48 @@ const ParticleStyle = styled.div`
   background-color: transparent;
   display: flex;
   flex-wrap: wrap;
-  position: relative;
+  overflow: hidden;
+  position: fixed;
   z-index: 1;
-  top: -900px;
-  right: 400px;
-  width: 100vh;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
 
   .Particle2 {
     z-index: 2;
     display: block;
-    top: 335px;
-    left: 1100px;
+    top: 155px;
+    left: 1080;
     animation-direction: reverse;
-    animation: effect1 5.7s infinite alternate ease-in-out;
+    animation: effect1 2.76s infinite alternate ease-in-out;
   }
   .Particle3 {
     display: block;
-    top: 355px;
-    left: 790px;
+    top: -75px;
+    left: -350px;
     animation-direction: reverse;
-    animation: effect2 5.7s infinite alternate ease-in-out;
+    animation: effect2 3.45s infinite alternate ease-in-out;
   }
   @keyframes effect1 {
     from {
-      top: 55px;
-      left: 500px;
-      transform: rotate(270deg);
+      top: -145px;
+      left: 1150px;
+      transform: rotate(45deg);
     }
     to {
-      left: 1100px;
+      left: 990px;
 
-      transform: rotate(70deg);
+      transform: rotate(270deg);
     }
   }
   @keyframes effect2 {
     from {
-      top: 50px;
-      right: 290px;
+      top: 150px;
+      right: 50px;
       transform: rotate(70deg);
     }
     to {
-      right: 820px;
+      right: 240px;
       transform: rotate(280deg);
     }
   }
@@ -247,7 +248,7 @@ const RegistMain = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 53vh;
+  // height: 53vh;
   button {
     margin-top: 15px;
     background-color: rgb(240, 165, 0);
@@ -268,56 +269,43 @@ const RegistMain = styled.div`
     }
   }
   @media screen and (min-width: 1280px) {
-    height: 71vh;
   }
   @media screen and (max-width: 1280px) {
-    height: 65vh;
   }
   @media screen and (max-width: 1024px) {
-    height: 78vh;
   }
   @media screen and (max-width: 912px) {
-    height: 42vh;
   }
   @media screen and (max-width: 820px) {
-    height: 51vh;
   }
   @media screen and (max-width: 768px) {
-    height: 55vh;
-    margin-bottom: 55px;
+    margin-bottom: 50px;
   }
   @media screen and (max-width: 540px) {
-    height: 92vh;
     scale: 0.9;
   }
   @media screen and (max-width: 414px) {
-    height: 51.5vh;
+    margin-bottom: 50px;
     scale: 0.9;
   }
   @media screen and (max-width: 412px) {
-    margin-bottom: 55px;
-    height: 45vh;
     scale: 0.8;
   }
   @media screen and (max-width: 393px) {
-    height: 51vh;
     scale: 0.85;
   }
   @media screen and (max-width: 375px) {
-    height: 55vh;
     scale: 0.8;
   }
   @media screen and (max-width: 360px) {
-    height: 65vh;
     scale: 0.8;
   }
   @media screen and (max-width: 280px) {
-    height: 43vh;
-    scale: 0.55;
+    scale: 0.8;
   }
 `;
 const RegistTopStlye = styled.div`
-  z-index: 5;
+  z-index: 3;
   border-bottom: 1px solid rgb(244, 244, 244);
   margin-bottom: 20px;
   width: 350px;
@@ -326,7 +314,7 @@ const RegistMidStlye = styled.div`
   * {
     margin-bottom: 15px;
   }
-  z-index: 5;
+  z-index: 3;
   display: flex;
   justify-content: center;
   align-items: center;
