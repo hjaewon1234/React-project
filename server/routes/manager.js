@@ -23,16 +23,21 @@ async function setImages() {
 }
 
 router.route("/productManage").post(async (req, res) => {
-  const productInfo = await db.Products.findAll();
-
+  const productInfo = await db.Order.findAll({
+    include: [
+      {
+        model: db.Products,
+        attributes: ["brand", "name", "price", "img", "id"],
+      },
+      { model: db.Users, attributes: ["userId"] },
+    ],
+  });
+  console.log(productInfo);
   const sliceInfo = productInfo.slice(
     req.body.number * 10,
     req.body.number * 10 + 10
   );
 
-  sliceInfo.map((item, idx) => {
-    item.img = item.img.split(",")[0];
-  });
   // 이렇게 해서 sliceInfo 로 사진을 하나씩만 보내줌
   res.send(sliceInfo);
   // 원래는 페이지 정보와 페이징 내용을 같이 보내야 한다.
@@ -42,7 +47,7 @@ router.route("/productManage").post(async (req, res) => {
 router.route("/productPage").post(async (req, res) => {
   let pageNum = [];
 
-  const pagingLength = (await db.Products.findAll()).length;
+  const pagingLength = (await db.Order.findAll()).length;
 
   for (let i = 0; i < pagingLength / 10; i++) {
     pageNum.push(i);
@@ -157,7 +162,7 @@ router.route("/uploadFile").post(upload.array("file", 4), async (req, res) => {
 
   const tempCa = await db.Category.findOne({
     where: {
-      id: req.body.smallsort,
+      smallsort: req.body.smallsort,
     },
   });
   console.log(tempCa);

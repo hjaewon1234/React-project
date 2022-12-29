@@ -8,13 +8,12 @@ const ManagerInfoContainer = () => {
   const dispatch = useDispatch();
   const tempThunk = (num) => dispatch(productManageThunk(num));
   const tempPagingThunk = () => dispatch(productPagingThunk());
-
+  const productInfo = useSelector((state) => state.productManageInfo);
   useEffect(() => {
     tempThunk(0);
     tempPagingThunk();
   }, []);
 
-  const productInfo = useSelector((state) => state.productManageInfo);
   const productPaging = useSelector((state) => state.productPaging);
 
   return (
