@@ -40,13 +40,13 @@
         4. 소켓통신 기초작업
         5. 장바구니 UI
       - 김재일
+
       - 최원겸
         1. 회원가입
         2. 로그인
         3. Particle Animation
       - 허재원
 
-
-    최원겸 상세구현   
-
 ---
+
+[Notion 기능 상세 링크](https://receptive-scarer-d8a.notion.site/66f23281cab242008afbe6edc57e8c10)
