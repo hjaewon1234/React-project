@@ -127,56 +127,56 @@ const FileAddContainer = () => {
     switch (value) {
       case "0":
         return refrigeratorArr.map((item, index) => (
-          <option key={index} value={index + 71}>
+          <option key={index} value={item}>
             {item}
           </option>
         ));
 
       case "1":
         return tvArr.map((item, index) => (
-          <option key={index} value={index + 78}>
+          <option key={index} value={item}>
             {item}
           </option>
         ));
 
       case "2":
         return washerArr.map((item, index) => (
-          <option key={index} value={index + 83}>
+          <option key={index} value={item}>
             {item}
           </option>
         ));
 
       case "3":
         return seasonArr.map((item, index) => (
-          <option key={index} value={index + 88}>
+          <option key={index} value={item}>
             {item}
           </option>
         ));
 
       case "4":
         return cleanerArr.map((item, index) => (
-          <option key={index} value={index + 98}>
+          <option key={index} value={item}>
             {item}
           </option>
         ));
 
       case "5":
         return kitchenArr.map((item, index) => (
-          <option key={index} value={index + 103}>
+          <option key={index} value={item}>
             {item}
           </option>
         ));
 
       case "6":
         return computerArr.map((item, index) => (
-          <option key={index} value={index + 122}>
+          <option key={index} value={item}>
             {item}
           </option>
         ));
 
       default:
         return refrigeratorArr.map((item, index) => (
-          <option key={index} value={index + 71}>
+          <option key={index} value={item}>
             {item}
           </option>
         ));
@@ -244,109 +244,109 @@ const FileAddContainer = () => {
     switch (value) {
       case "0":
         return bedArr.map((item, index) => (
-          <option key={index} value={index + 1}>
+          <option key={index} value={item}>
             {item}
           </option>
         ));
 
       case "1":
         return sofaArr.map((item, index) => (
-          <option key={index} value={index + 6}>
+          <option key={index} value={item}>
             {item}
           </option>
         ));
 
       case "2":
         return tableArr.map((item, index) => (
-          <option key={index} value={index + 11}>
+          <option key={index} value={item}>
             {item}
           </option>
         ));
 
       case "3":
         return livingRoomFurnArr.map((item, index) => (
-          <option key={index} value={index + 16}>
+          <option key={index} value={item}>
             {item}
           </option>
         ));
 
       case "4":
         return closetArr.map((item, index) => (
-          <option key={index} value={index + 19}>
+          <option key={index} value={item}>
             {item}
           </option>
         ));
 
       case "5":
         return showcaseArr.map((item, index) => (
-          <option key={index} value={index + 24}>
+          <option key={index} value={item}>
             {item}
           </option>
         ));
 
       case "6":
         return shelfArr.map((item, index) => (
-          <option key={index} value={index + 27}>
+          <option key={index} value={item}>
             {item}
           </option>
         ));
 
       case "7":
         return hangerArr.map((item, index) => (
-          <option key={index} value={index + 30}>
+          <option key={index} value={item}>
             {item}
           </option>
         ));
 
       case "8":
         return chairArr.map((item, index) => (
-          <option key={index} value={index + 34}>
+          <option key={index} value={item}>
             {item}
           </option>
         ));
       case "9":
         return dressingTableArr.map((item, index) => (
-          <option key={index} value={index + 44}>
+          <option key={index} value={item}>
             {item}
           </option>
         ));
 
       case "10":
         return mirrorArr.map((item, index) => (
-          <option key={index} value={index + 50}>
+          <option key={index} value={item}>
             {item}
           </option>
         ));
       case "11":
         return partionArr.map((item, index) => (
-          <option key={index} value={index + 53}>
+          <option key={index} value={item}>
             {item}
           </option>
         ));
 
       case "12":
         return outdoorFurnArr.map((item, index) => (
-          <option key={index} value={index + 55}>
+          <option key={index} value={item}>
             {item}
           </option>
         ));
       case "13":
         return childFurnArr.map((item, index) => (
-          <option key={index} value={index + 59}>
+          <option key={index} value={item}>
             {item}
           </option>
         ));
 
       case "14":
         return spaceFurnArr.map((item, index) => (
-          <option key={index} value={index + 65}>
+          <option key={index} value={item}>
             {item}
           </option>
         ));
 
       default:
         return bedArr.map((item, index) => (
-          <option key={index} value={index + 1}>
+          <option key={index} value={item}>
             {item}
           </option>
         ));

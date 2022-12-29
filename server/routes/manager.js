@@ -162,7 +162,7 @@ router.route("/uploadFile").post(upload.array("file", 4), async (req, res) => {
 
   const tempCa = await db.Category.findOne({
     where: {
-      id: req.body.smallsort,
+      smallsort: req.body.smallsort,
     },
   });
   console.log(tempCa);
