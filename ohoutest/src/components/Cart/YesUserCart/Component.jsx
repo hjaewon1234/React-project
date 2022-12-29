@@ -121,8 +121,8 @@ const YesUserCartComp = ({
                   </div>
                   <button
                     onClick={() => {
-                      setBuyModalOpen(!buyModalOpen);
                       navigate(`/${state.userInfo.userId}/userPage/myShopping`);
+                      setBuyModalOpen(!buyModalOpen);
                     }}
                   >
                     확 인
