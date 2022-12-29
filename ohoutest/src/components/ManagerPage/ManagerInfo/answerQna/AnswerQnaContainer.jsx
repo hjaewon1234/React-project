@@ -10,10 +10,10 @@ const AnswerQnaContainer = () => {
   const tempQnaInfoThunk = (num) => dispatch(qnaInfoThunk(num));
 
   const axiosFunc = async (id, answerQnaText, index) => {
-    const { data } = await axios.post(
-      "http://localhost:8080/api/manager/answerQna",
-      { id: id, qnaAnswer: answerQnaText }
-    );
+    const { data } = await axios.post("/api/manager/answerQna", {
+      id: id,
+      qnaAnswer: answerQnaText,
+    });
 
     parseInt(qnaInfo[index].id / 10) == qnaInfo[index].id / 10
       ? tempQnaInfoThunk(qnaInfo[index].id / 10 - 1)

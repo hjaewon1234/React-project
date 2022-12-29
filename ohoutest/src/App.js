@@ -39,8 +39,8 @@ function App() {
         <Route path="/main" element={<Main />}></Route>
         <Route path="/signUp" element={<SingUp></SingUp>}></Route>
         <Route path="/managerInfo" element={<ManagerInfo></ManagerInfo>} />
-        <Route path="/regist" element={<RegistContainer />} />
-        <Route path="/login" element={<Login2Container />} />
+        <Route path="/regist1" element={<RegistContainer />} />
+        <Route path="/login1" element={<Login2Container />} />
         {/* 회원가입 예외처리 하려고  27,28번줄 추가 */}
         <Route path="/search/:sword" element={<SearchContainer />} />
         {/* 회원가입 예외처리 하려고  26번 줄 추가 */}

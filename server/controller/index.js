@@ -8,9 +8,7 @@ const test = async (req) => {
       userId: req.body.inputId,
     },
   });
-  if (
-    curUser?.dataValues.userPw == crypto.SHA256(req.body.inputPw).toString()
-  ) {
+  if (curUser.dataValues.userPw == crypto.SHA256(req.body.inputPw).toString()) {
     return curUser;
   } else {
     return undefined;
@@ -60,11 +58,11 @@ const login = async (req, res, next) => {
     });
 
     res.status(200).json({
-      userId: tempUser?.userId,
-      userName: tempUser?.userName,
-      userAddress: tempUser?.userAddress,
-      userAddress1: tempUser?.userAddress1,
-      userImg: tempUser?.userImg,
+      userId: tempUser.userId,
+      userName: tempUser.userName,
+      userAddress: tempUser.userAddress,
+      userAddress1: tempUser.userAddress1,
+      userImg: tempUser.userImg,
       userImportance: Math.floor(Math.random() * 5),
     });
   } else {
@@ -200,8 +198,8 @@ const check = async (req, res) => {
     }
   }
 
-  if (req.userData?.userId) {
-    res.status(200).json({
+  if (req.userData.userId) {
+    res.status(200).send({
       userId: req.userData.userId,
       userName: req.userData.userName,
       userPw: req.userData.userPw,
@@ -211,7 +209,7 @@ const check = async (req, res) => {
       userImportance: req.userData.userImportance,
     });
   } else {
-    res.status(403).json("req.userData가 없는뎅 ?");
+    res.status(403).send("req.userData가 없는뎅 ?");
   }
 };
 
@@ -221,11 +219,11 @@ const logout = (req, res) => {
     res.clearCookie("refreshToken");
     req.userData = {};
     // global.userPw = "";
-    res.status(200).json("Logout Success");
+    res.status(200).send("Logout Success");
 
-    // res.status(200).json({ userId: global.userId, userName: global.userName });
+    // res.status(200).send({ userId: global.userId, userName: global.userName });
   } catch (error) {
-    res.status(500).json(error);
+    res.status(500).send(error);
   }
 };
 

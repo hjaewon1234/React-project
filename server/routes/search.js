@@ -26,7 +26,9 @@ router.route("/search").post((req, res) => {
       data.map((item) => {
         db.Search.findOne({ where: { products_id: item } })
           .then((data) => {
-            return data?.dataValues;
+            console.log("searchData다 : ", data);
+            if (data) return data.dataValues;
+            else return data;
           })
           .then((data) => {
             console.log(data);
@@ -53,8 +55,8 @@ router.route("/searchWord").post((req, res) => {
     const sendData = [];
     const filtered = data.filter((item) => {
       return (
-        item.dataValues.name?.includes(req.body.sword) ||
-        item.dataValues.brand?.includes(req.body.sword)
+        item.dataValues.name.includes(req.body.sword) ||
+        item.dataValues.brand.includes(req.body.sword)
       );
     });
     filtered.map((item, index) => {

@@ -95,10 +95,10 @@ const NavBarComponent = ({ onSubmit, isOnline, userImg }) => {
         </div>
 
         {isOnline || (
-          <Link to="/login">
+          <Link to="/login1">
             <div
               onClick={() => {
-                window.open("/login", "_self");
+                window.open("/login1", "_self");
               }}
             >
               로그인
@@ -106,10 +106,10 @@ const NavBarComponent = ({ onSubmit, isOnline, userImg }) => {
           </Link>
         )}
         {isOnline || (
-          <Link to="/regist">
+          <Link to="/regist1">
             <div
               onClick={() => {
-                window.open("/regist", "_self");
+                window.open("/regist1", "_self");
               }}
             >
               회원가입

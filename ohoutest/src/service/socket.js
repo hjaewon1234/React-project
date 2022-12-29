@@ -1,10 +1,10 @@
 import { createContext } from "react";
 import socketIo from "socket.io-client";
 
-export const socket = socketIo("http://localhost:3000", {
+export const socket = socketIo("http://wn01011.errorcode.help", {
   withCredentials: true,
 });
-export const SocketContext = createContext(socket);
+export const SocketContext = createContext(6);
 
 socket.on("connect", () => {
   console.log("socket server connected");

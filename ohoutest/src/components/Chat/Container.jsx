@@ -18,7 +18,7 @@ const ChatContainer = () => {
   let uploadFunc;
 
   const onChatEnter = async (e) => {
-    if (chatValue == "" || userName == "") return;
+    // if (chatValue == "" || userName == "") return;
     if (e.code == "Enter") {
       console.log(world);
       await axios.post("/api/community/pushChat", {

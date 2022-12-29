@@ -132,7 +132,7 @@ function setProduct() {
           JSON.parse(data).forEach((item) => {
             try {
               db.Category.findOne({
-                where: { smallsort: item.category?.smallsort },
+                where: { smallsort: item.category.smallsort },
               }).then((data) => {
                 if (!data) {
                   console.log("왜없음?", item);

@@ -5,8 +5,7 @@ const worldsArr = ["whole", "world1", "world2", "world3"];
 export default function (server) {
   const io = new Server(server, {
     cors: {
-      origin: "http://locahost:3000",
-      methods: ["GET", "POST"],
+      origin: "http://wn01011.errorcode.help",
       credentials: true,
     },
   });

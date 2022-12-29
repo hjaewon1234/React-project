@@ -2,10 +2,7 @@ import axios from "axios";
 
 const uploadFile = async (file) => {
   try {
-    const { data } = await axios.post(
-      "http://localhost:8080/api/userPage/uploadFile",
-      file
-    );
+    const { data } = await axios.post("/api/userPage/uploadFile", file);
     window.location.replace("/");
     return data;
   } catch (e) {

@@ -5,7 +5,7 @@ const router = Router();
 
 const overapId = async (req) => {
   const curUser = await db.Users.findOne({
-    where: { userId: req.body.inputId.replaceAll('"', "") },
+    where: { userId: req.body.inputId.replace(/\"/g, "") },
   });
 
   return curUser;
@@ -13,7 +13,7 @@ const overapId = async (req) => {
 
 const overapNickName = async (req) => {
   const curUser = await db.Users.findOne({
-    where: { userName: req.body.inputName.replaceAll('"', "") },
+    where: { userName: req.body.inputName.replace(/\"/g, "") },
   });
   return curUser;
 };
