@@ -10,7 +10,6 @@ const AnswerQnaComponent = ({ qnaInfo }) => {
   // const [dbConnect, setDbConnect] =
   // db통신이 있을때 변하는 걸 useState로 해준다?
   const numberingId = qnaInfo[id].id;
-  console.log(numberingId);
   return (
     <AnswerQnaDiv>
       <AnswerQnaInner>

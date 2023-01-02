@@ -8,38 +8,23 @@ import { Link } from "react-router-dom";
 import ParticleTest from "../Particle/Components";
 import { ParticleTest1 } from "../Particle/Components";
 import swal from "sweetalert";
-const Login2Components = ({ setIsLogin, setUser, user }) => {
+const Login2Components = () => {
   const [inputId, setId] = useState("");
   const [inputPw, setPw] = useState("");
-  // const [inputName, setName] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // const loginHandler = () => {
-  //   dispatch(
-  //     logInUser({
-  //       inputId,
-  //       inputName,
-  //     })
-  //   );
-  // };
   const logInHandle = () => {
-    console.log(inputId, inputPw);
     axios({
       url: "/login",
       method: "POST",
       withCredentials: true,
-      // client와 server가 쿠키 값을 공유
       data: {
         inputId: inputId,
         inputPw: inputPw,
       },
     }).then((result) => {
-      console.log(result);
       if (result.status === 200) {
-        console.log("로그인 성공");
-        // window.open("/signUp", "_self");
-        // navigate("/", { replace: true });
         navigate("/", { replace: true });
         if (result.data?.userId)
           dispatch(
@@ -92,7 +77,6 @@ const Login2Components = ({ setIsLogin, setUser, user }) => {
             onClick={() => {
               logInHandle();
             }}
-            // onChange={loginHandler}
             disabled={
               inputId.length <= 99 && inputPw.length <= 8 ? true : false
             }
@@ -100,10 +84,7 @@ const Login2Components = ({ setIsLogin, setUser, user }) => {
             로그인
           </button>{" "}
           <RegistLink>
-            <Link
-              // to={"/regist"}
-              style={{ textDecoration: "none" }}
-            >
+            <Link style={{ textDecoration: "none" }}>
               <div
                 onClick={() => {
                   window.open("/regist", "_self");
@@ -248,7 +229,6 @@ const RegistMain = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  // height: 53vh;
   button {
     margin-top: 15px;
     background-color: rgb(240, 165, 0);

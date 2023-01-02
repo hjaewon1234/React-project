@@ -13,8 +13,6 @@ export const productManageThunk = createAsyncThunk(
   }
 );
 
-// 우선순위 - > 초기값 설정 //
-
 const productManage = createSlice({
   name: "productManageInfo",
   initialState: [
@@ -36,18 +34,12 @@ const productManage = createSlice({
   },
   extraReducers: (bulider) => {
     bulider
-      .addCase(productManageThunk.pending, (state, action) => {
-        console.log("pending");
-      })
+      .addCase(productManageThunk.pending, (state, action) => {})
       .addCase(productManageThunk.fulfilled, (state, action) => {
         const { type, payload } = action;
-        console.log(payload);
-        console.log("fulfilled");
         return payload;
       })
-      .addCase(productManageThunk.rejected, (state, action) => {
-        console.log("rejected");
-      });
+      .addCase(productManageThunk.rejected, (state, action) => {});
   },
 });
 

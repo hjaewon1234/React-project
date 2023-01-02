@@ -9,7 +9,6 @@ export const answerQnaThunk = createAsyncThunk(
       id: id,
       qnaAnswer: answerQnaText,
     });
-    console.log(data);
     return data;
   }
 );
@@ -25,18 +24,12 @@ const answerQna = createSlice({
   },
   extraReducers: (bulider) => {
     bulider
-      .addCase(answerQnaThunk.pending, (state, action) => {
-        console.log("answerQna pending");
-      })
+      .addCase(answerQnaThunk.pending, (state, action) => {})
       .addCase(answerQnaThunk.fulfilled, (state, action) => {
         const { type, payload } = action;
-        console.log(current(state));
-        console.log("answerQna fulfilled");
         return payload;
       })
-      .addCase(answerQnaThunk.rejected, (state, action) => {
-        console.log("answerQna rejected");
-      });
+      .addCase(answerQnaThunk.rejected, (state, action) => {});
   },
 });
 

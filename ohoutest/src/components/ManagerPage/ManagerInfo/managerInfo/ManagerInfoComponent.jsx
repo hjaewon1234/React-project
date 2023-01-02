@@ -2,8 +2,6 @@ import styled from "styled-components";
 
 import { useState } from "react";
 import dayjs from "dayjs";
-// 여기도 추후에 숫자를 어떻게 받을 지 생각을 하고
-// 숫자를 눌럿을 때 임시 랜더링으로 파일을 다시 불러오면 될 것 같음.
 
 const ManagerInfoComponent = ({
   title,

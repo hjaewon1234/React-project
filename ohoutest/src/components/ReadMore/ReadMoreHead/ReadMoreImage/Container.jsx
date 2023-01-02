@@ -1,4 +1,3 @@
-import { useState } from "react";
 import ReadMoreImageComponent from "./Component";
 
 const ReadMoreImageContainer = ({ item }) => {

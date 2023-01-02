@@ -1,8 +1,6 @@
 import styled from "styled-components";
-import { useNavigate } from "react-router";
 
 const MyList = ({ myarr, myList, setMyList }) => {
-  const navigate = useNavigate();
   return (
     <div>
       <UserPageUnderHeaderDiv>

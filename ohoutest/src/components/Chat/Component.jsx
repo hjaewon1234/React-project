@@ -5,6 +5,7 @@ const ChatComponent = ({
   onChatEnter,
   chatValue,
   chatAry,
+  userName,
   onChatting,
   setWorld,
   noticeInfo,
@@ -41,7 +42,7 @@ const ChatComponent = ({
                 color: serverColor == 0 ? "black" : "white",
               }}
             >
-              전체
+              월드1
             </WorldDiv>
             <WorldDiv
               onClick={() => {
@@ -56,7 +57,7 @@ const ChatComponent = ({
                 color: serverColor == 1 ? "black" : "white",
               }}
             >
-              World1
+              월드2
             </WorldDiv>
             <WorldDiv
               onClick={() => {
@@ -71,7 +72,7 @@ const ChatComponent = ({
                 color: serverColor == 2 ? "black" : "white",
               }}
             >
-              World2
+              월드3
             </WorldDiv>
             <WorldDiv
               onClick={() => {
@@ -86,7 +87,7 @@ const ChatComponent = ({
                 color: serverColor == 3 ? "black" : "white",
               }}
             >
-              World3
+              월드4
             </WorldDiv>
           </WorldSelectBox>
           <ViewChatBox>
@@ -137,15 +138,16 @@ const ChatComponent = ({
         </ChattingBox>
         <InputBox opacity={inputRangeValue / 100}>
           <input
-            onKeyUp={(e) => {
+            onKeyDown={(e) => {
               onChatEnter(e);
             }}
             onChange={(e) => {
-              // onChatting(e);
+              if (userName == "") return;
               setChatValue(e.target.value);
             }}
             value={chatValue}
             type={"text"}
+            placeholder={userName == "" ? "로그인 해주세요." : ""}
           />
         </InputBox>
       </ChatBox>
@@ -248,6 +250,10 @@ const InputBox = styled.div`
     height: 100%;
     text-align: right;
     border: ${(props) => (props.opacity == 0 ? "none" : `1px solid grey`)};
+    &::placeholder {
+      color: red;
+      font-style: italic;
+    }
   }
 `;
 

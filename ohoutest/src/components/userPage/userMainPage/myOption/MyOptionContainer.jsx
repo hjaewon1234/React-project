@@ -18,7 +18,7 @@ const MyOptionContainer = ({ myList }) => {
     await uploadFile(formData);
   };
   const passwordChange = async (data, userId) => {
-    await axios.post("http://localhost:8080/api/userPage/passwordChange", {
+    await axios.post("/api/userPage/passwordChange", {
       data,
       userId,
     });

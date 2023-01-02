@@ -18,11 +18,6 @@ const FileAddContainer = () => {
     formData.append("smallsort", e.target.smallsort.value);
     await uploadFile(formData);
   };
-  // FormData 객체를 생성하여 form에서 선택한 파일을 append 해주고 있음.
-  // FormData는 ajax로 form data 전송을 해주는 객체인데 지금과 같이 form 전속이
-  // 필요한 경우 사용한다.
-  // 이렇게 호출된 uploadFile은 사용자가 선택한 파일을 담은
-  // formData 객체를 서버에 보내게 된다.
 
   const furnitureArr = [
     "침대",

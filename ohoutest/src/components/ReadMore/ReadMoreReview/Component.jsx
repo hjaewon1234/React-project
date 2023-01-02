@@ -4,10 +4,6 @@ import dayjs from "dayjs";
 
 const ReadMoreReviewComponent = ({ reviewData = [], getReviews }) => {
   useEffect(() => {
-    console.log(reviewData);
-  }, [reviewData]);
-
-  useEffect(() => {
     getReviews();
   }, []);
 

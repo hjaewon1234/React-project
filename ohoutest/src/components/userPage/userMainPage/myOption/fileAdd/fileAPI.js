@@ -7,7 +7,6 @@ const uploadFile = async (file) => {
     return data;
   } catch (e) {
     alert("실패함");
-    console.log(e);
   }
 };
 

@@ -6,13 +6,9 @@ export const socket = socketIo("http://wn01011.errorcode.help", {
 });
 export const SocketContext = createContext(6);
 
-socket.on("connect", () => {
-  console.log("socket server connected");
-});
+socket.on("connect", () => {});
 
-socket.on("disconnect", () => {
-  console.log("socket server disconnected");
-});
+socket.on("disconnect", () => {});
 
 export const SOCKET_EVENT = {
   JOIN_ROOM: "JOIN_ROOM",

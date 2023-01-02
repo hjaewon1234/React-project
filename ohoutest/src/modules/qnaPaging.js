@@ -6,7 +6,6 @@ export const qnaPagingThunk = createAsyncThunk(
   "/managerInfo/qnaPageThunk",
   async () => {
     const { data } = await axios.post("/api/manager/qnaPage");
-    console.log(data);
     return data;
   }
 );
@@ -21,17 +20,12 @@ const qnaPaging = createSlice({
   },
   extraReducers: (bulider) => {
     bulider
-      .addCase(qnaPagingThunk.pending, (state, action) => {
-        console.log("qnaPaging pending");
-      })
+      .addCase(qnaPagingThunk.pending, (state, action) => {})
       .addCase(qnaPagingThunk.fulfilled, (state, action) => {
         const { type, payload } = action;
-        console.log("qnaPaging fulfilled");
         return payload;
       })
-      .addCase(qnaPagingThunk.rejected, (state, action) => {
-        console.log("qnaPaging rejected");
-      });
+      .addCase(qnaPagingThunk.rejected, (state, action) => {});
   },
 });
 

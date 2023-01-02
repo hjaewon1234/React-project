@@ -53,14 +53,11 @@ router.route("/getCartItem").post(async (req, res) => {
       include: [
         {
           model: Products,
-          // attributes: ["price"],
-          // 필터
         },
       ],
     });
     res.send(addedItem);
   } catch (err) {
-    console.error(err);
     res.end();
   }
 });
@@ -73,7 +70,6 @@ router.route("/deleteitem").post(async (req, res) => {
     await target.destroy();
     res.send();
   } catch (err) {
-    console.error(err);
     res.end();
   }
 });

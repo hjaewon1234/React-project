@@ -26,46 +26,26 @@ const userInfoSlice = createSlice({
   initialState: { userId: "", userName: "" },
   reducers: {
     setUser: (state, action) => {
-      console.log(action);
       return action.payload;
     },
-    // setLogOut(state) {
-    //   console.log(state);
-    //   return state;
-    // },
   },
   extraReducers: (bulider) => {
-    // 추가적인 리듀서를 작성한다.
     bulider
-      .addCase(userInfoThunk.pending, (state, action) => {
-        console.log("pending");
-      })
+      .addCase(userInfoThunk.pending, (state, action) => {})
       .addCase(userInfoThunk.fulfilled, (state, { payload }) => {
         state = state;
         state.userInfo.user = action.payload;
         return { ...payload };
       })
-      .addCase(userInfoThunk.rejected, (state, action) => {
-        console.log("reject");
-      });
+      .addCase(userInfoThunk.rejected, (state, action) => {});
 
     bulider
-      .addCase(getUserThunk.pending, (state, action) => {
-        console.log("pending");
-      })
+      .addCase(getUserThunk.pending, (state, action) => {})
       .addCase(getUserThunk.fulfilled, (state, action) => {
         return state;
       })
-      .addCase(getUserThunk.rejected, (state, action) => {
-        console.log("reject");
-      });
+      .addCase(getUserThunk.rejected, (state, action) => {});
   },
-  // extraReducers: {
-  //   [userInfoThunk.fulfilled]: (state, { payload }) => {
-  //     console.log("fullfilled", current(state));
-  //     return payload;
-  //   },
-  // },
 });
 
 export const action = userInfoSlice.actions;

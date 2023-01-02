@@ -21,9 +21,6 @@ const FileAddComponent = ({
     let imageUrlLists = [...tempImgFile];
     for (let i = 0; i < imageLists.length; i++) {
       const currentImageUrl = URL.createObjectURL(imageLists[i]);
-      // URL.createObjectURL은 특정 파일 객체나 데이터의 참조를 가르키는 새로운 객체
-      // URL을 생성하는 메서드 이다. 생성한 값은 현재 창에서 만 유효하다.
-      console.log(currentImageUrl, imageLists[i]);
       imageUrlLists.push(currentImageUrl);
     }
     if (imageUrlLists.length > 4) {

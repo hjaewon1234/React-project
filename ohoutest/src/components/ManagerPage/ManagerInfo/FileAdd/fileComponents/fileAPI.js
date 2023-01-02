@@ -1,5 +1,4 @@
 import axios from "axios";
-import { apiClient } from "./appClient";
 
 const uploadFile = async (file) => {
   try {
@@ -7,7 +6,6 @@ const uploadFile = async (file) => {
     return data;
   } catch (e) {
     alert("실패함");
-    console.log(e);
   }
 };
 

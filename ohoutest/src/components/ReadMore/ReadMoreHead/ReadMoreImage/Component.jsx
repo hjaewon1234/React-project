@@ -19,12 +19,6 @@ const ReadMoreImageComponent = ({ imgArr }) => {
       setcurrentItem((prev) => prev + 1);
     }
   };
-
-  // useEffect(() => {
-  //   window.addEventListener("touchstart");
-  //   window.addEventListener("touchend", );
-  // }, []);
-
   return (
     <ReadMoreImageBox currentItem={currentItem}>
       <div className="img-box-left">

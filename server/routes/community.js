@@ -11,13 +11,9 @@ router.route("/getChat").post(async (req, res) => {
   });
 
   res.send(data);
-  // db.Chat.findAll().then((data) => {
-  //   res.send(data);
-  // });
 });
 
 router.route("/pushChat").post(async (req, res) => {
-  console.log("pushChat", req.body);
   await db.Chat.create({
     name: req.body.name,
     text: req.body.text,

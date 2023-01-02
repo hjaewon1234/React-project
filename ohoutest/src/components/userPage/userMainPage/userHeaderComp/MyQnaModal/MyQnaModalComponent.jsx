@@ -1,12 +1,9 @@
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 
 const MyQnaModalComponent = () => {
-  // const [dbConnect, setDbConnect] =
-  // db통신이 있을때 변하는 걸 useState로 해준다?
   const userId = useSelector((state) => state.userInfo);
   return (
     <AnswerQnaDiv>
@@ -55,13 +52,6 @@ const AnswerQnaInner = styled.div`
     margin: 10px 0;
     display: flex;
     column-gap: 50px;
-  }
-  textarea {
-    width: 100%;
-    height: 100px;
-    resize: none;
-    boreder: none;
-    padding: auto;
   }
 `;
 const QnaContents = styled.div``;
