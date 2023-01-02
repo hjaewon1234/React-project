@@ -1,6 +1,5 @@
 import Sequelize from "sequelize";
 
-// user, product 관계
 export default class Order extends Sequelize.Model {
   static init(sequelize) {
     return super.init(

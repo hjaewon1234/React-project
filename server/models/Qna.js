@@ -32,11 +32,3 @@ export default class Qna extends Sequelize.Model {
     });
   }
 }
-
-// 지금 상황에서 qna는 Products랑 Users를 가지고 있는거니까
-
-// a belongsTo b - a가 b에 속해있다.
-// 가지고있다 속해있다.
-
-// a hasMany b - a가 b를 가지고 있다.
-//

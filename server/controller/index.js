@@ -18,7 +18,6 @@ const test = async (req) => {
 const login = async (req, res, next) => {
   const tempUser = await test(req);
   if (tempUser) {
-    // access Token 발급
     const accessToken = jwt.sign(
       {
         userName: tempUser.userName,
@@ -30,7 +29,6 @@ const login = async (req, res, next) => {
         issuer: "About Tech",
       }
     );
-    // refresh Token 발급
     const refreshToken = jwt.sign(
       {
         userName: tempUser.userName,
@@ -42,19 +40,14 @@ const login = async (req, res, next) => {
         issuer: "About Tech",
       }
     );
-    // token 전송
     res.cookie("accessToken", accessToken, {
       secure: false,
       httpOnly: false,
-      // httpOnly: true,
-      // Credential: true,
     });
 
     res.cookie("refreshToken", refreshToken, {
       secure: false,
       httpOnly: false,
-      // httpOnly: true,
-      // Credential: true,
     });
 
     res.status(200).json({
@@ -84,13 +77,9 @@ const accessToken = async (req, res) => {
 };
 
 const refreshToken = async (req, res) => {
-  // 용도 : access token을 갱신.
-
   try {
     const token = req.cookies.refreshToken;
     const data = jwt.verify(token, process.env.REFRECH_SECRET);
-    console.log("aaaaaaaaaaaaaaaaaa", userData);
-    // access Token 새로 발급
     const accessToken = jwt.sign(
       {
         userName: data.userName,
@@ -115,43 +104,6 @@ const refreshToken = async (req, res) => {
 };
 
 const loginSuccess = async (req, res, next) => {
-  // try {
-  //   const token = req.cookies.accessToken;
-  //   const data = jwt.verify(token, process.env.ACCESS_SECRET);
-  //   const tempUser = await test({ body: { inputId: data.userId } });
-  //   global.userId = tempUser.userId;
-  //   global.userName = tempUser.userName;
-  //   global.userPw = tempUser.userPw;
-  // } catch (error) {
-  //   try {
-  //     const token = req.cookies.refreshToken;
-  //     const data = jwt.verify(token, process.env.REFRECH_SECRET);
-  //     const tempUser = await test({
-  //       body: { inputId: data.userId, inputPw: data.userPw },
-  //     });
-  //     // access Token 새로 발급
-  //     const accessToken = jwt.sign(
-  //       {
-  //         username: tempUser.username,
-  //         userId: tempUser.userId,
-  //       },
-  //       process.env.ACCESS_SECRET,
-  //       {
-  //         expiresIn: "10m",
-  //         issuer: "About Tech",
-  //       }
-  //     );
-
-  //     res.cookie("accessToken", accessToken, {
-  //       secure: false,
-  //       httpOnly: false,
-  //     });
-
-  //     global.userId = data.userId;
-  //     global.userName = data.userName;
-  //     global.userPw = data.userPw;
-  //   } catch (error) {}
-  // }
   next();
 };
 
@@ -218,10 +170,7 @@ const logout = (req, res) => {
     res.clearCookie("accessToken");
     res.clearCookie("refreshToken");
     req.userData = {};
-    // global.userPw = "";
     res.status(200).send("Logout Success");
-
-    // res.status(200).send({ userId: global.userId, userName: global.userName });
   } catch (error) {
     res.status(500).send(error);
   }

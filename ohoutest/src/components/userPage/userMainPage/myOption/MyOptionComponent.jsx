@@ -11,7 +11,6 @@ const MyOptionComponent = ({ upload, userInfo }) => {
   const [inputAdress1, setinputAdress1] = useState(userInfo.userAddress1);
 
   const [tempImgFile, setTempImgFile] = useState([]);
-  console.log(userInfo);
   const openModal = (data) => {
     setModalOpen(!modalOpen);
   };
@@ -80,7 +79,6 @@ const MyOptionComponent = ({ upload, userInfo }) => {
               {modalOpen && (
                 <>
                   <ModalComponents
-                    // autoClose
                     company={inputAdress1}
                     setcompany={setinputAdress1}
                     open={modalOpen}

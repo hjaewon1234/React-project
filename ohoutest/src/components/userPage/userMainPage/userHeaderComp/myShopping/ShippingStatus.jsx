@@ -12,7 +12,6 @@ const ShippingStatus = ({ listClick }) => {
     const { data } = await axios.post("/api/order/getUserShipping", {
       userId: userInfo.userId,
     });
-    console.log(data);
 
     setProductState(data);
   };
@@ -21,7 +20,6 @@ const ShippingStatus = ({ listClick }) => {
       userShipping();
     }
   }, []);
-  console.log(dayjs(new Date(Date.now()).toString()).format("YYYY-MM-DD"));
   return (
     <UserPageInfo>
       {listClick == 0 ? (

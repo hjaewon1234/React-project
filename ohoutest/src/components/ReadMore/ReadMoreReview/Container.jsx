@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ReadMoreReviewComponent from "./Component";
 
 const ReadMoreReviewContainer = ({ productId }) => {
@@ -8,12 +8,9 @@ const ReadMoreReviewContainer = ({ productId }) => {
     axios
       .post("/api/product/getReviewsFromProductId", { productId: productId })
       .then((reviews) => {
-        console.log(reviews);
         setReviewData(reviews.data);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   };
 
   return (

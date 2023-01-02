@@ -18,7 +18,6 @@ const QnaContainer = () => {
   const qnaInfo = useSelector((state) => state.qnaInfo);
   const qnaPaging = useSelector((state) => state.qnaPaging);
 
-  console.log(qnaInfo, qnaPaging, color);
   return (
     <QnaComponent
       title={"리뷰 확인 하기"}

@@ -14,7 +14,7 @@ const NavBarContainer = () => {
   const dispatch = useDispatch();
   const navigation = useNavigate();
   const onSubmit = (value) => {
-    if (!value.replace(" ", "")) return console.log("빈값이야");
+    if (!value.replace(" ", "")) return "빈값이야";
     axios.post("/api/search/search", { value }).then((data) => {
       axios.post("/api/search/searchWord", { sword: value }).then(() => {
         navigation("/search/" + value);

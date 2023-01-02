@@ -6,7 +6,6 @@ export const productPagingThunk = createAsyncThunk(
   "/managerInfo/productPageThunk",
   async () => {
     const { data } = await axios.post("/api/manager/productPage");
-    console.log(data);
     return data;
   }
 );
@@ -22,18 +21,12 @@ const productPaging = createSlice({
   },
   extraReducers: (bulider) => {
     bulider
-      .addCase(productPagingThunk.pending, (state, action) => {
-        console.log("paging pending");
-      })
+      .addCase(productPagingThunk.pending, (state, action) => {})
       .addCase(productPagingThunk.fulfilled, (state, action) => {
         const { type, payload } = action;
-        console.log("paging fulfilled");
-        console.log(payload);
         return payload;
       })
-      .addCase(productPagingThunk.rejected, (state, action) => {
-        console.log("paging rejected");
-      });
+      .addCase(productPagingThunk.rejected, (state, action) => {});
   },
 });
 

@@ -4,9 +4,6 @@ import { useEffect, useState } from "react";
 const CommunityComp = ({ user, getChatData, pushChatData, chatData }) => {
   const [inputText, setInputText] = useState("");
   const [entered, setEntered] = useState(true);
-  document.cookie.split(";").map((item) => {
-    // console.log(item.split("=")[0]);
-  });
 
   const [importance, setImportance] = useState("s");
 

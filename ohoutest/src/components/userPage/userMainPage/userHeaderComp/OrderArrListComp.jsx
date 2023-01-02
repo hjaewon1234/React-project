@@ -22,9 +22,7 @@ const OrderArrListComp = ({ productId, createdAt, index }) => {
         productId: productId,
         text: text,
       })
-      .then(({ data }) => {
-        console.log(data);
-      });
+      .then(({ data }) => {});
   };
 
   useEffect(() => {

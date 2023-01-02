@@ -12,7 +12,6 @@ const MyReviewComp = () => {
     axios
       .post("/api/product/getReviews", { userId: userInfo.userId })
       .then(({ data }) => {
-        console.log(data);
         if (myReviews != data) setMyReviews(data);
       });
   };

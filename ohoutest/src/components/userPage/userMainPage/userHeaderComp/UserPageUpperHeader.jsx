@@ -1,12 +1,9 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router";
-
 import MyList from "./MyList";
 import ShippingStatus from "./myShopping/ShippingStatus";
 import CartContainer from "../../../Cart/Container";
 import MyQnaList from "./MyQnaList/MyQnaList";
-import { Link } from "react-router-dom";
 import MyOptionContainer from "../myOption/MyOptionContainer";
 import OrderArrListComp from "./OrderArrListComp";
 import MyReviewComp from "./MyReviewComp";
@@ -15,16 +12,12 @@ import axios from "axios";
 
 const UserPageUpperHeader = () => {
   const [clickColor, setClickColor] = useState(0);
-  // 가장 위에 나의 쇼핑 // 나의 리뷰 // 설정 을 나누는 상태
   const [myList, setMyList] = useState(0);
-  // 가장 위에 것들 을 나누고 다음것들을 나누는거 (주문배송내역조회 // 나의 방바구니 // 나의 문의내역)
   const [listClick, setListClick] = useState(0);
-  // 주문배송내역에 조회에 배송준비 // 배송중 // 배송 완료에 대한 상태
   const myShoppingArr = ["주문배송내역 조회", "나의 장바구니"];
   const MyReviewArr = ["리뷰쓰기", "내가 작성한 리뷰"];
   const myOptionArr = ["회원정보수정", "비밀번호 변경"];
   const [orderArr, setOrderArr] = useState([]);
-  const navigate = useNavigate();
 
   const userInfo = useSelector((state) => state.userInfo);
   useEffect(() => {
@@ -78,7 +71,6 @@ const UserPageUpperHeader = () => {
         {clickColor == 1 ? (
           <>
             <MyList myarr={MyReviewArr} myList={myList} setMyList={setMyList} />
-            {/* 리뷰쓰기 */}
             {myList == 0 ? (
               <div>
                 {orderArr.map((item, index) => {
@@ -95,7 +87,6 @@ const UserPageUpperHeader = () => {
             ) : (
               <></>
             )}
-            {/* 내가 작성한 리뷰 */}
             {myList == 1 ? <MyReviewComp></MyReviewComp> : <></>}
           </>
         ) : (
@@ -148,8 +139,6 @@ const UserPageUpperHeader = () => {
       ) : (
         <></>
       )}
-
-      {/* 추후에 여기에 배송 관련 데이터들을 넘겨주고, 그걸 map 돌리면 될듯  */}
     </div>
   );
 };

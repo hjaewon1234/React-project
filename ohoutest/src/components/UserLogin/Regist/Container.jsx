@@ -16,9 +16,6 @@ const RegistContainer = () => {
   return (
     <>
       <ParticleStyle>
-        {/* <ParticleStyle1 className="Particle1 Particle1">
-          <ParticleTest1></ParticleTest1>
-        </ParticleStyle1> */}
         <ParticleStyle2 className="Particle1 Particle2">
           <ParticleTest></ParticleTest>
         </ParticleStyle2>
@@ -267,7 +264,6 @@ const ParticleStyle1 = styled.div`
   top: 295px;
   left: -25px;
   rotate: 45deg;
-  widht: 100%;
 `;
 const ParticleStyle2 = styled.div`
   position: absolute;
@@ -275,7 +271,6 @@ const ParticleStyle2 = styled.div`
   z-index: 2;
   top: 960px;
   left: 650px;
-  widht: 100%;
 `;
 const ParticleStyle3 = styled.div`
   position: absolute;
@@ -284,7 +279,6 @@ const ParticleStyle3 = styled.div`
   bottom: -25px;
   left: 110px;
   rotate: 15deg;
-  widht: 100%;
 `;
 const ParticleStyle4 = styled.div`
   position: absolute;
@@ -292,7 +286,6 @@ const ParticleStyle4 = styled.div`
   z-index: 2;
   top: -150px;
   left: 155px;
-  widht: 100%;
 `;
 const ParticleStyle5 = styled.div`
   position: absolute;
@@ -301,5 +294,4 @@ const ParticleStyle5 = styled.div`
   top: 550px;
   left: 799px;
   rotate: 225deg;
-  widht: 100%;
 `;

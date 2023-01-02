@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
-// import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import axios from "axios";
 
@@ -13,18 +12,13 @@ const initialState = {
 };
 
 export const signUpUser = createAsyncThunk("/user/signUpUser", async (body) => {
-  console.log(body);
-  // const navigate = useNavigate();
   const { data } = await axios
     .post("/api/user/getUsers", {
       ...body,
       body: JSON.stringify(body),
     })
-    .catch((error) => {
-      console.log(error);
-    })
+    .catch((error) => {})
     .then((data) => {
-      console.log(data.data);
       if (data.data.status == 401) {
         swal({
           title: "중복되는 아이디가 있습니다. 다시 확인해주세요",
@@ -63,24 +57,18 @@ export const signUpUser = createAsyncThunk("/user/signUpUser", async (body) => {
         setTimeout(() => {
           window.open("/", "_self");
         }, 1500);
-
-        // navigate("/", { replace: true });
       } else {
       }
     });
-  console.log(data);
   return data;
 });
-// axios.post("경로", {담아서 보낼 데이터})
 
 export const overlapId = createAsyncThunk(
   "/user/overlapId",
   async (inputId) => {
-    console.log(inputId, JSON.stringify(inputId.inputId));
     const { data } = await axios.post("/api/user/overlapId", {
       inputId: JSON.stringify(inputId.inputId),
     });
-    // .then((data) => {
     if (data.status == 401) {
       swal({
         title: "중복되는 아이디가 있습니다. 다른 아이디를 사용하세요",
@@ -119,8 +107,6 @@ export const overlapId = createAsyncThunk(
       });
     } else {
     }
-    // });
-    console.log("data", data);
     return data;
   }
 );
@@ -150,7 +136,6 @@ export const overlapNickName = createAsyncThunk(
         }
       });
 
-    console.log(data);
     return data;
   }
 );
@@ -164,46 +149,24 @@ const registSlice = createSlice({
     },
   },
   extraReducers: (bulider) => {
-    // 회원가입
     bulider
-      .addCase(signUpUser.pending, (state, action) => {
-        console.log("pending");
-      })
+      .addCase(signUpUser.pending, (state, action) => {})
       .addCase(signUpUser.fulfilled, (state, { payload }) => {
-        console.log("fulfilled", payload);
-        console.log(current(state));
         return { ...payload };
       })
-      .addCase(signUpUser.rejected, (state, action) => {
-        console.log("rejected");
-      })
+      .addCase(signUpUser.rejected, (state, action) => {})
 
-      // 중복ID
-
-      .addCase(overlapId.pending, (state, action) => {
-        console.log("pending");
-      })
+      .addCase(overlapId.pending, (state, action) => {})
       .addCase(overlapId.fulfilled, (state, { payload }) => {
-        console.log("fulfilled", payload);
-        console.log(current(state));
         return { ...payload };
       })
-      .addCase(overlapId.rejected, (state, action) => {
-        console.log("rejected");
-      })
+      .addCase(overlapId.rejected, (state, action) => {})
 
-      .addCase(overlapNickName.pending, (state, action) => {
-        console.log("pending");
-      })
+      .addCase(overlapNickName.pending, (state, action) => {})
       .addCase(overlapNickName.fulfilled, (state, { payload }) => {
-        console.log("fulfilled", payload);
-        console.log(current(state));
         return { ...payload };
       })
-      .addCase(overlapNickName.rejected, (state, action) => {
-        console.log("rejected");
-      });
-    // 중복NickName ///////////////////
+      .addCase(overlapNickName.rejected, (state, action) => {});
   },
 });
 

@@ -19,11 +19,9 @@ const FooterContainer = ({ socket }) => {
   useDidMountEffect(() => {
     if (document.cookie) dispatch(userAction.setUser(curUser));
     else dispatch(userAction.setUser({ userId: "", userName: "" }));
-    console.log(socket);
   }, [curUser]);
 
   useEffect(() => {
-    console.log("try check axios");
     try {
       axios({
         url: "/check",
@@ -31,21 +29,13 @@ const FooterContainer = ({ socket }) => {
         withCredentials: true,
       })
         .then((result) => {
-          console.log(result);
           if (result.data) {
             setcurUser(result.data);
           }
         })
-        .catch((error) => {
-          console.log(error);
-          console.error(error);
-        })
-        .finally(() => {
-          console.log("finally");
-        });
-    } catch (error) {
-      console.log(error);
-    }
+        .catch((error) => {})
+        .finally(() => {});
+    } catch (error) {}
 
     Combochecker(goToAdmin);
   }, []);

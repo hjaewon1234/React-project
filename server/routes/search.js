@@ -9,10 +9,8 @@ router.route("/").post((req, res) => {
 
 router.route("/search").post((req, res) => {
   const temp = [];
-  console.log("search", req.body);
   db.Products.findAll()
     .then((data) => {
-      console.log(data[0], data[0].name.includes(req.body.value));
       data.map((item) => {
         if (
           item.name.includes(req.body.value) ||
@@ -26,12 +24,10 @@ router.route("/search").post((req, res) => {
       data.map((item) => {
         db.Search.findOne({ where: { products_id: item } })
           .then((data) => {
-            console.log("searchData다 : ", data);
             if (data) return data.dataValues;
             else return data;
           })
           .then((data) => {
-            console.log(data);
             if (!data)
               db.Products.findOne({ where: { id: item } }).then((product) => {
                 db.Search.create({ count: 0 }).then((search) => {
@@ -60,11 +56,6 @@ router.route("/searchWord").post((req, res) => {
       );
     });
     filtered.map((item, index) => {
-      // if (
-      //   index < req.body.boxIdx - 1 ||
-      //   index >= req.body.boxIdx + req.body.idx - 1
-      // )
-      //   return;
       return sendData.push(item.dataValues);
     });
     res.send(sendData);

@@ -6,7 +6,6 @@ const chatNoticeManager = createSlice({
   reducers: {
     setChatNoticeManager: (state, action) => {
       const { payload, type } = action;
-      console.log(payload);
       return payload;
     },
   },

@@ -1,12 +1,10 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 const MyQnaList = () => {
   const num = 0;
   const userId = useSelector((state) => state.userInfo);
   const userRealId = userId.userId;
-  console.log(userId);
   return (
     <UserPageInfo>
       <QnaOutterDiv>

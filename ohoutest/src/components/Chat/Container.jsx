@@ -18,9 +18,8 @@ const ChatContainer = () => {
   let uploadFunc;
 
   const onChatEnter = async (e) => {
-    // if (chatValue == "" || userName == "") return;
-    if (e.code == "Enter") {
-      console.log(world);
+    if (userName == "" || chatValue == "") return;
+    if (e.code == "Enter" && e.nativeEvent.isComposing === false) {
       await axios.post("/api/community/pushChat", {
         name: userName,
         text: chatValue,
@@ -40,21 +39,14 @@ const ChatContainer = () => {
     const result = await axios.post("/api/community/getChat", {
       room: worldName,
     });
-    console.log(result.data);
     setChatAry(result.data);
   };
-  // async 함수로 선언된 함수는 결과가 나올때 await가 없으면 그냥 프로미스로 나온다.
-  // return 값이 나오지 않는다.
-  // chatAry = chatLog();
-  // [useruserName, chatValue]
   const onChatting = (e) => {
     setChatValue((state) => state + e.nativeEvent.data);
   };
   useEffect(() => {
     uploadFunc = (data) => {
-      console.log(data);
       if (data.room == world) {
-        console.log(data);
         setChatAry((state) => [data, ...state]);
       }
     };
@@ -64,12 +56,9 @@ const ChatContainer = () => {
 
   useEffect(() => {
     chatLog(world);
-    console.log("한번돔", world);
     socket.off("upload", uploadFunc);
     uploadFunc = (data) => {
-      console.log(data);
       if (data.room == world) {
-        console.log(data);
         setChatAry((state) => [data, ...state]);
       }
     };

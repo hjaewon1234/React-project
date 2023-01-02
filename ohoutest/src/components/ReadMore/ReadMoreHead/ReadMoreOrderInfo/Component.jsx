@@ -33,10 +33,6 @@ const ReadMoreOrderInfoComponent = ({
       <div className="to-store">
         <img src="/img/store.png" />
         <span>{brand}</span>
-        {/* <a href="http://naver.com" target={"_blank"}>
-          <span>브랜드홈</span>
-          <img src="/img/chevron-right-solid.svg" />
-        </a> */}
       </div>
       <hr />
       <div className="order-count">
@@ -119,8 +115,7 @@ const ReadMoreOrderInfoComponent = ({
               <div>먼저 로그인을 해주세요</div>
               <button
                 onClick={() => {
-                  // setNonLoginModalOpen(!nonLoginModalOpen);
-                  navigate("/login");
+                  navigate("/login1");
                 }}
               >
                 확 인
@@ -256,10 +251,6 @@ const ReadMoreOrderInfoBox = styled.div`
     font-weight: bold;
     cursor: pointer;
   }
-  // .order-btn > button > a {
-  //   text-decoration: none;
-  //   color: unset;
-  // }
   .order-btn > button:first-child {
     color: #f0a500;
     border: 1px solid #f0a500;

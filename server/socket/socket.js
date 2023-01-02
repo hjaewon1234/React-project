@@ -15,25 +15,18 @@ export default function (server) {
       worldsArr.map((item) => {
         socket.join(item);
       });
-      console.log(socket.rooms);
     });
     socket.on("JOIN_ROOM", (data) => {
-      console.log(data);
       io.emit("enter", data);
     });
 
     socket.on("message", (data) => {
-      console.log("client가 보낸 데이터 : ", data);
-
-      console.log(socket.rooms);
       io.to(data.room).emit("upload", data);
     });
 
     socket.on("leaveUser", (nick) => {
       io.emit("out", nick);
     });
-    socket.on("disconnect", () => {
-      console.log("disconnect");
-    });
+    socket.on("disconnect", () => {});
   });
 }

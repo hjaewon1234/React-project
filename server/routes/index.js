@@ -1,5 +1,4 @@
 import { Router } from "express";
-import jwt from "jsonwebtoken";
 
 import user from "./user.js";
 import product from "./product.js";
@@ -16,45 +15,6 @@ import cart from "./cart.js";
 
 const router = Router();
 
-// router.use("/", (req, res, next) => {
-//   try {
-//     const tempUser = jwt.verify(
-//       req.cookies.accessToken,
-//       process.env.ACCESS_SECRET
-//     );
-//     req.userData = {};
-//     req.userData.userId = tempUser.userId;
-//     req.userData.userName = tempUser.userName;
-//   } catch (err) {
-//     try {
-//       const data = jwt.verify(token, process.env.REFRECH_SECRET);
-//       const accessToken = jwt.sign(
-//         {
-//           userName: data.userName,
-//           userId: data.userId,
-//         },
-//         process.env.ACCESS_SECRET,
-//         {
-//           expiresIn: "30m",
-//           issuer: "About Tech",
-//         }
-//       );
-
-//       res.cookie("accessToken", accessToken, {
-//         secure: false,
-//         httpOnly: false,
-//       });
-
-//       req.userData.userId = data.userId;
-//       req.userData.userName = data.userName;
-//     } catch (error) {
-//       req.userData = {};
-//     }
-//   } finally {
-//     next();
-//   }
-// });
-
 router.use("/user", user);
 router.use("/product", product);
 router.use("/manager", manager);
@@ -65,29 +25,6 @@ router.use("/readmore", readMore);
 router.use("/cart", cart);
 router.use("/userPage", userPage);
 
-// 관계 맺음
-// db.Users.findOne({ where: { id: 1 } }).then((user) => {
-//   db.Products.findOne({ where: { id: 1 } }).then((product) => {
-//     user.addProducts(product);
-//     product.addUsers(user);
-//   });
-// });
-
-// db.Users.findAll().then((data) => {
-//   if (data.length === 0) {
-//     db.Users.create(users[0]);
-//   }
-// });
-
-// db.Products.findAll().then((data) => {
-//   console.log(data);
-//   if (data.length === 0) {
-//     db.Products.create(products[0]);
-//   }
-// });
-
-// 이미지 등록
-// 얘는 살아있어야함
 async function setImages() {
   await fs.readdir("./Img", (err, datas) => {
     for (let i = 0; i < datas.length; ++i) {
@@ -113,21 +50,17 @@ async function setTopTen() {
 }
 setTopTen();
 
-// 아니 이게 해당 그걸로 똑같이 만들어 주는 거를 모르겟음
-
 router.post("/getImages", (req, res) => {
   fs.readdir("./Img", (err, datas) => {
     res.send(datas);
   });
 });
 
-// 제품 등록
 function setProduct() {
   db.Products.findAll().then((data) => {
     if (data.length == 0) {
       fs.readFile("./data/product.json", "utf-8", function (err, data) {
         if (err) {
-          console.error(err.message);
         } else {
           JSON.parse(data).forEach((item) => {
             try {
@@ -135,9 +68,7 @@ function setProduct() {
                 where: { smallsort: item.category.smallsort },
               }).then((data) => {
                 if (!data) {
-                  console.log("왜없음?", item);
                 } else {
-                  console.log(data.id, item.img);
                   db.Products.create({
                     name: item.name,
                     price: item.price,
@@ -150,9 +81,7 @@ function setProduct() {
                   });
                 }
               });
-            } catch (err) {
-              console.error(err);
-            }
+            } catch (err) {}
           });
         }
       });
@@ -160,13 +89,11 @@ function setProduct() {
   });
 }
 
-// 카테고리 등록
 function setCategory() {
   db.Category.findAll().then((data) => {
     if (data.length == 0) {
       fs.readFile("./data/category.json", "utf-8", function (err, data) {
         if (err) {
-          console.error(err.message);
         } else {
           const curJsonData = JSON.parse(data);
           let count = 0;
@@ -175,9 +102,7 @@ function setCategory() {
               db.Category.create(item).then(() => {
                 count++;
               });
-            } catch (err) {
-              console.error(err);
-            }
+            } catch (err) {}
           });
 
           let intervalId = setInterval(() => {

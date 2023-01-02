@@ -14,9 +14,6 @@ import {
 } from "./controller/index.js";
 import routes from "./routes/index.js";
 
-import multer from "multer";
-const upload = multer({ dest: "./upload" });
-
 const app = express();
 dotenv.config();
 
@@ -30,7 +27,6 @@ app.use(cookieParser());
 app.use(
   cors({
     origin: "http://localhost:3000",
-    // methods: ["GET", "POST", "OPTIONS"],
     credentials: true,
   })
 );
@@ -44,19 +40,13 @@ app.get("/accesstoken", accessToken);
 app.get("/refreshtoken", refreshToken);
 app.post("/logout", logout);
 
-// region: db;
 import model from "./models/index.js";
 
 model.sequelize
   .sync({ force: false })
   .then(() => {})
-  .catch((err) => {
-    console.error(err);
-  });
-// region: db-end
+  .catch((err) => {});
 
-const server = app.listen(process.env.PORT, () => {
-  console.log(`server is on ${process.env.PORT}`);
-});
+const server = app.listen(process.env.PORT, () => {});
 
 socket(server);

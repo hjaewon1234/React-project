@@ -1,6 +1,5 @@
-import { useRef, useState, useEffect } from "react";
+import { useState } from "react";
 import styled from "styled-components";
-// import Post from "../../../modules/Api/kakaoApi";
 import {
   signUpUser,
   overlapId,
@@ -11,11 +10,8 @@ import { Link } from "react-router-dom";
 import React from "react";
 import ModalContainer from "../Modal/Container";
 import ModalComponents from "../Modal/Component";
-import ParticleTest from "../Particle/Components";
 
 const RegistComponents = () => {
-  // const dispathch = useDispatch();
-
   const [inputId, setId] = useState("");
   const [inputPw, setPw] = useState("");
   const [inputPw1, setPw1] = useState("");
@@ -24,26 +20,20 @@ const RegistComponents = () => {
   const [inputAdress1, setinputAdress1] = useState({
     address: "",
   });
-  // const [inputAdress1, inputAdress1] = useState("");
   const [popup, setPopup] = useState(false);
   const [checkItems, setCheckItems] = useState([]);
-  // const [openPostcode, setOpenPostcode] = useState(false);
   const dispatch = useDispatch();
 
-  // 오류메세지 상태 저장
   const [idMessage, setIdMessage] = React.useState("");
   const [nameMessage, setNameMessage] = React.useState("");
   const [passwordMessage, setPasswordMessage] = React.useState("");
   const [passwordConfirmMessage, setPasswordConfirmMessage] =
     React.useState("");
 
-  // 유효성 검사
   const [isId, setIsId] = React.useState(false);
   const [isname, setIsName] = React.useState(false);
   const [isPassword, setIsPassword] = React.useState(false);
   const [isPasswordConfirm, setIsPasswordConfirm] = React.useState(false);
-
-  const [checkedButtons, setCheckedButtons] = useState([]);
 
   const [allChecked, setAllchecked] = useState(false);
   const [checked1, setChecked1] = useState(false);
@@ -51,9 +41,6 @@ const RegistComponents = () => {
   const [checked3, setChecked3] = useState(false);
   const [checked4, setChecked4] = useState(false);
   const [checked5, setChecked5] = useState(false);
-
-  const [value, setValue] = useState("");
-  const input = useRef(null);
 
   const onChangeId = (e) => {
     const currentId = e.target.value;
@@ -101,11 +88,6 @@ const RegistComponents = () => {
       setPasswordMessage("안전한 비밀번호 입니다.");
       setIsPassword(true);
     }
-
-    // else {
-    //   setPasswordMessage("안전한 비밀번호 입니다.");
-    //   setIsPassword(true);
-    // }
   };
   const onChangePasswordConfirm = (e) => {
     const currentPasswordConfirm = e.target.value;
@@ -133,47 +115,6 @@ const RegistComponents = () => {
     );
   };
 
-  //  checkbox
-
-  const changeHandler = (checked, id) => {
-    if (checked) {
-      setCheckedButtons([...checkedButtons, id]);
-      console.log("체크 반영 확인");
-    } else {
-      setCheckedButtons(checkedButtons.filter((button) => button !== id));
-      console.log("체크 해제 확인");
-    }
-  };
-
-  const isAllChecked = checkedButtons.length === 5;
-  const checkDisble = !isAllChecked;
-
-  const data = [
-    { id: 0, title: "만 14세 이상입니다." },
-    { id: 1, title: "이용약관" },
-    { id: 2, title: "개인정보수집 및 이용동의" },
-    { id: 3, title: "개인정보 마케팅 활용 동의" },
-    { id: 4, title: "이벤트, 쿠폰, 특가 알림 메일 및 SMS 등 수신" },
-  ];
-
-  const SinglecheckHandle = (checked, id) => {
-    if (checked) {
-      setCheckItems((prev) => [...prev, id]);
-    } else {
-      setCheckItems(checkItems.filter((el) => el !== id));
-    }
-  };
-
-  const AllcheckHandle = (checked) => {
-    if (checked) {
-      const idArray = [];
-      data.forEach((el) => idArray.push(el.id));
-      setCheckItems(idArray);
-    } else {
-      setCheckItems([]);
-    }
-  };
-
   const overlapIdHandle = () => {
     dispatch(overlapId({ inputId }));
   };
@@ -189,11 +130,6 @@ const RegistComponents = () => {
     });
   };
 
-  const handleComplete = (data) => {
-    setPopup(!popup);
-  };
-
-  // console.log(allChecked);
   const handelAllChecked = (e) => {
     setAllchecked(!allChecked);
     setChecked1(!allChecked);
@@ -201,21 +137,6 @@ const RegistComponents = () => {
     setChecked3(!allChecked);
     setChecked4(!allChecked);
     setChecked5(!allChecked);
-  };
-
-  const handelSingleChecked = (e) => {
-    const arrCheck = [
-      setChecked1(!checked1),
-      setChecked2(!checked2),
-      setChecked3(!checked3),
-      setChecked4(!checked4),
-      setChecked5(!checked5),
-    ];
-    if (checked1) {
-      setCheckItems((prev) => [...prev], arrCheck);
-    } else {
-      setCheckItems(checkItems.filter((el) => el !== arrCheck));
-    }
   };
 
   const handelChecked1 = (e) => {
@@ -244,33 +165,9 @@ const RegistComponents = () => {
     setModalOpen(false);
   };
 
-  const handleClick = () => {
-    setValue("");
-    input.current.focus();
-  };
-
-  // const [movElement, setMovElement] = useState(false);
-  // const inputRef = useRef(null);
-
-  // useEffect(() => {
-  //   if (!inputRef.current) return;
-  //   window.addEventListener("input", inputEvent);
-  //   return () => {
-  //     window.removeEventListener("input", inputEvent);
-  //   };
-  // }, [inputRef.current]);
-
-  // const inputEvent = () => {
-  //   const inputTest = inputRef.current.getBoundingClientRect();
-
-  //   console.log(inputTest);
-  //   setMovElement(inputTest);
-  // };
-
   return (
     <>
       <ModalContainer></ModalContainer>
-      {/* <KakaoApi ref={inputRef}> */}
       <KakaoApi>
         <RegistMain>
           <RegistTopStlye>
@@ -378,18 +275,9 @@ const RegistComponents = () => {
               placeholder={"나머지 주소"}
               maxLength={12}
             />
-            {/* {popup && (
-              <Post
-                popup={popup}
-                autoClose
-                company={inputAdress1}
-                setcompany={setinputAdress1}
-              ></Post>
-            )} */}
             {modalOpen && (
               <>
                 <ModalComponents
-                  // autoClose
                   company={inputAdress1}
                   setcompany={setinputAdress1}
                   open={modalOpen}
@@ -402,9 +290,6 @@ const RegistComponents = () => {
               <button className="kakaoAdress" onClick={openModal}>
                 주소 찾기
               </button>
-              {/* <button className="kakaoAdress" onClick={handleComplete}>
-                주소 찾기
-              </button> */}
               <button
                 className="kakaoAdress1"
                 disabled={inputAdress.length <= 3 ? true : false}
@@ -413,39 +298,6 @@ const RegistComponents = () => {
             <label> 약관동의</label>
           </RegistMidStlye>
           <AcceptStlye>
-            {/* <table>
-              <thead>
-                <tr>
-                  <th>
-                    <input
-                      type="checkbox"
-                      name="select-all"
-                      onChange={(e) => AllcheckHandle(e.target.checked)}
-                      checked={checkItems.length === data.length ? true : false}
-                    />
-                  </th>
-                  <th className="check1">전체동의</th>
-                </tr>
-              </thead>
-              <thead>
-                {data?.map((data, key) => (
-                  <tr key={key}>
-                    <td>
-                      <input
-                        type="checkbox"
-                        name={`select-${data.id}`}
-                        onChange={(e) =>
-                          SinglecheckHandle(e.target.checked, data.id)
-                        }
-                        checked={checkItems.includes(data.id) ? true : false}
-                      />
-                      <label></label>
-                    </td>
-                    <td className="second-row">{data.title}</td>
-                  </tr>
-                ))}
-              </thead>
-            </table> */}
             <label>
               <input
                 id="check1"
@@ -506,7 +358,6 @@ const RegistComponents = () => {
                   onClick={() => {
                     registHandle();
                   }}
-                  // checked={checkItems.includes(data.id) ? true : false}
                   disabled={
                     inputId.length <= 5 ||
                     inputPw.length <= 6 ||
@@ -526,43 +377,10 @@ const RegistComponents = () => {
             ) : (
               ""
             )}
-            {/* <div>
-              <input type="checkbox" id="check1" />
-              <label htmlFor="check1"></label>
-              <h6> 전체동의</h6>
-            </div>
-            <div>
-              <input type="checkbox" id="check2" />
-              <label htmlFor="check2"></label>
-              <h6> 만 14세 이상입니다.</h6>
-            </div>
-            <div>
-              <input type="checkbox" id="check3" />
-              <label htmlFor="check3"></label>
-              <h6> 이용약관</h6>
-            </div>
-            <div>
-              <input type="checkbox" id="check4" />
-              <label htmlFor="check4"></label>
-              <h6> 개인정보수집 및 이용동의</h6>
-            </div>
-            <div>
-              <input type="checkbox" id="check5" />
-              <label htmlFor="check5"></label>
-              <h6> 개인정보 마케팅 활용 동의</h6>
-            </div>
-            <div>
-              <input type="checkbox" id="check6" />
-              <label htmlFor="check6"></label>
-              <h6> 이벤트, 쿠폰, 특가 알림 메일 및 SMS 등 수신</h6>
-            </div> */}
           </AcceptStlye>
 
           <LoginStyle>
-            <Link
-              //  to={"/signUp"}
-              style={{ textDecoration: "none" }}
-            >
+            <Link style={{ textDecoration: "none" }}>
               <div
                 onClick={() => {
                   window.open("/signUp", "_self");
@@ -574,9 +392,6 @@ const RegistComponents = () => {
           </LoginStyle>
         </RegistMain>
       </KakaoApi>
-      {/* <ParticleStyle>
-        <ParticleTest></ParticleTest>
-      </ParticleStyle> */}
     </>
   );
 };

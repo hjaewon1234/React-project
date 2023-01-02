@@ -3,8 +3,6 @@ import DaumPostcode from "react-daum-postcode";
 
 const ModalComponents = (props) => {
   const { open, close, header } = props;
-  // console.log(props);
-  // console.log(props.open);
 
   const complete = (data) => {
     let fullAddress = data.address;
@@ -84,7 +82,6 @@ const ModalCompoStyled = styled.div`
     margin: 0 auto;
     border-radius: 0.3rem;
     background-color: #fff;
-    /* 팝업이 열릴때 스르륵 열리는 효과 */
     animation: modal-show 0.3s;
     overflow: hidden;
   }
@@ -99,7 +96,7 @@ const ModalCompoStyled = styled.div`
     top: 15px;
     right: 15px;
     width: 30px;
-    height:30px;
+    height: 30px;
     font-size: 21px;
     font-weight: 700;
     text-align: center;
@@ -122,14 +119,13 @@ const ModalCompoStyled = styled.div`
     width: 45%;
     padding: 6px 12px;
     color: #fff;
-    background-color: rgb(240, 165, 0)
+    background-color: rgb(240, 165, 0);
     border-radius: 5px;
     font-size: 16px;
   }
   .modal.openModal {
     display: flex;
     align-items: center;
-    /* 팝업이 열릴때 스르륵 열리는 효과 */
     animation: modal-bg-show 0.3s;
   }
   @keyframes modal-show {

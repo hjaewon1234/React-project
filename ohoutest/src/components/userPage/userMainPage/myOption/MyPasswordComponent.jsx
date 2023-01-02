@@ -1,14 +1,5 @@
 import styled from "styled-components";
-import { useRef, useState, useEffect } from "react";
-
-// import Post from "../../../modules/Api/kakaoApi";
-
-import {
-  signUpUser,
-  overlapId,
-  overlapNickName,
-} from "../../../../modules/Slice/registSlice";
-import { useDispatch } from "react-redux";
+import { useState } from "react";
 
 import React from "react";
 
@@ -29,12 +20,7 @@ const MyPasswordComponent = ({ passwordChange, userInfo }) => {
     if (!passwordRegExp.test(currentPassword)) {
       setPasswordMessage("8~15 사이 숫자+영문+특수문자로 입력해주세요.");
       setIsPassword(false);
-    }
-    //  else if (inputPw1 !== currentPassword) {
-    //   setPasswordMessage("입력한 비밀번호 확인과 같지 않습니다.");
-    //   setIsPassword(false);
-    // }
-    else {
+    } else {
       setPasswordMessage("안전한 비밀번호 입니다.");
       setIsPassword(true);
     }
